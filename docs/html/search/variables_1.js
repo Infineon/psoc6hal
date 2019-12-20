@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['channel_5fnum',['channel_num',['../group__group__hal__psoc6__hw__types.html#a4488a199114a86e5a72184c7a0a16c06',1,'cyhal_resource_inst_t']]],
-  ['channel_5foffset',['channel_offset',['../group__group__hal__psoc6__tcpwm__common.html#a7fadb788d45e9c45c69a3f8ef40bc34f',1,'cyhal_tcpwm_data_t']]],
-  ['clock_5fdst',['clock_dst',['../group__group__hal__psoc6__tcpwm__common.html#a98719a518bc52191f2c010e3f15b5ce6',1,'cyhal_tcpwm_data_t']]],
-  ['compare_5fvalue',['compare_value',['../group__group__hal__timer.html#a2fb1a2da36b09c9a1febca770afe3190',1,'cyhal_timer_cfg_t']]],
-  ['cyhal_5fscb_5fbase_5faddresses',['CYHAL_SCB_BASE_ADDRESSES',['../group__group__hal__psoc6__scb__common.html#gad3d28ec73eebf8b546c1dfd4a82e7f26',1,'CYHAL_SCB_BASE_ADDRESSES():&#160;cyhal_scb_common.c'],['../group__group__hal__psoc6__scb__common.html#gad3d28ec73eebf8b546c1dfd4a82e7f26',1,'CYHAL_SCB_BASE_ADDRESSES():&#160;cyhal_scb_common.c']]],
-  ['cyhal_5fscb_5fconfig_5fstructs',['cyhal_scb_config_structs',['../group__group__hal__psoc6__scb__common.html#ga567e21511cd6669534179cf911a345e8',1,'cyhal_scb_config_structs():&#160;cyhal_scb_common.c'],['../group__group__hal__psoc6__scb__common.html#ga567e21511cd6669534179cf911a345e8',1,'cyhal_scb_config_structs():&#160;cyhal_scb_common.c']]],
-  ['cyhal_5fscb_5firq_5fn',['CYHAL_SCB_IRQ_N',['../group__group__hal__psoc6__scb__common.html#ga7eaffbd217cd82f139e6248fae1f7726',1,'CYHAL_SCB_IRQ_N():&#160;cyhal_scb_common.c'],['../group__group__hal__psoc6__scb__common.html#ga7eaffbd217cd82f139e6248fae1f7726',1,'CYHAL_SCB_IRQ_N():&#160;cyhal_scb_common.c']]],
-  ['cyhal_5ftcpwm_5fdata',['CYHAL_TCPWM_DATA',['../group__group__hal__psoc6__tcpwm__common.html#gad9e00e552d573807ecc01e066538ba3f',1,'cyhal_tcpwm_common.h']]]
+  ['block_5fcount',['block_count',['../group__group__hal__flash.html#a4084c53e5f07ca60c8fb3bcbb2af11a4',1,'cyhal_flash_info_t']]],
+  ['block_5fnum',['block_num',['../group__group__hal__psoc6__hw__types.html#a91895766b5f5efe1dfffac2d7537e73a',1,'cyhal_resource_inst_t']]],
+  ['block_5fsize',['block_size',['../group__group__hal__sdio.html#a918b317033419d8b40d052a4f88aa91c',1,'cyhal_sdio_cfg_t']]],
+  ['blocks',['blocks',['../group__group__hal__flash.html#abf8824c2c183140e0904dec90cffe877',1,'cyhal_flash_info_t']]],
+  ['buf',['buf',['../group__group__hal__ezi2c.html#a68a95c0eac422be405ebee6815cead4e',1,'cyhal_ezi2c_slave_cfg_t']]],
+  ['buf_5frw_5fboundary',['buf_rw_boundary',['../group__group__hal__ezi2c.html#ab1c5d2eea1cb45b5ff66c7ecdaf38cec',1,'cyhal_ezi2c_slave_cfg_t']]],
+  ['buf_5fsize',['buf_size',['../group__group__hal__ezi2c.html#aabb87053d865a60cd6cd5e6ce3a75b7d',1,'cyhal_ezi2c_slave_cfg_t']]],
+  ['burst_5fsize',['burst_size',['../group__group__hal__dma.html#ab9a976a59ce1acea9c281337c290d229',1,'cyhal_dma_cfg_t']]],
+  ['buswidth',['busWidth',['../group__group__hal__sdhc.html#aab3e73af9b4102da9a5c53e535bd2a83',1,'cyhal_sdhc_config_t']]]
 ];

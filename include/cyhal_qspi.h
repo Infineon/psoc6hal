@@ -77,6 +77,7 @@ typedef enum {
 #define CYHAL_QSPI_RSLT_ERR_PIN (CY_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_QSPI, 1)) /**< Pin related Error. >*/
 #define CYHAL_QSPI_RSLT_ERR_DATA_SEL (CY_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_QSPI, 2)) /**< Data select Error. >*/
 #define CYHAL_QSPI_RSLT_ERR_INSTANCE (CY_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_QSPI, 3)) /**< QSPI instance related Error. >*/
+#define CYHAL_QSPI_RSLT_ERR_FREQUENCY (CY_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_QSPI, 4)) /**< Clock frequency error. >*/
 
 /** @brief QSPI command settings */
 typedef struct cyhal_qspi_command {

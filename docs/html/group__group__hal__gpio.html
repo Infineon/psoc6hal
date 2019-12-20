@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('group__group__hal__gpio.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga25a61e0d5a27c77dca1c7709fba9c400"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#ga25a61e0d5a27c77dca1c7709fba9c400">CYHAL_NC_PIN_VALUE</a>&#160;&#160;&#160;((cyhal_gpio_t)0xFFFFFFFF)</td></tr>
+<tr class="memitem:ga25a61e0d5a27c77dca1c7709fba9c400"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#ga25a61e0d5a27c77dca1c7709fba9c400">CYHAL_NC_PIN_VALUE</a>&#160;&#160;&#160;((<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>)0xFFFFFFFF)</td></tr>
 <tr class="separator:ga25a61e0d5a27c77dca1c7709fba9c400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -132,28 +132,30 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a9c51fc7bcc4196c011af96495d358d95">CYHAL_GPIO_DRIVE_OPENDRAINDRIVESLOW</a>, 
 <a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2ae233e78cc7f6df331630ef11c243a9ac">CYHAL_GPIO_DRIVE_OPENDRAINDRIVESHIGH</a>, 
 <a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a697e0520cb1b71b748bb76eaafb3ad1b">CYHAL_GPIO_DRIVE_STRONG</a>, 
-<a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a42913f4c174583d37970c81aa6a20a5a">CYHAL_GPIO_DRIVE_PULLUPDOWN</a>
+<a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a42913f4c174583d37970c81aa6a20a5a">CYHAL_GPIO_DRIVE_PULLUPDOWN</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2abe59e87a4fa3903889d94d13b2f09a38">CYHAL_GPIO_DRIVE_PULL_NONE</a>
 <br />
  }</td></tr>
 <tr class="separator:ga2eb76143375648febb0ef73f00a681b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga59486f263ad8987e58f7dae6ae616b76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#ga59486f263ad8987e58f7dae6ae616b76">cyhal_gpio_init</a> (cyhal_gpio_t pin, <a class="el" href="group__group__hal__gpio.html#ga54f023b4b455556095b64f4f5d7e3446">cyhal_gpio_direction_t</a> direction, <a class="el" href="group__group__hal__gpio.html#ga2eb76143375648febb0ef73f00a681b2">cyhal_gpio_drive_mode_t</a> drvMode, bool initVal)</td></tr>
+<tr class="memitem:ga59486f263ad8987e58f7dae6ae616b76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#ga59486f263ad8987e58f7dae6ae616b76">cyhal_gpio_init</a> (<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, <a class="el" href="group__group__hal__gpio.html#ga54f023b4b455556095b64f4f5d7e3446">cyhal_gpio_direction_t</a> direction, <a class="el" href="group__group__hal__gpio.html#ga2eb76143375648febb0ef73f00a681b2">cyhal_gpio_drive_mode_t</a> drvMode, bool initVal)</td></tr>
 <tr class="separator:ga59486f263ad8987e58f7dae6ae616b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae5ef384dcdef1d08d4a9e88592bda173"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gae5ef384dcdef1d08d4a9e88592bda173">cyhal_gpio_free</a> (cyhal_gpio_t pin)</td></tr>
+<tr class="memitem:gae5ef384dcdef1d08d4a9e88592bda173"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gae5ef384dcdef1d08d4a9e88592bda173">cyhal_gpio_free</a> (<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin)</td></tr>
 <tr class="separator:gae5ef384dcdef1d08d4a9e88592bda173"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab5bce4c54b8236ca70d8eace4fded5e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gab5bce4c54b8236ca70d8eace4fded5e2">cyhal_gpio_configure</a> (cyhal_gpio_t pin, <a class="el" href="group__group__hal__gpio.html#ga54f023b4b455556095b64f4f5d7e3446">cyhal_gpio_direction_t</a> direction, <a class="el" href="group__group__hal__gpio.html#ga2eb76143375648febb0ef73f00a681b2">cyhal_gpio_drive_mode_t</a> drvMode)</td></tr>
+<tr class="memitem:gab5bce4c54b8236ca70d8eace4fded5e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gab5bce4c54b8236ca70d8eace4fded5e2">cyhal_gpio_configure</a> (<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, <a class="el" href="group__group__hal__gpio.html#ga54f023b4b455556095b64f4f5d7e3446">cyhal_gpio_direction_t</a> direction, <a class="el" href="group__group__hal__gpio.html#ga2eb76143375648febb0ef73f00a681b2">cyhal_gpio_drive_mode_t</a> drvMode)</td></tr>
 <tr class="separator:gab5bce4c54b8236ca70d8eace4fded5e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf66e7c3ed7b3b0711635d7687ae92291"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a> (cyhal_gpio_t pin, bool value)</td></tr>
+<tr class="memitem:gaf66e7c3ed7b3b0711635d7687ae92291"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a> (<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, bool value)</td></tr>
 <tr class="separator:gaf66e7c3ed7b3b0711635d7687ae92291"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3d38f1dd86c2e74b8ad10f1f6d1945c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#ga3d38f1dd86c2e74b8ad10f1f6d1945c2">cyhal_gpio_read</a> (cyhal_gpio_t pin)</td></tr>
+<tr class="memitem:ga3d38f1dd86c2e74b8ad10f1f6d1945c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#ga3d38f1dd86c2e74b8ad10f1f6d1945c2">cyhal_gpio_read</a> (<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin)</td></tr>
 <tr class="separator:ga3d38f1dd86c2e74b8ad10f1f6d1945c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacf9c6cb7d4f6f25828a62d44648b745d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gacf9c6cb7d4f6f25828a62d44648b745d">cyhal_gpio_toggle</a> (cyhal_gpio_t pin)</td></tr>
+<tr class="memitem:gacf9c6cb7d4f6f25828a62d44648b745d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gacf9c6cb7d4f6f25828a62d44648b745d">cyhal_gpio_toggle</a> (<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin)</td></tr>
 <tr class="separator:gacf9c6cb7d4f6f25828a62d44648b745d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaefb03ec6e090ec57fae9e79b4d3bfb4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gaefb03ec6e090ec57fae9e79b4d3bfb4e">cyhal_gpio_register_callback</a> (cyhal_gpio_t pin, <a class="el" href="group__group__hal__gpio.html#ga4a82d25582991576faba92d30a5da881">cyhal_gpio_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memitem:gaefb03ec6e090ec57fae9e79b4d3bfb4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#gaefb03ec6e090ec57fae9e79b4d3bfb4e">cyhal_gpio_register_callback</a> (<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, <a class="el" href="group__group__hal__gpio.html#ga4a82d25582991576faba92d30a5da881">cyhal_gpio_event_callback_t</a> callback, void *callback_arg)</td></tr>
 <tr class="separator:gaefb03ec6e090ec57fae9e79b4d3bfb4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1f8a7645bce7216c07fcb87071c6cfc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#ga1f8a7645bce7216c07fcb87071c6cfc8">cyhal_gpio_enable_event</a> (cyhal_gpio_t pin, <a class="el" href="group__group__hal__gpio.html#gaa18cb21d1ea9d64311a7c8ddc6a27656">cyhal_gpio_event_t</a> event, uint8_t intrPriority, bool enable)</td></tr>
+<tr class="memitem:ga1f8a7645bce7216c07fcb87071c6cfc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__gpio.html#ga1f8a7645bce7216c07fcb87071c6cfc8">cyhal_gpio_enable_event</a> (<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, <a class="el" href="group__group__hal__gpio.html#gaa18cb21d1ea9d64311a7c8ddc6a27656">cyhal_gpio_event_t</a> event, uint8_t intrPriority, bool enable)</td></tr>
 <tr class="separator:ga1f8a7645bce7216c07fcb87071c6cfc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -164,7 +166,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CYHAL_NC_PIN_VALUE&#160;&#160;&#160;((cyhal_gpio_t)0xFFFFFFFF)</td>
+          <td class="memname">#define CYHAL_NC_PIN_VALUE&#160;&#160;&#160;((<a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>)0xFFFFFFFF)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -250,7 +252,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Pin drive mode </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2a181685dd155f58d036420b61778a7394"></a>CYHAL_GPIO_DRIVE_NONE&#160;</td><td class="fielddoc"><p>No drive; Hi-Z </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2a181685dd155f58d036420b61778a7394"></a>CYHAL_GPIO_DRIVE_NONE&#160;</td><td class="fielddoc"><p>Digital Hi-Z </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2add31d230860a15fb28b1c51aeb34f3d7"></a>CYHAL_GPIO_DRIVE_ANALOG&#160;</td><td class="fielddoc"><p>Analog Hi-Z </p>
 </td></tr>
@@ -266,6 +268,8 @@ Functions</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2a42913f4c174583d37970c81aa6a20a5a"></a>CYHAL_GPIO_DRIVE_PULLUPDOWN&#160;</td><td class="fielddoc"><p>Pull-up and pull-down resistors </p>
 </td></tr>
+<tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2abe59e87a4fa3903889d94d13b2f09a38"></a>CYHAL_GPIO_DRIVE_PULL_NONE&#160;</td><td class="fielddoc"><p>No Pull-up or pull-down resistors </p>
+</td></tr>
 </table>
 
 </div>
@@ -280,7 +284,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_gpio_init </td>
           <td>(</td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
@@ -331,7 +335,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_gpio_free </td>
           <td>(</td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -356,7 +360,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_gpio_configure </td>
           <td>(</td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
@@ -400,7 +404,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_gpio_write </td>
           <td>(</td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
@@ -436,7 +440,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">bool cyhal_gpio_read </td>
           <td>(</td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -462,7 +466,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_gpio_toggle </td>
           <td>(</td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -487,7 +491,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_gpio_register_callback </td>
           <td>(</td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
@@ -530,7 +534,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_gpio_enable_event </td>
           <td>(</td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
@@ -577,7 +581,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

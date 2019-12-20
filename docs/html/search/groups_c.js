@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['rtc_20_28real_2dtime_20clock_29',['RTC (Real-Time Clock)',['../group__group__hal__rtc.html',1,'']]],
-  ['result_20type',['Result Type',['../group__group__result.html',1,'']]]
+  ['qspi_20_28quad_20serial_20peripheral_20interface_29',['QSPI (Quad Serial Peripheral Interface)',['../group__group__hal__qspi.html',1,'']]]
 ];

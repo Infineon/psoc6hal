@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -87,9 +87,7 @@ $(document).ready(function(){initNavTree('group__group__hal__psoc6.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#groups">API Reference</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#groups">API Reference</a>  </div>
   <div class="headertitle">
 <div class="title">PSoC 6 Implementation Specific</div>  </div>
 </div><!--header-->
@@ -99,116 +97,26 @@ $(document).ready(function(){initNavTree('group__group__hal__psoc6.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 API Reference</h2></td></tr>
-<tr class="memitem:group__group__hal__psoc6__hw__types"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__hw__types.html">Implementation-defined types</a></td></tr>
+<tr class="memitem:group__group__hal__psoc6__dma"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma.html">DMA (Direct Memory Access)</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__group__hal__psoc6__hw__types"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__hw__types.html">PSoC6 Specific Hardware Types</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__group__hal__psoc6__pin__package"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__pin__package.html">Pins</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__group__hal__psoc6__scb__common"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__scb__common.html">SCB Common Functionality</a></td></tr>
+<tr class="memitem:group__group__hal__psoc6__triggers"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__triggers.html">Triggers</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__group__hal__psoc6__tcpwm__common"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__tcpwm__common.html">TCPWM Common Functionality</a></td></tr>
+<tr class="memitem:group__group__hal__pwm__psoc6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm__psoc6.html">PWM (Pulse Width Modulator)</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__group__hal__psoc6__wdt"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__wdt.html">WDT (Watchdog Timer)</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:gad7321f312991f638e3fde62ab38fbb8d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6.html#gad7321f312991f638e3fde62ab38fbb8d">CYHAL_IRQN_OFFSET</a>&#160;&#160;&#160;16</td></tr>
-<tr class="separator:gad7321f312991f638e3fde62ab38fbb8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0e6ead31a8d5cba4663ac8ebaacedf3b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6.html#ga0e6ead31a8d5cba4663ac8ebaacedf3b">CYHAL_GET_CURRENT_IRQN</a>()&#160;&#160;&#160;((IRQn_Type) (__get_IPSR() - <a class="el" href="group__group__hal__psoc6.html#gad7321f312991f638e3fde62ab38fbb8d">CYHAL_IRQN_OFFSET</a>))</td></tr>
-<tr class="separator:ga0e6ead31a8d5cba4663ac8ebaacedf3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:gaefe5480599c4c84a140a8bb58138b3be"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6.html#gaefe5480599c4c84a140a8bb58138b3be">cyhal_divider_value</a> (uint32_t frequency, uint32_t frac_bits)</td></tr>
-<tr class="separator:gaefe5480599c4c84a140a8bb58138b3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="gad7321f312991f638e3fde62ab38fbb8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad7321f312991f638e3fde62ab38fbb8d">&#9670;&nbsp;</a></span>CYHAL_IRQN_OFFSET</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_IRQN_OFFSET&#160;&#160;&#160;16</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Offset for implementation-defined ISR type numbers (IRQ0 = 16) </p>
-
-</div>
-</div>
-<a id="ga0e6ead31a8d5cba4663ac8ebaacedf3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0e6ead31a8d5cba4663ac8ebaacedf3b">&#9670;&nbsp;</a></span>CYHAL_GET_CURRENT_IRQN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_GET_CURRENT_IRQN</td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>&#160;&#160;&#160;((IRQn_Type) (__get_IPSR() - <a class="el" href="group__group__hal__psoc6.html#gad7321f312991f638e3fde62ab38fbb8d">CYHAL_IRQN_OFFSET</a>))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Macro to get the IRQn of the current ISR </p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="gaefe5480599c4c84a140a8bb58138b3be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaefe5480599c4c84a140a8bb58138b3be">&#9670;&nbsp;</a></span>cyhal_divider_value()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static uint32_t cyhal_divider_value </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>frequency</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>frac_bits</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Calculate the peri clock divider value that need to be set to reach frequency closest to the input frequency</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">frequency</td><td>The desired frequency </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">frac_bits</td><td>The number of fractional bits that the divider has </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The calculate divider value to set, NOTE a divider value of x divide the frequency by (x+1) </dd></dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

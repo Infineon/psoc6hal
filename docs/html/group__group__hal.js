@@ -5,6 +5,8 @@ var group__group__hal =
     [ "I2C (Inter-Integrated Circuit)", "group__group__hal__i2c.html", "group__group__hal__i2c" ],
     [ "CRC (Cyclic Redundancy Check)", "group__group__hal__crc.html", "group__group__hal__crc" ],
     [ "DAC (Digital to Analog Converter)", "group__group__hal__dac.html", "group__group__hal__dac" ],
+    [ "DMA (Direct Memory Access)", "group__group__hal__dma.html", "group__group__hal__dma" ],
+    [ "EZI2C (Inter-Integrated Circuit)", "group__group__hal__ezi2c.html", "group__group__hal__ezi2c" ],
     [ "Flash", "group__group__hal__flash.html", "group__group__hal__flash" ],
     [ "GPIO (General Purpose Input Output)", "group__group__hal__gpio.html", "group__group__hal__gpio" ],
     [ "HWMGR (Hardware Manager)", "group__group__hal__hwmgr.html", "group__group__hal__hwmgr" ],

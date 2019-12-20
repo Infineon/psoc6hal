@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['wdt_20_28watchdog_20timer_29',['WDT (Watchdog Timer)',['../group__group__hal__psoc6__wdt.html',1,'']]],
-  ['wdt_20_28watchdog_20timer_29',['WDT (Watchdog Timer)',['../group__group__hal__wdt.html',1,'']]]
+  ['uart_20_28universal_20asynchronous_20receiver_2dtransmitter_29',['UART (Universal Asynchronous Receiver-Transmitter)',['../group__group__hal__uart.html',1,'']]],
+  ['usb_20device',['USB Device',['../group__group__hal__usb__dev.html',1,'']]]
 ];

@@ -79,7 +79,7 @@ typedef enum {
 
 /** Pin drive mode */
 typedef enum {
-    CYHAL_GPIO_DRIVE_NONE,                /**< No drive; Hi-Z */
+    CYHAL_GPIO_DRIVE_NONE,                /**< Digital Hi-Z */
     CYHAL_GPIO_DRIVE_ANALOG,              /**< Analog Hi-Z */
     CYHAL_GPIO_DRIVE_PULLUP,              /**< Pull-up resistor */
     CYHAL_GPIO_DRIVE_PULLDOWN,            /**< Pull-down resistor */
@@ -87,6 +87,7 @@ typedef enum {
     CYHAL_GPIO_DRIVE_OPENDRAINDRIVESHIGH, /**< Open-drain, Drives High */
     CYHAL_GPIO_DRIVE_STRONG,              /**< Strong output */
     CYHAL_GPIO_DRIVE_PULLUPDOWN,          /**< Pull-up and pull-down resistors */
+    CYHAL_GPIO_DRIVE_PULL_NONE,           /**< No Pull-up or pull-down resistors */
 } cyhal_gpio_drive_mode_t;
 
 /** GPIO callback function type */

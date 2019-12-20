@@ -26,6 +26,7 @@ var group__group__hal__timer =
     [ "cyhal_timer_set_frequency", "group__group__hal__timer.html#ga38ed4c91e655b8b4f5e446c63327ffe5", null ],
     [ "cyhal_timer_start", "group__group__hal__timer.html#gaff09b3ffee75893da00d0a7dae2d9cb2", null ],
     [ "cyhal_timer_stop", "group__group__hal__timer.html#ga8734bf8e55f7b51ef18a22e8d1ffb1e1", null ],
+    [ "cyhal_timer_read", "group__group__hal__timer.html#ga0be5bf53c214ffcb3c4e962e71af1e6d", null ],
     [ "cyhal_timer_register_callback", "group__group__hal__timer.html#ga928ffe0a3a1549c94752db7c68306424", null ],
     [ "cyhal_timer_enable_event", "group__group__hal__timer.html#ga66e428188d9a6cf96caebe8c2bdfbf25", null ]
 ];

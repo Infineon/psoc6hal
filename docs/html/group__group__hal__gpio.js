@@ -21,7 +21,8 @@ var group__group__hal__gpio =
       [ "CYHAL_GPIO_DRIVE_OPENDRAINDRIVESLOW", "group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a9c51fc7bcc4196c011af96495d358d95", null ],
       [ "CYHAL_GPIO_DRIVE_OPENDRAINDRIVESHIGH", "group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2ae233e78cc7f6df331630ef11c243a9ac", null ],
       [ "CYHAL_GPIO_DRIVE_STRONG", "group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a697e0520cb1b71b748bb76eaafb3ad1b", null ],
-      [ "CYHAL_GPIO_DRIVE_PULLUPDOWN", "group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a42913f4c174583d37970c81aa6a20a5a", null ]
+      [ "CYHAL_GPIO_DRIVE_PULLUPDOWN", "group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a42913f4c174583d37970c81aa6a20a5a", null ],
+      [ "CYHAL_GPIO_DRIVE_PULL_NONE", "group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2abe59e87a4fa3903889d94d13b2f09a38", null ]
     ] ],
     [ "cyhal_gpio_init", "group__group__hal__gpio.html#ga59486f263ad8987e58f7dae6ae616b76", null ],
     [ "cyhal_gpio_free", "group__group__hal__gpio.html#gae5ef384dcdef1d08d4a9e88592bda173", null ],

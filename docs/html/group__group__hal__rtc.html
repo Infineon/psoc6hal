@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -106,11 +106,19 @@ Data Structures</h2></td></tr>
 <tr class="memitem:structcyhal__alarm__active__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#structcyhal__alarm__active__t">cyhal_alarm_active_t</a></td></tr>
 <tr class="memdesc:structcyhal__alarm__active__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines which fields should be active for the alarm.  <a href="group__group__hal__rtc.html#structcyhal__alarm__active__t">More...</a><br /></td></tr>
 <tr class="separator:structcyhal__alarm__active__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:structcyhal__rtc__dst__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">cyhal_rtc_dst_t</a></td></tr>
+<tr class="separator:structcyhal__rtc__dst__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:unioncyhal__rtc__dst__t_8____unnamed____"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#unioncyhal__rtc__dst__t_8____unnamed____">cyhal_rtc_dst_t.__unnamed__</a></td></tr>
+<tr class="separator:unioncyhal__rtc__dst__t_8____unnamed____"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____">cyhal_rtc_dst_t.__unnamed__.__unnamed__</a></td></tr>
+<tr class="separator:structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:gaae3e49201de8355a8b8f9bcfd88a2d0b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#gaae3e49201de8355a8b8f9bcfd88a2d0b">CY_RSLT_RTC_NOT_INITIALIZED</a>&#160;&#160;&#160;<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b">CYHAL_RSLT_MODULE_RTC</a>, 0)</td></tr>
 <tr class="separator:gaae3e49201de8355a8b8f9bcfd88a2d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6c6143b437306d30ee23482cce83d461"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga6c6143b437306d30ee23482cce83d461">CY_RSLT_RTC_BAD_ARGUMENT</a>&#160;&#160;&#160;<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b">CYHAL_RSLT_MODULE_RTC</a>, 1)</td></tr>
+<tr class="separator:ga6c6143b437306d30ee23482cce83d461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -122,6 +130,10 @@ Enumerations</h2></td></tr>
 <tr class="memitem:ga65837a686b1fab2e3b11e0d3ba1fdafe"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> { <b>CYHAL_RTC_ALARM</b>
  }</td></tr>
 <tr class="separator:ga65837a686b1fab2e3b11e0d3ba1fdafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga70f0bde8db19e6aacbbd72afc1fa3f9f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga70f0bde8db19e6aacbbd72afc1fa3f9f">cyhal_rtc_dst_format_t</a> { <a class="el" href="group__group__hal__rtc.html#gga70f0bde8db19e6aacbbd72afc1fa3f9fa9e7d7fe4b4c2061b0e3fa66417fafe88">CYHAL_RTC_DST_RELATIVE</a>, 
+<a class="el" href="group__group__hal__rtc.html#gga70f0bde8db19e6aacbbd72afc1fa3f9fabf285ab71718312d1764612ac46c78d1">CYHAL_RTC_DST_FIXED</a>
+ }</td></tr>
+<tr class="separator:ga70f0bde8db19e6aacbbd72afc1fa3f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -135,6 +147,10 @@ Functions</h2></td></tr>
 <tr class="separator:ga5c3f15f870f2ecfb4a8a03a58d1eaa5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga09180594a84d768f17d80e1262dce2b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga09180594a84d768f17d80e1262dce2b7">cyhal_rtc_write</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, const struct tm *time)</td></tr>
 <tr class="separator:ga09180594a84d768f17d80e1262dce2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5e6893121f3be9026d5cf4cb10c008bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga5e6893121f3be9026d5cf4cb10c008bf">cyhal_rtc_set_dst</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, const <a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">cyhal_rtc_dst_t</a> *start, const <a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">cyhal_rtc_dst_t</a> *stop)</td></tr>
+<tr class="separator:ga5e6893121f3be9026d5cf4cb10c008bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3e56df18a9506e3d25050d4dabe7fd4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga3e56df18a9506e3d25050d4dabe7fd4c">cyhal_rtc_is_dst</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj)</td></tr>
+<tr class="separator:ga3e56df18a9506e3d25050d4dabe7fd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4281bd53cab53fb245a1e98a618e1679"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga4281bd53cab53fb245a1e98a618e1679">cyhal_rtc_set_alarm</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, const struct tm *time, <a class="el" href="group__group__hal__rtc.html#structcyhal__alarm__active__t">cyhal_alarm_active_t</a> active)</td></tr>
 <tr class="separator:ga4281bd53cab53fb245a1e98a618e1679"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga64761d1bb0c23aedc4329b50f8d3361d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga64761d1bb0c23aedc4329b50f8d3361d">cyhal_rtc_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, <a class="el" href="group__group__hal__rtc.html#ga2fe62b8562ac40925a243c75b0e6810f">cyhal_rtc_event_callback_t</a> callback, void *callback_arg)</td></tr>
@@ -201,6 +217,111 @@ en_month: 1</td>
 
 </div>
 </div>
+<a name="structcyhal__rtc__dst__t" id="structcyhal__rtc__dst__t"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structcyhal__rtc__dst__t">&#9670;&nbsp;</a></span>cyhal_rtc_dst_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct cyhal_rtc_dst_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Data Fields</th></tr>
+<tr><td class="fieldtype">
+<a id="a1811ad3e83ce0a73c208b42a42d33693"></a><a class="el" href="group__group__hal__rtc.html#ga70f0bde8db19e6aacbbd72afc1fa3f9f">cyhal_rtc_dst_format_t</a></td>
+<td class="fieldname">
+format</td>
+<td class="fielddoc">
+<p>DST format. See /ref cyhal_rtc_dst_format_t. Based on this value other structure elements should be filled or could be ignored </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a5270b5844693af6788a0a5da60ead51c"></a>uint32_t</td>
+<td class="fieldname">
+hour</td>
+<td class="fielddoc">
+<p>Hour in 24hour format, range[0-23] </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a62f9cfea6b62fb6f05c44f30498294d6"></a>union <a class="el" href="group__group__hal__rtc.html#unioncyhal__rtc__dst__t_8____unnamed____">cyhal_rtc_dst_t</a></td>
+<td class="fieldname">
+__unnamed__</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a7063f23fa8e30374c3c6593d272dc99f"></a>uint32_t</td>
+<td class="fieldname">
+month</td>
+<td class="fielddoc">
+<p>Month value, range[1-12]. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="unioncyhal__rtc__dst__t_8____unnamed____" id="unioncyhal__rtc__dst__t_8____unnamed____"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#unioncyhal__rtc__dst__t_8____unnamed____">&#9670;&nbsp;</a></span>cyhal_rtc_dst_t.__unnamed__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union cyhal_rtc_dst_t.__unnamed__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Data Fields</th></tr>
+<tr><td class="fieldtype">
+<a id="a79c2c19f09b65c5f0c478ddfa1d94217"></a>uint32_t</td>
+<td class="fieldname">
+dayOfMonth</td>
+<td class="fielddoc">
+<p>Day of Month, range[1-31]. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a60e3c12db6ddaae1f88a6e0e8d5118e0"></a><a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____">__unnamed__</a></td>
+<td class="fieldname">
+__unnamed__</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____" id="structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____">&#9670;&nbsp;</a></span>cyhal_rtc_dst_t.__unnamed__.__unnamed__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct cyhal_rtc_dst_t.__unnamed__.__unnamed__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Data Fields</th></tr>
+<tr><td class="fieldtype">
+<a id="ace4dee25729a2b40b820be71381ef6e8"></a>uint32_t</td>
+<td class="fieldname">
+dayOfWeek</td>
+<td class="fielddoc">
+<p>Day of the week, starting on Sunday, range[0-6] </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="abf56bc091977265c543ca16fd0189045"></a>uint32_t</td>
+<td class="fieldname">
+weekOfMonth</td>
+<td class="fielddoc">
+<p>Week of month, range[0-5]. Where 5 =&gt; Last week of month </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="gaae3e49201de8355a8b8f9bcfd88a2d0b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaae3e49201de8355a8b8f9bcfd88a2d0b">&#9670;&nbsp;</a></span>CY_RSLT_RTC_NOT_INITIALIZED</h2>
@@ -214,6 +335,21 @@ en_month: 1</td>
       </table>
 </div><div class="memdoc">
 <p>RTC not initialized </p>
+
+</div>
+</div>
+<a id="ga6c6143b437306d30ee23482cce83d461"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6c6143b437306d30ee23482cce83d461">&#9670;&nbsp;</a></span>CY_RSLT_RTC_BAD_ARGUMENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CY_RSLT_RTC_BAD_ARGUMENT&#160;&#160;&#160;<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b">CYHAL_RSLT_MODULE_RTC</a>, 1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Bad argument </p>
 
 </div>
 </div>
@@ -246,6 +382,27 @@ en_month: 1</td>
       </table>
 </div><div class="memdoc">
 <p>RTC interrupt triggers </p>
+
+</div>
+</div>
+<a id="ga70f0bde8db19e6aacbbd72afc1fa3f9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga70f0bde8db19e6aacbbd72afc1fa3f9f">&#9670;&nbsp;</a></span>cyhal_rtc_dst_format_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__group__hal__rtc.html#ga70f0bde8db19e6aacbbd72afc1fa3f9f">cyhal_rtc_dst_format_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enumeration used to configure the DST format </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga70f0bde8db19e6aacbbd72afc1fa3f9fa9e7d7fe4b4c2061b0e3fa66417fafe88"></a>CYHAL_RTC_DST_RELATIVE&#160;</td><td class="fielddoc"><p>Relative DST format </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga70f0bde8db19e6aacbbd72afc1fa3f9fabf285ab71718312d1764612ac46c78d1"></a>CYHAL_RTC_DST_FIXED&#160;</td><td class="fielddoc"><p>Fixed DST format </p>
+</td></tr>
+</table>
 
 </div>
 </div>
@@ -403,6 +560,76 @@ en_month: 1</td>
 
 </div>
 </div>
+<a id="ga5e6893121f3be9026d5cf4cb10c008bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5e6893121f3be9026d5cf4cb10c008bf">&#9670;&nbsp;</a></span>cyhal_rtc_set_dst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_rtc_set_dst </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">cyhal_rtc_dst_t</a> *&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">cyhal_rtc_dst_t</a> *&#160;</td>
+          <td class="paramname"><em>stop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the start and end time for Day Light Savings</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">start</td><td>When Day Light Savings time should start </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stop</td><td>When Day Light Savings time should end </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the set_dst request </dd></dl>
+
+</div>
+</div>
+<a id="ga3e56df18a9506e3d25050d4dabe7fd4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3e56df18a9506e3d25050d4dabe7fd4c">&#9670;&nbsp;</a></span>cyhal_rtc_is_dst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cyhal_rtc_is_dst </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks to see if Day Light Savings Time is currently active. This should only be called after <a class="el" href="group__group__hal__rtc.html#ga5e6893121f3be9026d5cf4cb10c008bf">cyhal_rtc_set_dst()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean indicating whether the current date/time is within the specified DST start/stop window. </dd></dl>
+
+</div>
+</div>
 <a id="ga4281bd53cab53fb245a1e98a618e1679"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga4281bd53cab53fb245a1e98a618e1679">&#9670;&nbsp;</a></span>cyhal_rtc_set_alarm()</h2>
 
@@ -546,7 +773,7 @@ en_month: 1</td>
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

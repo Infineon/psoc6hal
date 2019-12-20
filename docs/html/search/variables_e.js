@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['width',['width',['../group__group__hal__crc.html#a43f6798e59b2c14c20cf662a9c8952e6',1,'crc_algorithm_t']]]
+  ['value',['value',['../group__group__hal__timer.html#a53f34c0bd94d7d4b3661b9bc758d2536',1,'cyhal_timer_cfg_t']]]
 ];

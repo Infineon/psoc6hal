@@ -27,6 +27,9 @@ To ensure that distinct driver instances do not attempt to manipulate the same h
 ## Compile Time Dependencies
 The HAL public interface is consistent across all platforms that the HAL supports. However, the HAL interface does depend on types that are defined by platform-specific HAL implementations (for example, the driver-specific "handle" types). Additionally, a HAL implementation may be compile-time dependent on device-specific data structures (for example, mapping pins to peripheral instances). This means that in order to compile an application that depends on the HAL, it must build against a platform-specific implementation of the HAL, specifying a particular device. The resulting application will be source (but not binary) compatible with a HAL implementation for any other platform.
 
+## Event Handling
+Many HAL drivers provide an API for registering a callback which is invoked when certain (driver-specific) events occur. These drivers also often provide an API for enabling or disabling specific types of events. Unless otherwise documented, the callback will only be invoked for events that occur while that event type is enabled. Specifically, events that occur while a given event type is disabled are not queued and will not trigger a callback when that event type is (re)enabled.
+
 ## Error reporting
 The HAL uses the `cy_rslt_t` type (from the core-lib library) in all places where a HAL function might return an error code. This provides structured error reporting and makes it easy to determine the module from which the error arose, as well as the specific error cause. Macros are provided to help extract this information from a `cy_rslt_t` value. 
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -137,7 +137,8 @@ Typedefs</h2></td></tr>
 <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a61db0997675c2dc43ad7cf91e7160be5">CYHAL_RSLT_MODULE_UART</a>, 
 <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a608cd624d7042ae5d77c6134f7ea382f">CYHAL_RSLT_MODULE_USB</a>, 
 <br />
-&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba">CYHAL_RSLT_MODULE_WDT</a>
+&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba">CYHAL_RSLT_MODULE_WDT</a>, 
+<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>
 <br />
  }</td></tr>
 <tr class="memdesc:ga84f32ecb6376e2088d4f048e35f52005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum to specify module IDs for <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> values returned from the HAL.  <a href="group__group__result.html#ga84f32ecb6376e2088d4f048e35f52005">More...</a><br /></td></tr>
@@ -208,6 +209,12 @@ Modules</h2></td></tr>
 <tr class="separator:gaea80fb321cb0b3e298a3a2e90e445d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0ce9bf3fc06bf768cd32558b44aaaf0f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga0ce9bf3fc06bf768cd32558b44aaaf0f">CY_RSLT_MODULE_BOARD_LIB_SERIAL_FLASH</a>&#160;&#160;&#160;(0x01A2U)</td></tr>
 <tr class="separator:ga0ce9bf3fc06bf768cd32558b44aaaf0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga76bcb30b36e7fea0c8165c55e561de73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga76bcb30b36e7fea0c8165c55e561de73">CY_RSLT_MODULE_BOARD_SHIELD_BASE</a>&#160;&#160;&#160;(0x01C0U)</td></tr>
+<tr class="separator:ga76bcb30b36e7fea0c8165c55e561de73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa5b8e84947e9bf1a7fb5d8003ef276bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaa5b8e84947e9bf1a7fb5d8003ef276bf">CY_RSLT_MODULE_BOARD_SHIELD_028_EPD</a>&#160;&#160;&#160;(0x01C0U)</td></tr>
+<tr class="separator:gaa5b8e84947e9bf1a7fb5d8003ef276bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga40e8ea560bec96d98a8397308ce773cd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga40e8ea560bec96d98a8397308ce773cd">CY_RSLT_MODULE_BOARD_SHIELD_028_TFT</a>&#160;&#160;&#160;(0x01C1U)</td></tr>
+<tr class="separator:ga40e8ea560bec96d98a8397308ce773cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2db34d05e5194f919d6cc45957dc5047"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga2db34d05e5194f919d6cc45957dc5047">CY_RSLT_MODULE_MIDDLEWARE_BASE</a>&#160;&#160;&#160;(0x0200U)</td></tr>
 <tr class="separator:ga2db34d05e5194f919d6cc45957dc5047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -363,7 +370,7 @@ Modules</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Base identifier for peripheral driver library modules (0x0000 - 0x007F) </p>
+<p>Base module identifier for peripheral driver library drivers (0x0000 - 0x007F) </p>
 
 </div>
 </div>
@@ -378,7 +385,7 @@ Modules</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Base identifier for wireless host driver library modules (0x0080 - 0x00FF) </p>
+<p>Base module identifier for wireless host driver library modules (0x0080 - 0x00FF) </p>
 
 </div>
 </div>
@@ -393,7 +400,7 @@ Modules</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Base identifier for HAL modules (0x0100 - 0x017F) </p>
+<p>Base module identifier for HAL drivers (0x0100 - 0x017F) </p>
 
 </div>
 </div>
@@ -483,7 +490,7 @@ Modules</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Base identifier for Board Library modules (0x01A0 - 0x01BF) </p>
+<p>Base module identifier for Board Libraries (0x01A0 - 0x01BF) </p>
 
 </div>
 </div>
@@ -532,6 +539,51 @@ Modules</h2></td></tr>
 
 </div>
 </div>
+<a id="ga76bcb30b36e7fea0c8165c55e561de73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga76bcb30b36e7fea0c8165c55e561de73">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_SHIELD_BASE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CY_RSLT_MODULE_BOARD_SHIELD_BASE&#160;&#160;&#160;(0x01C0U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Base module identifier for Shield Board Libraries (0x01C0 - 0x01FF) </p>
+
+</div>
+</div>
+<a id="gaa5b8e84947e9bf1a7fb5d8003ef276bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa5b8e84947e9bf1a7fb5d8003ef276bf">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_SHIELD_028_EPD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CY_RSLT_MODULE_BOARD_SHIELD_028_EPD&#160;&#160;&#160;(0x01C0U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Module identifier for Shield Board CY8CKIT-028-EPD </p>
+
+</div>
+</div>
+<a id="ga40e8ea560bec96d98a8397308ce773cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga40e8ea560bec96d98a8397308ce773cd">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_SHIELD_028_TFT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CY_RSLT_MODULE_BOARD_SHIELD_028_TFT&#160;&#160;&#160;(0x01C1U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Module identifier for Shield Board CY8CKIT-028-TFT </p>
+
+</div>
+</div>
 <a id="ga2db34d05e5194f919d6cc45957dc5047"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga2db34d05e5194f919d6cc45957dc5047">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_MIDDLEWARE_BASE</h2>
 
@@ -543,7 +595,7 @@ Modules</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Base identifier for Middleware module codes (0x0200 - 0x02FF) </p>
+<p>Base module identifier for Middleware Libraries (0x0200 - 0x02FF) </p>
 
 </div>
 </div>
@@ -579,56 +631,59 @@ Modules</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Enum to specify module IDs for <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> values returned from the HAL. </p>
+<p>Enum definition for all HAL resource modules.Enum to in indicate which module an errors occurred in. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a717c803d1524878107ea23d0e6866bcd"></a>CYHAL_RSLT_MODULE_CHIP_HWMGR&#160;</td><td class="fielddoc"><p>Module identifier for the hardware management module. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a717c803d1524878107ea23d0e6866bcd"></a>CYHAL_RSLT_MODULE_CHIP_HWMGR&#160;</td><td class="fielddoc"><p>An error occurred in hardware management module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a5d2be4eb2e87e5d4f89f4b01cc69abc1"></a>CYHAL_RSLT_MODULE_ADC&#160;</td><td class="fielddoc"><p>Module identifier for the ADC module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a5d2be4eb2e87e5d4f89f4b01cc69abc1"></a>CYHAL_RSLT_MODULE_ADC&#160;</td><td class="fielddoc"><p>An error occurred in ADC module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a381517173cfef57e367895000979e1cb"></a>CYHAL_RSLT_MODULE_COMP&#160;</td><td class="fielddoc"><p>Module identifier for the comparator module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a381517173cfef57e367895000979e1cb"></a>CYHAL_RSLT_MODULE_COMP&#160;</td><td class="fielddoc"><p>An error occurred in comparator module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab957798178a7d11049efcba5bf4887fc"></a>CYHAL_RSLT_MODULE_CRC&#160;</td><td class="fielddoc"><p>Module identifier for the crypto CRC module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab957798178a7d11049efcba5bf4887fc"></a>CYHAL_RSLT_MODULE_CRC&#160;</td><td class="fielddoc"><p>An error occurred in crypto CRC module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a06cacdcbcf43191ea723f86b18ab68e8"></a>CYHAL_RSLT_MODULE_DAC&#160;</td><td class="fielddoc"><p>Module identifier for the DAC module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a06cacdcbcf43191ea723f86b18ab68e8"></a>CYHAL_RSLT_MODULE_DAC&#160;</td><td class="fielddoc"><p>An error occurred in DAC module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a7f8347561e9fbf193dd8b77904163acc"></a>CYHAL_RSLT_MODULE_DMA&#160;</td><td class="fielddoc"><p>Module identifier for the DMA module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a7f8347561e9fbf193dd8b77904163acc"></a>CYHAL_RSLT_MODULE_DMA&#160;</td><td class="fielddoc"><p>An error occurred in DMA module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005adae9f9541be461434c4e2011fe477bc3"></a>CYHAL_RSLT_MODULE_FLASH&#160;</td><td class="fielddoc"><p>Module identifier for the flash module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005adae9f9541be461434c4e2011fe477bc3"></a>CYHAL_RSLT_MODULE_FLASH&#160;</td><td class="fielddoc"><p>An error occurred in flash module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a8a22f6926766c2e3e69868ec51c2572b"></a>CYHAL_RSLT_MODULE_GPIO&#160;</td><td class="fielddoc"><p>Module identifier for the GPIO module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a8a22f6926766c2e3e69868ec51c2572b"></a>CYHAL_RSLT_MODULE_GPIO&#160;</td><td class="fielddoc"><p>An error occurred in GPIO module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a48c873ac3890a78ae0379e725396c607"></a>CYHAL_RSLT_MODULE_I2C&#160;</td><td class="fielddoc"><p>Module identifier for the I2C module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a48c873ac3890a78ae0379e725396c607"></a>CYHAL_RSLT_MODULE_I2C&#160;</td><td class="fielddoc"><p>An error occurred in I2C module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a8f3c272518c2a32f2455e34137a5180d"></a>CYHAL_RSLT_MODULE_I2S&#160;</td><td class="fielddoc"><p>Module identifier for the I2S module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a8f3c272518c2a32f2455e34137a5180d"></a>CYHAL_RSLT_MODULE_I2S&#160;</td><td class="fielddoc"><p>An error occurred in I2S module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab9373b6613ccb00bd4dedab0ae06d11c"></a>CYHAL_RSLT_MODULE_INTERCONNECT&#160;</td><td class="fielddoc"><p>Module identifier for the Interconnct module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab9373b6613ccb00bd4dedab0ae06d11c"></a>CYHAL_RSLT_MODULE_INTERCONNECT&#160;</td><td class="fielddoc"><p>An error occurred in Interconnct module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a291ed2da7ed5183c3e2164ab8b6a8c3e"></a>CYHAL_RSLT_MODULE_OPAMP&#160;</td><td class="fielddoc"><p>Module identifier for the OpAmp module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a291ed2da7ed5183c3e2164ab8b6a8c3e"></a>CYHAL_RSLT_MODULE_OPAMP&#160;</td><td class="fielddoc"><p>An error occurred in OpAmp module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a52c9005959fa8236fc262a990d3bd48f"></a>CYHAL_RSLT_MODULE_PDMPCM&#160;</td><td class="fielddoc"><p>Module identifier for the PDM/PCM module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a52c9005959fa8236fc262a990d3bd48f"></a>CYHAL_RSLT_MODULE_PDMPCM&#160;</td><td class="fielddoc"><p>An error occurred in PDM/PCM module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ac0436b7ec40cb5d645207a8bb23c0e0d"></a>CYHAL_RSLT_MODULE_PWM&#160;</td><td class="fielddoc"><p>Module identifier for the PWM module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ac0436b7ec40cb5d645207a8bb23c0e0d"></a>CYHAL_RSLT_MODULE_PWM&#160;</td><td class="fielddoc"><p>An error occurred in PWM module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005af001a4e0cb1173e8797a0a77c820bf0c"></a>CYHAL_RSLT_MODULE_QSPI&#160;</td><td class="fielddoc"><p>Module identifier for the QSPI module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005af001a4e0cb1173e8797a0a77c820bf0c"></a>CYHAL_RSLT_MODULE_QSPI&#160;</td><td class="fielddoc"><p>An error occurred in QSPI module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b"></a>CYHAL_RSLT_MODULE_RTC&#160;</td><td class="fielddoc"><p>Module identifier for the RTC module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b"></a>CYHAL_RSLT_MODULE_RTC&#160;</td><td class="fielddoc"><p>An error occurred in RTC module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a70df074a301b74eb9ebb1f48e65c9377"></a>CYHAL_RSLT_MODULE_SDHC&#160;</td><td class="fielddoc"><p>Module identifier for the SDHC module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a70df074a301b74eb9ebb1f48e65c9377"></a>CYHAL_RSLT_MODULE_SDHC&#160;</td><td class="fielddoc"><p>An error occurred in SDHC module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a9b6bd9637f353699d08637ac19f7f6fe"></a>CYHAL_RSLT_MODULE_SDIO&#160;</td><td class="fielddoc"><p>Module identifier for the SDIO module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a9b6bd9637f353699d08637ac19f7f6fe"></a>CYHAL_RSLT_MODULE_SDIO&#160;</td><td class="fielddoc"><p>An error occurred in SDIO module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab8eb6c73c4faba6bc4921c84ab03f065"></a>CYHAL_RSLT_MODULE_SPI&#160;</td><td class="fielddoc"><p>Module identifier for the SPI module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab8eb6c73c4faba6bc4921c84ab03f065"></a>CYHAL_RSLT_MODULE_SPI&#160;</td><td class="fielddoc"><p>An error occurred in SPI module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a421e006fc5d9ec6b40ae85276209f526"></a>CYHAL_RSLT_MODULE_SYSTEM&#160;</td><td class="fielddoc"><p>Module identifier for the System module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a421e006fc5d9ec6b40ae85276209f526"></a>CYHAL_RSLT_MODULE_SYSTEM&#160;</td><td class="fielddoc"><p>An error occurred in System module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15"></a>CYHAL_RSLT_MODULE_TIMER&#160;</td><td class="fielddoc"><p>Module identifier for the Timer module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15"></a>CYHAL_RSLT_MODULE_TIMER&#160;</td><td class="fielddoc"><p>An error occurred in Timer module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a9d65008cd494335a5b5decf3533efed2"></a>CYHAL_RSLT_MODULE_TRNG&#160;</td><td class="fielddoc"><p>Module identifier for the RNG module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a9d65008cd494335a5b5decf3533efed2"></a>CYHAL_RSLT_MODULE_TRNG&#160;</td><td class="fielddoc"><p>An error occurred in RNG module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a61db0997675c2dc43ad7cf91e7160be5"></a>CYHAL_RSLT_MODULE_UART&#160;</td><td class="fielddoc"><p>Module identifier for the UART module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a61db0997675c2dc43ad7cf91e7160be5"></a>CYHAL_RSLT_MODULE_UART&#160;</td><td class="fielddoc"><p>An error occurred in UART module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a608cd624d7042ae5d77c6134f7ea382f"></a>CYHAL_RSLT_MODULE_USB&#160;</td><td class="fielddoc"><p>Module identifier for the USB module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a608cd624d7042ae5d77c6134f7ea382f"></a>CYHAL_RSLT_MODULE_USB&#160;</td><td class="fielddoc"><p>An error occurred in USB module. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba"></a>CYHAL_RSLT_MODULE_WDT&#160;</td><td class="fielddoc"><p>Module identifier for the WDT module. </p>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba"></a>CYHAL_RSLT_MODULE_WDT&#160;</td><td class="fielddoc"><p>An error occurred in WDT module. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da"></a>CYHAL_RSLT_MODULE_EZI2C&#160;</td><td class="fielddoc"><p>An error occurred in EZI2C module. </p>
 </td></tr>
 </table>
 
@@ -640,7 +695,7 @@ Modules</h2></td></tr>
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

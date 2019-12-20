@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -101,6 +101,8 @@ $(document).ready(function(){initNavTree('group__group__hal__pwm.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ga54a93c541bdbb3fce066a2af00d8b67f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm.html#ga54a93c541bdbb3fce066a2af00d8b67f">cyhal_pwm_init</a>(obj,  pin,  clk)&#160;&#160;&#160;(<a class="el" href="group__group__hal__pwm.html#ga7fe385b44c329bfa08e5e9f21cf6b837">cyhal_pwm_init_adv</a>(obj, pin, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__03__68__qfn.html#ggac5ef75242c79cd654461fe238990b566a3dbd1016ea99d087d747530418b89a01">NC</a>, <a class="el" href="group__group__hal__pwm.html#gga251111384b543a19975df63353203b51a05ecb08e039afef0513837ce140a3fc1">CYHAL_PWM_LEFT_ALIGN</a>, true, 0u, false, clk))</td></tr>
+<tr class="separator:ga54a93c541bdbb3fce066a2af00d8b67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab7b16a3c46d4332fa511661dedc8d873"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm.html#gab7b16a3c46d4332fa511661dedc8d873">CYHAL_PWM_RSLT_BAD_ARGUMENT</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005ac0436b7ec40cb5d645207a8bb23c0e0d">CYHAL_RSLT_MODULE_PWM</a>, 0))</td></tr>
 <tr class="separator:gab7b16a3c46d4332fa511661dedc8d873"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga431ab66d01f4897a131ac3569c776fd0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm.html#ga431ab66d01f4897a131ac3569c776fd0">CYHAL_PWM_RSLT_FAILED_CLOCK_INIT</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005ac0436b7ec40cb5d645207a8bb23c0e0d">CYHAL_RSLT_MODULE_PWM</a>, 1))</td></tr>
@@ -121,11 +123,16 @@ Enumerations</h2></td></tr>
 <b>CYHAL_PWM_IRQ_ALL</b> = (1 &lt;&lt; 2) - 1
  }</td></tr>
 <tr class="separator:gabfbeebd93efd6491261d3eb6aefef554"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga251111384b543a19975df63353203b51"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm.html#ga251111384b543a19975df63353203b51">cyhal_pwm_alignment_t</a> { <a class="el" href="group__group__hal__pwm.html#gga251111384b543a19975df63353203b51a05ecb08e039afef0513837ce140a3fc1">CYHAL_PWM_LEFT_ALIGN</a> = 0, 
+<a class="el" href="group__group__hal__pwm.html#gga251111384b543a19975df63353203b51ae604cf9b7d021f86aff923fe916a8591">CYHAL_PWM_RIGHT_ALIGN</a> = 1, 
+<a class="el" href="group__group__hal__pwm.html#gga251111384b543a19975df63353203b51a2d5bca81d542fd2ca4a1348336c67af1">CYHAL_PWM_CENTER_ALIGN</a> = 2
+ }</td></tr>
+<tr class="separator:ga251111384b543a19975df63353203b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gac0e3d6740fb5e7100583187a4c2f9fe5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm.html#gac0e3d6740fb5e7100583187a4c2f9fe5">cyhal_pwm_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__pwm__t">cyhal_pwm_t</a> *obj, cyhal_gpio_t pin, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *clk)</td></tr>
-<tr class="separator:gac0e3d6740fb5e7100583187a4c2f9fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7fe385b44c329bfa08e5e9f21cf6b837"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm.html#ga7fe385b44c329bfa08e5e9f21cf6b837">cyhal_pwm_init_adv</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__pwm__t">cyhal_pwm_t</a> *obj, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> compl_pin, <a class="el" href="group__group__hal__pwm.html#ga251111384b543a19975df63353203b51">cyhal_pwm_alignment_t</a> pwm_alignment, bool continuous, uint32_t dead_time_us, bool invert, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *clk)</td></tr>
+<tr class="separator:ga7fe385b44c329bfa08e5e9f21cf6b837"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3e4e8aa7a73d02a15dcf386c335b1598"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm.html#ga3e4e8aa7a73d02a15dcf386c335b1598">cyhal_pwm_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__pwm__t">cyhal_pwm_t</a> *obj)</td></tr>
 <tr class="separator:ga3e4e8aa7a73d02a15dcf386c335b1598"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaab0dc18eb0b1c51623df07f2c275a578"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__pwm.html#gaab0dc18eb0b1c51623df07f2c275a578">cyhal_pwm_set_period</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__pwm__t">cyhal_pwm_t</a> *obj, uint32_t period_us, uint32_t pulse_width_us)</td></tr>
@@ -142,6 +149,50 @@ Functions</h2></td></tr>
 <tr class="separator:gad14d7830a9c05f1fc521863570149a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga54a93c541bdbb3fce066a2af00d8b67f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54a93c541bdbb3fce066a2af00d8b67f">&#9670;&nbsp;</a></span>cyhal_pwm_init</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define cyhal_pwm_init</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">obj, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pin, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">clk&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(<a class="el" href="group__group__hal__pwm.html#ga7fe385b44c329bfa08e5e9f21cf6b837">cyhal_pwm_init_adv</a>(obj, pin, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__03__68__qfn.html#ggac5ef75242c79cd654461fe238990b566a3dbd1016ea99d087d747530418b89a01">NC</a>, <a class="el" href="group__group__hal__pwm.html#gga251111384b543a19975df63353203b51a05ecb08e039afef0513837ce140a3fc1">CYHAL_PWM_LEFT_ALIGN</a>, true, 0u, false, clk))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initialize the PWM out peripheral and configure the pin This is similar to the <a class="el" href="group__group__hal__pwm.html#ga7fe385b44c329bfa08e5e9f21cf6b837">cyhal_pwm_init_adv()</a> but uses defaults for some of the more advanced setup options.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The PWM object to initialize </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>The PWM pin to initialize </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">clk</td><td>An optional, pre-allocated clock to use, if NULL a new clock will be allocated </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the init request </dd></dl>
+
+</div>
+</div>
 <a id="gab7b16a3c46d4332fa511661dedc8d873"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab7b16a3c46d4332fa511661dedc8d873">&#9670;&nbsp;</a></span>CYHAL_PWM_RSLT_BAD_ARGUMENT</h2>
 
@@ -219,15 +270,38 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="gac0e3d6740fb5e7100583187a4c2f9fe5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac0e3d6740fb5e7100583187a4c2f9fe5">&#9670;&nbsp;</a></span>cyhal_pwm_init()</h2>
+<a id="ga251111384b543a19975df63353203b51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga251111384b543a19975df63353203b51">&#9670;&nbsp;</a></span>cyhal_pwm_alignment_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_pwm_init </td>
+          <td class="memname">enum <a class="el" href="group__group__hal__pwm.html#ga251111384b543a19975df63353203b51">cyhal_pwm_alignment_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>PWM alignment </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga251111384b543a19975df63353203b51a05ecb08e039afef0513837ce140a3fc1"></a>CYHAL_PWM_LEFT_ALIGN&#160;</td><td class="fielddoc"><p>Count up </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga251111384b543a19975df63353203b51ae604cf9b7d021f86aff923fe916a8591"></a>CYHAL_PWM_RIGHT_ALIGN&#160;</td><td class="fielddoc"><p>Count down </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga251111384b543a19975df63353203b51a2d5bca81d542fd2ca4a1348336c67af1"></a>CYHAL_PWM_CENTER_ALIGN&#160;</td><td class="fielddoc"><p>Count from center/asymmetric </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga7fe385b44c329bfa08e5e9f21cf6b837"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7fe385b44c329bfa08e5e9f21cf6b837">&#9670;&nbsp;</a></span>cyhal_pwm_init_adv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_pwm_init_adv </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__pwm__t">cyhal_pwm_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -235,8 +309,38 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramname"><em>compl_pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__pwm.html#ga251111384b543a19975df63353203b51">cyhal_pwm_alignment_t</a>&#160;</td>
+          <td class="paramname"><em>pwm_alignment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>continuous</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>dead_time_us</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>invert</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -251,16 +355,22 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize the PWM out peripheral and configure the pin</p>
+<p>Initialize the PWM out peripheral and configure the pin. This is similar to the <a class="el" href="group__group__hal__pwm.html#ga54a93c541bdbb3fce066a2af00d8b67f">cyhal_pwm_init()</a> but provides additional setup options.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The PWM object to initialize </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>The PWM pin to initialize </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">clk</td><td>The clock to use can be shared, if not provided a new clock will be allocated </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The PWM object to initialize. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>The PWM pin to initialize. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">compl_pin</td><td>A optional second, inverted, output pin. If supplied, this must be connected to the same PWM instance as pin. Use 'NC' for No Connect. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pwm_alignment</td><td>PWM alignment: left, right, or center. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">continuous</td><td>PWM run type: continuous (true) or one shot (false). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dead_time_us</td><td>The number of micro-seconds for dead time. This is only meaningful if both pin and compl_pin are provided. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">invert</td><td>An option for the user to invert the PWM output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">clk</td><td>An optional, pre-allocated clock to use, if NULL a new clock will be allocated. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the init request </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the init request</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In some cases, it is possible to use a pin designated for non-inverting output as an inverting output and vice versa. Whether this is possible is dependent on the HAL implementation and operating mode. See the implementation specific documentation for details. </dd></dl>
 
 </div>
 </div>
@@ -528,7 +638,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

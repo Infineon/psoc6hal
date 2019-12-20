@@ -38,6 +38,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "cy_result.h"
 #include "cyhal_hw_types.h"
 #include "cyhal_modules.h"
@@ -45,6 +46,17 @@
 #if defined(__cplusplus)
 extern "C" {
 #endif
+
+/** Initialize the PWM out peripheral and configure the pin
+ * This is similar to the \ref cyhal_pwm_init_adv() but uses defaults for some of the
+ * more advanced setup options.
+ *
+ * @param[out] obj  The PWM object to initialize
+ * @param[in]  pin  The PWM pin to initialize
+ * @param[in]  clk  An optional, pre-allocated clock to use, if NULL a new clock will be allocated
+ * @return The status of the init request
+ */
+#define cyhal_pwm_init(obj, pin, clk) (cyhal_pwm_init_adv(obj, pin, NC, CYHAL_PWM_LEFT_ALIGN, true, 0u, false, clk))
 
 /** Bad argument */
 #define CYHAL_PWM_RSLT_BAD_ARGUMENT (CY_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_PWM, 0))
@@ -55,23 +67,41 @@ extern "C" {
 
 /** PWM interrupt triggers */
 typedef enum {
-    CYHAL_PWM_IRQ_NONE            =  0,
-    CYHAL_PWM_IRQ_TERMINAL_COUNT  =  1 << 0,
-    CYHAL_PWM_IRQ_CAPTURE_COMPARE =  1 << 1,
-    CYHAL_PWM_IRQ_ALL             = (1 << 2) - 1,
+    CYHAL_PWM_IRQ_NONE            =  0,             //**< No interrupts */
+    CYHAL_PWM_IRQ_TERMINAL_COUNT  =  1 << 0,        //**< Interrupt on terinal count match */
+    CYHAL_PWM_IRQ_CAPTURE_COMPARE =  1 << 1,        //**< Interrupt on capture/compare match */
+    CYHAL_PWM_IRQ_ALL             = (1 << 2) - 1,   //**< All interrupts */
 } cyhal_pwm_event_t;
+
+/** PWM alignment */
+typedef enum {
+    CYHAL_PWM_LEFT_ALIGN       = 0, /**< Count up */
+    CYHAL_PWM_RIGHT_ALIGN      = 1, /**< Count down */
+    CYHAL_PWM_CENTER_ALIGN     = 2, /**< Count from center/asymmetric */
+} cyhal_pwm_alignment_t;
 
 /** Handler for PWM interrupts */
 typedef void(*cyhal_pwm_event_callback_t)(void *callback_arg, cyhal_pwm_event_t event);
 
-/** Initialize the PWM out peripheral and configure the pin
+/** Initialize the PWM out peripheral and configure the pin.
+ * This is similar to the \ref cyhal_pwm_init() but provides additional setup options.
  *
- * @param[out] obj The PWM object to initialize
- * @param[in]  pin The PWM pin to initialize
- * @param[in]  clk The clock to use can be shared, if not provided a new clock will be allocated
+ * @param[out] obj              The PWM object to initialize.
+ * @param[in]  pin              The PWM pin to initialize.
+ * @param[in]  compl_pin        A optional second, inverted, output pin. If supplied,
+ * this must be connected to the same PWM instance as pin. Use 'NC' for No Connect.
+ * @param[in]  pwm_alignment    PWM alignment: left, right, or center.
+ * @param[in]  continuous       PWM run type: continuous (true) or one shot (false).
+ * @param[in]  dead_time_us     The number of micro-seconds for dead time. This is 
+ * only meaningful if both pin and compl_pin are provided.
+ * @param[in]  invert      An option for the user to invert the PWM output
+ * @param[in]  clk              An optional, pre-allocated clock to use, if NULL a 
+ * new clock will be allocated.
  * @return The status of the init request
+ * 
+ * @note In some cases, it is possible to use a pin designated for non-inverting output as an inverting output and vice versa. Whether this is possible is dependent on the HAL implementation and operating mode. See the implementation specific documentation for details.
  */
-cy_rslt_t cyhal_pwm_init(cyhal_pwm_t *obj, cyhal_gpio_t pin, const cyhal_clock_divider_t *clk);
+cy_rslt_t cyhal_pwm_init_adv(cyhal_pwm_t *obj, cyhal_gpio_t pin, cyhal_gpio_t compl_pin, cyhal_pwm_alignment_t pwm_alignment, bool continuous, uint32_t dead_time_us, bool invert, const cyhal_clock_divider_t *clk);
 
 /** Deinitialize the PWM object
  *

@@ -143,6 +143,13 @@ cy_rslt_t cyhal_timer_start(cyhal_timer_t *obj);
  */
 cy_rslt_t cyhal_timer_stop(cyhal_timer_t *obj);
 
+/** Reads the current value from the timer/counter.
+ *
+ * @param[in] obj     The timer/counter object
+ * @return The current value of the timer/counter
+ */
+uint32_t cyhal_timer_read(const cyhal_timer_t *obj);
+
 /** The timer/counter callback handler registration
  *
  * @param[in] obj          The timer/counter object

@@ -23,4 +23,4 @@ for the JavaScript code in this file
 */
 var menudata={children:[
 {text:"Home",url:"index.html"},
-{text:"PSoC 6 HAL API Reference",url:"modules.html"}]}
+{text:"HAL API Reference",url:"modules.html"}]}

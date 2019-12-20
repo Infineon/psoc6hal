@@ -192,9 +192,13 @@ cy_rslt_t cyhal_sdio_send_cmd(const cyhal_sdio_t *obj, cyhal_transfer_t directio
  * @param[in,out] obj       The SDIO object
  * @param[in]     direction The direction of transfer (read/write)
  * @param[in]     argument  The argument to the command
- * @param[in]     data      The data to send to the SDIO device. The data buffer 
- *                          should be aligned to the block size (64 bytes) if data 
- *                          size is greater that block size (64 bytes).
+ * @param[in]     data      The data to send to the SDIO device. A bulk transfer is done in block 
+ *                          size (default: 64 bytes) chunks for better performance. Therefore, 
+ *                          the size of the data buffer passed into this function must be at least 
+ *                          `length` bytes and a multiple of the block size. For example, when 
+ *                          requesting to read 100 bytes of data with a block size 64 bytes, the 
+ *                          data buffer needs to be at least 128 bytes. The first 100 bytes of data 
+ *                          in the buffer will be the requested data.
  * @param[in]     length    The number of bytes to send
  * @param[out]    response  The response from the SDIO device
  * @return The status of the configure request

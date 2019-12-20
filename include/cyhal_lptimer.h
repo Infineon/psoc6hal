@@ -47,6 +47,10 @@
 extern "C" {
 #endif
 
+
+/** Failed to configure power management callback */
+#define CYHAL_LPTIMER_RSLT_ERR_PM_CALLBACK (CY_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_WDT, 0))
+
 /** LPTIMER interrupt triggers */
 typedef enum {
     CYHAL_LPTIMER_COMPARE_MATCH,
@@ -85,18 +89,8 @@ void cyhal_lptimer_free(cyhal_lptimer_t *obj);
  */
 cy_rslt_t cyhal_lptimer_reload(cyhal_lptimer_t *obj);
 
-/** Set timeframe between interrupts
- * 
- * Configures the LPTIMER in free-running mode. Generates an interrupt on match.
- * This function is for initial configuration. For quick updates to the match
- * value, use cyhal_lptimer_set_time().
- * 
- * @param[in] obj   The LPTIMER object
- * @param[in] time  The time in ticks to be set
- *
- * @return The status of the set_time request
- */
-cy_rslt_t cyhal_lptimer_set_time(cyhal_lptimer_t *obj, uint32_t time);
+/** Deprecated. Call cyhal_lptimer_set_match instead. */
+#define cyhal_lptimer_set_time cyhal_lptimer_set_match
 
 /** Update the match/compare value
  * 
@@ -106,11 +100,26 @@ cy_rslt_t cyhal_lptimer_set_time(cyhal_lptimer_t *obj, uint32_t time);
  * sequence.
  * 
  * @param[in] obj   The LPTIMER object
- * @param[in] value The match value in ticks
+ * @param[in] value The tick value to match
  *
  * @return The status of the set_match request
  */
 cy_rslt_t cyhal_lptimer_set_match(cyhal_lptimer_t *obj, uint32_t value);
+
+/** Update the match/compare value
+ * 
+ * Update the match value of an already configured LPTIMER set up
+ * to generate an interrupt on match delay from the current counter value.
+ * Note that this function does not reinitialize the counter or the 
+ * associated peripheral initialization
+ * sequence.
+ * 
+ * @param[in] obj   The LPTIMER object
+ * @param[in] delay The ticks to wait
+ *
+ * @return The status of the set_match request
+ */
+cy_rslt_t cyhal_lptimer_set_delay(cyhal_lptimer_t *obj, uint32_t delay);
 
 /** Read the current tick
  *

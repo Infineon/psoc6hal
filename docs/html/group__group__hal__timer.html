@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -141,7 +141,7 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga7f2d53c6bf2e59a195f40a3eed6903d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, cyhal_gpio_t pin, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *clk)</td></tr>
+<tr class="memitem:ga7f2d53c6bf2e59a195f40a3eed6903d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *clk)</td></tr>
 <tr class="separator:ga7f2d53c6bf2e59a195f40a3eed6903d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga94944664f47b8ff7c093719116b35cdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga94944664f47b8ff7c093719116b35cdc">cyhal_timer_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj)</td></tr>
 <tr class="separator:ga94944664f47b8ff7c093719116b35cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,6 +153,8 @@ Functions</h2></td></tr>
 <tr class="separator:gaff09b3ffee75893da00d0a7dae2d9cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8734bf8e55f7b51ef18a22e8d1ffb1e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga8734bf8e55f7b51ef18a22e8d1ffb1e1">cyhal_timer_stop</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj)</td></tr>
 <tr class="separator:ga8734bf8e55f7b51ef18a22e8d1ffb1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0be5bf53c214ffcb3c4e962e71af1e6d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga0be5bf53c214ffcb3c4e962e71af1e6d">cyhal_timer_read</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="separator:ga0be5bf53c214ffcb3c4e962e71af1e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga928ffe0a3a1549c94752db7c68306424"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga928ffe0a3a1549c94752db7c68306424">cyhal_timer_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__timer.html#gae239f85fa523177aeed212846e491206">cyhal_timer_event_callback_t</a> callback, void *callback_arg)</td></tr>
 <tr class="separator:ga928ffe0a3a1549c94752db7c68306424"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga66e428188d9a6cf96caebe8c2bdfbf25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga66e428188d9a6cf96caebe8c2bdfbf25">cyhal_timer_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> event, uint8_t intrPriority, bool enable)</td></tr>
@@ -360,7 +362,7 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
@@ -540,6 +542,32 @@ Current value of the timer/counter. </td></tr>
 
 </div>
 </div>
+<a id="ga0be5bf53c214ffcb3c4e962e71af1e6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0be5bf53c214ffcb3c4e962e71af1e6d">&#9670;&nbsp;</a></span>cyhal_timer_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t cyhal_timer_read </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reads the current value from the timer/counter.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The current value of the timer/counter </dd></dl>
+
+</div>
+</div>
 <a id="ga928ffe0a3a1549c94752db7c68306424"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga928ffe0a3a1549c94752db7c68306424">&#9670;&nbsp;</a></span>cyhal_timer_register_callback()</h2>
 
@@ -639,7 +667,7 @@ Current value of the timer/counter. </td></tr>
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

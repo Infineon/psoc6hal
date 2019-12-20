@@ -47,6 +47,7 @@ extern "C" {
 #endif
 
 #define CYHAL_SDHC_RSLT_ERR_PIN (CY_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_SDHC, 0)) /**< Pin related Error. >*/
+#define CYHAL_SDHC_RSLT_ERR_UNSUPPORTED (CY_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_SDHC, 1)) /**< Requested feature is not supported on this hardware. >*/
 
 /** Card types */
 typedef enum

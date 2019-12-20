@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -87,6 +87,7 @@ $(document).ready(function(){initNavTree('group__group__hal__lptimer.html','');}
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -98,6 +99,13 @@ $(document).ready(function(){initNavTree('group__group__hal__lptimer.html','');}
 <p>High level interface for interacting with the Cypress LPTIMER.</p>
 <p>This can be used to measure timing between events, or to perform some action the ability after a set interval. It continues to operate in some low power modes; see the device datasheet for details. </p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gaab76b1a89013f80e937322727c727e26"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gaab76b1a89013f80e937322727c727e26">CYHAL_LPTIMER_RSLT_ERR_PM_CALLBACK</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba">CYHAL_RSLT_MODULE_WDT</a>, 0))</td></tr>
+<tr class="separator:gaab76b1a89013f80e937322727c727e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae51c0464d3c9ca35707e15afe31ccb54"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gae51c0464d3c9ca35707e15afe31ccb54">cyhal_lptimer_set_time</a>&#160;&#160;&#160;<a class="el" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a></td></tr>
+<tr class="separator:gae51c0464d3c9ca35707e15afe31ccb54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga09c30c6a9abcbd1a738529102aa9c9b5"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga09c30c6a9abcbd1a738529102aa9c9b5">cyhal_lptimer_event_callback_t</a>) (void *callback_arg, <a class="el" href="group__group__hal__lptimer.html#ga8a2db5e37e9e36afd382844cf909278f">cyhal_lptimer_event_t</a> event)</td></tr>
@@ -117,10 +125,10 @@ Functions</h2></td></tr>
 <tr class="separator:ga0cbaebaddaa47faf71a69d46c65f7917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5ed361c85190707574565009eb325473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga5ed361c85190707574565009eb325473">cyhal_lptimer_reload</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
 <tr class="separator:ga5ed361c85190707574565009eb325473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafa25c090d25fa4b8a11cfad9d51fc9b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gafa25c090d25fa4b8a11cfad9d51fc9b6">cyhal_lptimer_set_time</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t time)</td></tr>
-<tr class="separator:gafa25c090d25fa4b8a11cfad9d51fc9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga39d049f6f4bdd0bcd4e0be2ab48d3394"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t value)</td></tr>
 <tr class="separator:ga39d049f6f4bdd0bcd4e0be2ab48d3394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae91cdc8b63ef191f5a2013df3aaa5d78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gae91cdc8b63ef191f5a2013df3aaa5d78">cyhal_lptimer_set_delay</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t delay)</td></tr>
+<tr class="separator:gae91cdc8b63ef191f5a2013df3aaa5d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae759c60b5865a26599353e436518b1d3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gae759c60b5865a26599353e436518b1d3">cyhal_lptimer_read</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
 <tr class="separator:gae759c60b5865a26599353e436518b1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac670fa5380ffd41e548dac6975500b3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gac670fa5380ffd41e548dac6975500b3d">cyhal_lptimer_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, <a class="el" href="group__group__hal__lptimer.html#ga09c30c6a9abcbd1a738529102aa9c9b5">cyhal_lptimer_event_callback_t</a> callback, void *callback_arg)</td></tr>
@@ -130,6 +138,37 @@ Functions</h2></td></tr>
 <tr class="memitem:ga6c86e106c2cc0e5ce0cc4168924a7d41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga6c86e106c2cc0e5ce0cc4168924a7d41">cyhal_lptimer_irq_trigger</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
 <tr class="separator:ga6c86e106c2cc0e5ce0cc4168924a7d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="gaab76b1a89013f80e937322727c727e26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab76b1a89013f80e937322727c727e26">&#9670;&nbsp;</a></span>CYHAL_LPTIMER_RSLT_ERR_PM_CALLBACK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYHAL_LPTIMER_RSLT_ERR_PM_CALLBACK&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba">CYHAL_RSLT_MODULE_WDT</a>, 0))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Failed to configure power management callback </p>
+
+</div>
+</div>
+<a id="gae51c0464d3c9ca35707e15afe31ccb54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae51c0464d3c9ca35707e15afe31ccb54">&#9670;&nbsp;</a></span>cyhal_lptimer_set_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define cyhal_lptimer_set_time&#160;&#160;&#160;<a class="el" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Deprecated. Call cyhal_lptimer_set_match instead. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga09c30c6a9abcbd1a738529102aa9c9b5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga09c30c6a9abcbd1a738529102aa9c9b5">&#9670;&nbsp;</a></span>cyhal_lptimer_event_callback_t</h2>
@@ -242,44 +281,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gafa25c090d25fa4b8a11cfad9d51fc9b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gafa25c090d25fa4b8a11cfad9d51fc9b6">&#9670;&nbsp;</a></span>cyhal_lptimer_set_time()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_lptimer_set_time </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
-          <td class="paramname"><em>obj</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>time</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Set timeframe between interrupts</p>
-<p>Configures the LPTIMER in free-running mode. Generates an interrupt on match. This function is for initial configuration. For quick updates to the match value, use <a class="el" href="group__group__hal__lptimer.html#gafa25c090d25fa4b8a11cfad9d51fc9b6">cyhal_lptimer_set_time()</a>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The LPTIMER object </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>The time in ticks to be set</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the set_time request </dd></dl>
-
-</div>
-</div>
 <a id="ga39d049f6f4bdd0bcd4e0be2ab48d3394"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga39d049f6f4bdd0bcd4e0be2ab48d3394">&#9670;&nbsp;</a></span>cyhal_lptimer_set_match()</h2>
 
@@ -310,11 +311,51 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The LPTIMER object </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The match value in ticks</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The tick value to match</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The status of the set_match request </dd></dl>
+
+</div>
+</div>
+<a id="gae91cdc8b63ef191f5a2013df3aaa5d78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae91cdc8b63ef191f5a2013df3aaa5d78">&#9670;&nbsp;</a></span>cyhal_lptimer_set_delay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_lptimer_set_delay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>delay</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Update the match/compare value</p>
+<p>Update the match value of an already configured LPTIMER set up to generate an interrupt on match delay from the current counter value. Note that this function does not reinitialize the counter or the associated peripheral initialization sequence.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The LPTIMER object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">delay</td><td>The ticks to wait</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the set_match request </dd></dl>
+<p>16 bit C0/C1 are cascaded to generated a 32 bit counter. Counter0 continues counting after reaching its match value Interrupt is generated on Counter1 match.</p>
+<p>Supposed T=C0=C1=0, and we need to trigger an interrupt at T=0x28000. We set C0_match to 0x8000 and C1 match to 1. At T = 0x8000, C0_value matches C0_match so C1 get incremented. C1/C0=0x18000. At T = 0x18000, C0_value matches C0_match again so C1 get incremented from 1 to 2. When C1 get incremented from 1 to 2 theinterrupt is generated. At T = 0x18000, C1/C0 = 0x28000.</p>
 
 </div>
 </div>
@@ -334,7 +375,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Read the current tick</p>
-<p>If no rollover has occurred, the seconds passed since <a class="el" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init()</a> or <a class="el" href="group__group__hal__lptimer.html#gafa25c090d25fa4b8a11cfad9d51fc9b6">cyhal_lptimer_set_time()</a> was called can be found by dividing the ticks returned by this function by the frequency of the source clock (refer to the BSP for the clock source).</p>
+<p>If no rollover has occurred, the seconds passed since <a class="el" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init()</a> or <a class="el" href="group__group__hal__lptimer.html#gae51c0464d3c9ca35707e15afe31ccb54">cyhal_lptimer_set_time()</a> was called can be found by dividing the ticks returned by this function by the frequency of the source clock (refer to the BSP for the clock source).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The LPTIMER object </td></tr>
@@ -469,7 +510,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

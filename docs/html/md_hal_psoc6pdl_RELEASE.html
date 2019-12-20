@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -87,15 +87,17 @@ $(document).ready(function(){initNavTree('md_hal_psoc6pdl_RELEASE.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Cypress PSoC 6 Hardware Abstraction Layer (HAL) 1.0 </div>  </div>
+<div class="title">Cypress PSoC 6 Hardware Abstraction Layer (HAL) 1.1 </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Cypress PSoC 6 Hardware Abstraction Layer (HAL) provides an implementation of the Cypress Hardware Abstraction Layer for the PSoC 6 family of chips. This API provides convenience methods for initializing and manipulating different hardware peripherals. Depending on the specific chip being used, not all features may be supported.</p>
 <h3>What's Included?</h3>
-<p>The this release of the PSoC 6 HAL includes support for the following drivers:</p><ul>
+<p>This release of the PSoC 6 HAL includes support for the following drivers:</p><ul>
 <li>ADC</li>
 <li>CRC</li>
 <li>DAC</li>
+<li>DMA</li>
+<li>EZ-I2C</li>
 <li>Flash</li>
 <li>GPIO</li>
 <li>Hardware Manager</li>
@@ -114,6 +116,24 @@ $(document).ready(function(){initNavTree('md_hal_psoc6pdl_RELEASE.html','');});
 <li>USB Device</li>
 <li>WDT</li>
 </ul>
+<h3>What Changed?</h3>
+<h4>v1.1.0</h4>
+<ul>
+<li>Added new DMA driver</li>
+<li>Added new EZ-I2C driver</li>
+<li>Extended System driver to allow getting information about reset</li>
+<li>Extended System driver to provide delay functions</li>
+<li>Updated PWM driver to provide additional configuration options</li>
+<li>Updated Timer driver to allow reading the current count</li>
+<li>Updated RTC driver to support Day Light Savings time</li>
+<li>Updated LP Timer driver to improve performance</li>
+<li>Minor updates up avoid potential warnings on some toolchains</li>
+<li>Multiple bug fixes across drivers <h4>v1.0.0</h4>
+</li>
+</ul>
+<ul>
+<li>Initial release (ADC, CRC, DAC, Flash, GPIO, Hardware Manager, I2C, LP Timer, PWM, QSPI, RTC, SDHC, SDIO, SPI, System, Timer, TRNG, UART, USB Device, WDT)</li>
+</ul>
 <h3>Supported Software and Tools</h3>
 <p>This version of the Cypress PSoC 6 Hardware Abstraction Layer was validated for compatibility with the following Software and Tools:</p>
 <table class="markdownTable">
@@ -130,12 +150,10 @@ $(document).ready(function(){initNavTree('md_hal_psoc6pdl_RELEASE.html','');});
 </table>
 <h3>More information</h3>
 <p>Use the following links for more information, as needed:</p><ul>
-<li><a href="./docs/api_reference_manual.html">API Reference Guide</a></li>
+<li><a href="https://cypresssemiconductorco.github.io/psoc6hal/html/modules.html">API Reference Guide</a></li>
 <li><a href="http://www.cypress.com">Cypress Semiconductor</a></li>
 <li><a href="https://github.com/cypresssemiconductorco">Cypress Semiconductor GitHub</a></li>
-<li><a href="./version.txt">Version</a></li>
-<li><a href="./LICENSE">LICENSE</a></li>
-<li><a href="./EULA">EULA</a> <hr/>
+<li><a href="https://www.cypress.com/products/modustoolbox-software-environment">ModusToolbox</a> <hr/>
  © Cypress Semiconductor Corporation, 2019. </li>
 </ul>
 </div></div><!-- contents -->
@@ -144,7 +162,7 @@ $(document).ready(function(){initNavTree('md_hal_psoc6pdl_RELEASE.html','');});
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

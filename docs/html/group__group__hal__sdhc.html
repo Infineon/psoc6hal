@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC 6 Hardware Abstraction Layer (HAL)</title>
+<title>Hardware Abstraction Layer (HAL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSoC 6 Hardware Abstraction Layer (HAL)</div>
+   <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
  </tr>
  </tbody>
@@ -112,6 +112,8 @@ Macros</h2></td></tr>
 <tr class="separator:ga5271066b0eb796800ce40e649d5f6c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5271066b0eb796800ce40e649d5f6c1c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga5271066b0eb796800ce40e649d5f6c1c">CYHAL_SDHC_RSLT_ERR_PIN</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a70df074a301b74eb9ebb1f48e65c9377">CYHAL_RSLT_MODULE_SDHC</a>, 0))</td></tr>
 <tr class="separator:ga5271066b0eb796800ce40e649d5f6c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga08eb24911e6245f53e4118b9fc33aca0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga08eb24911e6245f53e4118b9fc33aca0">CYHAL_SDHC_RSLT_ERR_UNSUPPORTED</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a70df074a301b74eb9ebb1f48e65c9377">CYHAL_RSLT_MODULE_SDHC</a>, 1))</td></tr>
+<tr class="separator:ga08eb24911e6245f53e4118b9fc33aca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -159,7 +161,7 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gae748a1d5e7c6f91eeb78801979c5abe6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, const <a class="el" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> *config, cyhal_gpio_t cmd, cyhal_gpio_t clk, cyhal_gpio_t data0, cyhal_gpio_t data1, cyhal_gpio_t data2, cyhal_gpio_t data3, cyhal_gpio_t data4, cyhal_gpio_t data5, cyhal_gpio_t data6, cyhal_gpio_t data7, cyhal_gpio_t cardDetect, cyhal_gpio_t ioVoltSel, cyhal_gpio_t cardIfPwrEn, cyhal_gpio_t cardMechWriteProt, cyhal_gpio_t ledCtrl, cyhal_gpio_t cardEmmcReset)</td></tr>
+<tr class="memitem:gae748a1d5e7c6f91eeb78801979c5abe6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, const <a class="el" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> *config, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> cmd, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> clk, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> data0, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> data1, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> data2, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> data3, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> data4, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> data5, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> data6, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> data7, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> cardDetect, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> ioVoltSel, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> cardIfPwrEn, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> cardMechWriteProt, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> ledCtrl, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> cardEmmcReset)</td></tr>
 <tr class="separator:gae748a1d5e7c6f91eeb78801979c5abe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3fb2c77d8662f53a21996298cb4581b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga3fb2c77d8662f53a21996298cb4581b1">cyhal_sdhc_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj)</td></tr>
 <tr class="separator:ga3fb2c77d8662f53a21996298cb4581b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,6 +254,21 @@ The desired bus width. </td></tr>
       </table>
 </div><div class="memdoc">
 <p>Pin related Error. &gt; </p>
+
+</div>
+</div>
+<a id="ga08eb24911e6245f53e4118b9fc33aca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga08eb24911e6245f53e4118b9fc33aca0">&#9670;&nbsp;</a></span>CYHAL_SDHC_RSLT_ERR_UNSUPPORTED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYHAL_SDHC_RSLT_ERR_UNSUPPORTED&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a70df074a301b74eb9ebb1f48e65c9377">CYHAL_RSLT_MODULE_SDHC</a>, 1))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Requested feature is not supported on this hardware. &gt; </p>
 
 </div>
 </div>
@@ -392,97 +409,97 @@ The desired bus width. </td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cmd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data0</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data3</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data4</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data5</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data6</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data7</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cardDetect</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>ioVoltSel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cardIfPwrEn</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cardMechWriteProt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>ledCtrl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_gpio_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cardEmmcReset</em>&#160;</td>
         </tr>
         <tr>
@@ -944,7 +961,7 @@ The desired bus width. </td></tr>
 <div id="nav-path" class="navpath">
     <ul>
         <li class="footer">
-            Generated for <b>PSoC 6 Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
+            Generated for <b>Hardware Abstraction Layer (HAL)</b> by <b>Cypress Semiconductor Corporation</b>.
             All rights reserved.
         </li>
     </ul>

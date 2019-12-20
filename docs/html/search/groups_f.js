@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['uart_20_28universal_20asynchronous_20receiver_2dtransmitter_29',['UART (Universal Asynchronous Receiver-Transmitter)',['../group__group__hal__uart.html',1,'']]],
-  ['usb_20device',['USB Device',['../group__group__hal__usb__dev.html',1,'']]]
+  ['triggers',['Triggers',['../group__group__hal__psoc6__triggers.html',1,'']]],
+  ['timer_20_28timer_2fcounter_29',['TIMER (Timer/Counter)',['../group__group__hal__timer.html',1,'']]],
+  ['trng_20_28true_20random_20number_20generator_29',['TRNG (True Random Number Generator)',['../group__group__hal__trng.html',1,'']]]
 ];

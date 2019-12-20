@@ -31,6 +31,7 @@ var group__group__hal__qspi =
     [ "CYHAL_QSPI_RSLT_ERR_PIN", "group__group__hal__qspi.html#gaaff3affb5a155c8341d8081c04ba5fc2", null ],
     [ "CYHAL_QSPI_RSLT_ERR_DATA_SEL", "group__group__hal__qspi.html#ga71bf90ec56d0ff067b535f1ea667fb01", null ],
     [ "CYHAL_QSPI_RSLT_ERR_INSTANCE", "group__group__hal__qspi.html#ga98afbaa8e54635a5033feffdc5ee3a8d", null ],
+    [ "CYHAL_QSPI_RSLT_ERR_FREQUENCY", "group__group__hal__qspi.html#ga01bf613bc3c9e26af1008d79e1e9cbeb", null ],
     [ "cyhal_qspi_event_callback_t", "group__group__hal__qspi.html#ga42887dff6257345711b353990edb1ab1", null ],
     [ "cyhal_qspi_bus_width_t", "group__group__hal__qspi.html#gaddc93a79f0708fd53897d0c37bc7544b", null ],
     [ "cyhal_qspi_size_t", "group__group__hal__qspi.html#ga0633be58b4427d173d1f94c4e6e4e058", null ],
