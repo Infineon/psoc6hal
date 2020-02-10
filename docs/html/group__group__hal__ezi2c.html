@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('group__group__hal__ezi2c.html','');});
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>High level interface for interacting with the Cypress EZI2C. </p>
+<p>High level interface for interacting with the Cypress EZ Inter-Integrated Circuit (EZI2C). </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -145,22 +145,7 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:ga43af4b9cfed6e50bd96e4f2434678620"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga64117bd10d8cf53ff1a690e8fbc9a1cf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga64117bd10d8cf53ff1a690e8fbc9a1cf">cyhal_ezi2c_event_t</a> { <br />
-&#160;&#160;<b>CYHAL_EZI2C_EVENT_NONE</b> = 0, 
-<b>CYHAL_EZI2C_EVENT_SLAVE_READ_EVENT</b> = 1 &lt;&lt; 1, 
-<b>CYHAL_EZI2C_EVENT_SLAVE_WRITE_EVENT</b> = 1 &lt;&lt; 2, 
-<b>CYHAL_EZI2C_EVENT_SLAVE_RD_IN_FIFO_EVENT</b> = 1 &lt;&lt; 3, 
-<br />
-&#160;&#160;<b>CYHAL_EZI2C_EVENT_SLAVE_RD_BUF_EMPTY_EVENT</b> = 1 &lt;&lt; 4, 
-<b>CYHAL_EZI2C_EVENT_SLAVE_RD_CMPLT_EVENT</b> = 1 &lt;&lt; 5, 
-<b>CYHAL_EZI2C_EVENT_SLAVE_WR_CMPLT_EVENT</b> = 1 &lt;&lt; 6, 
-<b>CYHAL_EZI2C_EVENT_SLAVE_ERR_EVENT</b> = 1 &lt;&lt; 7, 
-<br />
-&#160;&#160;<b>CYHAL_EZI2C_EVENT_MASTER_WR_IN_FIFO_EVENT</b> = 1 &lt;&lt; 17, 
-<b>CYHAL_EZI2C_EVENT_MASTER_WR_CMPLT_EVENT</b> = 1 &lt;&lt; 18, 
-<b>CYHAL_EZI2C_EVENT_MASTER_RD_CMPLT_EVENT</b> = 1 &lt;&lt; 19, 
-<b>CYHAL_EZI2C_EVENT_MASTER_ERR_EVENT</b> = 1 &lt;&lt; 20
-<br />
+<tr class="memitem:ga64117bd10d8cf53ff1a690e8fbc9a1cf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga64117bd10d8cf53ff1a690e8fbc9a1cf">cyhal_ezi2c_event_t</a> { <b>CYHAL_EZI2C_EVENT_NONE</b> = 0
  }</td></tr>
 <tr class="separator:ga64117bd10d8cf53ff1a690e8fbc9a1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -436,7 +421,7 @@ sub_address_size</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Enum to enable/disable/report interrupt cause flags. </p>
+<p>Enum to enable/disable/report interrupt cause flags. When an event is triggered the status can be obtained by calling <a class="el" href="group__group__hal__ezi2c.html#gae4a966b68ceb0a9b7b467a288357b35d">cyhal_ezi2c_get_activity_status</a>. </p><dl class="section note"><dt>Note</dt><dd>This is a placeholder for now. It may be extended in the future. </dd></dl>
 
 </div>
 </div>

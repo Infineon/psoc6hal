@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,10 +26,10 @@
 *******************************************************************************/
 
 /**
-* \addtogroup group_hal_system SYSTEM (Power Management and System Clock)
+* \addtogroup group_hal_system System (Power Management and System Clock)
 * \ingroup group_hal
 * \{
-* High level interface for interacting with the Cypress power management
+* High level interface for interacting with the power management
 * and system clock configuration.
 *
 * This driver provides three categories of functionality:
@@ -133,26 +133,26 @@ cy_rslt_t cyhal_system_unregister_callback(cyhal_system_callback_t const *callba
 
 /**
  * Requests that the current operation delays for at least the specified length of time.
- * If this is running in an RTOS aware environment (-DCY_RTOS_AWARE) it will attempt to 
- * have the RTOS suspend the current task so others can continue to run. If this is not 
+ * If this is running in an RTOS aware environment (-DCY_RTOS_AWARE) it will attempt to
+ * have the RTOS suspend the current task so others can continue to run. If this is not
  * run under an RTOS it will then defer to the standard system delay which is likely to
  * be a busy loop.
- * If this is part of an application that is build with RTOS awareness, but the delay 
+ * If this is part of an application that is build with RTOS awareness, but the delay
  * should not depend on the RTOS for whatever reason, use cyhal_system_delay_us() with
  * the appropriate 1000x multiplier to the delay time.
- * 
+ *
  * @param[in] milliseconds The number of milliseconds to delay for
  * @return Returns CY_RSLT_SUCCESS if the delay request was successful, otherwise error
  */
 cy_rslt_t cyhal_system_delay_ms(uint32_t milliseconds);
 
 /**
- * Requests that the current operation delay for at least the specified number of 
- * micro-seconds. This will generally keep the processor active in a loop for the 
- * specified length of time. If this is running under an RTOS, it will NOT attempt to 
- * run any other RTOS tasks, however if the scheduler or a high priority interrupt 
+ * Requests that the current operation delay for at least the specified number of
+ * micro-seconds. This will generally keep the processor active in a loop for the
+ * specified length of time. If this is running under an RTOS, it will NOT attempt to
+ * run any other RTOS tasks, however if the scheduler or a high priority interrupt
  * comes it they can take over anyway.
- * 
+ *
  * @param[in] microseconds The number of micro-seconds to delay for
  */
 void cyhal_system_delay_us(uint16_t microseconds);

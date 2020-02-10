@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"group__group__hal__psoc6__hw__types.html#gga63b023ea7b5e73db59ddc0423c77975baf4c05e33bb994cc6a1d94bd301dcc988":[1,3,1,31,23],
+"group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t":[1,3,1,4],
 "group__group__hal__psoc6__hw__types.html#structcyhal__adc__t":[1,3,1,3],
 "group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t":[1,3,1,1],
 "group__group__hal__psoc6__hw__types.html#structcyhal__crc__t":[1,3,1,5],
@@ -247,7 +249,5 @@ var NAVTREEINDEX2 =
 "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#structcyhal__resource__pin__mapping__t":[1,3,2,4,0],
 "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#structcyhal__resource__pin__mapping__t":[1,3,2,5,0],
 "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#structcyhal__resource__pin__mapping__t":[1,3,2,0,0],
-"group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#structcyhal__resource__pin__mapping__t":[1,3,2,6,0],
-"group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html":[1,3,2,1],
-"group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html#ga05a3560b9049d39b61751c45dc649030":[1,3,2,1,27]
+"group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#structcyhal__resource__pin__mapping__t":[1,3,2,6,0]
 };

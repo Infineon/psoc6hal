@@ -1,7 +1,7 @@
 var searchData=
 [
   ['triggers',['Triggers',['../group__group__hal__psoc6__triggers.html',1,'']]],
-  ['timer_20_28timer_2fcounter_29',['TIMER (Timer/Counter)',['../group__group__hal__timer.html',1,'']]],
+  ['timer_20_28timer_2fcounter_29',['Timer (Timer/Counter)',['../group__group__hal__timer.html',1,'']]],
   ['trng_20_28true_20random_20number_20generator_29',['TRNG (True Random Number Generator)',['../group__group__hal__trng.html',1,'']]],
   ['transfer_5fwidth',['transfer_width',['../group__group__hal__dma.html#ae5b6698dfc754dc0ca497842681ce7ef',1,'cyhal_dma_cfg_t']]],
   ['trigger_5fcanfd0_5ftr_5fdbg_5fdma_5fack0',['TRIGGER_CANFD0_TR_DBG_DMA_ACK0',['../group__group__hal__psoc6__triggers__psoc6__03.html#ggaa15786a3c3e8b90aab093207b2a440fca339155faa5281cfedfca0b506fa28f1f',1,'cyhal_triggers_psoc6_03.h']]],

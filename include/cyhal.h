@@ -18,7 +18,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,9 +38,9 @@
 * \addtogroup group_hal HAL Drivers
 * This section documents the drivers which form the stable API of the Cypress HAL.
 * In order to remain portable across platforms and HAL versions, applications should
-* rely only on functionality documented in this section. 
+* rely only on functionality documented in this section.
 * \{
-* \defgroup group_result Result Type 
+* \defgroup group_result Result Type
 * \}
 */
 

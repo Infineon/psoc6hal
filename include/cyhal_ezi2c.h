@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,15 +26,15 @@
 *******************************************************************************/
 
 /******************************************************************************
-* Provides a high level Cypress EZI2C Slave interface for interacting with 
+* Provides a high level Cypress EZI2C Slave interface for interacting with
 * an I2C master.
 * This interface abstracts out the chip specific details. If any chip specific
 * functionality is necessary, or performance is critical the low level functions
 * can be used directly.
 *
-* Cypress EZI2C emulates a common I2C EEPROM interface that acts like dual-port 
+* Cypress EZI2C emulates a common I2C EEPROM interface that acts like dual-port
 * memory between the external master and your code. Once the interface is setup,
-* your code can read/write freely from the specified buffer(s). 
+* your code can read/write freely from the specified buffer(s).
 * All I2C transactions to/from the master are handled automatically.
 *******************************************************************************/
 
@@ -42,7 +42,7 @@
 * \addtogroup group_hal_ezi2c EZI2C (Inter-Integrated Circuit)
 * \ingroup group_hal
 * \{
-* High level interface for interacting with the Cypress EZI2C.
+* High level interface for interacting with the Cypress EZ Inter-Integrated Circuit (EZI2C).
 */
 
 #pragma once
@@ -92,24 +92,16 @@ typedef enum
     CYHAL_EZI2C_STATUS_WRITE2 = 0x08UL,  /**< The Write transfer intended for the secondary slave address is complete */
     CYHAL_EZI2C_STATUS_BUSY   = 0x10UL,  /**< A transfer intended for the primary address or secondary address is in progress */
     CYHAL_EZI2C_STATUS_ERR    = 0x20UL   /**< An error occurred during a transfer intended for the primary or secondary slave address */
-    
+
 } cyhal_ezi2c_status_t;
 
-/** Enum to enable/disable/report interrupt cause flags. */
+/** Enum to enable/disable/report interrupt cause flags. When an event is triggered
+ * the status can be obtained by calling \ref cyhal_ezi2c_get_activity_status.
+ * \note This is a placeholder for now. It may be extended in the future.
+ */
 typedef enum
 {
     CYHAL_EZI2C_EVENT_NONE                     = 0,       /* No event */
-    CYHAL_EZI2C_EVENT_SLAVE_READ_EVENT         = 1 << 1,  /* Indicates that the slave was addressed and the master wants to read data. */
-    CYHAL_EZI2C_EVENT_SLAVE_WRITE_EVENT        = 1 << 2,  /* Indicates that the slave was addressed and the master wants to write data. */
-    CYHAL_EZI2C_EVENT_SLAVE_RD_IN_FIFO_EVENT   = 1 << 3,  /* All slave data from the configured Read buffer has been loaded into the TX FIFO. */
-    CYHAL_EZI2C_EVENT_SLAVE_RD_BUF_EMPTY_EVENT = 1 << 4,  /* The master has read all data out of the configured Read buffer. */
-    CYHAL_EZI2C_EVENT_SLAVE_RD_CMPLT_EVENT     = 1 << 5,  /* Indicates the master completed reading from the slave (set by the master NAK or Stop) */
-    CYHAL_EZI2C_EVENT_SLAVE_WR_CMPLT_EVENT     = 1 << 6,  /* Indicates the master completed writing to the slave (set by the master Stop or Restart)*/
-    CYHAL_EZI2C_EVENT_SLAVE_ERR_EVENT          = 1 << 7,  /* Indicates the I2C hardware detected an error. */
-    CYHAL_EZI2C_EVENT_MASTER_WR_IN_FIFO_EVENT  = 1 << 17, /* All data specified by Cy_SCB_I2C_MasterWrite has been loaded into the TX FIFO. */
-    CYHAL_EZI2C_EVENT_MASTER_WR_CMPLT_EVENT    = 1 << 18, /* The master write started by Cy_SCB_I2C_MasterWrite is complete.*/
-    CYHAL_EZI2C_EVENT_MASTER_RD_CMPLT_EVENT    = 1 << 19, /* The master read started by Cy_SCB_I2C_MasterRead is complete.*/
-    CYHAL_EZI2C_EVENT_MASTER_ERR_EVENT         = 1 << 20, /* Indicates the I2C hardware has detected an error. */
 } cyhal_ezi2c_event_t;
 
 /** Handler for I2C events */
@@ -149,8 +141,8 @@ typedef struct
     cyhal_ezi2c_sub_addr_size_t sub_address_size;
 } cyhal_ezi2c_cfg_t;
 
-/** Initialize the EZI2C (slave), and configures its specifieds pins and clock. 
- * 
+/** Initialize the EZI2C (slave), and configures its specifieds pins and clock.
+ *
  * @param[out] obj The I2C object
  * @param[in]  sda The sda pin
  * @param[in]  scl The scl pin
@@ -168,8 +160,8 @@ void cyhal_ezi2c_free(cyhal_ezi2c_t *obj);
 
 /**
  * EZI2C slave get activity status
- * This function returns a non-zero value if an I2C Read or Write 
- * cycle has occurred since the last time this function was called. 
+ * This function returns a non-zero value if an I2C Read or Write
+ * cycle has occurred since the last time this function was called.
  *
  * @param[in] obj The EZI2C object
  *

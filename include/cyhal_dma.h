@@ -9,7 +9,11 @@
 *
 ********************************************************************************
 * \copyright
+<<<<<<< HEAD
 * Copyright 2018-2019 Cypress Semiconductor Corporation
+=======
+* Copyright 2018-2020 Cypress Semiconductor Corporation
+>>>>>>> Minor consistancy cleanup for HAL documentation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +33,7 @@
 * \addtogroup group_hal_dma DMA (Direct Memory Access)
 * \ingroup group_hal
 * \{
-* High level interface for interacting with the Cypress DMA. Allows the user to
+* High level interface for interacting with the direct memory access (DMA). Allows the user to
 * initialize and configure a DMA channel in order to trigger data transfers to
 * and from memory and peripherals. The transfers occur independently of the CPU
 * and are triggered in software. Multiple channels are available with
@@ -118,13 +122,13 @@ typedef void (*cyhal_dma_event_callback_t)(void *callback_arg, cyhal_dma_event_t
 /** Initialize the DMA peripheral.
  *
  * @param[out] obj          The DMA object to initialize
- * @param[in]  priority     The priority of this DMA operation relative to others. The number of priority levels which are supported is hardware dependent. All implementations define a #CYHAL_DMA_PRIORITY_DEFAULT constant which is always valid. If supported, implementations will also define #CYHAL_DMA_PRIORITY_HIGH, #CYHAL_DMA_PRIORITY_MEDIUM, and #CYHAL_DMA_PRIORITY_LOW. The behavior of any other value is implementation defined. See the implementation-specific DMA documentation for more details.
+ * @param[in]  priority     The priority of this DMA operation relative to others. The number of priority levels which are supported is hardware dependent. All implementations define a CYHAL_DMA_PRIORITY_DEFAULT constant which is always valid. If supported, implementations will also define CYHAL_DMA_PRIORITY_HIGH, CYHAL_DMA_PRIORITY_MEDIUM, and CYHAL_DMA_PRIORITY_LOW. The behavior of any other value is implementation defined. See the implementation-specific DMA documentation for more details.
  * @param[in]  direction    The direction memory is copied
  * @return The status of the init request
  */
 cy_rslt_t cyhal_dma_init(cyhal_dma_t *obj, uint8_t priority, cyhal_dma_direction_t direction);
 
-/** Free the DMA object. Freeing a DMA object while a transfer is in 
+/** Free the DMA object. Freeing a DMA object while a transfer is in
     progress (see @ref cyhal_dma_is_busy) is invalid.
  *
  * @param[in,out] obj The DMA object
@@ -152,7 +156,7 @@ cy_rslt_t cyhal_dma_start_transfer(cyhal_dma_t *obj);
  * @return True if DMA channel is busy
  */
 bool cyhal_dma_is_busy(cyhal_dma_t *obj);
- 
+
 /** The DMA callback handler registration
  *
  * @param[in] obj          The DMA object
@@ -163,12 +167,12 @@ void cyhal_dma_register_callback(cyhal_dma_t *obj, cyhal_dma_event_callback_t ca
 
 /** Configure DMA event enablement.
  *
- * @param[in] obj           The DMA object
- * @param[in] event         The DMA event type
- * @param[in] intrPriority  The priority for NVIC interrupt events. The priority from the most recent call will take precedence, i.e all events will have the same priority.
- * @param[in] enable        True to turn on interrupts, False to turn off
+ * @param[in] obj            The DMA object
+ * @param[in] event          The DMA event type
+ * @param[in] intr_priority  The priority for NVIC interrupt events. The priority from the most recent call will take precedence, i.e all events will have the same priority.
+ * @param[in] enable         True to turn on interrupts, False to turn off
  */
-void cyhal_dma_enable_event(cyhal_dma_t *obj, cyhal_dma_event_t event, uint8_t intrPriority, bool enable);
+void cyhal_dma_enable_event(cyhal_dma_t *obj, cyhal_dma_event_t event, uint8_t intr_priority, bool enable);
 
 #if defined(__cplusplus)
 }

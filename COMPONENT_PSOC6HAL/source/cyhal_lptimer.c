@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -110,7 +110,7 @@ cy_rslt_t cyhal_lptimer_init(cyhal_lptimer_t *obj)
         obj->callback_data.callback_arg = NULL;
         cyhal_lptimer_config_structs[obj->resource.block_num] = obj;
     }
-    
+
     if (CY_RSLT_SUCCESS == rslt)
     {
         IRQn_Type irqn = (IRQn_Type) (srss_interrupt_mcwdt_0_IRQn + obj->resource.block_num);
@@ -167,7 +167,7 @@ cy_rslt_t cyhal_lptimer_set_delay(cyhal_lptimer_t *obj, uint32_t delay)
      * 16 bit C0/C1 are cascaded to generated a 32 bit counter.
      * Counter0 continues counting after reaching its match value
      * Interrupt is generated on Counter1 match.
-     * 
+     *
      * Supposed T=C0=C1=0, and we need to trigger an interrupt at T=0x28000.
      * We set C0_match to 0x8000 and C1 match to 1.
      * At T = 0x8000, C0_value matches C0_match so C1 get incremented. C1/C0=0x18000.
@@ -189,7 +189,7 @@ cy_rslt_t cyhal_lptimer_set_delay(cyhal_lptimer_t *obj, uint32_t delay)
     uint16_t c1_increment = (uint16_t)(delay >> 16);
 
     Cy_MCWDT_ClearInterrupt(obj->base, CY_MCWDT_CTR1);
-    
+
     uint16_t c0_old_match = Cy_MCWDT_GetMatch(obj->base, CY_MCWDT_COUNTER0);
 
     uint32_t critical_section = cyhal_system_critical_section_enter();
@@ -244,7 +244,7 @@ void cyhal_lptimer_enable_event(cyhal_lptimer_t *obj, cyhal_lptimer_event_t even
     CY_ASSERT(event == CYHAL_LPTIMER_COMPARE_MATCH);
     Cy_MCWDT_ClearInterrupt(obj->base, CY_MCWDT_CTR1);
     Cy_MCWDT_SetInterruptMask(obj->base, enable ? CY_MCWDT_CTR1 : 0);
-    
+
     IRQn_Type irqn = (IRQn_Type)(srss_interrupt_mcwdt_0_IRQn + obj->resource.block_num);
     NVIC_SetPriority(irqn, intrPriority);
 }

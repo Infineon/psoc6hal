@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -67,6 +67,7 @@ static void cyhal_rtc_internal_handler(void)
     Cy_RTC_Interrupt(dst, NULL != dst);
 }
 
+/* Override weak function from PDL */
 void Cy_RTC_Alarm1Interrupt(void)
 {
     if (NULL != cyhal_rtc_user_handler)

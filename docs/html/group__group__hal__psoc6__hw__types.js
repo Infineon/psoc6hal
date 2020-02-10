@@ -84,14 +84,7 @@ var group__group__hal__psoc6__hw__types =
       [ "clock", "group__group__hal__psoc6__hw__types.html#acbdbb4ebcadb36dd632d9eb53dcbc8d2", null ],
       [ "is_shared_clock", "group__group__hal__psoc6__hw__types.html#af155dccb8af1decc16cce52d4ceaf7cc", null ],
       [ "context", "group__group__hal__psoc6__hw__types.html#a3aa065ed0c7c1d4d24c559cc4f4a644b", null ],
-      [ "rx_config", "group__group__hal__psoc6__hw__types.html#aa58265eccae331b8c3758d862996db70", null ],
-      [ "tx_config", "group__group__hal__psoc6__hw__types.html#a0646abfb408bea17f2cd04bf3dc8b6b1", null ],
-      [ "is_slave", "group__group__hal__psoc6__hw__types.html#abbc0caba70c397700a8a7c0e448839c5", null ],
-      [ "async", "group__group__hal__psoc6__hw__types.html#adb0268916bb9b564623d4847965b8649", null ],
-      [ "address", "group__group__hal__psoc6__hw__types.html#a041aa33186f533b25efc49fc9c48647b", null ],
       [ "irq_cause", "group__group__hal__psoc6__hw__types.html#a9cded0c71c054dea98ddf9f0c68d5ff7", null ],
-      [ "pending", "group__group__hal__psoc6__hw__types.html#a2e2510f19e2fb1b83ab5ed6470e48b80", null ],
-      [ "events", "group__group__hal__psoc6__hw__types.html#a59b79b9508874fb54d3b2eb3de252492", null ],
       [ "callback_data", "group__group__hal__psoc6__hw__types.html#a78fc15a46183b145984ad509e430d8af", null ]
     ] ],
     [ "cyhal_lptimer_t", "group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t", [

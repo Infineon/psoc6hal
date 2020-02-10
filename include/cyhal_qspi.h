@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,10 +29,10 @@
 * \addtogroup group_hal_qspi QSPI (Quad Serial Peripheral Interface)
 * \ingroup group_hal
 * \{
-* High level interface for interacting with the Cypress Quad-SPI interface.
-* 
-* The QSPI block supports sending commands to and receiving commands from an 
-* another device (often an external memory) via single, dual, quad, or octal SPI. 
+* High level interface for interacting with the Quad Serial Peripheral Interface (QSPI) interface.
+*
+* The QSPI block supports sending commands to and receiving commands from an
+* another device (often an external memory) via single, dual, quad, or octal SPI.
 */
 
 #pragma once

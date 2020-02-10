@@ -7,7 +7,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,11 +53,10 @@ static void cyhal_ezi2c_irq_handler(void)
     Cy_SCB_EZI2C_Interrupt(obj->base, &(obj->context));
 
     /* Call if registered callback here */
-    if (obj->callback_data.callback != NULL)
+    cyhal_ezi2c_event_callback_t callback = (cyhal_ezi2c_event_callback_t) obj->callback_data.callback;
+    if (callback != NULL)
     {
-        cyhal_ezi2c_event_callback_t callback = (cyhal_ezi2c_event_callback_t) obj->callback_data.callback;
-
-        (void) (callback) (obj->callback_data.callback_arg, (cyhal_ezi2c_event_t)obj->events);
+        callback(obj->callback_data.callback_arg, CYHAL_EZI2C_EVENT_NONE);
     }
 }
 

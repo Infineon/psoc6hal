@@ -46,5 +46,5 @@ var group__group__hal__dma =
     [ "cyhal_dma_start_transfer", "group__group__hal__dma.html#gaf57a2b19848478b6604e09a3ecc3fbfc", null ],
     [ "cyhal_dma_is_busy", "group__group__hal__dma.html#ga6f962c164fedb088dbd2a48e21550fd0", null ],
     [ "cyhal_dma_register_callback", "group__group__hal__dma.html#gacbccbcab79700c9e17bc47c525967876", null ],
-    [ "cyhal_dma_enable_event", "group__group__hal__dma.html#gab7afac6c4ee7ee40d9f005fc9cbee344", null ]
+    [ "cyhal_dma_enable_event", "group__group__hal__dma.html#gad41941e505b20be164c389925e7a25dc", null ]
 ];

@@ -10,7 +10,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2019 Cypress Semiconductor Corporation
+* Copyright 2019-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@
 
 /**
 * \addtogroup group_hal_psoc6_wdt WDT (Watchdog Timer)
-* \ingroup group_hal_psoc6 
+* \ingroup group_hal_psoc6
 * \{
 * The PSoC 6 WDT is only capable of supporting certain timeout ranges below its maximum timeout of 6000ms.
 * As a result, any unsupported timeouts given to the HAL WDT are rounded up to the nearest supported value.

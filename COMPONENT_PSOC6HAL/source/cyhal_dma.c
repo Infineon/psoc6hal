@@ -49,9 +49,11 @@ cy_rslt_t cyhal_dma_init(cyhal_dma_t *obj, uint8_t priority, cyhal_dma_direction
 
 #if !defined(CY_IP_M4CPUSS_DMAC) && defined(CY_IP_M4CPUSS_DMA)
     /* Only DW available. Ignore direction for purpose of choosing DMA type. */
+    CY_UNUSED_PARAMETER(direction);
     return cyhal_dma_init_dw(obj, priority);
 #elif defined(CY_IP_M4CPUSS_DMAC) && !defined(CY_IP_M4CPUSS_DMA)
     /* Only DMAC available. Ignore direction for purpose of choosing DMA type. */
+    CY_UNUSED_PARAMETER(direction);
     return cyhal_dma_init_dmac(obj, priority);
 #else
     /* DMAC is designed with high memory bandwidth for memory to memory
@@ -99,7 +101,7 @@ void cyhal_dma_free(cyhal_dma_t *obj)
 }
 
 cy_rslt_t cyhal_dma_configure(cyhal_dma_t *obj, const cyhal_dma_cfg_t *cfg)
-{  
+{
     CY_ASSERT(NULL != obj);
 
 #ifdef CY_IP_M4CPUSS_DMAC
@@ -122,7 +124,7 @@ cy_rslt_t cyhal_dma_configure(cyhal_dma_t *obj, const cyhal_dma_cfg_t *cfg)
 }
 
 cy_rslt_t cyhal_dma_start_transfer(cyhal_dma_t *obj)
-{ 
+{
     CY_ASSERT(NULL != obj);
 
 #ifdef CY_IP_M4CPUSS_DMAC

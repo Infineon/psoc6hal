@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,9 +29,9 @@
 * \addtogroup group_hal_sdhc SDHC (SD Host Controller)
 * \ingroup group_hal
 * \{
-* High level interface for interacting with the Cypress SDHC.
-* 
-* The SD Host Controller allows data to be read from and written to several types 
+* High level interface for interacting with the SD Host Controller (SDHC).
+*
+* The SD Host Controller allows data to be read from and written to several types
 * of memory cards, including SD and eMMC (see cyhal_sdhc_card_type_t for a full list).
 */
 

@@ -24,12 +24,12 @@ var group__group__hal__gpio =
       [ "CYHAL_GPIO_DRIVE_PULLUPDOWN", "group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a42913f4c174583d37970c81aa6a20a5a", null ],
       [ "CYHAL_GPIO_DRIVE_PULL_NONE", "group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2abe59e87a4fa3903889d94d13b2f09a38", null ]
     ] ],
-    [ "cyhal_gpio_init", "group__group__hal__gpio.html#ga59486f263ad8987e58f7dae6ae616b76", null ],
+    [ "cyhal_gpio_init", "group__group__hal__gpio.html#gab93322030909d3af6a9fc1a3b2eccbaa", null ],
     [ "cyhal_gpio_free", "group__group__hal__gpio.html#gae5ef384dcdef1d08d4a9e88592bda173", null ],
     [ "cyhal_gpio_configure", "group__group__hal__gpio.html#gab5bce4c54b8236ca70d8eace4fded5e2", null ],
     [ "cyhal_gpio_write", "group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291", null ],
     [ "cyhal_gpio_read", "group__group__hal__gpio.html#ga3d38f1dd86c2e74b8ad10f1f6d1945c2", null ],
     [ "cyhal_gpio_toggle", "group__group__hal__gpio.html#gacf9c6cb7d4f6f25828a62d44648b745d", null ],
     [ "cyhal_gpio_register_callback", "group__group__hal__gpio.html#gaefb03ec6e090ec57fae9e79b4d3bfb4e", null ],
-    [ "cyhal_gpio_enable_event", "group__group__hal__gpio.html#ga1f8a7645bce7216c07fcb87071c6cfc8", null ]
+    [ "cyhal_gpio_enable_event", "group__group__hal__gpio.html#ga0e0346810451d9940d31bb6111153593", null ]
 ];

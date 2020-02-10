@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -193,7 +193,7 @@ static cy_rslt_t try_set_pll(uint8_t clock, uint8_t pll, uint32_t target_freq)
 }
 
 /* This should be part of the PDL */
-static inline bool Cy_SysClk_ClkHfIsEnabled(uint32_t clkHf)
+static inline bool cyhal_sysclk_clkhfisenabled(uint32_t clkHf)
 {
     bool retVal = false;
     if (clkHf < CY_SRSS_NUM_HFROOT)
@@ -229,7 +229,7 @@ cy_rslt_t cyhal_system_clock_set_frequency(uint8_t clock, uint32_t frequency_hz)
         return rslt;
     }
 
-    bool enabled = Cy_SysClk_ClkHfIsEnabled(clock);
+    bool enabled = cyhal_sysclk_clkhfisenabled(clock);
     if (enabled && fll_pll_used == 0)
     {
         return try_set_fll(clock, frequency_hz);

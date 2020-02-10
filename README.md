@@ -14,7 +14,7 @@ The API functions for each HAL driver can be divided into the following categori
 
 The `_init` API functions require a pointer to an instance of a driver-specific type (for example, `cyhal_uart_t`). This instance must be allocated by the application code and passed via pointer into the initialization function, which will populate its contents (this structure enables the HAL to avoid performing any dynamic memory allocation). From an application point of view, these structs function as an opaque handle. The same object must be passed to all subsequent API calls that operate on the same hardware instance. The struct definitions are defined within the platform-specific HAL implementation. Application code should not rely on the specific contents, which is an implementation detail and is subject to change between platforms and/or HAL releases.
 
-Many `_init` functions also have an argument for a pointer to a `cyhal_clock_divider_t` instance. This is an optional argument to enable sharing of clock dividers in large designs (via using `cyhal_hwmgr_allocate_clock` to allocate a shared divider). If a `NULL` value is passed, the init function will allocate a clock divider that is exclusive to that block instance. 
+Many `_init` functions also have an argument for a pointer to a `cyhal_clock_divider_t` instance. This is an optional argument to enable sharing of clock dividers in large designs (via using `cyhal_hwmgr_allocate_clock` to allocate a shared divider). If a `NULL` value is passed, the init function will allocate a clock divider that is exclusive to that block instance.
 
 Note: Some APIs that manipulate block timing may not be able to support as wide of a range of values when using a shared divider. When a divider is shared the driver cannot unilaterally change the divider's value because that would affect other divider clients. This is not an issue with a dedicated divider.
 
@@ -31,7 +31,7 @@ The HAL public interface is consistent across all platforms that the HAL support
 Many HAL drivers provide an API for registering a callback which is invoked when certain (driver-specific) events occur. These drivers also often provide an API for enabling or disabling specific types of events. Unless otherwise documented, the callback will only be invoked for events that occur while that event type is enabled. Specifically, events that occur while a given event type is disabled are not queued and will not trigger a callback when that event type is (re)enabled.
 
 ## Error reporting
-The HAL uses the `cy_rslt_t` type (from the core-lib library) in all places where a HAL function might return an error code. This provides structured error reporting and makes it easy to determine the module from which the error arose, as well as the specific error cause. Macros are provided to help extract this information from a `cy_rslt_t` value. 
+The HAL uses the `cy_rslt_t` type (from the core-lib library) in all places where a HAL function might return an error code. This provides structured error reporting and makes it easy to determine the module from which the error arose, as well as the specific error cause. Macros are provided to help extract this information from a `cy_rslt_t` value.
 
 The HAL driver headers provide macros corresponding to codes for common error situations. Note that the errors listed in the driver header are not a comprehensive list; in less common cases a low-level, implementation-specific error code may be returned.
 
@@ -44,4 +44,4 @@ For more details on interacting with `cy_rslt_t` see [Result Type](docs/html/gro
 * [ModusToolbox](https://www.cypress.com/products/modustoolbox-software-environment)
 
 ---
-© Cypress Semiconductor Corporation, 2019.
+© Cypress Semiconductor Corporation, 2019-2020.

@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['slave',['Slave',['../group__group__hal__i2c__slave.html',1,'']]],
-  ['sdhc_20_28sd_20host_20controller_29',['SDHC (SD Host Controller)',['../group__group__hal__sdhc.html',1,'']]],
-  ['sdio_20_28secure_20digital_20input_20output_29',['SDIO (Secure Digital Input Output)',['../group__group__hal__sdio.html',1,'']]],
-  ['spi_20_28serial_20peripheral_20interface_29',['SPI (Serial Peripheral Interface)',['../group__group__hal__spi.html',1,'']]],
-  ['system_20_28power_20management_20and_20system_20clock_29',['SYSTEM (Power Management and System Clock)',['../group__group__hal__system.html',1,'']]]
+  ['triggers',['Triggers',['../group__group__hal__psoc6__triggers.html',1,'']]],
+  ['timer_20_28timer_2fcounter_29',['Timer (Timer/Counter)',['../group__group__hal__timer.html',1,'']]],
+  ['trng_20_28true_20random_20number_20generator_29',['TRNG (True Random Number Generator)',['../group__group__hal__trng.html',1,'']]]
 ];

@@ -6,7 +6,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -232,14 +232,7 @@ typedef struct {
     cyhal_clock_divider_t               clock;
     bool                                is_shared_clock;
     cy_stc_scb_ezi2c_context_t          context;
-    cy_stc_scb_i2c_master_xfer_config_t rx_config;
-    cy_stc_scb_i2c_master_xfer_config_t tx_config;
-    bool                                is_slave;
-    bool                                async;
-    uint32_t                            address;
     uint32_t                            irq_cause;
-    uint16_t                            pending;
-    uint16_t                            events;
     cyhal_event_callback_data_t         callback_data;
 #else
     void *empty;

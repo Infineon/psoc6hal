@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@
 * \addtogroup group_hal_rtc RTC (Real-Time Clock)
 * \ingroup group_hal
 * \{
-* High level interface for interacting with the Cypress RTC.
+* High level interface for interacting with the real-time clock (RTC).
 *
 * The real time clock provides tracking of the current time and date, as
 * well as the ability to trigger a callback at a specific time in the future.

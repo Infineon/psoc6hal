@@ -8,7 +8,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,8 +28,8 @@
 * \addtogroup group_hal_hwmgr HWMGR (Hardware Manager)
 * \ingroup group_hal
 * \{
-* High level interface for interacting with the Cypress Hardware Manager.
-* 
+* High level interface for interacting with the Hardware Manager.
+*
 * This provides two related functions:
 * * Allows HAL drivers (or application firmware) to mark specific hardware blocks
 *   as consumed, so that other firmware will not accidentally try to use the block

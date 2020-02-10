@@ -6,7 +6,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -79,7 +79,7 @@ void cyhal_utils_release_if_used(cyhal_gpio_t *pin)
 
 bool cyhal_utils_resources_equal(const cyhal_resource_inst_t *resource1, const cyhal_resource_inst_t *resource2)
 {
-    return (resource1->type == resource2->type) &&  
+    return (resource1->type == resource2->type) &&
         (resource1->block_num == resource2->block_num) &&
         (resource1->channel_num == resource2->channel_num);
 }

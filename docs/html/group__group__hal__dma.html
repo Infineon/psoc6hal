@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('group__group__hal__dma.html','');});
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>High level interface for interacting with the Cypress DMA. Allows the user to initialize and configure a DMA channel in order to trigger data transfers to and from memory and peripherals. The transfers occur independently of the CPU and are triggered in software. Multiple channels are available with user-selectable priority and transfer characteristics. </p>
+<p>High level interface for interacting with the direct memory access (DMA). Allows the user to initialize and configure a DMA channel in order to trigger data transfers to and from memory and peripherals. The transfers occur independently of the CPU and are triggered in software. Multiple channels are available with user-selectable priority and transfer characteristics. </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -171,8 +171,8 @@ Functions</h2></td></tr>
 <tr class="separator:ga6f962c164fedb088dbd2a48e21550fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacbccbcab79700c9e17bc47c525967876"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dma.html#gacbccbcab79700c9e17bc47c525967876">cyhal_dma_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, <a class="el" href="group__group__hal__dma.html#ga8d2fdb7ab4e9ba5367ef596ad42bbe3f">cyhal_dma_event_callback_t</a> callback, void *callback_arg)</td></tr>
 <tr class="separator:gacbccbcab79700c9e17bc47c525967876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab7afac6c4ee7ee40d9f005fc9cbee344"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dma.html#gab7afac6c4ee7ee40d9f005fc9cbee344">cyhal_dma_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, <a class="el" href="group__group__hal__dma.html#gad4507e9f3660b19e1ddc3085a96279e2">cyhal_dma_event_t</a> event, uint8_t intrPriority, bool enable)</td></tr>
-<tr class="separator:gab7afac6c4ee7ee40d9f005fc9cbee344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad41941e505b20be164c389925e7a25dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dma.html#gad41941e505b20be164c389925e7a25dc">cyhal_dma_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, <a class="el" href="group__group__hal__dma.html#gad4507e9f3660b19e1ddc3085a96279e2">cyhal_dma_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="separator:gad41941e505b20be164c389925e7a25dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
 <a name="structcyhal__dma__cfg__t" id="structcyhal__dma__cfg__t"></a>
@@ -495,7 +495,7 @@ Sets the behavior of the channel when triggered (using start_transfer). Ignored 
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The DMA object to initialize </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">priority</td><td>The priority of this DMA operation relative to others. The number of priority levels which are supported is hardware dependent. All implementations define a <a class="el" href="group__group__hal__psoc6__dma.html#ga81946da56dd6ba8afd28f6056b1d779a">CYHAL_DMA_PRIORITY_DEFAULT</a> constant which is always valid. If supported, implementations will also define <a class="el" href="group__group__hal__psoc6__dma.html#gaca50872208f80fb4625591afbaf79d70">CYHAL_DMA_PRIORITY_HIGH</a>, <a class="el" href="group__group__hal__psoc6__dma.html#ga0b9bf793bb1892836a901599c26fd698">CYHAL_DMA_PRIORITY_MEDIUM</a>, and <a class="el" href="group__group__hal__psoc6__dma.html#ga30998fd4febd3080e00922f969b08712">CYHAL_DMA_PRIORITY_LOW</a>. The behavior of any other value is implementation defined. See the implementation-specific DMA documentation for more details. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">priority</td><td>The priority of this DMA operation relative to others. The number of priority levels which are supported is hardware dependent. All implementations define a CYHAL_DMA_PRIORITY_DEFAULT constant which is always valid. If supported, implementations will also define CYHAL_DMA_PRIORITY_HIGH, CYHAL_DMA_PRIORITY_MEDIUM, and CYHAL_DMA_PRIORITY_LOW. The behavior of any other value is implementation defined. See the implementation-specific DMA documentation for more details. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">direction</td><td>The direction memory is copied </td></tr>
   </table>
   </dd>
@@ -661,8 +661,8 @@ Sets the behavior of the channel when triggered (using start_transfer). Ignored 
 
 </div>
 </div>
-<a id="gab7afac6c4ee7ee40d9f005fc9cbee344"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab7afac6c4ee7ee40d9f005fc9cbee344">&#9670;&nbsp;</a></span>cyhal_dma_enable_event()</h2>
+<a id="gad41941e505b20be164c389925e7a25dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad41941e505b20be164c389925e7a25dc">&#9670;&nbsp;</a></span>cyhal_dma_enable_event()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -683,7 +683,7 @@ Sets the behavior of the channel when triggered (using start_transfer). Ignored 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>intrPriority</em>, </td>
+          <td class="paramname"><em>intr_priority</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -703,7 +703,7 @@ Sets the behavior of the channel when triggered (using start_transfer). Ignored 
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>The DMA event type </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">intrPriority</td><td>The priority for NVIC interrupt events. The priority from the most recent call will take precedence, i.e all events will have the same priority. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">intr_priority</td><td>The priority for NVIC interrupt events. The priority from the most recent call will take precedence, i.e all events will have the same priority. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>True to turn on interrupts, False to turn off </td></tr>
   </table>
   </dd>

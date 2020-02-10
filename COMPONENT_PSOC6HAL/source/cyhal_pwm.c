@@ -7,7 +7,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,14 +24,20 @@
 *******************************************************************************/
 
 /**
-* \addtogroup group_hal_pwm_psoc6 PWM (Pulse Width Modulator)
-* \ingroup group_hal_psoc6
-*
-*
-* The current implementation of the PSoC6 PWM interface allows output pins to be used interchangeably, with the restriction that if an inverted hardware pin is used for pin, a non-inverted hardware pin must be used for pin_compl.
-*
-*/
-
+ * \addtogroup group_hal_psoc6_pwm PWM (Pulse Width Modulator)
+ * \ingroup group_hal_psoc6
+ * \{
+ * \section section_psoc6_pwm_compl_pins Complementary PWM output
+ * The PWM HAL driver allows generation of a normal and an inverted output. PSoC 6 devices support complementary pin pairs to which the normal and
+ * inverted signals can be routed. To identify the complementary pin for a given pin, open the PSoC 6 device datasheet and navigate to the 'Multiple Alternate Functions' table. Each
+ * column represents an alternate function of the pin in the corresponding row. Find your pin and make a note of the tcpwm[X].line[Y]:Z. The
+ * complementary pin is found by looking up the pin against tcpwm[X].line_<b>compl</b>[Y]:Z from the same column.
+ * For example, the image below shows a pair of complementary pins (P0.0 and P0.1) identified by the tcpwm[0].line[0]:0 and tcpwm[0].line_compl[0]:0 mapping.
+ * These complementary pins can be supplied to \ref cyhal_pwm_init_adv using <b>pin</b> and <b>compl_pin</b> parameters in any order.
+ * \image html pwm_compl_pins.png "Complementary PWM pins"
+ *
+ * \} group_hal_psoc6_pwm
+ */
 
 #include <string.h>
 #include "cyhal_pwm_impl.h"
@@ -154,7 +160,7 @@ cy_rslt_t cyhal_pwm_init_adv(cyhal_pwm_t *obj, cyhal_gpio_t pin, cyhal_gpio_t pi
                 result = CYHAL_PWM_RSLT_FAILED_CLOCK_INIT;
             }
         }
-        else 
+        else
         {
             if (CY_RSLT_SUCCESS == (result = cyhal_hwmgr_allocate_clock(&(obj->clock), CY_SYSCLK_DIV_16_BIT, false)))
             {

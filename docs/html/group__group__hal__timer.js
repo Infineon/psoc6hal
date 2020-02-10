@@ -19,7 +19,12 @@ var group__group__hal__timer =
       [ "CYHAL_TIMER_DIR_DOWN", "group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1595c7343fcdb73d4745f5062d969905", null ],
       [ "CYHAL_TIMER_DIR_UP_DOWN", "group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6af3b8efb5f43123961d8631f74db7ea43", null ]
     ] ],
-    [ "cyhal_timer_event_t", "group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9", null ],
+    [ "cyhal_timer_event_t", "group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9", [
+      [ "CYHAL_TIMER_IRQ_NONE", "group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9ad9b21c35e61b69c316bee693b8fcb0d6", null ],
+      [ "CYHAL_TIMER_IRQ_TERMINAL_COUNT", "group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a51b932b9e3e80d5dd7e98b75e7e8228e", null ],
+      [ "CYHAL_TIMER_IRQ_CAPTURE_COMPARE", "group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a90cf556247ca96952af696c0a4d53e15", null ],
+      [ "CYHAL_TIMER_IRQ_ALL", "group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a3b6afa3bcff5af8b040f479eda3aaf35", null ]
+    ] ],
     [ "cyhal_timer_init", "group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5", null ],
     [ "cyhal_timer_free", "group__group__hal__timer.html#ga94944664f47b8ff7c093719116b35cdc", null ],
     [ "cyhal_timer_configure", "group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813", null ],
@@ -28,5 +33,5 @@ var group__group__hal__timer =
     [ "cyhal_timer_stop", "group__group__hal__timer.html#ga8734bf8e55f7b51ef18a22e8d1ffb1e1", null ],
     [ "cyhal_timer_read", "group__group__hal__timer.html#ga0be5bf53c214ffcb3c4e962e71af1e6d", null ],
     [ "cyhal_timer_register_callback", "group__group__hal__timer.html#ga928ffe0a3a1549c94752db7c68306424", null ],
-    [ "cyhal_timer_enable_event", "group__group__hal__timer.html#ga66e428188d9a6cf96caebe8c2bdfbf25", null ]
+    [ "cyhal_timer_enable_event", "group__group__hal__timer.html#ga4b97fe48330e9b8034ab7c2f56078002", null ]
 ];

@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('group__group__hal__crc.html','');});
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>High level interface for interacting with the Cypress CRC, which provides hardware accelerated CRC computations. The CRC APIs are structured to enable usage in situations where the entire input data set is not available in memory at one time. Therefore, each conversion consists of three steps:</p><ul>
+<p>High level interface for interacting with the cyclic redundancy check (CRC), which provides hardware accelerated CRC computations. The CRC APIs are structured to enable usage in situations where the entire input data set is not available in memory at one time. Therefore, each conversion consists of three steps:</p><ul>
 <li>A single call to cyhal_crc_start, to initialize data structures for this computation</li>
 <li>One or more calls to cyhal_crc_compute, to provide chunks of data.</li>
 <li>A single call to cyhal_crc_finish, to finalize the computation and retrieve the result.</li>

@@ -1,4 +1,4 @@
-### Cypress PSoC 6 Hardware Abstraction Layer (HAL) 1.1
+### Cypress PSoC 6 Hardware Abstraction Layer (HAL)
 Cypress PSoC 6 Hardware Abstraction Layer (HAL) provides an implementation of the Cypress Hardware Abstraction Layer for the PSoC 6 family of chips. This API provides convenience methods for initializing and manipulating different hardware peripherals. Depending on the specific chip being used, not all features may be supported.
 
 ### What's Included?
@@ -25,8 +25,11 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * UART
 * USB Device
 * WDT
- 
+
 ### What Changed?
+#### v1.1.1
+* Improved documentation for a number of drivers
+* Fixed incompatibility with PDL 1.4.1 release
 #### v1.1.0
 * Added new DMA driver
 * Added new EZ-I2C driver
@@ -59,4 +62,4 @@ Use the following links for more information, as needed:
 * [ModusToolbox](https://www.cypress.com/products/modustoolbox-software-environment)
 
 ---
-© Cypress Semiconductor Corporation, 2019.
+© Cypress Semiconductor Corporation, 2019-2020.

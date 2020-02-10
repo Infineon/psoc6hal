@@ -86,91 +86,10 @@ $(document).ready(function(){initNavTree('group__group__hal__adc__functions.html
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ADC Functions<div class="ingroups"><a class="el" href="group__group__hal.html">HAL Drivers</a> &raquo; <a class="el" href="group__group__hal__adc.html">ADC (Analog to Digital Converter)</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-<a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:gae0dce87ceefe23f4e1b9d88f66ec5677"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc__functions.html#gae0dce87ceefe23f4e1b9d88f66ec5677">cyhal_adc_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *clk)</td></tr>
-<tr class="separator:gae0dce87ceefe23f4e1b9d88f66ec5677"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadae8361e3e3e3d0ff96767e1e8e1d913"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc__functions.html#gadae8361e3e3e3d0ff96767e1e8e1d913">cyhal_adc_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj)</td></tr>
-<tr class="separator:gadae8361e3e3e3d0ff96767e1e8e1d913"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="gae0dce87ceefe23f4e1b9d88f66ec5677"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae0dce87ceefe23f4e1b9d88f66ec5677">&#9670;&nbsp;</a></span>cyhal_adc_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
-          <td class="paramname"><em>obj</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
-          <td class="paramname"><em>pin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *&#160;</td>
-          <td class="paramname"><em>clk</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Initialize ADC peripheral</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The adc object to initialize </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>A pin corresponding to the ADC block to initialize Note: This pin is not reserved, it is just used to identify which ADC block to allocate. If multiple channels will be allocated for a single ADC instance, only one pin should be passed here; it does not matter which one. After calling this function once, call cyhal_adc_channel_init once for each pin whose value should be measured. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">clk</td><td>The clock to use can be shared, if not provided a new clock will be allocated </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the init request </dd></dl>
-
-</div>
-</div>
-<a id="gadae8361e3e3e3d0ff96767e1e8e1d913"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gadae8361e3e3e3d0ff96767e1e8e1d913">&#9670;&nbsp;</a></span>cyhal_adc_free()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cyhal_adc_free </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
-          <td class="paramname"><em>obj</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Uninitialize the ADC peripheral and <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t" title="ADC object. ">cyhal_adc_t</a> object</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part

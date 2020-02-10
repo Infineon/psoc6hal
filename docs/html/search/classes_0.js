@@ -19,7 +19,7 @@ var searchData=
   ['cyhal_5fflash_5fblock_5finfo_5ft',['cyhal_flash_block_info_t',['../group__group__hal__flash.html#structcyhal__flash__block__info__t',1,'']]],
   ['cyhal_5fflash_5finfo_5ft',['cyhal_flash_info_t',['../group__group__hal__flash.html#structcyhal__flash__info__t',1,'']]],
   ['cyhal_5fflash_5ft',['cyhal_flash_t',['../group__group__hal__psoc6__hw__types.html#structcyhal__flash__t',1,'']]],
-  ['cyhal_5fi2c_5fcfg_5ft',['cyhal_i2c_cfg_t',['../group__group__hal__i2c__common.html#structcyhal__i2c__cfg__t',1,'']]],
+  ['cyhal_5fi2c_5fcfg_5ft',['cyhal_i2c_cfg_t',['../group__group__hal__i2c.html#structcyhal__i2c__cfg__t',1,'']]],
   ['cyhal_5fi2c_5ft',['cyhal_i2c_t',['../group__group__hal__psoc6__hw__types.html#structcyhal__i2c__t',1,'']]],
   ['cyhal_5flptimer_5ft',['cyhal_lptimer_t',['../group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t',1,'']]],
   ['cyhal_5fpwm_5ft',['cyhal_pwm_t',['../group__group__hal__psoc6__hw__types.html#structcyhal__pwm__t',1,'']]],

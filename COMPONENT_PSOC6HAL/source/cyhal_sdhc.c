@@ -7,7 +7,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2019 Cypress Semiconductor Corporation
+* Copyright 2018-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -258,9 +258,9 @@ static cy_rslt_t setup_pin(cyhal_gpio_t pin, const cyhal_resource_pin_mapping_t 
 static bool isTransferInProcess = false;
 
 /* Internal functions */
-static cy_en_sd_host_status_t Cy_SD_Host_PollTransferComplete(SDHC_Type *base, const uint16_t delay);
-static cy_en_sd_host_status_t Cy_SD_Host_PollCmdComplete(SDHC_Type *base);
-static cy_en_sd_host_status_t Cy_SD_Host_SdCardChangeClock(SDHC_Type *base, uint32_t instance_num, uint32_t frequency);
+static cy_en_sd_host_status_t cyhal_sd_host_polltransfercomplete(SDHC_Type *base, const uint16_t delay);
+static cy_en_sd_host_status_t cyhal_sd_host_pollcmdcomplete(SDHC_Type *base);
+static cy_en_sd_host_status_t cyhal_sd_host_sdcardchangeclock(SDHC_Type *base, uint32_t instance_num, uint32_t frequency);
 static cy_en_sd_host_bus_width_t convert_buswidth(uint8_t stopbits);
 static cy_en_syspm_status_t cyhal_sdio_syspm_callback(cy_stc_syspm_callback_params_t *params,
                                                       cy_en_syspm_callback_mode_t mode);
@@ -352,7 +352,7 @@ static cy_en_sd_host_bus_width_t convert_buswidth(uint8_t stopbits)
 
 
 /*******************************************************************************
-* Function Name: Cy_SD_Host_SdCardChangeClock
+* Function Name: cyhal_sd_host_sdcardchangeclock
 ****************************************************************************//**
 *
 *  Changes the Host controller SD clock.
@@ -369,7 +369,7 @@ static cy_en_sd_host_bus_width_t convert_buswidth(uint8_t stopbits)
 * \return \ref cy_en_sd_host_status_t
 *
 *******************************************************************************/
-static cy_en_sd_host_status_t Cy_SD_Host_SdCardChangeClock(SDHC_Type *base, uint32_t instance_num, uint32_t frequency)
+static cy_en_sd_host_status_t cyhal_sd_host_sdcardchangeclock(SDHC_Type *base, uint32_t instance_num, uint32_t frequency)
 {
     cy_en_sd_host_status_t ret = CY_SD_HOST_ERROR_INVALID_PARAMETER;
     uint32_t clockInput = 0;
@@ -413,7 +413,7 @@ static cy_en_sd_host_status_t Cy_SD_Host_SdCardChangeClock(SDHC_Type *base, uint
 
 
 /*******************************************************************************
-* Function Name: Cy_SD_Host_PollCmdComplete
+* Function Name: cyhal_sd_host_pollcmdcomplete
 ****************************************************************************//**
 *
 *  Waits for the command complete event.
@@ -424,7 +424,7 @@ static cy_en_sd_host_status_t Cy_SD_Host_SdCardChangeClock(SDHC_Type *base, uint
 * \return \ref cy_en_sd_host_status_t
 *
 *******************************************************************************/
-static cy_en_sd_host_status_t Cy_SD_Host_PollCmdComplete(SDHC_Type *base)
+static cy_en_sd_host_status_t cyhal_sd_host_pollcmdcomplete(SDHC_Type *base)
 {
     cy_en_sd_host_status_t ret = CY_SD_HOST_ERROR_TIMEOUT;
     uint32_t               retry = SDHC_RETRY_TIMES;
@@ -450,7 +450,7 @@ static cy_en_sd_host_status_t Cy_SD_Host_PollCmdComplete(SDHC_Type *base)
 
 
 /*******************************************************************************
-* Function Name: Cy_SD_Host_PollTransferComplete
+* Function Name: cyhal_sd_host_polltransfercomplete
 ****************************************************************************//**
 *
 *  Waits for the command complete event.
@@ -466,7 +466,7 @@ static cy_en_sd_host_status_t Cy_SD_Host_PollCmdComplete(SDHC_Type *base)
 *      If the pointer is NULL, returns error.
 *
 *******************************************************************************/
-static cy_en_sd_host_status_t Cy_SD_Host_PollTransferComplete(SDHC_Type *base, const uint16_t delay)
+static cy_en_sd_host_status_t cyhal_sd_host_polltransfercomplete(SDHC_Type *base, const uint16_t delay)
 {
     cy_en_sd_host_status_t ret = CY_SD_HOST_ERROR_TIMEOUT;
     uint32_t               retry = SDHC_RW_RETRY_CYCLES;
@@ -769,7 +769,7 @@ cy_rslt_t cyhal_sdhc_init(cyhal_sdhc_t *obj,
             if (result == CY_RSLT_SUCCESS)
             {
                 /* Update SD Card frequency to be 25 Mhz */
-                result = (cy_rslt_t) Cy_SD_Host_SdCardChangeClock(obj->base, obj->resource.block_num, CY_SD_HOST_CLK_25M);
+                result = (cy_rslt_t) cyhal_sd_host_sdcardchangeclock(obj->base, obj->resource.block_num, CY_SD_HOST_CLK_25M);
             }
         }
     }
@@ -868,7 +868,7 @@ cy_rslt_t cyhal_sdhc_read(const cyhal_sdhc_t *obj, uint32_t address, uint8_t *da
     }
     else
     {
-        driverRet = Cy_SD_Host_PollTransferComplete(obj->base, SDHC_RW_TIMEOUT_US);
+        driverRet = cyhal_sd_host_polltransfercomplete(obj->base, SDHC_RW_TIMEOUT_US);
 
         if (CY_SD_HOST_SUCCESS != driverRet)
         {
@@ -922,7 +922,7 @@ cy_rslt_t cyhal_sdhc_write(const cyhal_sdhc_t *obj, uint32_t address, const uint
     }
     else
     {
-        driverRet = Cy_SD_Host_PollTransferComplete(obj->base, SDHC_RW_TIMEOUT_US);
+        driverRet = cyhal_sd_host_polltransfercomplete(obj->base, SDHC_RW_TIMEOUT_US);
 
         if (CY_SD_HOST_SUCCESS != driverRet)
         {
@@ -973,7 +973,7 @@ cy_rslt_t cyhal_sdhc_erase(const cyhal_sdhc_t *obj, uint32_t startAddr, size_t l
     }
     else
     {
-        driverRet = Cy_SD_Host_PollCmdComplete(obj->base);
+        driverRet = cyhal_sd_host_pollcmdcomplete(obj->base);
     }
 
     if (CY_SD_HOST_SUCCESS != driverRet)
@@ -1284,7 +1284,7 @@ cy_rslt_t cyhal_sdio_init(cyhal_sdio_t *obj, cyhal_gpio_t cmd, cyhal_gpio_t clk,
                     (void)Cy_SD_Host_SetHostBusWidth(obj->base, CY_SD_HOST_BUS_WIDTH_4_BIT);
 
                     /* Change the host SD clock to 400 kHz */
-                    (void) Cy_SD_Host_SdCardChangeClock(obj->base, obj->resource.block_num, SDIO_HOST_CLK_400K);
+                    (void) cyhal_sd_host_sdcardchangeclock(obj->base, obj->resource.block_num, SDIO_HOST_CLK_400K);
 
                     obj->frequencyhal_hz = SDIO_HOST_CLK_400K;
                     obj->block_size = SDIO_64B_BLOCK;
@@ -1340,7 +1340,7 @@ cy_rslt_t cyhal_sdio_configure(cyhal_sdio_t *obj, const cyhal_sdio_cfg_t *config
 
     if (config->frequencyhal_hz != 0U)
     {
-        result = Cy_SD_Host_SdCardChangeClock(obj->base, obj->resource.block_num, config->frequencyhal_hz);
+        result = cyhal_sd_host_sdcardchangeclock(obj->base, obj->resource.block_num, config->frequencyhal_hz);
         obj->frequencyhal_hz = config->frequencyhal_hz;
     }
 
@@ -1417,7 +1417,7 @@ cy_rslt_t cyhal_sdio_send_cmd(const cyhal_sdio_t *obj, cyhal_transfer_t directio
 
         if (CY_SD_HOST_SUCCESS == result)
         {
-            result = Cy_SD_Host_PollCmdComplete(obj->base);
+            result = cyhal_sd_host_pollcmdcomplete(obj->base);
         }
     }
 
@@ -1538,11 +1538,11 @@ cy_rslt_t cyhal_sdio_bulk_transfer(cyhal_sdio_t *obj, cyhal_transfer_t direction
         result = Cy_SD_Host_SendCommand(obj->base, &cmd);
         if ( CY_SD_HOST_SUCCESS == result )
         {
-            result = Cy_SD_Host_PollCmdComplete(obj->base);
+            result = cyhal_sd_host_pollcmdcomplete(obj->base);
 
             if ( CY_SD_HOST_SUCCESS == result )
             {
-                result = Cy_SD_Host_PollTransferComplete(obj->base, SDIO_RW_TIMEOUT_US);
+                result = cyhal_sd_host_polltransfercomplete(obj->base, SDIO_RW_TIMEOUT_US);
             }
         }
         retry--;
@@ -1698,7 +1698,7 @@ bool cyhal_sdio_is_busy(const cyhal_sdio_t *obj)
 
         if (!isCmdComplete)
         {
-            result = Cy_SD_Host_PollCmdComplete(obj->base);
+            result = cyhal_sd_host_pollcmdcomplete(obj->base);
 
             if (CY_SD_HOST_SUCCESS == result)
             {
@@ -1708,7 +1708,7 @@ bool cyhal_sdio_is_busy(const cyhal_sdio_t *obj)
 
         if (isCmdComplete)
         {
-            result = Cy_SD_Host_PollTransferComplete(obj->base, SDIO_RW_TIMEOUT_US);
+            result = cyhal_sd_host_polltransfercomplete(obj->base, SDIO_RW_TIMEOUT_US);
 
             if (CY_SD_HOST_SUCCESS == result)
             {

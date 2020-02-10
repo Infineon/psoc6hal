@@ -94,9 +94,19 @@ $(document).ready(function(){initNavTree('group__group__hal__wdt.html','');});
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>High level interface for interacting with the Cypress Watchdog Timer (WDT).</p>
-<p>The watchdog timer is initialized with a timeout interval. Once the WDT is started, if cyhal_wdt_kick is not called at least once every timeout interval, the device will be reset. </p>
-<table class="memberdecls">
+<p>High level interface to the Watchdog Timer (WDT).</p>
+<p><a class="el" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init()</a> initializes the WDT and passes a pointer to the WDT block through obj. The timeout_ms parameter takes in the timeout in milliseconds. It can be used for recovering from a CPU or firmware failure. The watchdog timer is initialized with a timeout interval. Once the WDT is started, if <a class="el" href="group__group__hal__wdt.html#gaeb43bee6a246da3eedfb5d06fbd226de">cyhal_wdt_kick()</a> must be called at least once within the timeout interval. In case the firmware fails to do so, it is considered to be a CPU crash or firmware failure and the device will be reset.</p>
+<h1><a class="anchor" id="subsection_wdt_features"></a>
+Features</h1>
+<p>WDT supports Device Reset generation if not serviced within the configured timeout interval.</p>
+<h1><a class="anchor" id="subsection_wdt_quickstart"></a>
+Quick Start</h1>
+<p><a class="el" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init()</a> can be used for initialization by providing the WDT object (obj) and the timeout parameter (timeout period in ms). The timeout parameter can have a minimum value of 1ms. The maximum value of the timeout parameter can be obtained using the <a class="el" href="group__group__hal__wdt.html#gaf121c3f36d38b275c1887b8fddf96a3f">cyhal_wdt_get_max_timeout_ms()</a>.</p>
+<h1><a class="anchor" id="subsection_wdt_sample_use_case"></a>
+Sample use case</h1>
+<h2><a class="anchor" id="subsection_wdt_use_case"></a>
+Use Case: Initialization and reset functionality</h2>
+<p>The following snippet initializes the WDT and depicts the reset functionality of WDT in case of CPU or firmware failure. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> my_wdt;</div><div class="line">    uint32_t timeout_ms = 10; <span class="comment">/*minimum value of timeout_ms is 1ms*/</span></div><div class="line"></div><div class="line">    <span class="comment">/*Initializing WDT*/</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init</a>(&amp;my_wdt, timeout_ms);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Check for errors */</span></div><div class="line"></div><div class="line">    <span class="keywordflow">for</span>(;;)</div><div class="line">    {</div><div class="line">        <span class="comment">/*The Application Code comes here*/</span></div><div class="line"></div><div class="line">        <span class="comment">/*The time required for execution of the application code should be less than the parameter</span></div><div class="line"><span class="comment">        timeout_ms. In case there is a failure and the WDT is not refreshed within timeout_ms, the</span></div><div class="line"><span class="comment">        WDT will reset the device.*/</span></div><div class="line"></div><div class="line">        <span class="comment">/*Refresh watchdog*/</span></div><div class="line">        <a class="code" href="group__group__hal__wdt.html#gaeb43bee6a246da3eedfb5d06fbd226de">cyhal_wdt_kick</a>(&amp;my_wdt);</div><div class="line">    }</div></div><!-- fragment --><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:gaa1a7998265af245eadda0401bd888fa2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gaa1a7998265af245eadda0401bd888fa2">CY_RSLT_WDT_INVALID_TIMEOUT</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba">CYHAL_RSLT_MODULE_WDT</a>, 0))</td></tr>
@@ -187,7 +197,8 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the init request </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the init request</dd></dl>
+<p>Returns <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> if the operation was successfull. </p>
 
 </div>
 </div>
@@ -236,10 +247,11 @@ Functions</h2></td></tr>
 <p>Refreshes the WDT. This function should be called periodically to prevent the WDT from timing out. In the event of a timeout, the WDT resets the system.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The WDT object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The WDT object</td></tr>
   </table>
   </dd>
 </dl>
+<p>See <a class="el" href="group__group__hal__wdt.html#subsection_wdt_use_case">Use Case: Initialization and reset functionality</a> </p>
 
 </div>
 </div>
