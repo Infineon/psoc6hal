@@ -87,8 +87,8 @@ $(document).ready(function(){initNavTree('group__group__hal__rtc.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#groups">API Reference</a> &#124;
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -97,66 +97,101 @@ $(document).ready(function(){initNavTree('group__group__hal__rtc.html','');});
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>High level interface for interacting with the real-time clock (RTC).</p>
+<p>High level interface for interacting with the real-time clock (RTC). </p>
 <p>The real time clock provides tracking of the current time and date, as well as the ability to trigger a callback at a specific time in the future.</p>
-<p>If a suitable clock source is available, the RTC can continue timekeeping operations even when the device is in a low power operating mode. See the device datasheet for more details. </p>
-<table class="memberdecls">
+<h1><a class="anchor" id="section_rtc_features"></a>
+Features</h1>
+<ul>
+<li>Configurable interrupt and callback assignment on RTC event <a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a></li>
+<li>Set alarm for a specific time and date <a class="el" href="group__group__hal__rtc.html#ga4281bd53cab53fb245a1e98a618e1679">cyhal_rtc_set_alarm</a></li>
+</ul>
+<h1><a class="anchor" id="section_rtc_quickstart"></a>
+Quick Start</h1>
+<p>Initialise the RTC using <a class="el" href="group__group__hal__rtc.html#ga913818691e0a742dea9172d1dc255f5b">cyhal_rtc_init</a>. Set the current time and date using <a class="el" href="group__group__hal__rtc.html#ga09180594a84d768f17d80e1262dce2b7">cyhal_rtc_write</a>. <br />
+ See <a class="el" href="group__group__hal__rtc.html#subsection_rtc_snippet_1">Snippet 1: Initialize RTC, write and read current time and date</a> to initialize RTC, read and write current date and time to the RTC peripheral. See <a class="el" href="group__group__hal__rtc.html#subsection_rtc_snippet_2">Snippet 2: RTC Alarm using Callbacks</a> to set an alarm event on a specific time and date.</p>
+<h1><a class="anchor" id="section_rtc_snippets"></a>
+Code snippets</h1>
+<h2><a class="anchor" id="subsection_rtc_snippet_1"></a>
+Snippet 1: Initialize RTC, write and read current time and date</h2>
+<p>The following code snippet initialises the RTC using the <a class="el" href="group__group__hal__rtc.html#ga913818691e0a742dea9172d1dc255f5b">cyhal_rtc_init</a>. The current date and time are set using <a class="el" href="group__group__hal__rtc.html#ga09180594a84d768f17d80e1262dce2b7">cyhal_rtc_write</a>. The current date and time is read from the RTC using <a class="el" href="group__group__hal__rtc.html#ga5c3f15f870f2ecfb4a8a03a58d1eaa5f">cyhal_rtc_read</a>. The time structure <b> tm </b>, contains the calendar date and time which are broken down into its components. This structure is declared in standard C library time.h which is included by HAL. </p><div class="fragment"><div class="line">    <span class="comment">/* Structure tm stores years since 1900 */</span></div><div class="line"><span class="preprocessor">    #define TM_YEAR_BASE (1900u)</span></div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> my_rtc;</div><div class="line">    <span class="keywordtype">char</span> buffer[80];</div><div class="line"></div><div class="line">    <span class="keywordtype">int</span> mday = 3, month = 3, year = 2020; <span class="comment">/* Day of month, month and year */</span></div><div class="line">    <span class="keywordtype">int</span> hours = 8, minutes = 10, seconds = 10; <span class="comment">/* Hours, minutes and seconds */</span></div><div class="line">    <span class="keywordtype">int</span> wday = 3; <span class="comment">/* Days from Sunday. Sunday is 0, Monday is 1 and so on. */</span></div><div class="line">    <span class="keywordtype">int</span> dst = 0; <span class="comment">/* Daylight Savings. 0 - Disabled, 1 - Enabled */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Setting the tm structure as 08 HRS:10 MIN:10 SEC ; 3rd March 2020; Wednesday ; DST off */</span></div><div class="line">    <span class="keyword">struct </span>tm new_date_time =</div><div class="line">    {</div><div class="line">        .tm_sec = seconds,</div><div class="line">        .tm_min = minutes,</div><div class="line">        .tm_hour = hours,</div><div class="line">        .tm_mday = mday,</div><div class="line">        .tm_mon = month - 1,</div><div class="line">        .tm_year = year - TM_YEAR_BASE,</div><div class="line">        .tm_wday = wday,</div><div class="line">        .tm_isdst = dst</div><div class="line">    };</div><div class="line">    <span class="keyword">struct </span>tm current_date_time = {0};</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize RTC */</span></div><div class="line">    result = <a class="code" href="group__group__hal__rtc.html#ga913818691e0a742dea9172d1dc255f5b">cyhal_rtc_init</a>(&amp;my_rtc);</div><div class="line"></div><div class="line">    <span class="comment">/* Update the current time and date to the RTC peripheral */</span></div><div class="line">    result = <a class="code" href="group__group__hal__rtc.html#ga09180594a84d768f17d80e1262dce2b7">cyhal_rtc_write</a>(&amp;my_rtc, &amp;new_date_time);</div><div class="line"></div><div class="line">    <span class="comment">/* Get the current time and date from the RTC peripheral */</span></div><div class="line">    result = <a class="code" href="group__group__hal__rtc.html#ga5c3f15f870f2ecfb4a8a03a58d1eaa5f">cyhal_rtc_read</a>(&amp;my_rtc, &amp;current_date_time);</div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">       <span class="comment">/* strftime() is a C library function which is used to format date and time into string.</span></div><div class="line"><span class="comment">        * It comes under the header file &quot;time.h&quot; which is included by HAL (See http://www.cplusplus.com/reference/ctime/strftime/)</span></div><div class="line"><span class="comment">        */</span></div><div class="line">        strftime(buffer, <span class="keyword">sizeof</span>(buffer), <span class="stringliteral">&quot;%c&quot;</span>, &amp;current_date_time);</div><div class="line">        <span class="comment">/* Print the buffer in serial terminal to view the current date and time */</span></div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_rtc_snippet_2"></a>
+Snippet 2: RTC Alarm using Callbacks</h2>
+<p>The following code snippet configures the RTC to trigger an alarm event on a specified date and time using <a class="el" href="group__group__hal__rtc.html#ga4281bd53cab53fb245a1e98a618e1679">cyhal_rtc_set_alarm</a>. A callback is registered to handle the alarm event using <a class="el" href="group__group__hal__rtc.html#ga64761d1bb0c23aedc4329b50f8d3361d">cyhal_rtc_register_callback</a>. </p><div class="fragment"><div class="line"></div><div class="line"><span class="keywordtype">void</span> cyhal_rtc_alarm_interrupt_handler(<span class="keywordtype">void</span> *arg, <a class="code" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> event)</div><div class="line">{</div><div class="line">    (void)arg;</div><div class="line">    <span class="keywordflow">if</span> (event == CYHAL_RTC_ALARM )</div><div class="line">    {</div><div class="line">        <span class="comment">/* ALARM HAS FIRED */</span></div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_set_alarm_callback(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">     <span class="comment">/* Structure tm stores years since 1900 */</span></div><div class="line"><span class="preprocessor">    #define TM_YEAR_BASE (1900u)</span></div><div class="line"><span class="preprocessor">    #define RTC_CALLBACK_ARG (NULL)</span></div><div class="line"><span class="preprocessor">    #define RTC_INTERRUPT_PRIORITY (3u)</span></div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> my_rtc;</div><div class="line"></div><div class="line">    <span class="comment">/* Setting the tm structure as 08 HRS:10 MIN:10 SEC ; 3rd March 2020; Wednesday ; DST off */</span></div><div class="line">    <span class="keyword">struct </span>tm new_date_time =</div><div class="line">    {</div><div class="line">        .tm_sec = 10,</div><div class="line">        .tm_min = 10,</div><div class="line">        .tm_hour = 8,</div><div class="line">        .tm_mday = 3,</div><div class="line">        .tm_mon = 3 - 1,</div><div class="line">        .tm_year = 2020 - TM_YEAR_BASE,</div><div class="line">        .tm_wday = 3,</div><div class="line">        .tm_yday = 61,</div><div class="line">        .tm_isdst = 0,</div><div class="line">    };</div><div class="line">    <span class="comment">/* Initialize RTC */</span></div><div class="line">    result = <a class="code" href="group__group__hal__rtc.html#ga913818691e0a742dea9172d1dc255f5b">cyhal_rtc_init</a>(&amp;my_rtc);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result);</div><div class="line"></div><div class="line">    <span class="comment">/* Update the current time and date to the RTC peripheral */</span></div><div class="line">    result = <a class="code" href="group__group__hal__rtc.html#ga09180594a84d768f17d80e1262dce2b7">cyhal_rtc_write</a>(&amp;my_rtc, &amp;new_date_time);</div><div class="line"></div><div class="line">    <span class="comment">/* Setting the tm structure to set alarm for 08 HRS:10 MIN:15 SEC ; 3rd March 2020; Wednesday ; DST off */</span></div><div class="line">    <span class="keyword">struct </span>tm alarm_date_time =</div><div class="line">    {</div><div class="line">        .tm_sec = 15,</div><div class="line">        .tm_min = 10,</div><div class="line">        .tm_hour = 8,</div><div class="line">        .tm_mday = 3,</div><div class="line">        .tm_mon = 3 - 1,</div><div class="line">        .tm_year = 2020 - TM_YEAR_BASE,</div><div class="line">        .tm_wday = 3,</div><div class="line">        .tm_yday = 61,</div><div class="line">        .tm_isdst = 0,</div><div class="line">    };</div><div class="line"></div><div class="line">    <span class="comment">/* Set which fields should match to trigger an alarm event. The fields are set to trigger an alarm event on the</span></div><div class="line"><span class="comment">     * date and time specified using alarm_date_time structure.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <a class="code" href="group__group__hal__rtc.html#structcyhal__alarm__active__t">cyhal_alarm_active_t</a> alarm_active =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__rtc.html#aa36c2142cb8a0dead7b6d40fcd499099">en_sec</a> = 1,</div><div class="line">        .en_min = 1,</div><div class="line">        .en_hour = 1,</div><div class="line">        .en_day =  1,</div><div class="line">        .en_date = 1,</div><div class="line">        .en_month = 1,</div><div class="line">    };</div><div class="line"></div><div class="line">    <a class="code" href="group__group__hal__rtc.html#ga4281bd53cab53fb245a1e98a618e1679">cyhal_rtc_set_alarm</a>(&amp;my_rtc, &amp;alarm_date_time,  alarm_active);</div><div class="line">    <span class="comment">/* Register a callback function to handle the alarm event */</span></div><div class="line">    <a class="code" href="group__group__hal__rtc.html#ga64761d1bb0c23aedc4329b50f8d3361d">cyhal_rtc_register_callback</a>(&amp;my_rtc, (<a class="code" href="group__group__hal__rtc.html#ga2fe62b8562ac40925a243c75b0e6810f">cyhal_rtc_event_callback_t</a>)cyhal_rtc_alarm_interrupt_handler, RTC_CALLBACK_ARG);</div><div class="line">    <span class="comment">/* Enable the alarm event to trigger an interrupt */</span></div><div class="line">    <a class="code" href="group__group__hal__rtc.html#ga92d82cf6e7ca376c5a41004d2d67cd4d">cyhal_rtc_enable_event</a>(&amp;my_rtc, CYHAL_RTC_ALARM, RTC_INTERRUPT_PRIORITY, <span class="keyword">true</span>);</div><div class="line">}</div><div class="line"></div></div><!-- fragment --><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+API Reference</h2></td></tr>
+<tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
+<tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:structcyhal__alarm__active__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#structcyhal__alarm__active__t">cyhal_alarm_active_t</a></td></tr>
 <tr class="memdesc:structcyhal__alarm__active__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines which fields should be active for the alarm.  <a href="group__group__hal__rtc.html#structcyhal__alarm__active__t">More...</a><br /></td></tr>
 <tr class="separator:structcyhal__alarm__active__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structcyhal__rtc__dst__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">cyhal_rtc_dst_t</a></td></tr>
+<tr class="memdesc:structcyhal__rtc__dst__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Day Light Savings Time (DST) structure for setting when to apply.  <a href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">More...</a><br /></td></tr>
 <tr class="separator:structcyhal__rtc__dst__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:unioncyhal__rtc__dst__t_8____unnamed____"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#unioncyhal__rtc__dst__t_8____unnamed____">cyhal_rtc_dst_t.__unnamed__</a></td></tr>
 <tr class="separator:unioncyhal__rtc__dst__t_8____unnamed____"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____">cyhal_rtc_dst_t.__unnamed__.__unnamed__</a></td></tr>
 <tr class="separator:structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:gaae3e49201de8355a8b8f9bcfd88a2d0b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#gaae3e49201de8355a8b8f9bcfd88a2d0b">CY_RSLT_RTC_NOT_INITIALIZED</a>&#160;&#160;&#160;<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b">CYHAL_RSLT_MODULE_RTC</a>, 0)</td></tr>
-<tr class="separator:gaae3e49201de8355a8b8f9bcfd88a2d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6c6143b437306d30ee23482cce83d461"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga6c6143b437306d30ee23482cce83d461">CY_RSLT_RTC_BAD_ARGUMENT</a>&#160;&#160;&#160;<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b">CYHAL_RSLT_MODULE_RTC</a>, 1)</td></tr>
-<tr class="separator:ga6c6143b437306d30ee23482cce83d461"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga2fe62b8562ac40925a243c75b0e6810f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga2fe62b8562ac40925a243c75b0e6810f">cyhal_rtc_event_callback_t</a>) (void *callback_arg, <a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> event)</td></tr>
+<tr class="memitem:ga2fe62b8562ac40925a243c75b0e6810f"><td class="memItemLeft" align="right" valign="top"><a id="ga2fe62b8562ac40925a243c75b0e6810f"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga2fe62b8562ac40925a243c75b0e6810f">cyhal_rtc_event_callback_t</a>) (void *callback_arg, <a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> event)</td></tr>
+<tr class="memdesc:ga2fe62b8562ac40925a243c75b0e6810f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler for RTC events. <br /></td></tr>
 <tr class="separator:ga2fe62b8562ac40925a243c75b0e6810f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga65837a686b1fab2e3b11e0d3ba1fdafe"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> { <b>CYHAL_RTC_ALARM</b>
+<tr class="memitem:ga65837a686b1fab2e3b11e0d3ba1fdafe"><td class="memItemLeft" align="right" valign="top"><a id="ga65837a686b1fab2e3b11e0d3ba1fdafe"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> { <b>CYHAL_RTC_ALARM</b>
  }</td></tr>
+<tr class="memdesc:ga65837a686b1fab2e3b11e0d3ba1fdafe"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC interrupt triggers. <br /></td></tr>
 <tr class="separator:ga65837a686b1fab2e3b11e0d3ba1fdafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga70f0bde8db19e6aacbbd72afc1fa3f9f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga70f0bde8db19e6aacbbd72afc1fa3f9f">cyhal_rtc_dst_format_t</a> { <a class="el" href="group__group__hal__rtc.html#gga70f0bde8db19e6aacbbd72afc1fa3f9fa9e7d7fe4b4c2061b0e3fa66417fafe88">CYHAL_RTC_DST_RELATIVE</a>, 
-<a class="el" href="group__group__hal__rtc.html#gga70f0bde8db19e6aacbbd72afc1fa3f9fabf285ab71718312d1764612ac46c78d1">CYHAL_RTC_DST_FIXED</a>
+<tr class="memitem:ga70f0bde8db19e6aacbbd72afc1fa3f9f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga70f0bde8db19e6aacbbd72afc1fa3f9f">cyhal_rtc_dst_format_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__rtc.html#gga70f0bde8db19e6aacbbd72afc1fa3f9fa9e7d7fe4b4c2061b0e3fa66417fafe88">CYHAL_RTC_DST_RELATIVE</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__rtc.html#gga70f0bde8db19e6aacbbd72afc1fa3f9fabf285ab71718312d1764612ac46c78d1">CYHAL_RTC_DST_FIXED</a>
+<br />
  }</td></tr>
+<tr class="memdesc:ga70f0bde8db19e6aacbbd72afc1fa3f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration used to configure the DST format.  <a href="group__group__hal__rtc.html#ga70f0bde8db19e6aacbbd72afc1fa3f9f">More...</a><br /></td></tr>
 <tr class="separator:ga70f0bde8db19e6aacbbd72afc1fa3f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga913818691e0a742dea9172d1dc255f5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga913818691e0a742dea9172d1dc255f5b">cyhal_rtc_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj)</td></tr>
+<tr class="memdesc:ga913818691e0a742dea9172d1dc255f5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the RTC peripheral.  <a href="#ga913818691e0a742dea9172d1dc255f5b">More...</a><br /></td></tr>
 <tr class="separator:ga913818691e0a742dea9172d1dc255f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4e9f272f48fcf83b09db4603c76b1d79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga4e9f272f48fcf83b09db4603c76b1d79">cyhal_rtc_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj)</td></tr>
+<tr class="memdesc:ga4e9f272f48fcf83b09db4603c76b1d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize RTC.  <a href="#ga4e9f272f48fcf83b09db4603c76b1d79">More...</a><br /></td></tr>
 <tr class="separator:ga4e9f272f48fcf83b09db4603c76b1d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac6891d0e8b9de6c32f46f179aa32b800"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#gac6891d0e8b9de6c32f46f179aa32b800">cyhal_rtc_is_enabled</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj)</td></tr>
+<tr class="memdesc:gac6891d0e8b9de6c32f46f179aa32b800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the RTC has the time set and is counting.  <a href="#gac6891d0e8b9de6c32f46f179aa32b800">More...</a><br /></td></tr>
 <tr class="separator:gac6891d0e8b9de6c32f46f179aa32b800"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5c3f15f870f2ecfb4a8a03a58d1eaa5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga5c3f15f870f2ecfb4a8a03a58d1eaa5f">cyhal_rtc_read</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, struct tm *time)</td></tr>
+<tr class="memdesc:ga5c3f15f870f2ecfb4a8a03a58d1eaa5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current time and date from the RTC peripheral.  <a href="#ga5c3f15f870f2ecfb4a8a03a58d1eaa5f">More...</a><br /></td></tr>
 <tr class="separator:ga5c3f15f870f2ecfb4a8a03a58d1eaa5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga09180594a84d768f17d80e1262dce2b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga09180594a84d768f17d80e1262dce2b7">cyhal_rtc_write</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, const struct tm *time)</td></tr>
+<tr class="memdesc:ga09180594a84d768f17d80e1262dce2b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the specified time and date to the RTC peripheral.  <a href="#ga09180594a84d768f17d80e1262dce2b7">More...</a><br /></td></tr>
 <tr class="separator:ga09180594a84d768f17d80e1262dce2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5e6893121f3be9026d5cf4cb10c008bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga5e6893121f3be9026d5cf4cb10c008bf">cyhal_rtc_set_dst</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, const <a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">cyhal_rtc_dst_t</a> *start, const <a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t">cyhal_rtc_dst_t</a> *stop)</td></tr>
+<tr class="memdesc:ga5e6893121f3be9026d5cf4cb10c008bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the start and end time for Day Light Savings.  <a href="#ga5e6893121f3be9026d5cf4cb10c008bf">More...</a><br /></td></tr>
 <tr class="separator:ga5e6893121f3be9026d5cf4cb10c008bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3e56df18a9506e3d25050d4dabe7fd4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga3e56df18a9506e3d25050d4dabe7fd4c">cyhal_rtc_is_dst</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj)</td></tr>
+<tr class="memdesc:ga3e56df18a9506e3d25050d4dabe7fd4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if Day Light Savings Time is currently active.  <a href="#ga3e56df18a9506e3d25050d4dabe7fd4c">More...</a><br /></td></tr>
 <tr class="separator:ga3e56df18a9506e3d25050d4dabe7fd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4281bd53cab53fb245a1e98a618e1679"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga4281bd53cab53fb245a1e98a618e1679">cyhal_rtc_set_alarm</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, const struct tm *time, <a class="el" href="group__group__hal__rtc.html#structcyhal__alarm__active__t">cyhal_alarm_active_t</a> active)</td></tr>
+<tr class="memdesc:ga4281bd53cab53fb245a1e98a618e1679"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an alarm for the specified time and date using the RTC peripheral.  <a href="#ga4281bd53cab53fb245a1e98a618e1679">More...</a><br /></td></tr>
 <tr class="separator:ga4281bd53cab53fb245a1e98a618e1679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2b3a85af9b9b878e8cae824d5f847b88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga2b3a85af9b9b878e8cae824d5f847b88">cyhal_rtc_set_alarm_by_seconds</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, const uint32_t seconds)</td></tr>
+<tr class="memdesc:ga2b3a85af9b9b878e8cae824d5f847b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an alarm at a specified number of seconds in the future.  <a href="#ga2b3a85af9b9b878e8cae824d5f847b88">More...</a><br /></td></tr>
+<tr class="separator:ga2b3a85af9b9b878e8cae824d5f847b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga64761d1bb0c23aedc4329b50f8d3361d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga64761d1bb0c23aedc4329b50f8d3361d">cyhal_rtc_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, <a class="el" href="group__group__hal__rtc.html#ga2fe62b8562ac40925a243c75b0e6810f">cyhal_rtc_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memdesc:ga64761d1bb0c23aedc4329b50f8d3361d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a RTC event callback handler.  <a href="#ga64761d1bb0c23aedc4329b50f8d3361d">More...</a><br /></td></tr>
 <tr class="separator:ga64761d1bb0c23aedc4329b50f8d3361d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga155f24733e1c8dad3f38daf490f273f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga155f24733e1c8dad3f38daf490f273f7">cyhal_rtc_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, <a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> event, uint8_t intrPriority, bool enable)</td></tr>
-<tr class="separator:ga155f24733e1c8dad3f38daf490f273f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga92d82cf6e7ca376c5a41004d2d67cd4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__rtc.html#ga92d82cf6e7ca376c5a41004d2d67cd4d">cyhal_rtc_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *obj, <a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memdesc:ga92d82cf6e7ca376c5a41004d2d67cd4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure RTC event enablement.  <a href="#ga92d82cf6e7ca376c5a41004d2d67cd4d">More...</a><br /></td></tr>
+<tr class="separator:ga92d82cf6e7ca376c5a41004d2d67cd4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
 <a name="structcyhal__alarm__active__t" id="structcyhal__alarm__active__t"></a>
@@ -177,42 +212,37 @@ Functions</h2></td></tr>
 <td class="fieldname">
 en_sec: 1</td>
 <td class="fielddoc">
-</td></tr>
+Enable match of seconds. </td></tr>
 <tr><td class="fieldtype">
 <a id="a320940624827f9d754184447393a95f0"></a>uint8_t</td>
 <td class="fieldname">
 en_min: 1</td>
 <td class="fielddoc">
-<p>!&lt; Enable match of seconds </p>
-</td></tr>
+Enable match of minutes. </td></tr>
 <tr><td class="fieldtype">
 <a id="a8d9c92fe49428aedd8c78985a41f6967"></a>uint8_t</td>
 <td class="fieldname">
 en_hour: 1</td>
 <td class="fielddoc">
-<p>!&lt; Enable match of minutes </p>
-</td></tr>
+Enable match of hours. </td></tr>
 <tr><td class="fieldtype">
 <a id="af8fbeff616036b99a30ac05404420cb1"></a>uint8_t</td>
 <td class="fieldname">
 en_day: 1</td>
 <td class="fielddoc">
-<p>!&lt; Enable match of hours </p>
-</td></tr>
+Enable match of day of week. </td></tr>
 <tr><td class="fieldtype">
 <a id="a3f14355696e229e8f2e8a8c03951cb22"></a>uint8_t</td>
 <td class="fieldname">
 en_date: 1</td>
 <td class="fielddoc">
-<p>!&lt; Enable match of day of week </p>
-</td></tr>
+Enable match of date in month. </td></tr>
 <tr><td class="fieldtype">
 <a id="aa3904e107ba274b3e28966fa87d175d1"></a>uint8_t</td>
 <td class="fieldname">
 en_month: 1</td>
 <td class="fielddoc">
-<p>!&lt; Enable match of date in month </p>
-</td></tr>
+Enable match of month. </td></tr>
 </table>
 
 </div>
@@ -235,15 +265,14 @@ en_month: 1</td>
 <td class="fieldname">
 format</td>
 <td class="fielddoc">
-<p>DST format. See /ref cyhal_rtc_dst_format_t. Based on this value other structure elements should be filled or could be ignored </p>
+DST format. <p>See /ref cyhal_rtc_dst_format_t. Based on this value other structure elements should be filled or could be ignored </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a5270b5844693af6788a0a5da60ead51c"></a>uint32_t</td>
 <td class="fieldname">
 hour</td>
 <td class="fielddoc">
-<p>Hour in 24hour format, range[0-23] </p>
-</td></tr>
+Hour in 24hour format, range[0-23]. </td></tr>
 <tr><td class="fieldtype">
 <a id="a62f9cfea6b62fb6f05c44f30498294d6"></a>union <a class="el" href="group__group__hal__rtc.html#unioncyhal__rtc__dst__t_8____unnamed____">cyhal_rtc_dst_t</a></td>
 <td class="fieldname">
@@ -255,8 +284,7 @@ __unnamed__</td>
 <td class="fieldname">
 month</td>
 <td class="fielddoc">
-<p>Month value, range[1-12]. </p>
-</td></tr>
+Month value, range[1-12]. </td></tr>
 </table>
 
 </div>
@@ -279,8 +307,7 @@ month</td>
 <td class="fieldname">
 dayOfMonth</td>
 <td class="fielddoc">
-<p>Day of Month, range[1-31]. </p>
-</td></tr>
+Day of Month, range[1-31]. </td></tr>
 <tr><td class="fieldtype">
 <a id="a60e3c12db6ddaae1f88a6e0e8d5118e0"></a><a class="el" href="group__group__hal__rtc.html#structcyhal__rtc__dst__t_8____unnamed_____8____unnamed____">__unnamed__</a></td>
 <td class="fieldname">
@@ -309,82 +336,19 @@ __unnamed__</td>
 <td class="fieldname">
 dayOfWeek</td>
 <td class="fielddoc">
-<p>Day of the week, starting on Sunday, range[0-6] </p>
-</td></tr>
+Day of the week, starting on Sunday, range[0-6]. </td></tr>
 <tr><td class="fieldtype">
 <a id="abf56bc091977265c543ca16fd0189045"></a>uint32_t</td>
 <td class="fieldname">
 weekOfMonth</td>
 <td class="fielddoc">
-<p>Week of month, range[0-5]. Where 5 =&gt; Last week of month </p>
+Week of month, range[0-5]. <p>Where 5 =&gt; Last week of month </p>
 </td></tr>
 </table>
 
 </div>
 </div>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="gaae3e49201de8355a8b8f9bcfd88a2d0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaae3e49201de8355a8b8f9bcfd88a2d0b">&#9670;&nbsp;</a></span>CY_RSLT_RTC_NOT_INITIALIZED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_RTC_NOT_INITIALIZED&#160;&#160;&#160;<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b">CYHAL_RSLT_MODULE_RTC</a>, 0)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>RTC not initialized </p>
-
-</div>
-</div>
-<a id="ga6c6143b437306d30ee23482cce83d461"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6c6143b437306d30ee23482cce83d461">&#9670;&nbsp;</a></span>CY_RSLT_RTC_BAD_ARGUMENT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_RTC_BAD_ARGUMENT&#160;&#160;&#160;<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b">CYHAL_RSLT_MODULE_RTC</a>, 1)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Bad argument </p>
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="ga2fe62b8562ac40925a243c75b0e6810f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2fe62b8562ac40925a243c75b0e6810f">&#9670;&nbsp;</a></span>cyhal_rtc_event_callback_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* cyhal_rtc_event_callback_t) (void *callback_arg, <a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a> event)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Handler for RTC events </p>
-
-</div>
-</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="ga65837a686b1fab2e3b11e0d3ba1fdafe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga65837a686b1fab2e3b11e0d3ba1fdafe">&#9670;&nbsp;</a></span>cyhal_rtc_event_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe">cyhal_rtc_event_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>RTC interrupt triggers </p>
-
-</div>
-</div>
 <a id="ga70f0bde8db19e6aacbbd72afc1fa3f9f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga70f0bde8db19e6aacbbd72afc1fa3f9f">&#9670;&nbsp;</a></span>cyhal_rtc_dst_format_t</h2>
 
@@ -396,11 +360,12 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Enumeration used to configure the DST format </p>
+
+<p>Enumeration used to configure the DST format. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga70f0bde8db19e6aacbbd72afc1fa3f9fa9e7d7fe4b4c2061b0e3fa66417fafe88"></a>CYHAL_RTC_DST_RELATIVE&#160;</td><td class="fielddoc"><p>Relative DST format </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga70f0bde8db19e6aacbbd72afc1fa3f9fa9e7d7fe4b4c2061b0e3fa66417fafe88"></a>CYHAL_RTC_DST_RELATIVE&#160;</td><td class="fielddoc"><p>Relative DST format. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga70f0bde8db19e6aacbbd72afc1fa3f9fabf285ab71718312d1764612ac46c78d1"></a>CYHAL_RTC_DST_FIXED&#160;</td><td class="fielddoc"><p>Fixed DST format </p>
+<tr><td class="fieldname"><a id="gga70f0bde8db19e6aacbbd72afc1fa3f9fabf285ab71718312d1764612ac46c78d1"></a>CYHAL_RTC_DST_FIXED&#160;</td><td class="fielddoc"><p>Fixed DST format. </p>
 </td></tr>
 </table>
 
@@ -422,11 +387,12 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize the RTC peripheral</p>
-<p>Powerup the RTC in preparation for access. This function must be called before any other RTC functions are called. This does not change the state of the RTC. It just enables access to it. NOTE: Before calling this, make sure all necessary System Clocks are setup correctly. Generally this means making sure the RTC has access to a Crystal for optimal accuracy and operation in low power.</p>
+
+<p>Initialize the RTC peripheral. </p>
+<p>Powerup the RTC in preparation for access. This function must be called before any other RTC functions are called. This does not change the state of the RTC. It just enables access to it. NOTE: Before calling this, make sure all necessary System Clocks are setup correctly. Generally this means making sure the RTC has access to a crystal oscillator for optimal accuracy and operation in low power.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>RTC object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>Pointer to an RTC object. The caller must allocate the memory for this object but the init function will initialize its contents. </td></tr>
   </table>
   </dd>
 </dl>
@@ -449,7 +415,8 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Deinitialize RTC</p>
+
+<p>Deinitialize RTC. </p>
 <p>Frees resources associated with the RTC and disables CPU access. This only affects the CPU domain and not the time keeping logic. After this function is called no other RTC functions should be called except for rtc_init.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -475,7 +442,8 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Check if the RTC has the time set and is counting</p>
+
+<p>Check if the RTC has the time set and is counting. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
@@ -511,7 +479,8 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the current time from the RTC peripheral</p>
+
+<p>Get the current time and date from the RTC peripheral. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
@@ -548,7 +517,8 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Write the current time in seconds to the RTC peripheral</p>
+
+<p>Write the specified time and date to the RTC peripheral. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
@@ -591,7 +561,8 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the start and end time for Day Light Savings</p>
+
+<p>Set the start and end time for Day Light Savings. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
@@ -619,7 +590,9 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Checks to see if Day Light Savings Time is currently active. This should only be called after <a class="el" href="group__group__hal__rtc.html#ga5e6893121f3be9026d5cf4cb10c008bf">cyhal_rtc_set_dst()</a>.</p>
+
+<p>Checks to see if Day Light Savings Time is currently active. </p>
+<p>This should only be called after <a class="el" href="group__group__hal__rtc.html#ga5e6893121f3be9026d5cf4cb10c008bf">cyhal_rtc_set_dst()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
@@ -661,7 +634,8 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set an alarm for the specified time in seconds to the RTC peripheral</p>
+
+<p>Set an alarm for the specified time and date using the RTC peripheral. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
@@ -671,6 +645,44 @@ weekOfMonth</td>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The status of the set_alarm request </dd></dl>
+
+</div>
+</div>
+<a id="ga2b3a85af9b9b878e8cae824d5f847b88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2b3a85af9b9b878e8cae824d5f847b88">&#9670;&nbsp;</a></span>cyhal_rtc_set_alarm_by_seconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_rtc_set_alarm_by_seconds </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__rtc__t">cyhal_rtc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set an alarm at a specified number of seconds in the future. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>RTC object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">seconds</td><td>The number of seconds in the future for the alarm to be set to. Because alarms cannot match the year (see <a class="el" href="group__group__hal__rtc.html#structcyhal__alarm__active__t">cyhal_alarm_active_t</a>) the maximum number of seconds allowed is 365d*24h*60m*60s == 31,536,000s </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the set_alarm_by_seconds request </dd></dl>
 
 </div>
 </div>
@@ -705,11 +717,13 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The RTC event callback handler registration</p>
+
+<p>Register a RTC event callback handler. </p>
+<p>This function will be called when one of the events enabled by <a class="el" href="group__group__hal__rtc.html#ga92d82cf6e7ca376c5a41004d2d67cd4d">cyhal_rtc_enable_event</a> occurs.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The RTC object </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td>The callback handler which will be invoked when the alarm fires </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td>The callback handler which will be invoked when the alarm event fires </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">callback_arg</td><td>Generic argument that will be provided to the callback when called </td></tr>
   </table>
   </dd>
@@ -717,8 +731,8 @@ weekOfMonth</td>
 
 </div>
 </div>
-<a id="ga155f24733e1c8dad3f38daf490f273f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga155f24733e1c8dad3f38daf490f273f7">&#9670;&nbsp;</a></span>cyhal_rtc_enable_event()</h2>
+<a id="ga92d82cf6e7ca376c5a41004d2d67cd4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga92d82cf6e7ca376c5a41004d2d67cd4d">&#9670;&nbsp;</a></span>cyhal_rtc_enable_event()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -739,7 +753,7 @@ weekOfMonth</td>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>intrPriority</em>, </td>
+          <td class="paramname"><em>intr_priority</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -754,12 +768,14 @@ weekOfMonth</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Configure RTC event enablement.</p>
+
+<p>Configure RTC event enablement. </p>
+<p>When an enabled event occurs, the function specified by <a class="el" href="group__group__hal__rtc.html#ga64761d1bb0c23aedc4329b50f8d3361d">cyhal_rtc_register_callback</a> will be called.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The RTC object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>The RTC event type </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">intrPriority</td><td>The priority for NVIC interrupt events </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">intr_priority</td><td>The priority for NVIC interrupt events </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>True to turn on interrupts, False to turn off </td></tr>
   </table>
   </dd>

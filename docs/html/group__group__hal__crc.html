@@ -87,43 +87,57 @@ $(document).ready(function(){initNavTree('group__group__hal__crc.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#groups">API Reference</a> &#124;
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">CRC (Cyclic Redundancy Check)<div class="ingroups"><a class="el" href="group__group__hal.html">HAL Drivers</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>High level interface for interacting with the cyclic redundancy check (CRC), which provides hardware accelerated CRC computations. The CRC APIs are structured to enable usage in situations where the entire input data set is not available in memory at one time. Therefore, each conversion consists of three steps:</p><ul>
-<li>A single call to cyhal_crc_start, to initialize data structures for this computation</li>
-<li>One or more calls to cyhal_crc_compute, to provide chunks of data.</li>
-<li>A single call to cyhal_crc_finish, to finalize the computation and retrieve the result.</li>
+<p>High level interface for interacting with the CRC, which provides hardware accelerated CRC computations. </p>
+<p>The CRC APIs are structured to enable usage in situations where the entire input data set is not available in memory at the same time. Therefore, each conversion consists of three steps:</p><ul>
+<li>A single call to <a class="el" href="group__group__hal__crc.html#gac4d388f57a325090b05d718d7f20e333">cyhal_crc_start</a>, to initialize data structures used to compute CRC</li>
+<li>One or more calls to <a class="el" href="group__group__hal__crc.html#ga17e1a6544fecaa60880111d9ad2428f2">cyhal_crc_compute</a>, to provide chunks of data</li>
+<li>A single call to <a class="el" href="group__group__hal__crc.html#ga2457c4fa6536551e89c21f9bd476c601">cyhal_crc_finish</a>, to finalize the computation and retrieve the result</li>
 </ul>
-<p>Many of the algorithm parameters can be customized; see <a class="el" href="group__group__hal__crc.html#structcrc__algorithm__t" title="CRC algorithm parameters. ">crc_algorithm_t</a> for more details. </p>
-<table class="memberdecls">
+<p>Many of the algorithm parameters can be customized.</p>
+<p>See <a class="el" href="group__group__hal__crc.html#structcrc__algorithm__t">crc_algorithm_t</a> and <a class="el" href="group__group__hal__crc.html#subsection_crc_snippet_1">Snippet1: CRC Generation</a> for more details.</p>
+<h1><a class="anchor" id="subsection_crc_quickstart"></a>
+Quick Start</h1>
+<p><a class="el" href="group__group__hal__crc.html#gaf7d80ad97b75d1284db96b94274a837a">cyhal_crc_init</a> initializes the CRC generator and passes the pointer to the CRC block through the <b>obj</b> object of type <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__crc__t">cyhal_crc_t</a>.</p>
+<h2><a class="anchor" id="subsection_crc_snippet_1"></a>
+Snippet1: CRC Generation</h2>
+<p>The following snippet initializes a CRC generator and computes the CRC for a sample message.</p>
+<div class="fragment"><div class="line"></div><div class="line">    <span class="comment">/* CRC parameters for some CRC algorithms:</span></div><div class="line"><span class="comment">    +---------------------+-----+------------+------------+------+------+-----+------------+------------+</span></div><div class="line"><span class="comment">    | CRC algorithm Name  | CRC |  Polynom   |   Initial  | Data | Data | Rem |  Remainder |  Expected  |</span></div><div class="line"><span class="comment">    |                     | len |            |    seed    | REV  | XOR  | REV |    XOR     |    CRC     |</span></div><div class="line"><span class="comment">    | ------------------- | --- | ---------- |----------- | ---- | ---- | --- | ---------- | ---------- |</span></div><div class="line"><span class="comment">    | CRC-6  / CDMA2000-A |  6  |    0x27    |    0x3F    |   0  |   0  |  0  |    0x00    |    0x0D    |</span></div><div class="line"><span class="comment">    | CRC-6  / CDMA2000-B |  6  |    0x07    |    0x3F    |   0  |   0  |  0  |    0x00    |    0x3B    |</span></div><div class="line"><span class="comment">    | CRC-6  / DARC       |  6  |    0x19    |    0x00    |   1  |   0  |  1  |    0x00    |    0x26    |</span></div><div class="line"><span class="comment">    | CRC-6  / ITU        |  6  |    0x03    |    0x00    |   1  |   0  |  1  |    0x00    |    0x06    |</span></div><div class="line"><span class="comment">    | CRC-8  / ITU        |  8  |    0x07    |    0x00    |   0  |   0  |  0  |    0x55    |    0xA1    |</span></div><div class="line"><span class="comment">    | CRC-8  / MAXIM      |  8  |    0x31    |    0x00    |   1  |   0  |  1  |    0x00    |    0xA1    |</span></div><div class="line"><span class="comment">    | CRC-8  / ROHC       |  8  |    0x07    |    0xFF    |   1  |   0  |  1  |    0x00    |    0xD0    |</span></div><div class="line"><span class="comment">    | CRC-8  / WCDMA      |  8  |    0x9B    |    0x00    |   1  |   0  |  1  |    0x00    |    0x25    |</span></div><div class="line"><span class="comment">    | CRC-16 / CCITT-0    | 16  |   0x1021   |   0xFFFF   |   0  |   0  |  0  |   0x0000   |   0x29B1   |</span></div><div class="line"><span class="comment">    | CRC-16 / CDMA2000   | 16  |   0xC867   |   0xFFFF   |   0  |   0  |  0  |   0x0000   |   0x4C06   |</span></div><div class="line"><span class="comment">    | CRC-32              | 32  | 0x04C11DB7 | 0xFFFFFFFF |   1  |   0  |  1  | 0xFFFFFFFF | 0xCBF43926 |</span></div><div class="line"><span class="comment">    | CRC-32 / BZIP2      | 32  | 0x04C11DB7 | 0xFFFFFFFF |   0  |   0  |  0  | 0xFFFFFFFF | 0xFC891918 |</span></div><div class="line"><span class="comment">    +---------------------+-----+------------+------------+------+------+-----+------------+------------+</span></div><div class="line"><span class="comment">    */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Using CRC-16/CCITT-0 Algorithm */</span></div><div class="line"><span class="preprocessor">    #define CRC_BITLEN          (16u)</span></div><div class="line"><span class="preprocessor">    #define CRC_POLYNOMIAL      (0x1021u)</span></div><div class="line"><span class="preprocessor">    #define CRC_LFSR_SEED       (0xffffu)</span></div><div class="line"><span class="preprocessor">    #define CRC_DATA_REVERSE    (0u)</span></div><div class="line"><span class="preprocessor">    #define CRC_DATA_XOR        (0u)</span></div><div class="line"><span class="preprocessor">    #define CRC_REM_REVERSE     (0u)</span></div><div class="line"><span class="preprocessor">    #define CRC_REM_XOR         (0x0000u)</span></div><div class="line"></div><div class="line"><span class="preprocessor">    #define MSG_LENGTH 9</span></div><div class="line"></div><div class="line">    CY_ALIGN(4) uint8_t message[MSG_LENGTH] = &quot;123456789&quot;;</div><div class="line">    CY_ALIGN(4) uint32_t calc_crc = 0;</div><div class="line"></div><div class="line">    <span class="comment">/* Set CRC algorithm parameters */</span></div><div class="line">    <a class="code" href="group__group__hal__crc.html#structcrc__algorithm__t">crc_algorithm_t</a> my_algorithm = {</div><div class="line">        .<a class="code" href="group__group__hal__crc.html#a43f6798e59b2c14c20cf662a9c8952e6">width</a> = CRC_BITLEN,</div><div class="line">        .polynomial = CRC_POLYNOMIAL,</div><div class="line">        .lfsrInitState = CRC_LFSR_SEED,</div><div class="line">        .dataReverse = CRC_DATA_REVERSE,</div><div class="line">        .dataXor = CRC_DATA_XOR,</div><div class="line">        .remReverse = CRC_REM_REVERSE,</div><div class="line">        .remXor = CRC_REM_XOR</div><div class="line">    };</div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__crc__t">cyhal_crc_t</a> crc_obj;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the CRC Generator */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__crc.html#gaf7d80ad97b75d1284db96b94274a837a">cyhal_crc_init</a>(&amp;crc_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the CRC algorithm parameters */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__crc.html#gac4d388f57a325090b05d718d7f20e333">cyhal_crc_start</a>(&amp;crc_obj, &amp;my_algorithm);</div><div class="line"></div><div class="line">    <span class="comment">/* Compute CRC */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__crc.html#ga17e1a6544fecaa60880111d9ad2428f2">cyhal_crc_compute</a>(&amp;crc_obj, message, MSG_LENGTH);</div><div class="line"></div><div class="line">    <span class="comment">/* Finish computation */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__crc.html#ga2457c4fa6536551e89c21f9bd476c601">cyhal_crc_finish</a>(&amp;crc_obj, &amp;calc_crc);</div><div class="line"></div><div class="line">    <span class="comment">/* Release the CRC generator</span></div><div class="line"><span class="comment">     * Note: Free only if not required anymore</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <a class="code" href="group__group__hal__crc.html#ga13e98c8757355f979fbe955d94763336">cyhal_crc_free</a>(&amp;crc_obj);</div><div class="line"></div></div><!-- fragment --><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+API Reference</h2></td></tr>
+<tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
+<tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:structcrc__algorithm__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__crc.html#structcrc__algorithm__t">crc_algorithm_t</a></td></tr>
 <tr class="memdesc:structcrc__algorithm__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRC algorithm parameters.  <a href="group__group__hal__crc.html#structcrc__algorithm__t">More...</a><br /></td></tr>
 <tr class="separator:structcrc__algorithm__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga8f573a6a3660ae4086e9cde2da454324"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__crc.html#ga8f573a6a3660ae4086e9cde2da454324">CYHAL_CRC_RSLT_ERR_BAD_ARGUMENT</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005ab957798178a7d11049efcba5bf4887fc">CYHAL_RSLT_MODULE_CRC</a>, 0))</td></tr>
-<tr class="separator:ga8f573a6a3660ae4086e9cde2da454324"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gaf7d80ad97b75d1284db96b94274a837a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__crc.html#gaf7d80ad97b75d1284db96b94274a837a">cyhal_crc_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__crc__t">cyhal_crc_t</a> *obj)</td></tr>
+<tr class="memdesc:gaf7d80ad97b75d1284db96b94274a837a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the CRC generator.  <a href="#gaf7d80ad97b75d1284db96b94274a837a">More...</a><br /></td></tr>
 <tr class="separator:gaf7d80ad97b75d1284db96b94274a837a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga13e98c8757355f979fbe955d94763336"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__crc.html#ga13e98c8757355f979fbe955d94763336">cyhal_crc_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__crc__t">cyhal_crc_t</a> *obj)</td></tr>
+<tr class="memdesc:ga13e98c8757355f979fbe955d94763336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release the CRC generator.  <a href="#ga13e98c8757355f979fbe955d94763336">More...</a><br /></td></tr>
 <tr class="separator:ga13e98c8757355f979fbe955d94763336"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac4d388f57a325090b05d718d7f20e333"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__crc.html#gac4d388f57a325090b05d718d7f20e333">cyhal_crc_start</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__crc__t">cyhal_crc_t</a> *obj, const <a class="el" href="group__group__hal__crc.html#structcrc__algorithm__t">crc_algorithm_t</a> *algorithm)</td></tr>
+<tr class="memdesc:gac4d388f57a325090b05d718d7f20e333"><td class="mdescLeft">&#160;</td><td class="mdescRight">The CRC block is setup to perform CRC computation.  <a href="#gac4d388f57a325090b05d718d7f20e333">More...</a><br /></td></tr>
 <tr class="separator:gac4d388f57a325090b05d718d7f20e333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga17e1a6544fecaa60880111d9ad2428f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__crc.html#ga17e1a6544fecaa60880111d9ad2428f2">cyhal_crc_compute</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__crc__t">cyhal_crc_t</a> *obj, const uint8_t *data, size_t length)</td></tr>
+<tr class="memdesc:ga17e1a6544fecaa60880111d9ad2428f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the CRC for the given data and accumulates the CRC with the CRC generated from previous calls.  <a href="#ga17e1a6544fecaa60880111d9ad2428f2">More...</a><br /></td></tr>
 <tr class="separator:ga17e1a6544fecaa60880111d9ad2428f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2457c4fa6536551e89c21f9bd476c601"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__crc.html#ga2457c4fa6536551e89c21f9bd476c601">cyhal_crc_finish</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__crc__t">cyhal_crc_t</a> *obj, uint32_t *crc)</td></tr>
+<tr class="memdesc:ga2457c4fa6536551e89c21f9bd476c601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes the CRC computation and returns the CRC for the complete set of data passed through a single call or multiple calls to <a class="el" href="group__group__hal__crc.html#ga17e1a6544fecaa60880111d9ad2428f2">cyhal_crc_compute</a>.  <a href="#ga2457c4fa6536551e89c21f9bd476c601">More...</a><br /></td></tr>
 <tr class="separator:ga2457c4fa6536551e89c21f9bd476c601"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
@@ -175,7 +189,7 @@ Mask to xor with the remainder. </td></tr>
 <td class="fieldname">
 dataReverse</td>
 <td class="fielddoc">
-<p>The order in which data should be processed. If 0, data is processed MSB first. If 1, data is processed LSB first. </p>
+The order in which data should be processed. <p>If 0, data is processed MSB first. If 1, data is processed LSB first. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a5ad81955519341e5b258a54559a4146f"></a>bool</td>
@@ -184,22 +198,6 @@ remReverse</td>
 <td class="fielddoc">
 If 1, the remainder is reversed. If 0, it is not. </td></tr>
 </table>
-
-</div>
-</div>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ga8f573a6a3660ae4086e9cde2da454324"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8f573a6a3660ae4086e9cde2da454324">&#9670;&nbsp;</a></span>CYHAL_CRC_RSLT_ERR_BAD_ARGUMENT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_CRC_RSLT_ERR_BAD_ARGUMENT&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005ab957798178a7d11049efcba5bf4887fc">CYHAL_RSLT_MODULE_CRC</a>, 0))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Invalid argument </p>
 
 </div>
 </div>
@@ -219,14 +217,17 @@ If 1, the remainder is reversed. If 0, it is not. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize the CRC generator. This function reserves the CRYPTO block for CRC calculations.</p>
+
+<p>Initialize the CRC generator. </p>
+<p>This function reserves the CRYPTO block for CRC calculations.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The CRC generator object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>Pointer to a CRC generator object. The caller must allocate the memory for this object but the init function will initialize its contents. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the init request. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the init request.</dd></dl>
+<p>Returns <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> if the operation was successful. Refer <a class="el" href="group__group__hal__crc.html#subsection_crc_snippet_1">Snippet1: CRC Generation</a> for more information. </p>
 
 </div>
 </div>
@@ -245,7 +246,8 @@ If 1, the remainder is reversed. If 0, it is not. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Release the CRC generator.</p>
+
+<p>Release the CRC generator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The CRC generator object </td></tr>
@@ -280,15 +282,17 @@ If 1, the remainder is reversed. If 0, it is not. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initializes a CRC calculation.</p>
+
+<p>The CRC block is setup to perform CRC computation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The CRC generator object </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">algorithm</td><td>The CRC algorithm to use for computations </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">algorithm</td><td>The CRC algorithm to use for computations Refer <a class="el" href="group__group__hal__crc.html#structcrc__algorithm__t">crc_algorithm_t</a>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the compute request </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the compute request</dd></dl>
+<p>Returns <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> if the operation was successful. </p>
 
 </div>
 </div>
@@ -323,16 +327,19 @@ If 1, the remainder is reversed. If 0, it is not. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Computes the CRC for the given data. This function can be called multiple times to provide addtional data. This CRC generator will compute the CRC for including all data that was provided during previous calls.</p>
+
+<p>Computes the CRC for the given data and accumulates the CRC with the CRC generated from previous calls. </p>
+<p>This function can be called multiple times to provide additional data. </p><dl class="section note"><dt>Note</dt><dd>Input data must be 4-byte aligned. Refer <a class="el" href="group__group__hal__crc.html#subsection_crc_snippet_1">Snippet1: CRC Generation</a> for more details. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The CRC generator object </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>The data to compute a CRC over </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">length</td><td>The number of bytes of data to process </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>The input data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">length</td><td>The number of bytes in the data </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the compute request </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the compute request</dd></dl>
+<p>Returns <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> if the operation was successful. </p>
 
 </div>
 </div>
@@ -361,7 +368,9 @@ If 1, the remainder is reversed. If 0, it is not. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Provides final result for a CRC calculation. This will compute the CRC for all data that was provided when during the diffrent calls to cyhal_crc_compute.</p>
+
+<p>Finalizes the CRC computation and returns the CRC for the complete set of data passed through a single call or multiple calls to <a class="el" href="group__group__hal__crc.html#ga17e1a6544fecaa60880111d9ad2428f2">cyhal_crc_compute</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>The computed CRC pointer provided must be 4 byte aligned. Refer <a class="el" href="group__group__hal__crc.html#subsection_crc_snippet_1">Snippet1: CRC Generation</a> for more details.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The CRC generator object </td></tr>
@@ -369,7 +378,8 @@ If 1, the remainder is reversed. If 0, it is not. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the compute request </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the compute request</dd></dl>
+<p>Returns <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> if the operation was successful. </p>
 
 </div>
 </div>

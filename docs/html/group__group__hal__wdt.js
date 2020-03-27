@@ -1,7 +1,6 @@
 var group__group__hal__wdt =
 [
-    [ "CY_RSLT_WDT_INVALID_TIMEOUT", "group__group__hal__wdt.html#gaa1a7998265af245eadda0401bd888fa2", null ],
-    [ "CY_RSLT_WDT_ALREADY_INITIALIZED", "group__group__hal__wdt.html#ga6ac0fb47d61bc9cfd1597f4547f20ccf", null ],
+    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
     [ "cyhal_wdt_init", "group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697", null ],
     [ "cyhal_wdt_free", "group__group__hal__wdt.html#ga976a8b0fe8fe66f89311cfca18768b13", null ],
     [ "cyhal_wdt_kick", "group__group__hal__wdt.html#gaeb43bee6a246da3eedfb5d06fbd226de", null ],

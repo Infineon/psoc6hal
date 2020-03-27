@@ -96,7 +96,7 @@ extern "C" {
 *******************************************************************************/
 
 /** Integer representation of no connect pin (required to exist in all BSPs) */
-#define CYHAL_NC_PIN_VALUE ((cyhal_gpio_t)0xFFFFFFFF)
+#define CYHAL_NC_PIN_VALUE (NC)
 
 /*******************************************************************************
 *       Enumerations
@@ -104,10 +104,10 @@ extern "C" {
 
 /** Pin events */
 typedef enum {
-    CYHAL_GPIO_IRQ_NONE,   /**< No interrupt */
-    CYHAL_GPIO_IRQ_RISE,   /**< Interrupt on rising edge */
-    CYHAL_GPIO_IRQ_FALL,   /**< Interrupt on falling edge */
-    CYHAL_GPIO_IRQ_BOTH,   /**< Interrupt on both rising and falling edges */
+    CYHAL_GPIO_IRQ_NONE = 0,                                            /**< No interrupt */
+    CYHAL_GPIO_IRQ_RISE = 1 << 0,                                       /**< Interrupt on rising edge */
+    CYHAL_GPIO_IRQ_FALL = 1 << 1,                                       /**< Interrupt on falling edge */
+    CYHAL_GPIO_IRQ_BOTH = (CYHAL_GPIO_IRQ_RISE | CYHAL_GPIO_IRQ_FALL),  /**< Interrupt on both rising and falling edges */
 } cyhal_gpio_event_t;
 
 /** Pin direction */
@@ -164,13 +164,13 @@ void cyhal_gpio_free(cyhal_gpio_t pin);
 /** Configure the GPIO pin <br>
  * See \ref subsection_gpio_snippet_3.
  *
- * @param[in] pin       The GPIO pin
- * @param[in] direction The pin direction
- * @param[in] drvMode   The pin drive mode
+ * @param[in] pin          The GPIO pin
+ * @param[in] direction    The pin direction
+ * @param[in] drive_mode   The pin drive mode
  *
  * @return The status of the configure request
  */
-cy_rslt_t cyhal_gpio_configure(cyhal_gpio_t pin, cyhal_gpio_direction_t direction, cyhal_gpio_drive_mode_t drvMode);
+cy_rslt_t cyhal_gpio_configure(cyhal_gpio_t pin, cyhal_gpio_direction_t direction, cyhal_gpio_drive_mode_t drive_mode);
 
 /** Set the output value for the pin. This only works for output & in_out pins. <br>
  * See \ref subsection_gpio_snippet_2.
@@ -195,6 +195,9 @@ bool cyhal_gpio_read(cyhal_gpio_t pin);
 void cyhal_gpio_toggle(cyhal_gpio_t pin);
 
 /** Register/clear a callback handler for pin events <br>
+ *
+ * This function will be called when one of the events enabled by \ref cyhal_gpio_enable_event occurs.
+ *
  * See \ref subsection_gpio_snippet_4.
  *
  * @param[in] pin            The pin number
@@ -204,6 +207,9 @@ void cyhal_gpio_toggle(cyhal_gpio_t pin);
 void cyhal_gpio_register_callback(cyhal_gpio_t pin, cyhal_gpio_event_callback_t callback, void *callback_arg);
 
 /** Enable or Disable the specified GPIO event <br>
+ *
+ * When an enabled event occurs, the function specified by \ref cyhal_gpio_register_callback will be called.
+ *
  * See \ref subsection_gpio_snippet_4.
  *
  * @param[in] pin           The GPIO object

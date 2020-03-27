@@ -1,9 +1,8 @@
 var group__group__hal__usb__dev__common =
 [
-    [ "CYHAL_USB_DEV_RSLT_ERR", "group__group__hal__usb__dev__common.html#ga97ebcf5d7cb38f5fd30a7f0313036d7a", null ],
-    [ "CYHAL_USB_DEV_RSLT_ERR_BAD_DRV_CFG", "group__group__hal__usb__dev__common.html#ga5257ee0ae42e057fe514fb0ead6dedc4", null ],
-    [ "CYHAL_USB_DEV_RSLT_ERR_CLK_CFG", "group__group__hal__usb__dev__common.html#gafa0fc8e75cf177cddad24a9ad558e329", null ],
+    [ "cyhal_usb_dev_ep_t", "group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307", null ],
     [ "cyhal_usb_dev_irq_callback_t", "group__group__hal__usb__dev__common.html#ga2f2997674c9f3de87ef66c2a7efba533", null ],
+    [ "cyhal_usb_dev_endpoint_callback_t", "group__group__hal__usb__dev__common.html#ga8e9b21021ff08b7d2d53aaaef5c8f1b6", null ],
     [ "cyhal_usb_dev_event_callback_t", "group__group__hal__usb__dev__common.html#ga06d07346fb9aeaca315b468647a79f25", null ],
     [ "cyhal_usb_dev_sof_callback_t", "group__group__hal__usb__dev__common.html#gaf0796dc590759a7809327c60d4616218", null ],
     [ "cyhal_usb_dev_event_t", "group__group__hal__usb__dev__common.html#gab0df7903f398f360d71e8beb78ead49b", [
@@ -12,10 +11,12 @@ var group__group__hal__usb__dev__common =
       [ "CYHAL_USB_DEV_EVENT_EP0_IN", "group__group__hal__usb__dev__common.html#ggab0df7903f398f360d71e8beb78ead49ba2dfe95c0891c7c37eda0c5e707e45229", null ],
       [ "CYHAL_USB_DEV_EVENT_EP0_OUT", "group__group__hal__usb__dev__common.html#ggab0df7903f398f360d71e8beb78ead49bac715be16269b7dfb4294a8fb13b649ab", null ]
     ] ],
-    [ "cyhal_usb_dev_init", "group__group__hal__usb__dev__common.html#gaa9cd38e84de1b220da742f94e7324a31", null ],
+    [ "cyhal_usb_dev_init", "group__group__hal__usb__dev__common.html#ga3fada34f2e7c54d8fae5def861f41083", null ],
     [ "cyhal_usb_dev_free", "group__group__hal__usb__dev__common.html#gaaa88f3aa7717c333c7966588f38a9b47", null ],
     [ "cyhal_usb_dev_connect", "group__group__hal__usb__dev__common.html#ga58083386748f9295037d7567330b9677", null ],
     [ "cyhal_usb_dev_disconnect", "group__group__hal__usb__dev__common.html#ga6dea98f1897ac22312814583f70398e3", null ],
+    [ "cyhal_usb_dev_suspend", "group__group__hal__usb__dev__common.html#gadce224990357806ddf46226cdc4c2fe1", null ],
+    [ "cyhal_usb_dev_resume", "group__group__hal__usb__dev__common.html#ga77b467f803a8bb75c8052e9768370c1a", null ],
     [ "cyhal_usb_dev_set_configured", "group__group__hal__usb__dev__common.html#ga93a43b761729183af402967f11c212ae", null ],
     [ "cyhal_usb_dev_set_unconfigured", "group__group__hal__usb__dev__common.html#ga2ebd7e7f008da1ba1546e5d7892dd89d", null ],
     [ "cyhal_usb_dev_sof_enable", "group__group__hal__usb__dev__common.html#gacee494ef27d4c8b6c9a101b925dc24a9", null ],

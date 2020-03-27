@@ -67,7 +67,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('group__group__hal__adc__channel__functions.html','');});
+$(document).ready(function(){initNavTree('group__group__hal__override.html','');});
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -86,10 +86,39 @@ $(document).ready(function(){initNavTree('group__group__hal__adc__channel__funct
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">ADC Channel Functions<div class="ingroups"><a class="el" href="group__group__hal.html">HAL Drivers</a> &raquo; <a class="el" href="group__group__hal__adc.html">ADC (Analog to Digital Converter)</a></div></div>  </div>
+<div class="title">Overrideable Macros<div class="ingroups"><a class="el" href="group__group__hal__types.html">HAL General Types/Macros</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+<a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
+<p>These macros can be defined to a custom value globally to modify the behavior of the HAL. </p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gad822a466fc63847114add720ef84c83a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__override.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>&#160;&#160;&#160;(7) /* TODO: port specific value */</td></tr>
+<tr class="memdesc:gad822a466fc63847114add720ef84c83a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority that is applied by default to all drivers when initalized.  <a href="#gad822a466fc63847114add720ef84c83a">More...</a><br /></td></tr>
+<tr class="separator:gad822a466fc63847114add720ef84c83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="gad822a466fc63847114add720ef84c83a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad822a466fc63847114add720ef84c83a">&#9670;&nbsp;</a></span>CYHAL_ISR_PRIORITY_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYHAL_ISR_PRIORITY_DEFAULT&#160;&#160;&#160;(7) /* TODO: port specific value */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Priority that is applied by default to all drivers when initalized. </p>
+<p>Priorities can be overridden on each driver as part of enabling events. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part

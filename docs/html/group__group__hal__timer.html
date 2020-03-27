@@ -87,6 +87,7 @@ $(document).ready(function(){initNavTree('group__group__hal__timer.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#groups">API Reference</a> &#124;
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
@@ -97,7 +98,7 @@ $(document).ready(function(){initNavTree('group__group__hal__timer.html','');});
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>High level interface for interacting with the Timer/Counter hardware resource.</p>
+<p>High level interface for interacting with the Timer/Counter hardware resource. </p>
 <p>The timer block is commonly used to measure the time of occurrence of an event, to measure the time difference between two events or perform an action after a specified period of time. The driver also allows the user to invoke a callback function when a particular event occurs.</p>
 <p>Some use case scenarios of timer -</p>
 <ul>
@@ -116,17 +117,23 @@ Features</h1>
 </ul>
 <h1><a class="anchor" id="subsection_timer_quickstart"></a>
 Quick Start</h1>
-<p><a class="el" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a> can be used for timer initialization by providing the timer object - <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a>, and shared clock source - <b> clk </b> (optional). The timer parameters needs to be populated in <a class="el" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a> structure. The timer then needs to be configured by using the <a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a> function.</p>
-<dl class="section note"><dt>Note</dt><dd>A default frequency is set when an existing clock divider - <b> clk </b> is not provided to <a class="el" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a> which is defined by the macro - <a class="el" href="group__group__hal__timer.html#ga28d85cf945883c0e74a533a4ddd7b122">CYHAL_TIMER_DEFAULT_FREQ</a>.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>Currently there is no support for pin connections to Timer using this driver. So, the <b> pin </b> should be assigned as <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__03__68__qfn.html#ggac5ef75242c79cd654461fe238990b566a3dbd1016ea99d087d747530418b89a01">NC</a> while using the <a class="el" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a> to initialize the timer.</dd></dl>
+<p><a class="el" href="group__group__hal__timer.html#gaa8ca8e199bc9848f8729ff78953bb0fa">cyhal_timer_init</a> can be used for timer initialization by providing the timer object - <a class="el" href="group__group__hal__types__implementation.html#ga797a1d207419a3ce620a8da0035d1d55">cyhal_timer_t</a>, and shared clock source - <b> clk </b> (optional). The timer parameters needs to be populated in <a class="el" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a> structure. The timer then needs to be configured by using the <a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a> function.</p>
+<dl class="section note"><dt>Note</dt><dd>A default frequency is set when an existing clock divider - <b> clk </b> is not provided to <a class="el" href="group__group__hal__timer.html#gaa8ca8e199bc9848f8729ff78953bb0fa">cyhal_timer_init</a> which is defined by the macro - <a class="el" href="group__group__hal__timer.html#ga28d85cf945883c0e74a533a4ddd7b122">CYHAL_TIMER_DEFAULT_FREQ</a>.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Currently there is no support for pin connections to Timer using this driver. So, the <b> pin </b> should be assigned as <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__03__68__qfn.html#ggac5ef75242c79cd654461fe238990b566a3dbd1016ea99d087d747530418b89a01">NC</a> while using the <a class="el" href="group__group__hal__timer.html#gaa8ca8e199bc9848f8729ff78953bb0fa">cyhal_timer_init</a> to initialize the timer.</dd></dl>
 <p>See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>.</p>
 <h1><a class="anchor" id="subsection_timer_sample_snippets"></a>
 Code Snippets</h1>
 <h2><a class="anchor" id="subsection_timer_snippet_1"></a>
 Snippet 1: Measuring time between two events</h2>
-<p>The following snippet initializes a Timer and measures the time between two events. The <b>clk</b> need not be provided, in which case a clock resource is assigned. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    uint32_t read_val;</div><div class="line"></div><div class="line">    <span class="comment">/* Timer object used */</span></div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> timer_obj;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a> timer_cfg =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__timer.html#a2fb1a2da36b09c9a1febca770afe3190">compare_value</a> = 0,                 <span class="comment">/* Timer compare value, not used */</span></div><div class="line">        .period = 2000,                     <span class="comment">/* Timer period set to a large enough value</span></div><div class="line"><span class="comment">                                             * compared to event being measured */</span></div><div class="line">        .direction = <a class="code" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1f50f295ead6dbdb36edefc03a183810">CYHAL_TIMER_DIR_UP</a>,    <span class="comment">/* Timer counts up */</span></div><div class="line">        .is_compare = <span class="keyword">false</span>,                <span class="comment">/* Don&#39;t use compare mode */</span></div><div class="line">        .is_continuous = <span class="keyword">false</span>,             <span class="comment">/* Do not run timer indefinitely */</span></div><div class="line">        .value = 0                          <span class="comment">/* Initial value of counter */</span></div><div class="line">    };</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the timer object. Does not use pin output (&#39;pin&#39; is NC) and</span></div><div class="line"><span class="comment">     * does not use a pre-configured clock source (&#39;clk&#39; is NULL). */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a>(&amp;timer_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3dbd1016ea99d087d747530418b89a01">NC</a>, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Apply timer configuration such as period, count direction, run mode, etc. */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>(&amp;timer_obj, &amp;timer_cfg);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the frequency of timer to 1000 counts in a second or 1000 Hz to enable counting in millisecond */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga38ed4c91e655b8b4f5e446c63327ffe5">cyhal_timer_set_frequency</a>(&amp;timer_obj, 1000);</div><div class="line"></div><div class="line">    <span class="comment">/* Start the timer with the configured settings */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#gaff09b3ffee75893da00d0a7dae2d9cb2">cyhal_timer_start</a>(&amp;timer_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Delay Function simulates the time between two events */</span></div><div class="line">    <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(500);</div><div class="line"></div><div class="line">    <span class="comment">/* Read the current timer value, which should be close to the amount of delay (500 ms) */</span></div><div class="line">    read_val = <a class="code" href="group__group__hal__timer.html#ga0be5bf53c214ffcb3c4e962e71af1e6d">cyhal_timer_read</a>(&amp;timer_obj);</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_timer_snippet_2"></a>
+<p>The following snippet initializes a Timer and measures the time between two events. The <b>clk</b> need not be provided, in which case a clock resource is assigned. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    uint32_t read_val;</div><div class="line"></div><div class="line">    <span class="comment">/* Timer object used */</span></div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__tcpwm__common__t">cyhal_timer_t</a> timer_obj;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a> timer_cfg =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__timer.html#a2fb1a2da36b09c9a1febca770afe3190">compare_value</a> = 0,                 <span class="comment">/* Timer compare value, not used */</span></div><div class="line">        .period = 2000,                     <span class="comment">/* Timer period set to a large enough value</span></div><div class="line"><span class="comment">                                             * compared to event being measured */</span></div><div class="line">        .direction = <a class="code" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1f50f295ead6dbdb36edefc03a183810">CYHAL_TIMER_DIR_UP</a>,    <span class="comment">/* Timer counts up */</span></div><div class="line">        .is_compare = <span class="keyword">false</span>,                <span class="comment">/* Don&#39;t use compare mode */</span></div><div class="line">        .is_continuous = <span class="keyword">false</span>,             <span class="comment">/* Do not run timer indefinitely */</span></div><div class="line">        .value = 0                          <span class="comment">/* Initial value of counter */</span></div><div class="line">    };</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the timer object. Does not use pin output (&#39;pin&#39; is NC) and</span></div><div class="line"><span class="comment">     * does not use a pre-configured clock source (&#39;clk&#39; is NULL). */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__timer.html#gaa8ca8e199bc9848f8729ff78953bb0fa">cyhal_timer_init</a>(&amp;timer_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3dbd1016ea99d087d747530418b89a01">NC</a>, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Apply timer configuration such as period, count direction, run mode, etc. */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>(&amp;timer_obj, &amp;timer_cfg);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the frequency of timer to 1000 counts in a second or 1000 Hz to enable counting in millisecond */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga38ed4c91e655b8b4f5e446c63327ffe5">cyhal_timer_set_frequency</a>(&amp;timer_obj, 1000);</div><div class="line"></div><div class="line">    <span class="comment">/* Start the timer with the configured settings */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#gaff09b3ffee75893da00d0a7dae2d9cb2">cyhal_timer_start</a>(&amp;timer_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Delay Function simulates the time between two events */</span></div><div class="line">    <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(500);</div><div class="line"></div><div class="line">    <span class="comment">/* Read the current timer value, which should be close to the amount of delay (500 ms) */</span></div><div class="line">    read_val = <a class="code" href="group__group__hal__timer.html#ga0be5bf53c214ffcb3c4e962e71af1e6d">cyhal_timer_read</a>(&amp;timer_obj);</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_timer_snippet_2"></a>
 Snippet 2: Handling an event in a callback function</h2>
-<p>The following snippet initializes a Timer and triggers an event after every one second. The <b>clk</b> need not be provided (NULL), in which case a clock resource is assigned. </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> timer_interrupt_flag = <span class="keyword">false</span>;</div><div class="line"></div><div class="line"><span class="comment">/* Timer object used */</span></div><div class="line"><a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> timer_obj;</div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> isr_timer(<span class="keywordtype">void</span> *callback_arg, <a class="code" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> event)</div><div class="line">{</div><div class="line">    (void) callback_arg;</div><div class="line">    (void) event;</div><div class="line"></div><div class="line">    <span class="comment">/* Set the interrupt flag and process it from the application */</span></div><div class="line">    timer_interrupt_flag = <span class="keyword">true</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_timer_event_interrupt()</div><div class="line">{</div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a> timer_cfg =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__timer.html#a2fb1a2da36b09c9a1febca770afe3190">compare_value</a> = 0,                 <span class="comment">/* Timer compare value, not used */</span></div><div class="line">        .period = 999,                      <span class="comment">/* Defines the timer period */</span></div><div class="line">        .direction = <a class="code" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1f50f295ead6dbdb36edefc03a183810">CYHAL_TIMER_DIR_UP</a>,    <span class="comment">/* Timer counts up */</span></div><div class="line">        .is_compare = <span class="keyword">false</span>,                <span class="comment">/* Don&#39;t use compare mode */</span></div><div class="line">        .is_continuous = <span class="keyword">true</span>,              <span class="comment">/* Run the timer indefinitely */</span></div><div class="line">        .value = 0                          <span class="comment">/* Initial value of counter */</span></div><div class="line">    };</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the timer object. Does not use pin output (&#39;pin&#39; is NC) and</span></div><div class="line"><span class="comment">     * does not use a pre-configured clock source (&#39;clk&#39; is NULL). */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a>(&amp;timer_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3dbd1016ea99d087d747530418b89a01">NC</a>, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Apply timer configuration such as period, count direction, run mode, etc. */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>(&amp;timer_obj, &amp;timer_cfg);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the frequency of timer to 1000 Hz */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga38ed4c91e655b8b4f5e446c63327ffe5">cyhal_timer_set_frequency</a>(&amp;timer_obj, 1000);</div><div class="line"></div><div class="line">    <span class="comment">/* Assign the ISR to execute on timer interrupt */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga928ffe0a3a1549c94752db7c68306424">cyhal_timer_register_callback</a>(&amp;timer_obj, isr_timer, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the event on which timer interrupt occurs and enable it */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga4b97fe48330e9b8034ab7c2f56078002">cyhal_timer_enable_event</a>(&amp;timer_obj, <a class="code" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a51b932b9e3e80d5dd7e98b75e7e8228e">CYHAL_TIMER_IRQ_TERMINAL_COUNT</a>, 3, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Start the timer with the configured settings */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#gaff09b3ffee75893da00d0a7dae2d9cb2">cyhal_timer_start</a>(&amp;timer_obj);</div><div class="line">}</div></div><!-- fragment --><table class="memberdecls">
+<p>The following snippet initializes a Timer and triggers an event after every one second. The <b>clk</b> need not be provided (NULL), in which case a clock resource is assigned. </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> timer_interrupt_flag = <span class="keyword">false</span>;</div><div class="line"></div><div class="line"><span class="comment">/* Timer object used */</span></div><div class="line"><a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__tcpwm__common__t">cyhal_timer_t</a> timer_obj;</div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> isr_timer(<span class="keywordtype">void</span> *callback_arg, <a class="code" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> event)</div><div class="line">{</div><div class="line">    (void) callback_arg;</div><div class="line">    (void) event;</div><div class="line"></div><div class="line">    <span class="comment">/* Set the interrupt flag and process it from the application */</span></div><div class="line">    timer_interrupt_flag = <span class="keyword">true</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_timer_event_interrupt()</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a> timer_cfg =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__timer.html#a2fb1a2da36b09c9a1febca770afe3190">compare_value</a> = 0,                 <span class="comment">/* Timer compare value, not used */</span></div><div class="line">        .period = 999,                      <span class="comment">/* Defines the timer period */</span></div><div class="line">        .direction = <a class="code" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1f50f295ead6dbdb36edefc03a183810">CYHAL_TIMER_DIR_UP</a>,    <span class="comment">/* Timer counts up */</span></div><div class="line">        .is_compare = <span class="keyword">false</span>,                <span class="comment">/* Don&#39;t use compare mode */</span></div><div class="line">        .is_continuous = <span class="keyword">true</span>,              <span class="comment">/* Run the timer indefinitely */</span></div><div class="line">        .value = 0                          <span class="comment">/* Initial value of counter */</span></div><div class="line">    };</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the timer object. Does not use pin output (&#39;pin&#39; is NC) and</span></div><div class="line"><span class="comment">     * does not use a pre-configured clock source (&#39;clk&#39; is NULL). */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__timer.html#gaa8ca8e199bc9848f8729ff78953bb0fa">cyhal_timer_init</a>(&amp;timer_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3dbd1016ea99d087d747530418b89a01">NC</a>, NULL);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Apply timer configuration such as period, count direction, run mode, etc. */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>(&amp;timer_obj, &amp;timer_cfg);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the frequency of timer to 1000 Hz */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__timer.html#ga38ed4c91e655b8b4f5e446c63327ffe5">cyhal_timer_set_frequency</a>(&amp;timer_obj, 1000);</div><div class="line"></div><div class="line">    <span class="comment">/* Assign the ISR to execute on timer interrupt */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga928ffe0a3a1549c94752db7c68306424">cyhal_timer_register_callback</a>(&amp;timer_obj, isr_timer, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the event on which timer interrupt occurs and enable it */</span></div><div class="line">    <a class="code" href="group__group__hal__timer.html#ga4b97fe48330e9b8034ab7c2f56078002">cyhal_timer_enable_event</a>(&amp;timer_obj, <a class="code" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a51b932b9e3e80d5dd7e98b75e7e8228e">CYHAL_TIMER_IRQ_TERMINAL_COUNT</a>, 3, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Start the timer with the configured settings */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__timer.html#gaff09b3ffee75893da00d0a7dae2d9cb2">cyhal_timer_start</a>(&amp;timer_obj);</div><div class="line">}</div></div><!-- fragment --><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+API Reference</h2></td></tr>
+<tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
+<tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:structcyhal__timer__cfg__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a></td></tr>
@@ -135,55 +142,77 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga662f2ac815ee9343d838da91e9cbb6c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga662f2ac815ee9343d838da91e9cbb6c6">CYHAL_TIMER_RSLT_ERR_BAD_ARGUMENT</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 0))</td></tr>
-<tr class="separator:ga662f2ac815ee9343d838da91e9cbb6c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga40f8f0d14ae4f0ca76f6fd7fcfc25539"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga40f8f0d14ae4f0ca76f6fd7fcfc25539">CYHAL_TIMER_RSLT_ERR_CLOCK_INIT</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 1))</td></tr>
-<tr class="separator:ga40f8f0d14ae4f0ca76f6fd7fcfc25539"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3bba289229f87384d957b795325fa322"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga3bba289229f87384d957b795325fa322">CYHAL_TIMER_RSLT_ERR_INIT</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 2))</td></tr>
-<tr class="separator:ga3bba289229f87384d957b795325fa322"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga228ec35da2b49ea8a25ff874694ade56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga228ec35da2b49ea8a25ff874694ade56">CYHAL_TIMER_RSLT_ERR_SHARED_CLOCK</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 3))</td></tr>
-<tr class="separator:ga228ec35da2b49ea8a25ff874694ade56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga28d85cf945883c0e74a533a4ddd7b122"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga28d85cf945883c0e74a533a4ddd7b122">CYHAL_TIMER_DEFAULT_FREQ</a>&#160;&#160;&#160;(1000000u)</td></tr>
+<tr class="memitem:ga28d85cf945883c0e74a533a4ddd7b122"><td class="memItemLeft" align="right" valign="top"><a id="ga28d85cf945883c0e74a533a4ddd7b122"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga28d85cf945883c0e74a533a4ddd7b122">CYHAL_TIMER_DEFAULT_FREQ</a>&#160;&#160;&#160;(1000000u)</td></tr>
+<tr class="memdesc:ga28d85cf945883c0e74a533a4ddd7b122"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default timer frequency, used when an existing clock divider is not provided to <a class="el" href="group__group__hal__timer.html#gaa8ca8e199bc9848f8729ff78953bb0fa">cyhal_timer_init()</a> <br /></td></tr>
 <tr class="separator:ga28d85cf945883c0e74a533a4ddd7b122"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:gae239f85fa523177aeed212846e491206"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#gae239f85fa523177aeed212846e491206">cyhal_timer_event_callback_t</a>) (void *callback_arg, <a class="el" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> event)</td></tr>
+<tr class="memitem:gae239f85fa523177aeed212846e491206"><td class="memItemLeft" align="right" valign="top"><a id="gae239f85fa523177aeed212846e491206"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#gae239f85fa523177aeed212846e491206">cyhal_timer_event_callback_t</a>) (void *callback_arg, <a class="el" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> event)</td></tr>
+<tr class="memdesc:gae239f85fa523177aeed212846e491206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler for timer events. <br /></td></tr>
 <tr class="separator:gae239f85fa523177aeed212846e491206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:gaeb28a1b2d8914e9ad63bb0a68c321ff6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#gaeb28a1b2d8914e9ad63bb0a68c321ff6">cyhal_timer_direction_t</a> { <a class="el" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1f50f295ead6dbdb36edefc03a183810">CYHAL_TIMER_DIR_UP</a>, 
-<a class="el" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1595c7343fcdb73d4745f5062d969905">CYHAL_TIMER_DIR_DOWN</a>, 
-<a class="el" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6af3b8efb5f43123961d8631f74db7ea43">CYHAL_TIMER_DIR_UP_DOWN</a>
+<tr class="memitem:gaeb28a1b2d8914e9ad63bb0a68c321ff6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#gaeb28a1b2d8914e9ad63bb0a68c321ff6">cyhal_timer_direction_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1f50f295ead6dbdb36edefc03a183810">CYHAL_TIMER_DIR_UP</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1595c7343fcdb73d4745f5062d969905">CYHAL_TIMER_DIR_DOWN</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__timer.html#ggaeb28a1b2d8914e9ad63bb0a68c321ff6af3b8efb5f43123961d8631f74db7ea43">CYHAL_TIMER_DIR_UP_DOWN</a>
+<br />
  }</td></tr>
+<tr class="memdesc:gaeb28a1b2d8914e9ad63bb0a68c321ff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer directions.  <a href="group__group__hal__timer.html#gaeb28a1b2d8914e9ad63bb0a68c321ff6">More...</a><br /></td></tr>
 <tr class="separator:gaeb28a1b2d8914e9ad63bb0a68c321ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga39a171d6680fe30685a6e27a333db8e9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> { <a class="el" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9ad9b21c35e61b69c316bee693b8fcb0d6">CYHAL_TIMER_IRQ_NONE</a> = 0, 
-<a class="el" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a51b932b9e3e80d5dd7e98b75e7e8228e">CYHAL_TIMER_IRQ_TERMINAL_COUNT</a> = 1 &lt;&lt; 0, 
-<a class="el" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a90cf556247ca96952af696c0a4d53e15">CYHAL_TIMER_IRQ_CAPTURE_COMPARE</a> = 1 &lt;&lt; 1, 
-<a class="el" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a3b6afa3bcff5af8b040f479eda3aaf35">CYHAL_TIMER_IRQ_ALL</a> = (1 &lt;&lt; 2) - 1
+<tr class="memitem:ga39a171d6680fe30685a6e27a333db8e9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9ad9b21c35e61b69c316bee693b8fcb0d6">CYHAL_TIMER_IRQ_NONE</a> = 0, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a51b932b9e3e80d5dd7e98b75e7e8228e">CYHAL_TIMER_IRQ_TERMINAL_COUNT</a> = 1 &lt;&lt; 0, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a90cf556247ca96952af696c0a4d53e15">CYHAL_TIMER_IRQ_CAPTURE_COMPARE</a> = 1 &lt;&lt; 1, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__timer.html#gga39a171d6680fe30685a6e27a333db8e9a3b6afa3bcff5af8b040f479eda3aaf35">CYHAL_TIMER_IRQ_ALL</a> = (1 &lt;&lt; 2) - 1
+<br />
  }</td></tr>
+<tr class="memdesc:ga39a171d6680fe30685a6e27a333db8e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer/counter interrupt triggers.  <a href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">More...</a><br /></td></tr>
 <tr class="separator:ga39a171d6680fe30685a6e27a333db8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga7f2d53c6bf2e59a195f40a3eed6903d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> pin, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *clk)</td></tr>
-<tr class="separator:ga7f2d53c6bf2e59a195f40a3eed6903d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga94944664f47b8ff7c093719116b35cdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga94944664f47b8ff7c093719116b35cdc">cyhal_timer_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memitem:gaa8ca8e199bc9848f8729ff78953bb0fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#gaa8ca8e199bc9848f8729ff78953bb0fa">cyhal_timer_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> pin, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk)</td></tr>
+<tr class="memdesc:gaa8ca8e199bc9848f8729ff78953bb0fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the timer/counter peripheral and configure the pin.  <a href="#gaa8ca8e199bc9848f8729ff78953bb0fa">More...</a><br /></td></tr>
+<tr class="separator:gaa8ca8e199bc9848f8729ff78953bb0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga94944664f47b8ff7c093719116b35cdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga94944664f47b8ff7c093719116b35cdc">cyhal_timer_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memdesc:ga94944664f47b8ff7c093719116b35cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize the timer/counter object.  <a href="#ga94944664f47b8ff7c093719116b35cdc">More...</a><br /></td></tr>
 <tr class="separator:ga94944664f47b8ff7c093719116b35cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga03e9a7839ffd4e8cad90f97fab176813"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, const <a class="el" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a> *cfg)</td></tr>
+<tr class="memitem:ga03e9a7839ffd4e8cad90f97fab176813"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj, const <a class="el" href="group__group__hal__timer.html#structcyhal__timer__cfg__t">cyhal_timer_cfg_t</a> *cfg)</td></tr>
+<tr class="memdesc:ga03e9a7839ffd4e8cad90f97fab176813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the configuration and counter value of the timer/counter object.  <a href="#ga03e9a7839ffd4e8cad90f97fab176813">More...</a><br /></td></tr>
 <tr class="separator:ga03e9a7839ffd4e8cad90f97fab176813"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga38ed4c91e655b8b4f5e446c63327ffe5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga38ed4c91e655b8b4f5e446c63327ffe5">cyhal_timer_set_frequency</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, uint32_t hz)</td></tr>
+<tr class="memitem:ga38ed4c91e655b8b4f5e446c63327ffe5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga38ed4c91e655b8b4f5e446c63327ffe5">cyhal_timer_set_frequency</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj, uint32_t hz)</td></tr>
+<tr class="memdesc:ga38ed4c91e655b8b4f5e446c63327ffe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the timer frequency.  <a href="#ga38ed4c91e655b8b4f5e446c63327ffe5">More...</a><br /></td></tr>
 <tr class="separator:ga38ed4c91e655b8b4f5e446c63327ffe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaff09b3ffee75893da00d0a7dae2d9cb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#gaff09b3ffee75893da00d0a7dae2d9cb2">cyhal_timer_start</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memitem:gaff09b3ffee75893da00d0a7dae2d9cb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#gaff09b3ffee75893da00d0a7dae2d9cb2">cyhal_timer_start</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memdesc:gaff09b3ffee75893da00d0a7dae2d9cb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the timer/counter with the pre-set configuration from <a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>.  <a href="#gaff09b3ffee75893da00d0a7dae2d9cb2">More...</a><br /></td></tr>
 <tr class="separator:gaff09b3ffee75893da00d0a7dae2d9cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8734bf8e55f7b51ef18a22e8d1ffb1e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga8734bf8e55f7b51ef18a22e8d1ffb1e1">cyhal_timer_stop</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memitem:ga8734bf8e55f7b51ef18a22e8d1ffb1e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga8734bf8e55f7b51ef18a22e8d1ffb1e1">cyhal_timer_stop</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memdesc:ga8734bf8e55f7b51ef18a22e8d1ffb1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the timer/counter.  <a href="#ga8734bf8e55f7b51ef18a22e8d1ffb1e1">More...</a><br /></td></tr>
 <tr class="separator:ga8734bf8e55f7b51ef18a22e8d1ffb1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0be5bf53c214ffcb3c4e962e71af1e6d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga0be5bf53c214ffcb3c4e962e71af1e6d">cyhal_timer_read</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memitem:ga86878ca8f781c3ed1a50fbee9e37987f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga86878ca8f781c3ed1a50fbee9e37987f">cyhal_timer_reset</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memdesc:ga86878ca8f781c3ed1a50fbee9e37987f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the timer/counter value to the default value set from <a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>.  <a href="#ga86878ca8f781c3ed1a50fbee9e37987f">More...</a><br /></td></tr>
+<tr class="separator:ga86878ca8f781c3ed1a50fbee9e37987f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0be5bf53c214ffcb3c4e962e71af1e6d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga0be5bf53c214ffcb3c4e962e71af1e6d">cyhal_timer_read</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj)</td></tr>
+<tr class="memdesc:ga0be5bf53c214ffcb3c4e962e71af1e6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the current value from the timer/counter <br />
+ See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>.  <a href="#ga0be5bf53c214ffcb3c4e962e71af1e6d">More...</a><br /></td></tr>
 <tr class="separator:ga0be5bf53c214ffcb3c4e962e71af1e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga928ffe0a3a1549c94752db7c68306424"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga928ffe0a3a1549c94752db7c68306424">cyhal_timer_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__timer.html#gae239f85fa523177aeed212846e491206">cyhal_timer_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memitem:ga928ffe0a3a1549c94752db7c68306424"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga928ffe0a3a1549c94752db7c68306424">cyhal_timer_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__timer.html#gae239f85fa523177aeed212846e491206">cyhal_timer_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memdesc:ga928ffe0a3a1549c94752db7c68306424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a timer/counter callback handler<br />
+  <a href="#ga928ffe0a3a1549c94752db7c68306424">More...</a><br /></td></tr>
 <tr class="separator:ga928ffe0a3a1549c94752db7c68306424"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4b97fe48330e9b8034ab7c2f56078002"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga4b97fe48330e9b8034ab7c2f56078002">cyhal_timer_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memitem:ga4b97fe48330e9b8034ab7c2f56078002"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__timer.html#ga4b97fe48330e9b8034ab7c2f56078002">cyhal_timer_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *obj, <a class="el" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memdesc:ga4b97fe48330e9b8034ab7c2f56078002"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure timer/counter event enablement <br />
+  <a href="#ga4b97fe48330e9b8034ab7c2f56078002">More...</a><br /></td></tr>
 <tr class="separator:ga4b97fe48330e9b8034ab7c2f56078002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
@@ -205,7 +234,7 @@ Functions</h2></td></tr>
 <td class="fieldname">
 is_continuous</td>
 <td class="fielddoc">
-Whether the timer/counter operates continuous (true) or one shot (false) <p>Whether the timer is set to continuously run. If true, the timer will run forever. Otherwise, the timer will run once and stop (one shot). </p>
+Whether the timer is set to continuously run. <p>If true, the timer will run forever. Otherwise, the timer will run once and stop (one shot).Whether the timer/counter operates continuous (true) or one shot (false) </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="abcacbb77905a45d92f9ecda65de6fe32"></a><a class="el" href="group__group__hal__timer.html#gaeb28a1b2d8914e9ad63bb0a68c321ff6">cyhal_timer_direction_t</a></td>
@@ -236,100 +265,8 @@ Timer/counter comparison value. </td></tr>
 <td class="fieldname">
 value</td>
 <td class="fielddoc">
-Current value of the timer/counter. </td></tr>
+Default value of the timer/counter. <a class="el" href="group__group__hal__timer.html#ga86878ca8f781c3ed1a50fbee9e37987f">cyhal_timer_reset()</a> will also change counter to this value when called. </td></tr>
 </table>
-
-</div>
-</div>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ga662f2ac815ee9343d838da91e9cbb6c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga662f2ac815ee9343d838da91e9cbb6c6">&#9670;&nbsp;</a></span>CYHAL_TIMER_RSLT_ERR_BAD_ARGUMENT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_TIMER_RSLT_ERR_BAD_ARGUMENT&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 0))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Bad argument. eg: null pointer </p>
-
-</div>
-</div>
-<a id="ga40f8f0d14ae4f0ca76f6fd7fcfc25539"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga40f8f0d14ae4f0ca76f6fd7fcfc25539">&#9670;&nbsp;</a></span>CYHAL_TIMER_RSLT_ERR_CLOCK_INIT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_TIMER_RSLT_ERR_CLOCK_INIT&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 1))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Failed to initialize Timer clock </p>
-
-</div>
-</div>
-<a id="ga3bba289229f87384d957b795325fa322"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3bba289229f87384d957b795325fa322">&#9670;&nbsp;</a></span>CYHAL_TIMER_RSLT_ERR_INIT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_TIMER_RSLT_ERR_INIT&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 2))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Failed to initialize Timer </p>
-
-</div>
-</div>
-<a id="ga228ec35da2b49ea8a25ff874694ade56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga228ec35da2b49ea8a25ff874694ade56">&#9670;&nbsp;</a></span>CYHAL_TIMER_RSLT_ERR_SHARED_CLOCK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_TIMER_RSLT_ERR_SHARED_CLOCK&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 3))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Cannot change the timer frequency when a shared clock divider is in use </p>
-
-</div>
-</div>
-<a id="ga28d85cf945883c0e74a533a4ddd7b122"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga28d85cf945883c0e74a533a4ddd7b122">&#9670;&nbsp;</a></span>CYHAL_TIMER_DEFAULT_FREQ</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_TIMER_DEFAULT_FREQ&#160;&#160;&#160;(1000000u)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Default timer frequency, used when an existing clock divider is not provided to init </p>
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="gae239f85fa523177aeed212846e491206"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae239f85fa523177aeed212846e491206">&#9670;&nbsp;</a></span>cyhal_timer_event_callback_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* cyhal_timer_event_callback_t) (void *callback_arg, <a class="el" href="group__group__hal__timer.html#ga39a171d6680fe30685a6e27a333db8e9">cyhal_timer_event_t</a> event)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Handler for timer events </p>
 
 </div>
 </div>
@@ -345,7 +282,8 @@ Current value of the timer/counter. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Timer directions </p>
+
+<p>Timer directions. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggaeb28a1b2d8914e9ad63bb0a68c321ff6a1f50f295ead6dbdb36edefc03a183810"></a>CYHAL_TIMER_DIR_UP&#160;</td><td class="fielddoc"><p>Counts up. </p>
 </td></tr>
@@ -368,23 +306,24 @@ Current value of the timer/counter. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Timer/counter interrupt triggers </p>
+
+<p>Timer/counter interrupt triggers. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga39a171d6680fe30685a6e27a333db8e9ad9b21c35e61b69c316bee693b8fcb0d6"></a>CYHAL_TIMER_IRQ_NONE&#160;</td><td class="fielddoc"><p>No interrupt handled </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga39a171d6680fe30685a6e27a333db8e9ad9b21c35e61b69c316bee693b8fcb0d6"></a>CYHAL_TIMER_IRQ_NONE&#160;</td><td class="fielddoc"><p>No interrupt handled. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga39a171d6680fe30685a6e27a333db8e9a51b932b9e3e80d5dd7e98b75e7e8228e"></a>CYHAL_TIMER_IRQ_TERMINAL_COUNT&#160;</td><td class="fielddoc"><p>Interrupt when terminal count is reached </p>
+<tr><td class="fieldname"><a id="gga39a171d6680fe30685a6e27a333db8e9a51b932b9e3e80d5dd7e98b75e7e8228e"></a>CYHAL_TIMER_IRQ_TERMINAL_COUNT&#160;</td><td class="fielddoc"><p>Interrupt when terminal count is reached. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga39a171d6680fe30685a6e27a333db8e9a90cf556247ca96952af696c0a4d53e15"></a>CYHAL_TIMER_IRQ_CAPTURE_COMPARE&#160;</td><td class="fielddoc"><p>Interrupt when Compare/Capture value is reached </p>
+<tr><td class="fieldname"><a id="gga39a171d6680fe30685a6e27a333db8e9a90cf556247ca96952af696c0a4d53e15"></a>CYHAL_TIMER_IRQ_CAPTURE_COMPARE&#160;</td><td class="fielddoc"><p>Interrupt when Compare/Capture value is reached. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga39a171d6680fe30685a6e27a333db8e9a3b6afa3bcff5af8b040f479eda3aaf35"></a>CYHAL_TIMER_IRQ_ALL&#160;</td><td class="fielddoc"><p>Interrupt on terminal count and Compare/Capture values </p>
+<tr><td class="fieldname"><a id="gga39a171d6680fe30685a6e27a333db8e9a3b6afa3bcff5af8b040f479eda3aaf35"></a>CYHAL_TIMER_IRQ_ALL&#160;</td><td class="fielddoc"><p>Interrupt on terminal count and Compare/Capture values. </p>
 </td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga7f2d53c6bf2e59a195f40a3eed6903d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7f2d53c6bf2e59a195f40a3eed6903d5">&#9670;&nbsp;</a></span>cyhal_timer_init()</h2>
+<a id="gaa8ca8e199bc9848f8729ff78953bb0fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa8ca8e199bc9848f8729ff78953bb0fa">&#9670;&nbsp;</a></span>cyhal_timer_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -392,19 +331,19 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_timer_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *&#160;</td>
           <td class="paramname"><em>clk</em>&#160;</td>
         </tr>
         <tr>
@@ -414,11 +353,13 @@ Current value of the timer/counter. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize the timer/counter peripheral and configure the pin. <br />
+
+<p>Initialize the timer/counter peripheral and configure the pin. </p>
+<p><br />
  See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The timer/counter object to initialize </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>Pointer to a timer/counter object. The caller must allocate the memory for this object but the init function will initialize its contents. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>optional - The timer/counter compare/capture pin to initialize </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">clk</td><td>optional - The shared clock to use, if not provided a new clock will be allocated and the timer frequency will be set to CYHAL_TIMER_DEFAULT_FREQ </td></tr>
   </table>
@@ -437,13 +378,14 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname">void cyhal_timer_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Deinitialize the timer/counter object</p>
+
+<p>Deinitialize the timer/counter object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>
@@ -462,7 +404,7 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_timer_configure </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -478,8 +420,10 @@ Current value of the timer/counter. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Updates the configuration of the timer/counter object <br />
- See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Updates the configuration and counter value of the timer/counter object. </p>
+<p><br />
+ This function may temporary stop the timer if it is currently running. See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cfg</td><td>The configuration of the timer/counter </td></tr>
@@ -499,7 +443,7 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_timer_set_frequency </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -515,7 +459,9 @@ Current value of the timer/counter. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Configures the timer frequency. </p><dl class="section note"><dt>Note</dt><dd>This is only valid to call if a null clock divider was provided to <a class="el" href="group__group__hal__timer.html#ga7f2d53c6bf2e59a195f40a3eed6903d5">cyhal_timer_init</a>. If a custom clock was provided its frequency should be adjusted directly.</dd></dl>
+
+<p>Configures the timer frequency. </p>
+<dl class="section note"><dt>Note</dt><dd>This is only valid to call if a null clock divider was provided to <a class="el" href="group__group__hal__timer.html#gaa8ca8e199bc9848f8729ff78953bb0fa">cyhal_timer_init</a>. If a custom clock was provided its frequency should be adjusted directly.</dd></dl>
 <p>See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>
@@ -536,13 +482,15 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_timer_start </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Starts the timer/counter with the pre-set configuration <br />
+
+<p>Starts the timer/counter with the pre-set configuration from <a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>. </p>
+<p>This does not reset the counter. The count value will start from the value that was set by the last operation to modify it. See <a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>, and <a class="el" href="group__group__hal__timer.html#ga86878ca8f781c3ed1a50fbee9e37987f">cyhal_timer_reset</a> for how the value can be changed. If none of these functions have been called, it will start from 0.<br />
  See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -563,14 +511,16 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_timer_stop </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Stops the timer/counter <br />
- See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>.</p>
+
+<p>Stops the timer/counter. </p>
+<p>Does not reset counter value. <br />
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>
@@ -578,6 +528,35 @@ Current value of the timer/counter. </td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The status of the stop request </dd></dl>
+
+</div>
+</div>
+<a id="ga86878ca8f781c3ed1a50fbee9e37987f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga86878ca8f781c3ed1a50fbee9e37987f">&#9670;&nbsp;</a></span>cyhal_timer_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_timer_reset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the timer/counter value to the default value set from <a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a>. </p>
+<p>If <a class="el" href="group__group__hal__timer.html#ga03e9a7839ffd4e8cad90f97fab176813">cyhal_timer_configure</a> was never called, this will reset timer/counter value to 0. This function may temporary stop the timer. <br />
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the reset request </dd></dl>
 
 </div>
 </div>
@@ -590,14 +569,15 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname">uint32_t cyhal_timer_read </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
 <p>Reads the current value from the timer/counter <br />
- See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>.</p>
+ See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_1">Snippet 1: Measuring time between two events</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>
@@ -617,7 +597,7 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname">void cyhal_timer_register_callback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -639,8 +619,11 @@ Current value of the timer/counter. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The timer/counter callback handler registration <br />
- See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_2">Snippet 2: Handling an event in a callback function</a>.</p>
+
+<p>Register a timer/counter callback handler<br />
+ </p>
+<p>This function will be called when one of the events enabled by <a class="el" href="group__group__hal__timer.html#ga4b97fe48330e9b8034ab7c2f56078002">cyhal_timer_enable_event</a> occurs.</p>
+<p>See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_2">Snippet 2: Handling an event in a callback function</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>
@@ -661,7 +644,7 @@ Current value of the timer/counter. </td></tr>
         <tr>
           <td class="memname">void cyhal_timer_enable_event </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__timer__t">cyhal_timer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#ga50fd2c21e857de83fb28c5373c148222">cyhal_timer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -689,8 +672,11 @@ Current value of the timer/counter. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
 <p>Configure timer/counter event enablement <br />
- See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_2">Snippet 2: Handling an event in a callback function</a>.</p>
+ </p>
+<p>When an enabled event occurs, the function specified by <a class="el" href="group__group__hal__timer.html#ga928ffe0a3a1549c94752db7c68306424">cyhal_timer_register_callback</a> will be called.</p>
+<p>See <a class="el" href="group__group__hal__timer.html#subsection_timer_snippet_2">Snippet 2: Handling an event in a callback function</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The timer/counter object </td></tr>

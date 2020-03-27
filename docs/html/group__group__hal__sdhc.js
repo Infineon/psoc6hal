@@ -1,14 +1,12 @@
 var group__group__hal__sdhc =
 [
+    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
     [ "cyhal_sdhc_config_t", "group__group__hal__sdhc.html#structcyhal__sdhc__config__t", [
       [ "enableLedControl", "group__group__hal__sdhc.html#a9a0d3720e7b0898f436fd51dc3f65ab2", null ],
       [ "lowVoltageSignaling", "group__group__hal__sdhc.html#a34288a41b330982ab1a584953922d8f3", null ],
       [ "isEmmc", "group__group__hal__sdhc.html#a91ccb95e1df1b03b3786644e953c005d", null ],
       [ "busWidth", "group__group__hal__sdhc.html#aab3e73af9b4102da9a5c53e535bd2a83", null ]
     ] ],
-    [ "CYHAL_SDHC_RSLT_ERR_PIN", "group__group__hal__sdhc.html#ga5271066b0eb796800ce40e649d5f6c1c", null ],
-    [ "CYHAL_SDHC_RSLT_ERR_PIN", "group__group__hal__sdhc.html#ga5271066b0eb796800ce40e649d5f6c1c", null ],
-    [ "CYHAL_SDHC_RSLT_ERR_UNSUPPORTED", "group__group__hal__sdhc.html#ga08eb24911e6245f53e4118b9fc33aca0", null ],
     [ "cyhal_sdhc_event_callback_t", "group__group__hal__sdhc.html#gaded71f4751306e4983c1e8315c569fa1", null ],
     [ "cyhal_sdhc_card_type_t", "group__group__hal__sdhc.html#ga612f43553069268d48d7ce0bee45722a", [
       [ "CYHAL_SDHC_SD", "group__group__hal__sdhc.html#gga612f43553069268d48d7ce0bee45722aa38bcb59920941b83f0c06332df4cfc56", null ],
@@ -30,6 +28,8 @@ var group__group__hal__sdhc =
       [ "CYHAL_SDHC_INT_A", "group__group__hal__sdhc.html#ggab58a2ffca59383a72cf8bc49d74cf17ba8b6cfd8821b612754d929b8613bfc968", null ],
       [ "CYHAL_SDHC_FX_EVENT", "group__group__hal__sdhc.html#ggab58a2ffca59383a72cf8bc49d74cf17bac5d8eae9a3ca751227264f692a4f9ebd", null ],
       [ "CYHAL_SDHC_CQE_EVENT", "group__group__hal__sdhc.html#ggab58a2ffca59383a72cf8bc49d74cf17bab1f59c81773e6e2083623bee85dd9c9b", null ],
+      [ "CYHAL_SDHC_ASYNC_READ_COMPLETE", "group__group__hal__sdhc.html#ggab58a2ffca59383a72cf8bc49d74cf17ba5aa1783642ed00d38817f54c93a434cb", null ],
+      [ "CYHAL_SDHC_ASYNC_WRITE_COMPLETE", "group__group__hal__sdhc.html#ggab58a2ffca59383a72cf8bc49d74cf17ba5b75a551bdc2c60c3a6a36218c7727dc", null ],
       [ "CYHAL_SDHC_ERR_INTERRUPT", "group__group__hal__sdhc.html#ggab58a2ffca59383a72cf8bc49d74cf17bae5a8f7697409d7c683405808581a9a57", null ],
       [ "CYHAL_SDHC_ALL_INTERRUPTS", "group__group__hal__sdhc.html#ggab58a2ffca59383a72cf8bc49d74cf17ba3be10ae218d0d48ef63f98a9238fac46", null ]
     ] ],
@@ -37,11 +37,11 @@ var group__group__hal__sdhc =
     [ "cyhal_sdhc_free", "group__group__hal__sdhc.html#ga3fb2c77d8662f53a21996298cb4581b1", null ],
     [ "cyhal_sdhc_read", "group__group__hal__sdhc.html#ga4714e8b2507eefd5e6df9105f2944a1e", null ],
     [ "cyhal_sdhc_write", "group__group__hal__sdhc.html#ga5a7d14246fee3ef70ec2d9ce4abf066a", null ],
-    [ "cyhal_sdhc_erase", "group__group__hal__sdhc.html#gabd69aea4684c80006545d9ec446fcfdf", null ],
+    [ "cyhal_sdhc_erase", "group__group__hal__sdhc.html#gac3b257d6386f9699d70ca378bb02c7cb", null ],
     [ "cyhal_sdhc_read_async", "group__group__hal__sdhc.html#gad020348569b21c43181c0c46e68ce05c", null ],
     [ "cyhal_sdhc_write_async", "group__group__hal__sdhc.html#gac46d4b112279c8a2eabe61769faab39d", null ],
     [ "cyhal_sdhc_is_busy", "group__group__hal__sdhc.html#gad28a8b2178173ce3ee981453ed3ce12c", null ],
     [ "cyhal_sdhc_abort_async", "group__group__hal__sdhc.html#ga1b3044289cec6662efea36bd4054bf7b", null ],
     [ "cyhal_sdhc_register_callback", "group__group__hal__sdhc.html#ga1fe53d842050280b8827e9a41545f461", null ],
-    [ "cyhal_sdhc_enable_event", "group__group__hal__sdhc.html#ga28ea94f9716a19ad673defb22fa7a0b5", null ]
+    [ "cyhal_sdhc_enable_event", "group__group__hal__sdhc.html#ga3a0865321bd9284606655f9fb9402339", null ]
 ];

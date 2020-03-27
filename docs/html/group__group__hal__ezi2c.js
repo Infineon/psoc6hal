@@ -1,5 +1,6 @@
 var group__group__hal__ezi2c =
 [
+    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
     [ "cyhal_ezi2c_slave_cfg_t", "group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t", [
       [ "slave_address", "group__group__hal__ezi2c.html#ab00e8f466048660368420dea9ff18346", null ],
       [ "buf", "group__group__hal__ezi2c.html#a68a95c0eac422be405ebee6815cead4e", null ],
@@ -14,11 +15,9 @@ var group__group__hal__ezi2c =
       [ "slave2_cfg", "group__group__hal__ezi2c.html#abb9fe145f42e6184e604994382d83248", null ],
       [ "sub_address_size", "group__group__hal__ezi2c.html#a87dc9cd1a382761d0d165326a249a734", null ]
     ] ],
-    [ "CYHAL_EZI2C_RSLT_ERR_INVALID_PIN", "group__group__hal__ezi2c.html#gaffa17caceac4fbb375bcb8b7c524dbfa", null ],
-    [ "CYHAL_EZI2C_RSLT_ERR_CAN_NOT_REACH_DR", "group__group__hal__ezi2c.html#gae944c60ac92110bb3a05de6f7a4e5491", null ],
-    [ "CYHAL_EZI2C_RSLT_ERR_NUM_ADDR_NOT_VALID", "group__group__hal__ezi2c.html#ga5fbf33476912aecd40ba68aee60daa3b", null ],
-    [ "CYHAL_EZI2C_RSLT_ERR_CHECK_USER_CONFIG", "group__group__hal__ezi2c.html#gaddf9285d2feb8628caf0e22abc8baae4", null ],
-    [ "cyhal_ezi2c_event_callback_t", "group__group__hal__ezi2c.html#ga606e609d5ea20a4e828c2ad48ebf822e", null ],
+    [ "CYHAL_EZI2C_EVENT_NONE", "group__group__hal__ezi2c.html#ga702084431e51c0a3bcf649c168de235e", null ],
+    [ "cyhal_ezi2c_event_t", "group__group__hal__ezi2c.html#ga54f0efd8c2288febce0773fc53dd122b", null ],
+    [ "cyhal_ezi2c_event_callback_t", "group__group__hal__ezi2c.html#ga0ca75741f7b6f241c28d12a4b9e1487a", null ],
     [ "cyhal_ezi2c_sub_addr_size_t", "group__group__hal__ezi2c.html#ga88858315f478b071f59d8f0190241c05", [
       [ "CYHAL_EZI2C_SUB_ADDR8_BITS", "group__group__hal__ezi2c.html#gga88858315f478b071f59d8f0190241c05a07e90b025b1b700955ecf092e3f278f3", null ],
       [ "CYHAL_EZI2C_SUB_ADDR16_BITS", "group__group__hal__ezi2c.html#gga88858315f478b071f59d8f0190241c05a02c8031e6d6864b0132ccb22942cb87f", null ]
@@ -33,9 +32,9 @@ var group__group__hal__ezi2c =
       [ "CYHAL_EZI2C_STATUS_BUSY", "group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a92b8b5fb18e9f08b5f86188bf44c51cc", null ],
       [ "CYHAL_EZI2C_STATUS_ERR", "group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a3960bfaec07aae51a3886d36e99d0989", null ]
     ] ],
-    [ "cyhal_ezi2c_event_t", "group__group__hal__ezi2c.html#ga64117bd10d8cf53ff1a690e8fbc9a1cf", null ],
-    [ "cyhal_ezi2c_init", "group__group__hal__ezi2c.html#gae4c6cd6a28cd82adceb060ba5237ff4f", null ],
+    [ "cyhal_ezi2c_init", "group__group__hal__ezi2c.html#ga0418a0231369904a03c9b19a734a920f", null ],
     [ "cyhal_ezi2c_free", "group__group__hal__ezi2c.html#ga4a422210bdab95d92fc6afc6b832877f", null ],
     [ "cyhal_ezi2c_get_activity_status", "group__group__hal__ezi2c.html#gae4a966b68ceb0a9b7b467a288357b35d", null ],
-    [ "cyhal_ezi2c_register_callback", "group__group__hal__ezi2c.html#gac3a9fbfa0ae4b433f830af7c0130f2f3", null ]
+    [ "cyhal_ezi2c_register_callback", "group__group__hal__ezi2c.html#gac3a9fbfa0ae4b433f830af7c0130f2f3", null ],
+    [ "cyhal_ezi2c_enable_event", "group__group__hal__ezi2c.html#gac81d408ff91899f328b51c4ba3254536", null ]
 ];

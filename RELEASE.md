@@ -1,9 +1,10 @@
-### Cypress PSoC 6 Hardware Abstraction Layer (HAL)
+# Cypress PSoC 6 Hardware Abstraction Layer (HAL) Release Notes
 Cypress PSoC 6 Hardware Abstraction Layer (HAL) provides an implementation of the Cypress Hardware Abstraction Layer for the PSoC 6 family of chips. This API provides convenience methods for initializing and manipulating different hardware peripherals. Depending on the specific chip being used, not all features may be supported.
 
 ### What's Included?
 This release of the PSoC 6 HAL includes support for the following drivers:
 * ADC
+* Clock
 * CRC
 * DAC
 * DMA
@@ -12,7 +13,10 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * GPIO
 * Hardware Manager
 * I2C
-* LP Timer
+* I2S
+* LowPower Timer (LPTimer)
+* PDM/PCM
+* Power Management (SysPM)
 * PWM
 * QSPI
 * RTC
@@ -21,15 +25,24 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * SPI
 * System
 * Timer
-* TRNG
+* True Random Number Generator (TRNG)
 * UART
 * USB Device
 * WDT
 
 ### What Changed?
+#### v1.2.0
+* Added new Clock driver
+* Added new SysPM Power Management driver
+* Added new I2S driver
+* Added new PDM/PCM driver
+* Reduced flash memory usage for a number of drivers
+* Improved documentation for a number of drivers
+* Fixed a few bugs in various drivers
 #### v1.1.1
 * Improved documentation for a number of drivers
-* Fixed incompatibility with PDL 1.4.1 release
+* Fixed duplicate symbol definition with PDL 1.4.1 release
+* Minor bug fixes
 #### v1.1.0
 * Added new DMA driver
 * Added new EZ-I2C driver

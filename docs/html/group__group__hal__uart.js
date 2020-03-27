@@ -1,5 +1,6 @@
 var group__group__hal__uart =
 [
+    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
     [ "cyhal_uart_cfg_t", "group__group__hal__uart.html#structcyhal__uart__cfg__t", [
       [ "data_bits", "group__group__hal__uart.html#a3360061aafad236eb9a9d347f9154643", null ],
       [ "stop_bits", "group__group__hal__uart.html#a6864a54db95005a564fd8617f9029e20", null ],
@@ -7,10 +8,6 @@ var group__group__hal__uart =
       [ "rx_buffer", "group__group__hal__uart.html#abf31b7706f129f2ea59471ba7fb6835a", null ],
       [ "rx_buffer_size", "group__group__hal__uart.html#a3ab4d4e2c33ec8ba1a0943e1f24d61f1", null ]
     ] ],
-    [ "CYHAL_UART_RSLT_ERR_INVALID_PIN", "group__group__hal__uart.html#ga10dd6d5d7975757a4d900ce6da3b002e", null ],
-    [ "CYHAL_UART_RSLT_ERR_PM_CALLBACK", "group__group__hal__uart.html#ga7f6b37c70d5a2e1f067c8248f631d4ab", null ],
-    [ "CY_RSLT_ERR_CSP_UART_GETC_TIMEOUT", "group__group__hal__uart.html#ga264e4adc4d1c01e4c92aa93680e928ca", null ],
-    [ "CY_RSLT_WRN_CSP_UART_BAUD_TOLERANCE", "group__group__hal__uart.html#gab9e6c49a6d0947c7dc1594bb424555be", null ],
     [ "CYHAL_UART_DEFAULT_BAUD", "group__group__hal__uart.html#ga4b2c1534032adfc825026b5882fa2cd6", null ],
     [ "CYHAL_UART_MAX_BAUD_PERCENT_DIFFERENCE", "group__group__hal__uart.html#ga9c1580a18947e5e976a997767b35b2c6", null ],
     [ "cyhal_uart_event_callback_t", "group__group__hal__uart.html#gac444f4c849b289d99a75e0132f04fb65", null ],
@@ -30,7 +27,7 @@ var group__group__hal__uart =
       [ "CYHAL_UART_IRQ_RX_NOT_EMPTY", "group__group__hal__uart.html#ggaf307283f3d358e4b6048846034df19aaa9b64ead890054ee5943b58bafc0f367e", null ],
       [ "CYHAL_UART_IRQ_TX_EMPTY", "group__group__hal__uart.html#ggaf307283f3d358e4b6048846034df19aaa0c7868cf2a2719db7fc2cb8c357e47a9", null ]
     ] ],
-    [ "cyhal_uart_init", "group__group__hal__uart.html#gadfd25c5e408ee377148b492e64fbadaf", null ],
+    [ "cyhal_uart_init", "group__group__hal__uart.html#gae62874a1a5484721c90ea53993d791d6", null ],
     [ "cyhal_uart_free", "group__group__hal__uart.html#ga51731996aca653fc76caee4cc7ad684f", null ],
     [ "cyhal_uart_set_baud", "group__group__hal__uart.html#ga14dcad3682e9b49e70b7f1e77cd862cc", null ],
     [ "cyhal_uart_configure", "group__group__hal__uart.html#ga4af8ba6ff0012214be498a001f1ac782", null ],
@@ -49,5 +46,5 @@ var group__group__hal__uart =
     [ "cyhal_uart_write_abort", "group__group__hal__uart.html#gaa143498ce81a014c19bcd1e8ad43a3f6", null ],
     [ "cyhal_uart_read_abort", "group__group__hal__uart.html#ga94980c5a10527027be1da8e11bc34a98", null ],
     [ "cyhal_uart_register_callback", "group__group__hal__uart.html#gae26bab64811713b1d69170352fe32c20", null ],
-    [ "cyhal_uart_enable_event", "group__group__hal__uart.html#ga60c4d315ea758449334ce17d29629651", null ]
+    [ "cyhal_uart_enable_event", "group__group__hal__uart.html#ga4dae4cef7dbf1d7935fe6dd6d31f282e", null ]
 ];

@@ -1,11 +1,14 @@
 var group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb =
 [
     [ "cyhal_resource_pin_mapping_t", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#structcyhal__resource__pin__mapping__t", [
-      [ "pin", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#a61f6033fdaae54a06ac8e63656b2a37a", null ],
       [ "inst", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#a5c5b6367a94636f9811352bbbc69b1db", null ],
-      [ "cfg", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#a8d52b3a0f9a97b5592f2bfa2f9c6449e", null ]
+      [ "pin", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#a61f6033fdaae54a06ac8e63656b2a37a", null ],
+      [ "drive_mode", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#a01c7dc6cfa4fca67252a14571b98a3ff", null ],
+      [ "hsiom", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ad4514be01ab83c7248c320b3232145c1", null ]
     ] ],
     [ "CYHAL_GET_GPIO", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html#gadbcb21726bedc8b2e4f1bb2e0235035d", null ],
+    [ "CYHAL_GET_PIN", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html#gae0af2ee8c5a2a2e6661962b368d1f2ba", null ],
+    [ "CYHAL_GET_PORT", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html#ga015f256578abd5638668ff19b9dc89d5", null ],
     [ "cyhal_gpio_t", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html#ga509e6c92ac8b7cafaeab5236fcc234b9", null ],
     [ "cyhal_gpio_psoc6_01_104_m_csp_ble_usb_t", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html#gadb1b30ad8667ff98ff7c39046c4d0741", [
       [ "NC", "group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html#ggadb1b30ad8667ff98ff7c39046c4d0741a3dbd1016ea99d087d747530418b89a01", null ],

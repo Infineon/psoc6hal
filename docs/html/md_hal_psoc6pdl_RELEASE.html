@@ -87,13 +87,14 @@ $(document).ready(function(){initNavTree('md_hal_psoc6pdl_RELEASE.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Cypress PSoC 6 Hardware Abstraction Layer (HAL) </div>  </div>
+<div class="title">Cypress PSoC 6 Hardware Abstraction Layer (HAL) Release Notes </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Cypress PSoC 6 Hardware Abstraction Layer (HAL) provides an implementation of the Cypress Hardware Abstraction Layer for the PSoC 6 family of chips. This API provides convenience methods for initializing and manipulating different hardware peripherals. Depending on the specific chip being used, not all features may be supported.</p>
 <h3>What's Included?</h3>
 <p>This release of the PSoC 6 HAL includes support for the following drivers:</p><ul>
 <li>ADC</li>
+<li>Clock</li>
 <li>CRC</li>
 <li>DAC</li>
 <li>DMA</li>
@@ -102,7 +103,10 @@ $(document).ready(function(){initNavTree('md_hal_psoc6pdl_RELEASE.html','');});
 <li>GPIO</li>
 <li>Hardware Manager</li>
 <li>I2C</li>
-<li>LP Timer</li>
+<li>I2S</li>
+<li>LowPower Timer (LPTimer)</li>
+<li>PDM/PCM</li>
+<li>Power Management (SysPM)</li>
 <li>PWM</li>
 <li>QSPI</li>
 <li>RTC</li>
@@ -111,16 +115,27 @@ $(document).ready(function(){initNavTree('md_hal_psoc6pdl_RELEASE.html','');});
 <li>SPI</li>
 <li>System</li>
 <li>Timer</li>
-<li>TRNG</li>
+<li>True Random Number Generator (TRNG)</li>
 <li>UART</li>
 <li>USB Device</li>
 <li>WDT</li>
 </ul>
 <h3>What Changed?</h3>
-<h4>v1.1.1</h4>
+<h4>v1.2.0</h4>
+<ul>
+<li>Added new Clock driver</li>
+<li>Added new SysPM Power Management driver</li>
+<li>Added new I2S driver</li>
+<li>Added new PDM/PCM driver</li>
+<li>Reduced flash memory usage for a number of drivers</li>
+<li>Improved documentation for a number of drivers</li>
+<li>Fixed a few bugs in various drivers <h4>v1.1.1</h4>
+</li>
+</ul>
 <ul>
 <li>Improved documentation for a number of drivers</li>
-<li>Fixed incompatibility with PDL 1.4.1 release <h4>v1.1.0</h4>
+<li>Fixed duplicate symbol definition with PDL 1.4.1 release</li>
+<li>Minor bug fixes <h4>v1.1.0</h4>
 </li>
 </ul>
 <ul>

@@ -87,63 +87,49 @@ $(document).ready(function(){initNavTree('group__group__hal__trng.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
+<a href="#groups">API Reference</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">TRNG (True Random Number Generator)<div class="ingroups"><a class="el" href="group__group__hal.html">HAL Drivers</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>High level interface for interacting with the true random number generator (TRNG).</p>
-<p>This block uses dedicated hardware to efficiently generate truly random numbers. </p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:gaba113ef39ef18732b428377cb27489bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__trng.html#gaba113ef39ef18732b428377cb27489bd">CYHAL_TRNG_RSLT_ERR_BAD_ARGUMENT</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a9d65008cd494335a5b5decf3533efed2">CYHAL_RSLT_MODULE_TRNG</a>, 0))</td></tr>
-<tr class="separator:gaba113ef39ef18732b428377cb27489bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga141467eacacaafe6402c9d3ce982e06c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__trng.html#ga141467eacacaafe6402c9d3ce982e06c">CYHAL_TRNG_RSLT_ERR_HW</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a9d65008cd494335a5b5decf3533efed2">CYHAL_RSLT_MODULE_TRNG</a>, 1))</td></tr>
-<tr class="separator:ga141467eacacaafe6402c9d3ce982e06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<p>High level interface to the True Random Number Generator (TRNG). </p>
+<p>This block uses dedicated hardware to efficiently generate true random numbers.</p>
+<h1><a class="anchor" id="subsection_trng_features"></a>
+Features</h1>
+<ul>
+<li>Number generated is statistically random</li>
+<li>Based on physical processes exhibiting random variation</li>
+<li>Generated sequences of numbers cannot be duplicated by running the process again</li>
+<li>Uses polynomial generators with fixed and programmable polynomials</li>
+</ul>
+<h1><a class="anchor" id="subsection_trng_quickstart"></a>
+Quick Start</h1>
+<p><a class="el" href="group__group__hal__trng.html#ga499f730a1bf8a19bbd685bb40e7a0887">cyhal_trng_init</a> initializes the TRNG and passes a pointer to the <b>TRNG</b> block through the <b>obj</b> object of type <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__trng__t">cyhal_trng_t</a>.</p>
+<p>See <a class="el" href="group__group__hal__trng.html#subsection_trng_use_case_1">Simple TRNG number generation example</a>.</p>
+<h2><a class="anchor" id="subsection_trng_use_case_1"></a>
+Simple TRNG number generation example</h2>
+<p>The following snippet initializes a TRNG and generates a true random number.</p>
+<div class="fragment"><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__trng__t">cyhal_trng_t</a> trng_obj;</div><div class="line">    uint32_t rnd_num;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the true random number generator block */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__trng.html#ga499f730a1bf8a19bbd685bb40e7a0887">cyhal_trng_init</a>(&amp;trng_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Generate a true random number */</span></div><div class="line">    rnd_num = <a class="code" href="group__group__hal__trng.html#ga9675bb0235fcd4500d4f77686b000f59">cyhal_trng_generate</a>(&amp;trng_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Release the true random number generator block</span></div><div class="line"><span class="comment">     * Note: Free only if not required anymore</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <a class="code" href="group__group__hal__trng.html#gaf11f2e6c4841065309ecfeab50f488eb">cyhal_trng_free</a>(&amp;trng_obj);</div><div class="line"></div></div><!-- fragment --><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+API Reference</h2></td></tr>
+<tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
+<tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga499f730a1bf8a19bbd685bb40e7a0887"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__trng.html#ga499f730a1bf8a19bbd685bb40e7a0887">cyhal_trng_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__trng__t">cyhal_trng_t</a> *obj)</td></tr>
+<tr class="memdesc:ga499f730a1bf8a19bbd685bb40e7a0887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the random number generator.  <a href="#ga499f730a1bf8a19bbd685bb40e7a0887">More...</a><br /></td></tr>
 <tr class="separator:ga499f730a1bf8a19bbd685bb40e7a0887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf11f2e6c4841065309ecfeab50f488eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__trng.html#gaf11f2e6c4841065309ecfeab50f488eb">cyhal_trng_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__trng__t">cyhal_trng_t</a> *obj)</td></tr>
+<tr class="memdesc:gaf11f2e6c4841065309ecfeab50f488eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release the random number generator.  <a href="#gaf11f2e6c4841065309ecfeab50f488eb">More...</a><br /></td></tr>
 <tr class="separator:gaf11f2e6c4841065309ecfeab50f488eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9675bb0235fcd4500d4f77686b000f59"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__trng.html#ga9675bb0235fcd4500d4f77686b000f59">cyhal_trng_generate</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__trng__t">cyhal_trng_t</a> *obj)</td></tr>
+<tr class="memdesc:ga9675bb0235fcd4500d4f77686b000f59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random number.  <a href="#ga9675bb0235fcd4500d4f77686b000f59">More...</a><br /></td></tr>
 <tr class="separator:ga9675bb0235fcd4500d4f77686b000f59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="gaba113ef39ef18732b428377cb27489bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaba113ef39ef18732b428377cb27489bd">&#9670;&nbsp;</a></span>CYHAL_TRNG_RSLT_ERR_BAD_ARGUMENT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_TRNG_RSLT_ERR_BAD_ARGUMENT&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a9d65008cd494335a5b5decf3533efed2">CYHAL_RSLT_MODULE_TRNG</a>, 0))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>An invalid argument was passed to a function. </p>
-
-</div>
-</div>
-<a id="ga141467eacacaafe6402c9d3ce982e06c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga141467eacacaafe6402c9d3ce982e06c">&#9670;&nbsp;</a></span>CYHAL_TRNG_RSLT_ERR_HW</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_TRNG_RSLT_ERR_HW&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a9d65008cd494335a5b5decf3533efed2">CYHAL_RSLT_MODULE_TRNG</a>, 1))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Hardware error in the crypto block. This will only occur if the Ring oscillators in the TRNG generator are explicitly disabled during TRNG generation. </p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga499f730a1bf8a19bbd685bb40e7a0887"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga499f730a1bf8a19bbd685bb40e7a0887">&#9670;&nbsp;</a></span>cyhal_trng_init()</h2>
@@ -160,14 +146,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize the random number generator.</p>
+
+<p>Initialize the random number generator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The random number generator object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>Pointer to a random number generator object. The caller must allocate the memory for this object but the init function will initialize its contents. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the init request </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the init request</dd></dl>
+<p>Returns <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> if the operation was successful </p>
 
 </div>
 </div>
@@ -186,7 +174,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Release the random number generator.</p>
+
+<p>Release the random number generator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The random number generator object </td></tr>
@@ -211,14 +200,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Generate a random number.</p>
+
+<p>Generate a random number. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The random number generator object </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The random number generated </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The random number generated</dd></dl>
+<p>See <a class="el" href="group__group__hal__trng.html#subsection_trng_use_case_1">Simple TRNG number generation example</a> </p>
 
 </div>
 </div>

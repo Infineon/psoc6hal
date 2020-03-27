@@ -67,7 +67,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('group__group__hal__adc__functions.html','');});
+$(document).ready(function(){initNavTree('group__group__hal__psoc6__rtc.html','');});
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -87,9 +87,12 @@ $(document).ready(function(){initNavTree('group__group__hal__adc__functions.html
 
 <div class="header">
   <div class="headertitle">
-<div class="title">ADC Functions<div class="ingroups"><a class="el" href="group__group__hal.html">HAL Drivers</a> &raquo; <a class="el" href="group__group__hal__adc.html">ADC (Analog to Digital Converter)</a></div></div>  </div>
+<div class="title">RTC (Real Time Clock)<div class="ingroups"><a class="el" href="group__group__hal__psoc6.html">PSoC 6 Implementation Specific</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+<p>Internally the PSoC6 RTC only stores the year as a two digit BCD value (0-99); no century information is stored. </p>
+<p>On RTC initialization the HAL must, as a result, assume a default century. If cyhal_rtc_write has been called with a different century than the default, its value must be stored and that value must persist through deep sleep, hibernate, software resets, etc. PSoC6 hardware provides a number of BREG registers which exist in the BACKUP domain and will persist over these power modes and resets. The HAL uses the highest indexed BACKUP-&gt;BREG register to store the century for the RTC.</p>
+<p>Therefore do not use the highest indexed BACKUP-&gt;BREG register as it is reserved for internal HAL usage. </p>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part

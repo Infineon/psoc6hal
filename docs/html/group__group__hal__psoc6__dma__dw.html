@@ -93,21 +93,27 @@ $(document).ready(function(){initNavTree('group__group__hal__psoc6__dma__dw.html
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>Implementation specific interface for using the Datawire DMA peripheral </p>
+<p>Implementation specific interface for using the Datawire DMA peripheral. </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga6191b22e612261919989c5baea2bb75b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dw.html#ga6191b22e612261919989c5baea2bb75b">cyhal_dma_init_dw</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, uint8_t priority)</td></tr>
+<tr class="memdesc:ga6191b22e612261919989c5baea2bb75b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the Datawire peripheral.  <a href="#ga6191b22e612261919989c5baea2bb75b">More...</a><br /></td></tr>
 <tr class="separator:ga6191b22e612261919989c5baea2bb75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6efddb8cc93d11599b90630998df9a1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dw.html#ga6efddb8cc93d11599b90630998df9a1a">cyhal_dma_free_dw</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj)</td></tr>
+<tr class="memdesc:ga6efddb8cc93d11599b90630998df9a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the Datawire specific DMA object.  <a href="#ga6efddb8cc93d11599b90630998df9a1a">More...</a><br /></td></tr>
 <tr class="separator:ga6efddb8cc93d11599b90630998df9a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2503d7cb036c853cfa6844882562e053"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dw.html#ga2503d7cb036c853cfa6844882562e053">cyhal_dma_configure_dw</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, const <a class="el" href="group__group__hal__dma.html#structcyhal__dma__cfg__t">cyhal_dma_cfg_t</a> *cfg)</td></tr>
+<tr class="memdesc:ga2503d7cb036c853cfa6844882562e053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a Datawire descriptor for the dma resource.  <a href="#ga2503d7cb036c853cfa6844882562e053">More...</a><br /></td></tr>
 <tr class="separator:ga2503d7cb036c853cfa6844882562e053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae790c6486aa9c9cac7b2c8b2d5122f25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dw.html#gae790c6486aa9c9cac7b2c8b2d5122f25">cyhal_dma_start_transfer_dw</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj)</td></tr>
+<tr class="memdesc:gae790c6486aa9c9cac7b2c8b2d5122f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a Datawire transfer.  <a href="#gae790c6486aa9c9cac7b2c8b2d5122f25">More...</a><br /></td></tr>
 <tr class="separator:gae790c6486aa9c9cac7b2c8b2d5122f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5212208e846701d94bcf731deea92877"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dw.html#ga5212208e846701d94bcf731deea92877">cyhal_dma_enable_event_dw</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, <a class="el" href="group__group__hal__dma.html#gad4507e9f3660b19e1ddc3085a96279e2">cyhal_dma_event_t</a> event, uint8_t intrPriority, bool enable)</td></tr>
-<tr class="separator:ga5212208e846701d94bcf731deea92877"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5786870af6e589456ba0048f035bfef4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dw.html#ga5786870af6e589456ba0048f035bfef4">cyhal_dma_enable_event_dw</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, <a class="el" href="group__group__hal__dma.html#gad4507e9f3660b19e1ddc3085a96279e2">cyhal_dma_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memdesc:ga5786870af6e589456ba0048f035bfef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure Datawire event enablement.  <a href="#ga5786870af6e589456ba0048f035bfef4">More...</a><br /></td></tr>
+<tr class="separator:ga5786870af6e589456ba0048f035bfef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab5139ec926464b3f76ce004bbdd152a7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dw.html#gab5139ec926464b3f76ce004bbdd152a7">cyhal_dma_is_busy_dw</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj)</td></tr>
+<tr class="memdesc:gab5139ec926464b3f76ce004bbdd152a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a transfer is pending or running on the DMA channel.  <a href="#gab5139ec926464b3f76ce004bbdd152a7">More...</a><br /></td></tr>
 <tr class="separator:gab5139ec926464b3f76ce004bbdd152a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -136,7 +142,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize the Datawire peripheral.</p>
+
+<p>Initialize the Datawire peripheral. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The DMA object to initialize </td></tr>
@@ -163,7 +170,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Frees the Datawire specific DMA object</p>
+
+<p>Frees the Datawire specific DMA object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
@@ -198,7 +206,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Setup a Datawire descriptor for the dma resource</p>
+
+<p>Setup a Datawire descriptor for the dma resource. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
@@ -225,7 +234,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Start a Datawire transfer</p>
+
+<p>Start a Datawire transfer. </p>
 <p>Initiates DMA channel transfer for specified DMA object </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
@@ -236,8 +246,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga5212208e846701d94bcf731deea92877"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5212208e846701d94bcf731deea92877">&#9670;&nbsp;</a></span>cyhal_dma_enable_event_dw()</h2>
+<a id="ga5786870af6e589456ba0048f035bfef4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5786870af6e589456ba0048f035bfef4">&#9670;&nbsp;</a></span>cyhal_dma_enable_event_dw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +268,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>intrPriority</em>, </td>
+          <td class="paramname"><em>intr_priority</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -273,12 +283,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Configure Datawire event enablement.</p>
+
+<p>Configure Datawire event enablement. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>The DMA event type </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">intrPriority</td><td>The priority for NVIC interrupt events. The priority from the most recent call will take precedence, i.e all events will have the same priority. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">intr_priority</td><td>The priority for NVIC interrupt events. The priority from the most recent call will take precedence, i.e all events will have the same priority. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>True to turn on interrupts, False to turn off </td></tr>
   </table>
   </dd>
@@ -301,7 +312,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Checks whether a transfer is pending or running on the DMA channel</p>
+
+<p>Checks whether a transfer is pending or running on the DMA channel. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>

@@ -87,6 +87,7 @@ $(document).ready(function(){initNavTree('group__group__hal__ezi2c.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#groups">API Reference</a> &#124;
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
@@ -98,67 +99,118 @@ $(document).ready(function(){initNavTree('group__group__hal__ezi2c.html','');});
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
 <p>High level interface for interacting with the Cypress EZ Inter-Integrated Circuit (EZI2C). </p>
-<table class="memberdecls">
+<p>The EZI2C driver implements an I2C slave device that emulates a common I2C EEPROM interface between the external master and your application code. EZI2C Slave buffers can be set up as any variable, array, or structure in your code without worrying about the I2C protocol. I2C related transactions and processing of data from the I2C master are handled by the driver through internal interrupt routine, reducing application involvement to maintain the I2C buffer.</p>
+<h1><a class="anchor" id="subsection_ezi2c_features"></a>
+Features</h1>
+<ul>
+<li>EZI2C Slave functionality</li>
+<li>Configurable standard data rates of 100/400/1000 kbps - <a class="el" href="group__group__hal__ezi2c.html#ga4d5b397b7436fbfe3628090981026d02">cyhal_ezi2c_data_rate_t</a></li>
+<li>Supports one or two addresses with independent memory buffers - <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a></li>
+<li>Memory buffers provide configurable read/write and read only regions - <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a></li>
+<li>8 or 16-bit sub-addressing - <a class="el" href="group__group__hal__ezi2c.html#ga88858315f478b071f59d8f0190241c05">cyhal_ezi2c_sub_addr_size_t</a></li>
+<li>Configurable interrupt and callback assignment from EZI2C events - <a class="el" href="group__group__hal__ezi2c.html#ga54f0efd8c2288febce0773fc53dd122b">cyhal_ezi2c_event_t</a></li>
+</ul>
+<h1><a class="anchor" id="section_ezi2c_quickstart"></a>
+Quick Start</h1>
+<p>Initialize EZI2C by using <a class="el" href="group__group__hal__ezi2c.html#ga0418a0231369904a03c9b19a734a920f">cyhal_ezi2c_init</a> and selecting the <b>sda</b> and <b>scl</b> pins. Setup one or two memory buffers and read/write boundaries using the EZI2C configuration structure <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a>. See <a class="el" href="group__group__hal__ezi2c.html#subsection_ezi2c_snippet_1">Snippet 1: EZI2C Initialization and Configuration</a> </p><dl class="section note"><dt>Note</dt><dd>The clock parameter <b>clk</b> is optional and can be set to NULL to generate and use an available clock resource.</dd></dl>
+<h1><a class="anchor" id="section_ezi2c_snippets"></a>
+Code snippets</h1>
+<h2><a class="anchor" id="subsection_ezi2c_snippet_1"></a>
+Snippet 1: EZI2C Initialization and Configuration</h2>
+<p>The following snippet shows how to initialize and configure an EZI2C and assign the pins to the <b>sda</b> and <b>scl</b> lines. The <b>clk</b> need not be provided (NULL), in which case a clock resource is assigned.</p>
+<div class="fragment"><div class="line">    <span class="keyword">const</span> uint8_t SLAVE_ADDRESS = 0x08;</div><div class="line">     <span class="comment">/* Allocate buffer for EZI2C Operation */</span></div><div class="line"><span class="preprocessor">    #define BUFF_SIZE     (8u)</span></div><div class="line">    <span class="comment">/* Number of bytes from the beginning of buffer that provides read and write access for the master */</span></div><div class="line">    <span class="keyword">const</span> uint32_t BUFFER_RW_BOUNDARY = 8u;</div><div class="line"></div><div class="line">    uint8_t buf[BUFF_SIZE];</div><div class="line"></div><div class="line">    <span class="comment">/* Declare variables */</span></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> ezi2c_obj;</div><div class="line"></div><div class="line">    <span class="comment">/* Populate slave configuration structure slave_config1 */</span></div><div class="line">    <a class="code" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a> slave_config1 = {SLAVE_ADDRESS, buf, BUFF_SIZE, BUFFER_RW_BOUNDARY};</div><div class="line"></div><div class="line">    <span class="comment">/* Assign values to configuration structure slave_config2 if dual port addressing is needed */</span></div><div class="line">    <a class="code" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a> slave_config2 = { 0, NULL, 0, 0 };</div><div class="line"></div><div class="line">    <span class="comment">/* Populate the EZI2C configuration structure */</span></div><div class="line">    <a class="code" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a> ezi2c_config = {<span class="keyword">false</span>, <span class="keyword">true</span>, CYHAL_EZI2C_DATA_RATE_400KHZ, slave_config1, \</div><div class="line">                                     slave_config2, <a class="code" href="group__group__hal__ezi2c.html#gga88858315f478b071f59d8f0190241c05a07e90b025b1b700955ecf092e3f278f3">CYHAL_EZI2C_SUB_ADDR8_BITS</a> };</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize EZI2C */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__ezi2c.html#ga0418a0231369904a03c9b19a734a920f">cyhal_ezi2c_init</a>(&amp;ezi2c_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3e0cb355dfc40a09ddbcb3e2a646e186">P6_1</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a651caedfece9cfdc1054b06bdb19ef5c">P6_0</a>, NULL, &amp;ezi2c_config);</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_ezi2c_snippet_2"></a>
+Snippet 2: Register Callback function</h2>
+<p>The following snippet shows how to use the <a class="el" href="group__group__hal__ezi2c.html#gac3a9fbfa0ae4b433f830af7c0130f2f3">cyhal_ezi2c_register_callback</a> function. The <b>callback</b> parameter refers to the handler which will be invoked when an event triggers.</p>
+<div class="fragment"><div class="line"></div><div class="line"><span class="comment">/* Declare variables */</span></div><div class="line"><a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> ezi2c_obj;</div><div class="line"></div><div class="line"><span class="comment">/* Interrupt handler for EZI2C */</span></div><div class="line"><span class="keywordtype">void</span> handle_ezi2c_events(<span class="keywordtype">void</span> *callback_arg, <a class="code" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_event_t</a> event)</div><div class="line">{</div><div class="line">    (void)callback_arg;</div><div class="line">    <a class="code" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a> status;</div><div class="line"></div><div class="line">    status = <a class="code" href="group__group__hal__ezi2c.html#gae4a966b68ceb0a9b7b467a288357b35d">cyhal_ezi2c_get_activity_status</a>(&amp;ezi2c_obj);</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span> (0 != (<a class="code" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a974cc49bec7a7e8e46a0494e548de1a0">CYHAL_EZI2C_STATUS_READ1</a> &amp; status))</div><div class="line">    {</div><div class="line">        <span class="comment">/* User code for operations to be performed after read complete */</span></div><div class="line">    }</div><div class="line">    <span class="keywordflow">if</span> (0 != (<a class="code" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a45906f2579b75a3ce2ca81d9e3cfa6ea">CYHAL_EZI2C_STATUS_WRITE1</a> &amp; status))</div><div class="line">    {</div><div class="line">        <span class="comment">/* User code for operations to be performed after write complete */</span></div><div class="line">    }</div><div class="line">    <span class="keywordflow">if</span> (0 != (<a class="code" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a3960bfaec07aae51a3886d36e99d0989">CYHAL_EZI2C_STATUS_ERR</a> &amp; status))</div><div class="line">    {</div><div class="line">        <span class="comment">/* User code for operations to be performed if an error occurs */</span></div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_ezi2c_handler()</div><div class="line">{</div><div class="line">    <span class="keyword">const</span> uint8_t SLAVE_ADDRESS = 0x08;</div><div class="line">     <span class="comment">/* Allocate buffer for EZI2C Operation */</span></div><div class="line"><span class="preprocessor">    #define BUFFER_SIZE     (8u)</span></div><div class="line">    <span class="comment">/* Number of bytes from the beginning of buffer that provides read and write access for the master */</span></div><div class="line">    <span class="keyword">const</span> uint32_t BUFFER_RW_BOUNDARY = 6u;</div><div class="line"></div><div class="line">    uint8_t buf[BUFFER_SIZE];</div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line"></div><div class="line">    <span class="comment">/* Populate slave configuration structure slave_config1 */</span></div><div class="line">    <a class="code" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a> slave_config1 = {SLAVE_ADDRESS, buf, BUFFER_SIZE, BUFFER_RW_BOUNDARY};</div><div class="line"></div><div class="line">    <span class="comment">/* Assign values to configuration structure slave_config2 if dual port addressing is needed */</span></div><div class="line">    <a class="code" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a> slave_config2 = { 0, NULL, 0, 0 };</div><div class="line"></div><div class="line">    <span class="comment">/* Populate the EZI2C configuration structure */</span></div><div class="line">    <a class="code" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a> ezi2c_config = {<span class="keyword">false</span>, <span class="keyword">true</span>, CYHAL_EZI2C_DATA_RATE_400KHZ, slave_config1,</div><div class="line">                                     slave_config2, <a class="code" href="group__group__hal__ezi2c.html#gga88858315f478b071f59d8f0190241c05a07e90b025b1b700955ecf092e3f278f3">CYHAL_EZI2C_SUB_ADDR8_BITS</a> };</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize EZI2C */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__ezi2c.html#ga0418a0231369904a03c9b19a734a920f">cyhal_ezi2c_init</a>(&amp;ezi2c_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3e0cb355dfc40a09ddbcb3e2a646e186">P6_1</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a651caedfece9cfdc1054b06bdb19ef5c">P6_0</a>, NULL, &amp;ezi2c_config);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Register I2C slave event callback */</span></div><div class="line">    <a class="code" href="group__group__hal__ezi2c.html#gac3a9fbfa0ae4b433f830af7c0130f2f3">cyhal_ezi2c_register_callback</a>(&amp;ezi2c_obj, handle_ezi2c_events, NULL);</div><div class="line">}</div></div><!-- fragment --><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+API Reference</h2></td></tr>
+<tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
+<tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:structcyhal__ezi2c__slave__cfg__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a></td></tr>
+<tr class="memdesc:structcyhal__ezi2c__slave__cfg__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial EZI2C sub configuration.  <a href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">More...</a><br /></td></tr>
 <tr class="separator:structcyhal__ezi2c__slave__cfg__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structcyhal__ezi2c__cfg__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a></td></tr>
+<tr class="memdesc:structcyhal__ezi2c__cfg__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial EZI2C configuration.  <a href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">More...</a><br /></td></tr>
 <tr class="separator:structcyhal__ezi2c__cfg__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:gaffa17caceac4fbb375bcb8b7c524dbfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#gaffa17caceac4fbb375bcb8b7c524dbfa">CYHAL_EZI2C_RSLT_ERR_INVALID_PIN</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>, 0))</td></tr>
-<tr class="separator:gaffa17caceac4fbb375bcb8b7c524dbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae944c60ac92110bb3a05de6f7a4e5491"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#gae944c60ac92110bb3a05de6f7a4e5491">CYHAL_EZI2C_RSLT_ERR_CAN_NOT_REACH_DR</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>, 1))</td></tr>
-<tr class="separator:gae944c60ac92110bb3a05de6f7a4e5491"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5fbf33476912aecd40ba68aee60daa3b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga5fbf33476912aecd40ba68aee60daa3b">CYHAL_EZI2C_RSLT_ERR_NUM_ADDR_NOT_VALID</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>, 2))</td></tr>
-<tr class="separator:ga5fbf33476912aecd40ba68aee60daa3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaddf9285d2feb8628caf0e22abc8baae4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#gaddf9285d2feb8628caf0e22abc8baae4">CYHAL_EZI2C_RSLT_ERR_CHECK_USER_CONFIG</a>&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>, 3))</td></tr>
-<tr class="separator:gaddf9285d2feb8628caf0e22abc8baae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga702084431e51c0a3bcf649c168de235e"><td class="memItemLeft" align="right" valign="top"><a id="ga702084431e51c0a3bcf649c168de235e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga702084431e51c0a3bcf649c168de235e">CYHAL_EZI2C_EVENT_NONE</a>&#160;&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620aa93306e59d3f7c9cf36c5cbb5294e93f">CYHAL_EZI2C_STATUS_OK</a></td></tr>
+<tr class="memdesc:ga702084431e51c0a3bcf649c168de235e"><td class="mdescLeft">&#160;</td><td class="mdescRight">CYHAL_EZI2C_EVENT_NONE event is deprecated and that CYHAL_EZI2C_STATUS_OK should be used instead. <br /></td></tr>
+<tr class="separator:ga702084431e51c0a3bcf649c168de235e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga606e609d5ea20a4e828c2ad48ebf822e"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga606e609d5ea20a4e828c2ad48ebf822e">cyhal_ezi2c_event_callback_t</a>) (void *callback_arg, <a class="el" href="group__group__hal__ezi2c.html#ga64117bd10d8cf53ff1a690e8fbc9a1cf">cyhal_ezi2c_event_t</a> event)</td></tr>
-<tr class="separator:ga606e609d5ea20a4e828c2ad48ebf822e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga54f0efd8c2288febce0773fc53dd122b"><td class="memItemLeft" align="right" valign="top"><a id="ga54f0efd8c2288febce0773fc53dd122b"></a>
+typedef <a class="el" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga54f0efd8c2288febce0773fc53dd122b">cyhal_ezi2c_event_t</a></td></tr>
+<tr class="memdesc:ga54f0efd8c2288febce0773fc53dd122b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This type is deprecated and that cyhal_ezi2c_status_t should be used instead. <br /></td></tr>
+<tr class="separator:ga54f0efd8c2288febce0773fc53dd122b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ca75741f7b6f241c28d12a4b9e1487a"><td class="memItemLeft" align="right" valign="top"><a id="ga0ca75741f7b6f241c28d12a4b9e1487a"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga0ca75741f7b6f241c28d12a4b9e1487a">cyhal_ezi2c_event_callback_t</a>) (void *callback_arg, <a class="el" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a> event)</td></tr>
+<tr class="memdesc:ga0ca75741f7b6f241c28d12a4b9e1487a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler for I2C events. <br /></td></tr>
+<tr class="separator:ga0ca75741f7b6f241c28d12a4b9e1487a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga88858315f478b071f59d8f0190241c05"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga88858315f478b071f59d8f0190241c05">cyhal_ezi2c_sub_addr_size_t</a> { <a class="el" href="group__group__hal__ezi2c.html#gga88858315f478b071f59d8f0190241c05a07e90b025b1b700955ecf092e3f278f3">CYHAL_EZI2C_SUB_ADDR8_BITS</a>, 
-<a class="el" href="group__group__hal__ezi2c.html#gga88858315f478b071f59d8f0190241c05a02c8031e6d6864b0132ccb22942cb87f">CYHAL_EZI2C_SUB_ADDR16_BITS</a>
+<tr class="memitem:ga88858315f478b071f59d8f0190241c05"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga88858315f478b071f59d8f0190241c05">cyhal_ezi2c_sub_addr_size_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga88858315f478b071f59d8f0190241c05a07e90b025b1b700955ecf092e3f278f3">CYHAL_EZI2C_SUB_ADDR8_BITS</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga88858315f478b071f59d8f0190241c05a02c8031e6d6864b0132ccb22942cb87f">CYHAL_EZI2C_SUB_ADDR16_BITS</a>
+<br />
  }</td></tr>
+<tr class="memdesc:ga88858315f478b071f59d8f0190241c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of Sub-Address.  <a href="group__group__hal__ezi2c.html#ga88858315f478b071f59d8f0190241c05">More...</a><br /></td></tr>
 <tr class="separator:ga88858315f478b071f59d8f0190241c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4d5b397b7436fbfe3628090981026d02"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga4d5b397b7436fbfe3628090981026d02">cyhal_ezi2c_data_rate_t</a> { <b>CYHAL_EZI2C_DATA_RATE_100KHZ</b> = 100000, 
-<b>CYHAL_EZI2C_DATA_RATE_400KHZ</b> = 400000, 
-<b>CYHAL_EZI2C_DATA_RATE_1MHZ</b> = 1000000
+<tr class="memitem:ga4d5b397b7436fbfe3628090981026d02"><td class="memItemLeft" align="right" valign="top"><a id="ga4d5b397b7436fbfe3628090981026d02"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga4d5b397b7436fbfe3628090981026d02">cyhal_ezi2c_data_rate_t</a> { <br />
+&#160;&#160;<b>CYHAL_EZI2C_DATA_RATE_100KHZ</b> = 100000, 
+<br />
+&#160;&#160;<b>CYHAL_EZI2C_DATA_RATE_400KHZ</b> = 400000, 
+<br />
+&#160;&#160;<b>CYHAL_EZI2C_DATA_RATE_1MHZ</b> = 1000000
+<br />
  }</td></tr>
+<tr class="memdesc:ga4d5b397b7436fbfe3628090981026d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of Sub-Address. <br /></td></tr>
 <tr class="separator:ga4d5b397b7436fbfe3628090981026d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga43af4b9cfed6e50bd96e4f2434678620"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a> { <br />
-&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620aa93306e59d3f7c9cf36c5cbb5294e93f">CYHAL_EZI2C_STATUS_OK</a> = 0x0UL, 
-<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a974cc49bec7a7e8e46a0494e548de1a0">CYHAL_EZI2C_STATUS_READ1</a> = 0x01UL, 
-<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a45906f2579b75a3ce2ca81d9e3cfa6ea">CYHAL_EZI2C_STATUS_WRITE1</a> = 0x02UL, 
-<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a58e8abeeb53449b058e29fa40c240ecd">CYHAL_EZI2C_STATUS_READ2</a> = 0x04UL, 
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620aa93306e59d3f7c9cf36c5cbb5294e93f">CYHAL_EZI2C_STATUS_OK</a> = 0x1UL, 
 <br />
-&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620ae77aae5dc453d1e15692eac1e08a3a0a">CYHAL_EZI2C_STATUS_WRITE2</a> = 0x08UL, 
-<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a92b8b5fb18e9f08b5f86188bf44c51cc">CYHAL_EZI2C_STATUS_BUSY</a> = 0x10UL, 
-<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a3960bfaec07aae51a3886d36e99d0989">CYHAL_EZI2C_STATUS_ERR</a> = 0x20UL
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a974cc49bec7a7e8e46a0494e548de1a0">CYHAL_EZI2C_STATUS_READ1</a> = 0x2UL, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a45906f2579b75a3ce2ca81d9e3cfa6ea">CYHAL_EZI2C_STATUS_WRITE1</a> = 0x4UL, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a58e8abeeb53449b058e29fa40c240ecd">CYHAL_EZI2C_STATUS_READ2</a> = 0x8UL, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620ae77aae5dc453d1e15692eac1e08a3a0a">CYHAL_EZI2C_STATUS_WRITE2</a> = 0x10UL, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a92b8b5fb18e9f08b5f86188bf44c51cc">CYHAL_EZI2C_STATUS_BUSY</a> = 0x20UL, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__ezi2c.html#gga43af4b9cfed6e50bd96e4f2434678620a3960bfaec07aae51a3886d36e99d0989">CYHAL_EZI2C_STATUS_ERR</a> = 0x40UL
 <br />
  }</td></tr>
+<tr class="memdesc:ga43af4b9cfed6e50bd96e4f2434678620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return codes of ezi2c.  <a href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">More...</a><br /></td></tr>
 <tr class="separator:ga43af4b9cfed6e50bd96e4f2434678620"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga64117bd10d8cf53ff1a690e8fbc9a1cf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga64117bd10d8cf53ff1a690e8fbc9a1cf">cyhal_ezi2c_event_t</a> { <b>CYHAL_EZI2C_EVENT_NONE</b> = 0
- }</td></tr>
-<tr class="separator:ga64117bd10d8cf53ff1a690e8fbc9a1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gae4c6cd6a28cd82adceb060ba5237ff4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#gae4c6cd6a28cd82adceb060ba5237ff4f">cyhal_ezi2c_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> *obj, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> sda, <a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a> scl, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *clk, const <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a> *cfg)</td></tr>
-<tr class="separator:gae4c6cd6a28cd82adceb060ba5237ff4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0418a0231369904a03c9b19a734a920f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga0418a0231369904a03c9b19a734a920f">cyhal_ezi2c_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> *obj, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> sda, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> scl, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk, const <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a> *cfg)</td></tr>
+<tr class="memdesc:ga0418a0231369904a03c9b19a734a920f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the EZI2C (slave), and configures its specified pins and clock.  <a href="#ga0418a0231369904a03c9b19a734a920f">More...</a><br /></td></tr>
+<tr class="separator:ga0418a0231369904a03c9b19a734a920f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4a422210bdab95d92fc6afc6b832877f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#ga4a422210bdab95d92fc6afc6b832877f">cyhal_ezi2c_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> *obj)</td></tr>
+<tr class="memdesc:ga4a422210bdab95d92fc6afc6b832877f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize the ezi2c object.  <a href="#ga4a422210bdab95d92fc6afc6b832877f">More...</a><br /></td></tr>
 <tr class="separator:ga4a422210bdab95d92fc6afc6b832877f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae4a966b68ceb0a9b7b467a288357b35d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#gae4a966b68ceb0a9b7b467a288357b35d">cyhal_ezi2c_get_activity_status</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> *obj)</td></tr>
+<tr class="memdesc:gae4a966b68ceb0a9b7b467a288357b35d"><td class="mdescLeft">&#160;</td><td class="mdescRight">EZI2C slave get activity status This function returns a non-zero value ( <a class="el" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a>) if an I2C Read or Write cycle has occurred since the last time this function was called.  <a href="#gae4a966b68ceb0a9b7b467a288357b35d">More...</a><br /></td></tr>
 <tr class="separator:gae4a966b68ceb0a9b7b467a288357b35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac3a9fbfa0ae4b433f830af7c0130f2f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#gac3a9fbfa0ae4b433f830af7c0130f2f3">cyhal_ezi2c_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> *obj, <a class="el" href="group__group__hal__ezi2c.html#ga606e609d5ea20a4e828c2ad48ebf822e">cyhal_ezi2c_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memitem:gac3a9fbfa0ae4b433f830af7c0130f2f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#gac3a9fbfa0ae4b433f830af7c0130f2f3">cyhal_ezi2c_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> *obj, <a class="el" href="group__group__hal__ezi2c.html#ga0ca75741f7b6f241c28d12a4b9e1487a">cyhal_ezi2c_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memdesc:gac3a9fbfa0ae4b433f830af7c0130f2f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a EZI2C event callback handler.  <a href="#gac3a9fbfa0ae4b433f830af7c0130f2f3">More...</a><br /></td></tr>
 <tr class="separator:gac3a9fbfa0ae4b433f830af7c0130f2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac81d408ff91899f328b51c4ba3254536"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__ezi2c.html#gac81d408ff91899f328b51c4ba3254536">cyhal_ezi2c_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> *obj, <a class="el" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memdesc:gac81d408ff91899f328b51c4ba3254536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure and Enable or Disable EZI2C Interrupt.  <a href="#gac81d408ff91899f328b51c4ba3254536">More...</a><br /></td></tr>
+<tr class="separator:gac81d408ff91899f328b51c4ba3254536"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
 <a name="structcyhal__ezi2c__slave__cfg__t" id="structcyhal__ezi2c__slave__cfg__t"></a>
@@ -179,28 +231,25 @@ Functions</h2></td></tr>
 <td class="fieldname">
 slave_address</td>
 <td class="fielddoc">
-<p>The 7-bit right justified primary slave address </p>
-</td></tr>
+The 7-bit right justified primary slave address. </td></tr>
 <tr><td class="fieldtype">
 <a id="a68a95c0eac422be405ebee6815cead4e"></a>uint8_t *</td>
 <td class="fieldname">
 buf</td>
 <td class="fielddoc">
-<p>A pointer to the data buffer for the primary/secondary slave address </p>
-</td></tr>
+A pointer to the data buffer for the primary/secondary slave address. </td></tr>
 <tr><td class="fieldtype">
 <a id="aabb87053d865a60cd6cd5e6ce3a75b7d"></a>uint32_t</td>
 <td class="fieldname">
 buf_size</td>
 <td class="fielddoc">
-<p>The size of the buffer assigned to the primary/secondary slave address </p>
-</td></tr>
+The size of the buffer assigned to the primary/secondary slave address. </td></tr>
 <tr><td class="fieldtype">
 <a id="ab1c5d2eea1cb45b5ff66c7ecdaf38cec"></a>uint32_t</td>
 <td class="fieldname">
 buf_rw_boundary</td>
 <td class="fielddoc">
-<p>The Read/Write boundary within the buffer assigned to the primary/secondary slave address. This specifies the number of data bytes from the beginning of the buffer with read and write access for the master. Data bytes at this value or greater are read only by the master </p>
+The Read/Write boundary within the buffer assigned to the primary/secondary slave address. <p>This specifies the number of data bytes from the beginning of the buffer with read and write access for the master. Data bytes at this value or greater are read only by the master </p>
 </td></tr>
 </table>
 
@@ -224,121 +273,42 @@ buf_rw_boundary</td>
 <td class="fieldname">
 two_addresses</td>
 <td class="fielddoc">
-<p>Number of addresses (one or two). If set "true" - use two addresses otherwise ("false") one </p>
+Number of addresses (one or two). <p>If set "true" - use two addresses otherwise ("false") one </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a011a66a43ac709b197fb10362d867b43"></a>bool</td>
 <td class="fieldname">
 enable_wake_from_sleep</td>
 <td class="fielddoc">
-<p>When set, the slave will wake the device from Deep Sleep on an address match </p>
-</td></tr>
+When set, the slave will wake the device from Deep Sleep on an address match. </td></tr>
 <tr><td class="fieldtype">
 <a id="a6fbb2cfc5e85e1ef64fec15075744b3d"></a><a class="el" href="group__group__hal__ezi2c.html#ga4d5b397b7436fbfe3628090981026d02">cyhal_ezi2c_data_rate_t</a></td>
 <td class="fieldname">
 data_rate</td>
 <td class="fielddoc">
-<p>Maximum frequency that the I2C Slave bus runs at. Supports standard data rates of 100/400/1000 kbps </p>
+Maximum frequency that the I2C Slave bus runs at. <p>Supports standard data rates of 100/400/1000 kbps </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="acdb4af96c5a06da5ec83bb87d85f6851"></a><a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a></td>
 <td class="fieldname">
 slave1_cfg</td>
 <td class="fielddoc">
-<p>Refer to <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a> for details. This config structure is mandatory. </p>
+Refer to <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t" title="Initial EZI2C sub configuration. ">cyhal_ezi2c_slave_cfg_t</a> for details. <p>This config structure is mandatory. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="abb9fe145f42e6184e604994382d83248"></a><a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a></td>
 <td class="fieldname">
 slave2_cfg</td>
 <td class="fielddoc">
-<p>Refer to <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t">cyhal_ezi2c_slave_cfg_t</a> for details. This config structure is optional. Set it if user want to use dual-port addressing otherwise leave blank </p>
+Refer to <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t" title="Initial EZI2C sub configuration. ">cyhal_ezi2c_slave_cfg_t</a> for details. <p>This config structure is optional. Set it if user want to use dual-port addressing otherwise leave blank </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a87dc9cd1a382761d0d165326a249a734"></a><a class="el" href="group__group__hal__ezi2c.html#ga88858315f478b071f59d8f0190241c05">cyhal_ezi2c_sub_addr_size_t</a></td>
 <td class="fieldname">
 sub_address_size</td>
 <td class="fielddoc">
-<p>The size of the sub-address, can either be 8 or 16 bits </p>
-</td></tr>
+The size of the sub-address, can either be 8 or 16 bits. </td></tr>
 </table>
-
-</div>
-</div>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="gaffa17caceac4fbb375bcb8b7c524dbfa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaffa17caceac4fbb375bcb8b7c524dbfa">&#9670;&nbsp;</a></span>CYHAL_EZI2C_RSLT_ERR_INVALID_PIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_EZI2C_RSLT_ERR_INVALID_PIN&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>, 0))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The requested resource type is invalid </p>
-
-</div>
-</div>
-<a id="gae944c60ac92110bb3a05de6f7a4e5491"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae944c60ac92110bb3a05de6f7a4e5491">&#9670;&nbsp;</a></span>CYHAL_EZI2C_RSLT_ERR_CAN_NOT_REACH_DR</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_EZI2C_RSLT_ERR_CAN_NOT_REACH_DR&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>, 1))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Can not reach desired data rate </p>
-
-</div>
-</div>
-<a id="ga5fbf33476912aecd40ba68aee60daa3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5fbf33476912aecd40ba68aee60daa3b">&#9670;&nbsp;</a></span>CYHAL_EZI2C_RSLT_ERR_NUM_ADDR_NOT_VALID</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_EZI2C_RSLT_ERR_NUM_ADDR_NOT_VALID&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>, 2))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Number of addresses is not valid </p>
-
-</div>
-</div>
-<a id="gaddf9285d2feb8628caf0e22abc8baae4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaddf9285d2feb8628caf0e22abc8baae4">&#9670;&nbsp;</a></span>CYHAL_EZI2C_RSLT_ERR_CHECK_USER_CONFIG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_EZI2C_RSLT_ERR_CHECK_USER_CONFIG&#160;&#160;&#160;(<a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(<a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>, 3))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Number of addresses is not valid </p>
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="ga606e609d5ea20a4e828c2ad48ebf822e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga606e609d5ea20a4e828c2ad48ebf822e">&#9670;&nbsp;</a></span>cyhal_ezi2c_event_callback_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* cyhal_ezi2c_event_callback_t) (void *callback_arg, <a class="el" href="group__group__hal__ezi2c.html#ga64117bd10d8cf53ff1a690e8fbc9a1cf">cyhal_ezi2c_event_t</a> event)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Handler for I2C events </p>
 
 </div>
 </div>
@@ -354,28 +324,14 @@ sub_address_size</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Size of Sub-Address </p>
+
+<p>Size of Sub-Address. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga88858315f478b071f59d8f0190241c05a07e90b025b1b700955ecf092e3f278f3"></a>CYHAL_EZI2C_SUB_ADDR8_BITS&#160;</td><td class="fielddoc"><p>Sub-address is 8 bits </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga88858315f478b071f59d8f0190241c05a07e90b025b1b700955ecf092e3f278f3"></a>CYHAL_EZI2C_SUB_ADDR8_BITS&#160;</td><td class="fielddoc"><p>Sub-address is 8 bits. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga88858315f478b071f59d8f0190241c05a02c8031e6d6864b0132ccb22942cb87f"></a>CYHAL_EZI2C_SUB_ADDR16_BITS&#160;</td><td class="fielddoc"><p>Sub-address is 16 bits </p>
+<tr><td class="fieldname"><a id="gga88858315f478b071f59d8f0190241c05a02c8031e6d6864b0132ccb22942cb87f"></a>CYHAL_EZI2C_SUB_ADDR16_BITS&#160;</td><td class="fielddoc"><p>Sub-address is 16 bits. </p>
 </td></tr>
 </table>
-
-</div>
-</div>
-<a id="ga4d5b397b7436fbfe3628090981026d02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4d5b397b7436fbfe3628090981026d02">&#9670;&nbsp;</a></span>cyhal_ezi2c_data_rate_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__group__hal__ezi2c.html#ga4d5b397b7436fbfe3628090981026d02">cyhal_ezi2c_data_rate_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Size of Sub-Address </p>
 
 </div>
 </div>
@@ -390,44 +346,31 @@ sub_address_size</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Return codes of ezi2c </p>
+
+<p>Return codes of ezi2c. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620aa93306e59d3f7c9cf36c5cbb5294e93f"></a>CYHAL_EZI2C_STATUS_OK&#160;</td><td class="fielddoc"><p>Each EZI2C slave status is encoded in a separate bit, therefore multiple bits may be set to indicate the current status Operation completed successfully </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620aa93306e59d3f7c9cf36c5cbb5294e93f"></a>CYHAL_EZI2C_STATUS_OK&#160;</td><td class="fielddoc"><p>Each EZI2C slave status is encoded in a separate bit, therefore multiple bits may be set to indicate the current status. </p>
+<p>Operation completed successfully </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a974cc49bec7a7e8e46a0494e548de1a0"></a>CYHAL_EZI2C_STATUS_READ1&#160;</td><td class="fielddoc"><p>The Read transfer intended for the primary slave address is complete </p>
+<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a974cc49bec7a7e8e46a0494e548de1a0"></a>CYHAL_EZI2C_STATUS_READ1&#160;</td><td class="fielddoc"><p>The Read transfer intended for the primary slave address is complete. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a45906f2579b75a3ce2ca81d9e3cfa6ea"></a>CYHAL_EZI2C_STATUS_WRITE1&#160;</td><td class="fielddoc"><p>The Write transfer intended for the primary slave address is complete </p>
+<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a45906f2579b75a3ce2ca81d9e3cfa6ea"></a>CYHAL_EZI2C_STATUS_WRITE1&#160;</td><td class="fielddoc"><p>The Write transfer intended for the primary slave address is complete. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a58e8abeeb53449b058e29fa40c240ecd"></a>CYHAL_EZI2C_STATUS_READ2&#160;</td><td class="fielddoc"><p>The Read transfer intended for the secondary slave address is complete </p>
+<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a58e8abeeb53449b058e29fa40c240ecd"></a>CYHAL_EZI2C_STATUS_READ2&#160;</td><td class="fielddoc"><p>The Read transfer intended for the secondary slave address is complete. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620ae77aae5dc453d1e15692eac1e08a3a0a"></a>CYHAL_EZI2C_STATUS_WRITE2&#160;</td><td class="fielddoc"><p>The Write transfer intended for the secondary slave address is complete </p>
+<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620ae77aae5dc453d1e15692eac1e08a3a0a"></a>CYHAL_EZI2C_STATUS_WRITE2&#160;</td><td class="fielddoc"><p>The Write transfer intended for the secondary slave address is complete. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a92b8b5fb18e9f08b5f86188bf44c51cc"></a>CYHAL_EZI2C_STATUS_BUSY&#160;</td><td class="fielddoc"><p>A transfer intended for the primary address or secondary address is in progress </p>
+<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a92b8b5fb18e9f08b5f86188bf44c51cc"></a>CYHAL_EZI2C_STATUS_BUSY&#160;</td><td class="fielddoc"><p>A transfer intended for the primary address or secondary address is in progress. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a3960bfaec07aae51a3886d36e99d0989"></a>CYHAL_EZI2C_STATUS_ERR&#160;</td><td class="fielddoc"><p>An error occurred during a transfer intended for the primary or secondary slave address </p>
+<tr><td class="fieldname"><a id="gga43af4b9cfed6e50bd96e4f2434678620a3960bfaec07aae51a3886d36e99d0989"></a>CYHAL_EZI2C_STATUS_ERR&#160;</td><td class="fielddoc"><p>An error occurred during a transfer intended for the primary or secondary slave address. </p>
 </td></tr>
 </table>
 
 </div>
 </div>
-<a id="ga64117bd10d8cf53ff1a690e8fbc9a1cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga64117bd10d8cf53ff1a690e8fbc9a1cf">&#9670;&nbsp;</a></span>cyhal_ezi2c_event_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__group__hal__ezi2c.html#ga64117bd10d8cf53ff1a690e8fbc9a1cf">cyhal_ezi2c_event_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Enum to enable/disable/report interrupt cause flags. When an event is triggered the status can be obtained by calling <a class="el" href="group__group__hal__ezi2c.html#gae4a966b68ceb0a9b7b467a288357b35d">cyhal_ezi2c_get_activity_status</a>. </p><dl class="section note"><dt>Note</dt><dd>This is a placeholder for now. It may be extended in the future. </dd></dl>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gae4c6cd6a28cd82adceb060ba5237ff4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae4c6cd6a28cd82adceb060ba5237ff4f">&#9670;&nbsp;</a></span>cyhal_ezi2c_init()</h2>
+<a id="ga0418a0231369904a03c9b19a734a920f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0418a0231369904a03c9b19a734a920f">&#9670;&nbsp;</a></span>cyhal_ezi2c_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -441,19 +384,19 @@ sub_address_size</td>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>sda</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__hw__types__data__structures.html#ga37579d500a1d05905c8f2bea4e907f99">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>scl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__divider__t">cyhal_clock_divider_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *&#160;</td>
           <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
@@ -469,14 +412,16 @@ sub_address_size</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize the EZI2C (slave), and configures its specifieds pins and clock.</p>
+
+<p>Initialize the EZI2C (slave), and configures its specified pins and clock. </p>
+<p>See <a class="el" href="group__group__hal__ezi2c.html#subsection_ezi2c_snippet_1">Snippet 1: EZI2C Initialization and Configuration</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The I2C object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>Pointer to an EZI2C object. The caller must allocate the memory for this object but the init function will initialize its contents. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">sda</td><td>The sda pin </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">scl</td><td>The scl pin </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">clk</td><td>The clock to use can be shared, if NULL a new clock will be allocated </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cfg</td><td>The ezi2c configuration (refer to <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t">cyhal_ezi2c_cfg_t</a> for details) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cfg</td><td>The ezi2c configuration (refer to <a class="el" href="group__group__hal__ezi2c.html#structcyhal__ezi2c__cfg__t" title="Initial EZI2C configuration. ">cyhal_ezi2c_cfg_t</a> for details) </td></tr>
   </table>
   </dd>
 </dl>
@@ -499,7 +444,8 @@ sub_address_size</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Deinitialize the ezi2c object</p>
+
+<p>Deinitialize the ezi2c object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The ezi2c object </td></tr>
@@ -524,7 +470,9 @@ sub_address_size</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>EZI2C slave get activity status This function returns a non-zero value if an I2C Read or Write cycle has occurred since the last time this function was called.</p>
+
+<p>EZI2C slave get activity status This function returns a non-zero value ( <a class="el" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a>) if an I2C Read or Write cycle has occurred since the last time this function was called. </p>
+<p>See <a class="el" href="group__group__hal__ezi2c.html#subsection_ezi2c_snippet_2">Snippet 2: Register Callback function</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The EZI2C object</td></tr>
@@ -550,7 +498,7 @@ sub_address_size</td>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__ezi2c.html#ga606e609d5ea20a4e828c2ad48ebf822e">cyhal_ezi2c_event_callback_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__ezi2c.html#ga0ca75741f7b6f241c28d12a4b9e1487a">cyhal_ezi2c_event_callback_t</a>&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
@@ -566,12 +514,65 @@ sub_address_size</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The EZI2C event callback handler registration</p>
+
+<p>Register a EZI2C event callback handler. </p>
+<p>See <a class="el" href="group__group__hal__ezi2c.html#subsection_ezi2c_snippet_2">Snippet 2: Register Callback function</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The EZI2C object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td>The callback handler which will be invoked when an event triggers </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">callback_arg</td><td>Generic argument that will be provided to the callback when called </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gac81d408ff91899f328b51c4ba3254536"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac81d408ff91899f328b51c4ba3254536">&#9670;&nbsp;</a></span>cyhal_ezi2c_enable_event()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cyhal_ezi2c_enable_event </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__ezi2c__t">cyhal_ezi2c_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__ezi2c.html#ga43af4b9cfed6e50bd96e4f2434678620">cyhal_ezi2c_status_t</a>&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>intr_priority</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure and Enable or Disable EZI2C Interrupt. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The EZI2C object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>The EZI2C event type </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">intr_priority</td><td>The priority for NVIC interrupt events </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>True to turn on interrupts, False to turn off </td></tr>
   </table>
   </dd>
 </dl>

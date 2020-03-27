@@ -93,21 +93,27 @@ $(document).ready(function(){initNavTree('group__group__hal__psoc6__dma__dmac.ht
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>Implementation specific interface for using the DMAC DMA peripheral </p>
+<p>Implementation specific interface for using the DMAC DMA peripheral. </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gaf759c6a26b6cd9d12a7aa83bc04b557d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dmac.html#gaf759c6a26b6cd9d12a7aa83bc04b557d">cyhal_dma_init_dmac</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, uint8_t priority)</td></tr>
+<tr class="memdesc:gaf759c6a26b6cd9d12a7aa83bc04b557d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the DMAC peripheral.  <a href="#gaf759c6a26b6cd9d12a7aa83bc04b557d">More...</a><br /></td></tr>
 <tr class="separator:gaf759c6a26b6cd9d12a7aa83bc04b557d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaedb29aa43229814febd47dd11cbbc3c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dmac.html#gaedb29aa43229814febd47dd11cbbc3c4">cyhal_dma_free_dmac</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj)</td></tr>
+<tr class="memdesc:gaedb29aa43229814febd47dd11cbbc3c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the DMAC specific object.  <a href="#gaedb29aa43229814febd47dd11cbbc3c4">More...</a><br /></td></tr>
 <tr class="separator:gaedb29aa43229814febd47dd11cbbc3c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga33ff9a844572011b1a9abe22dde90ed2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dmac.html#ga33ff9a844572011b1a9abe22dde90ed2">cyhal_dma_configure_dmac</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, const <a class="el" href="group__group__hal__dma.html#structcyhal__dma__cfg__t">cyhal_dma_cfg_t</a> *cfg)</td></tr>
+<tr class="memdesc:ga33ff9a844572011b1a9abe22dde90ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a DMAC descriptor for the dma resource.  <a href="#ga33ff9a844572011b1a9abe22dde90ed2">More...</a><br /></td></tr>
 <tr class="separator:ga33ff9a844572011b1a9abe22dde90ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga010e54ff732063bdd4ca53a58d5941f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dmac.html#ga010e54ff732063bdd4ca53a58d5941f7">cyhal_dma_start_transfer_dmac</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj)</td></tr>
+<tr class="memdesc:ga010e54ff732063bdd4ca53a58d5941f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a DMAC transfer.  <a href="#ga010e54ff732063bdd4ca53a58d5941f7">More...</a><br /></td></tr>
 <tr class="separator:ga010e54ff732063bdd4ca53a58d5941f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga791fa320273ce6b5a1a8d6a66efe1aee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dmac.html#ga791fa320273ce6b5a1a8d6a66efe1aee">cyhal_dma_enable_event_dmac</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, <a class="el" href="group__group__hal__dma.html#gad4507e9f3660b19e1ddc3085a96279e2">cyhal_dma_event_t</a> event, uint8_t intrPriority, bool enable)</td></tr>
-<tr class="separator:ga791fa320273ce6b5a1a8d6a66efe1aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa34dd7e12a4738eef96018416ecbbce0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dmac.html#gaa34dd7e12a4738eef96018416ecbbce0">cyhal_dma_enable_event_dmac</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj, <a class="el" href="group__group__hal__dma.html#gad4507e9f3660b19e1ddc3085a96279e2">cyhal_dma_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memdesc:gaa34dd7e12a4738eef96018416ecbbce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure DMAC event enablement.  <a href="#gaa34dd7e12a4738eef96018416ecbbce0">More...</a><br /></td></tr>
+<tr class="separator:gaa34dd7e12a4738eef96018416ecbbce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaba0d43583e01609ddf92cf70bda76de7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__psoc6__dma__dmac.html#gaba0d43583e01609ddf92cf70bda76de7">cyhal_dma_is_busy_dmac</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dma__t">cyhal_dma_t</a> *obj)</td></tr>
+<tr class="memdesc:gaba0d43583e01609ddf92cf70bda76de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a transfer is pending or running on the DMA channel.  <a href="#gaba0d43583e01609ddf92cf70bda76de7">More...</a><br /></td></tr>
 <tr class="separator:gaba0d43583e01609ddf92cf70bda76de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -136,7 +142,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize the DMAC peripheral</p>
+
+<p>Initialize the DMAC peripheral. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The DMA object to initialize </td></tr>
@@ -163,7 +170,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Frees the DMAC specific object</p>
+
+<p>Frees the DMAC specific object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
@@ -198,7 +206,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Setup a DMAC descriptor for the dma resource</p>
+
+<p>Setup a DMAC descriptor for the dma resource. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
@@ -225,7 +234,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Start a DMAC transfer</p>
+
+<p>Start a DMAC transfer. </p>
 <p>Initiates DMA channel transfer for specified DMA object </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
@@ -236,8 +246,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga791fa320273ce6b5a1a8d6a66efe1aee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga791fa320273ce6b5a1a8d6a66efe1aee">&#9670;&nbsp;</a></span>cyhal_dma_enable_event_dmac()</h2>
+<a id="gaa34dd7e12a4738eef96018416ecbbce0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa34dd7e12a4738eef96018416ecbbce0">&#9670;&nbsp;</a></span>cyhal_dma_enable_event_dmac()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +268,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>intrPriority</em>, </td>
+          <td class="paramname"><em>intr_priority</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -273,12 +283,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Configure DMAC event enablement.</p>
+
+<p>Configure DMAC event enablement. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>The DMA event type </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">intrPriority</td><td>The priority for NVIC interrupt events. The priority from the most recent call will take precedence, i.e all events will have the same priority. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">intr_priority</td><td>The priority for NVIC interrupt events. The priority from the most recent call will take precedence, i.e all events will have the same priority. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>True to turn on interrupts, False to turn off </td></tr>
   </table>
   </dd>
@@ -301,7 +312,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Checks whether a transfer is pending or running on the DMA channel</p>
+
+<p>Checks whether a transfer is pending or running on the DMA channel. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The DMA object </td></tr>

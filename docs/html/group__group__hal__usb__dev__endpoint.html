@@ -88,7 +88,6 @@ $(document).ready(function(){initNavTree('group__group__hal__usb__dev__endpoint.
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -96,164 +95,74 @@ $(document).ready(function(){initNavTree('group__group__hal__usb__dev__endpoint.
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p>APIs relating to endpoint management </p>
+<p>APIs relating to endpoint management. </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga692c047c9e8dd81883b52c43ef9c7f81"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga692c047c9e8dd81883b52c43ef9c7f81">CYHAL_USB_DEV_IS_IN_EP</a>(endpoint)&#160;&#160;&#160;(0U != (0x80U &amp; (uint32_t) (endpoint)))</td></tr>
+<tr class="memitem:ga692c047c9e8dd81883b52c43ef9c7f81"><td class="memItemLeft" align="right" valign="top"><a id="ga692c047c9e8dd81883b52c43ef9c7f81"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga692c047c9e8dd81883b52c43ef9c7f81">CYHAL_USB_DEV_IS_IN_EP</a>(endpoint)&#160;&#160;&#160;(0U != (0x80U &amp; (uint32_t) (endpoint)))</td></tr>
+<tr class="memdesc:ga692c047c9e8dd81883b52c43ef9c7f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if endpoint direction is IN. <br /></td></tr>
 <tr class="separator:ga692c047c9e8dd81883b52c43ef9c7f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa077cda11942124fc133e6637057f58b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa077cda11942124fc133e6637057f58b">CYHAL_USB_DEV_GET_EP_NUM</a>(endpoint)&#160;&#160;&#160;((uint32_t) (endpoint) &amp; 0x0FU)</td></tr>
+<tr class="memitem:gaa077cda11942124fc133e6637057f58b"><td class="memItemLeft" align="right" valign="top"><a id="gaa077cda11942124fc133e6637057f58b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa077cda11942124fc133e6637057f58b">CYHAL_USB_DEV_GET_EP_NUM</a>(endpoint)&#160;&#160;&#160;((uint32_t) (endpoint) &amp; 0x0FU)</td></tr>
+<tr class="memdesc:gaa077cda11942124fc133e6637057f58b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns endpoint number (type uint32_t) <br /></td></tr>
 <tr class="separator:gaa077cda11942124fc133e6637057f58b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga17dc71e801edbd6b7d120319e1185505"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga17dc71e801edbd6b7d120319e1185505">CYHAL_USB_DEV_GET_EP_IDX</a>(endpoint)&#160;&#160;&#160;(<a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa077cda11942124fc133e6637057f58b">CYHAL_USB_DEV_GET_EP_NUM</a>(endpoint) - 1U)</td></tr>
+<tr class="memitem:ga17dc71e801edbd6b7d120319e1185505"><td class="memItemLeft" align="right" valign="top"><a id="ga17dc71e801edbd6b7d120319e1185505"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga17dc71e801edbd6b7d120319e1185505">CYHAL_USB_DEV_GET_EP_IDX</a>(endpoint)&#160;&#160;&#160;(<a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa077cda11942124fc133e6637057f58b">CYHAL_USB_DEV_GET_EP_NUM</a>(endpoint) - 1U)</td></tr>
+<tr class="memdesc:ga17dc71e801edbd6b7d120319e1185505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns endpoint index (type uint32_t) <br /></td></tr>
 <tr class="separator:ga17dc71e801edbd6b7d120319e1185505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:ga62a268fe35f5e68f1faf9b362ee6c307"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a></td></tr>
-<tr class="separator:ga62a268fe35f5e68f1faf9b362ee6c307"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8e9b21021ff08b7d2d53aaaef5c8f1b6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga8e9b21021ff08b7d2d53aaaef5c8f1b6">cyhal_usb_dev_endpoint_callback_t</a>) (<a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
-<tr class="separator:ga8e9b21021ff08b7d2d53aaaef5c8f1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:gaa050c9639ab34294735f8ef572b9e417"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa050c9639ab34294735f8ef572b9e417">cyhal_usb_dev_ep_type_t</a> { <b>CYHAL_USB_DEV_EP_TYPE_CTRL</b> = 0, 
-<b>CYHAL_USB_DEV_EP_TYPE_ISO</b> = 1, 
-<b>CYHAL_USB_DEV_EP_TYPE_BULK</b> = 2, 
-<b>CYHAL_USB_DEV_EP_TYPE_INT</b> = 3
+<tr class="memitem:gaa050c9639ab34294735f8ef572b9e417"><td class="memItemLeft" align="right" valign="top"><a id="gaa050c9639ab34294735f8ef572b9e417"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa050c9639ab34294735f8ef572b9e417">cyhal_usb_dev_ep_type_t</a> { <br />
+&#160;&#160;<b>CYHAL_USB_DEV_EP_TYPE_CTRL</b> = 0, 
+<br />
+&#160;&#160;<b>CYHAL_USB_DEV_EP_TYPE_ISO</b> = 1, 
+<br />
+&#160;&#160;<b>CYHAL_USB_DEV_EP_TYPE_BULK</b> = 2, 
+<br />
+&#160;&#160;<b>CYHAL_USB_DEV_EP_TYPE_INT</b> = 3
+<br />
  }</td></tr>
+<tr class="memdesc:gaa050c9639ab34294735f8ef572b9e417"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Device Endpoints types. <br /></td></tr>
 <tr class="separator:gaa050c9639ab34294735f8ef572b9e417"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga3e695b7f2026ecf6ea125c1b7c765ab8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga3e695b7f2026ecf6ea125c1b7c765ab8">cyhal_usb_dev_endpoint_add</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, bool alloc, bool enable, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, uint32_t maxPacket, <a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa050c9639ab34294735f8ef572b9e417">cyhal_usb_dev_ep_type_t</a> type)</td></tr>
-<tr class="separator:ga3e695b7f2026ecf6ea125c1b7c765ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga45dbdfed4128948d62e06dd95e59429e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga45dbdfed4128948d62e06dd95e59429e">cyhal_usb_dev_endpoint_remove</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memitem:ga19afd43bcec6dc1c3a54cc3d3620bdcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga19afd43bcec6dc1c3a54cc3d3620bdcf">cyhal_usb_dev_endpoint_add</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, bool alloc, bool enable, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, uint32_t max_packet, <a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa050c9639ab34294735f8ef572b9e417">cyhal_usb_dev_ep_type_t</a> type)</td></tr>
+<tr class="memdesc:ga19afd43bcec6dc1c3a54cc3d3620bdcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure an endpoint.  <a href="#ga19afd43bcec6dc1c3a54cc3d3620bdcf">More...</a><br /></td></tr>
+<tr class="separator:ga19afd43bcec6dc1c3a54cc3d3620bdcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga45dbdfed4128948d62e06dd95e59429e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga45dbdfed4128948d62e06dd95e59429e">cyhal_usb_dev_endpoint_remove</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memdesc:ga45dbdfed4128948d62e06dd95e59429e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable an endpoint.  <a href="#ga45dbdfed4128948d62e06dd95e59429e">More...</a><br /></td></tr>
 <tr class="separator:ga45dbdfed4128948d62e06dd95e59429e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7efab105262969a4c711012bbc636bc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga7efab105262969a4c711012bbc636bc6">cyhal_usb_dev_endpoint_stall</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memitem:ga7efab105262969a4c711012bbc636bc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga7efab105262969a4c711012bbc636bc6">cyhal_usb_dev_endpoint_stall</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memdesc:ga7efab105262969a4c711012bbc636bc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a functional stall on the given endpoint.  <a href="#ga7efab105262969a4c711012bbc636bc6">More...</a><br /></td></tr>
 <tr class="separator:ga7efab105262969a4c711012bbc636bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3377902d254aacd757319ed677467bb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga3377902d254aacd757319ed677467bb3">cyhal_usb_dev_endpoint_unstall</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memitem:ga3377902d254aacd757319ed677467bb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga3377902d254aacd757319ed677467bb3">cyhal_usb_dev_endpoint_unstall</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memdesc:ga3377902d254aacd757319ed677467bb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unstall the endpoint.  <a href="#ga3377902d254aacd757319ed677467bb3">More...</a><br /></td></tr>
 <tr class="separator:ga3377902d254aacd757319ed677467bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4f969f88c334c12e5a3975bda054b248"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga4f969f88c334c12e5a3975bda054b248">cyhal_usb_dev_endpoint_is_stalled</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memitem:ga4f969f88c334c12e5a3975bda054b248"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga4f969f88c334c12e5a3975bda054b248">cyhal_usb_dev_endpoint_is_stalled</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memdesc:ga4f969f88c334c12e5a3975bda054b248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the endpoint stall state.  <a href="#ga4f969f88c334c12e5a3975bda054b248">More...</a><br /></td></tr>
 <tr class="separator:ga4f969f88c334c12e5a3975bda054b248"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa5a6c78cc7a6cb089373986cf557b6e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa5a6c78cc7a6cb089373986cf557b6e9">cyhal_usb_dev_endpoint_read</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, uint8_t *data, uint32_t size)</td></tr>
+<tr class="memitem:gaa5a6c78cc7a6cb089373986cf557b6e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa5a6c78cc7a6cb089373986cf557b6e9">cyhal_usb_dev_endpoint_read</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, uint8_t *data, uint32_t size)</td></tr>
+<tr class="memdesc:gaa5a6c78cc7a6cb089373986cf557b6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a read on the given endpoint.  <a href="#gaa5a6c78cc7a6cb089373986cf557b6e9">More...</a><br /></td></tr>
 <tr class="separator:gaa5a6c78cc7a6cb089373986cf557b6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2f7be1637c9bd6a89dba812d7fa74040"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga2f7be1637c9bd6a89dba812d7fa74040">cyhal_usb_dev_endpoint_read_result</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, uint32_t *actSize)</td></tr>
-<tr class="separator:ga2f7be1637c9bd6a89dba812d7fa74040"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga54f6b481864a40165d643ad67900d0b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga54f6b481864a40165d643ad67900d0b7">cyhal_usb_dev_endpoint_write</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, uint8_t const *data, uint32_t size)</td></tr>
+<tr class="memitem:ga2739d5c3160be023a33cbaaf7ea08bc0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga2739d5c3160be023a33cbaaf7ea08bc0">cyhal_usb_dev_endpoint_read_result</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, uint32_t *act_size)</td></tr>
+<tr class="memdesc:ga2739d5c3160be023a33cbaaf7ea08bc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finish a read on the given endpoint.  <a href="#ga2739d5c3160be023a33cbaaf7ea08bc0">More...</a><br /></td></tr>
+<tr class="separator:ga2739d5c3160be023a33cbaaf7ea08bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga54f6b481864a40165d643ad67900d0b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga54f6b481864a40165d643ad67900d0b7">cyhal_usb_dev_endpoint_write</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, uint8_t const *data, uint32_t size)</td></tr>
+<tr class="memdesc:ga54f6b481864a40165d643ad67900d0b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a write on the given endpoint.  <a href="#ga54f6b481864a40165d643ad67900d0b7">More...</a><br /></td></tr>
 <tr class="separator:ga54f6b481864a40165d643ad67900d0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga38b4dec1035874e64c9df78718bdc99c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga38b4dec1035874e64c9df78718bdc99c">cyhal_usb_dev_endpoint_abort</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memitem:ga38b4dec1035874e64c9df78718bdc99c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga38b4dec1035874e64c9df78718bdc99c">cyhal_usb_dev_endpoint_abort</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td></tr>
+<tr class="memdesc:ga38b4dec1035874e64c9df78718bdc99c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort the current transfer if it has not yet been sent.  <a href="#ga38b4dec1035874e64c9df78718bdc99c">More...</a><br /></td></tr>
 <tr class="separator:ga38b4dec1035874e64c9df78718bdc99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga128a701f82f6250a3a907f417959182e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga128a701f82f6250a3a907f417959182e">cyhal_usb_dev_register_endpoint_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga8e9b21021ff08b7d2d53aaaef5c8f1b6">cyhal_usb_dev_endpoint_callback_t</a> callback)</td></tr>
+<tr class="memitem:ga128a701f82f6250a3a907f417959182e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga128a701f82f6250a3a907f417959182e">cyhal_usb_dev_register_endpoint_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__usb__dev__t">cyhal_usb_dev_t</a> *obj, <a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint, <a class="el" href="group__group__hal__usb__dev__common.html#ga8e9b21021ff08b7d2d53aaaef5c8f1b6">cyhal_usb_dev_endpoint_callback_t</a> callback)</td></tr>
+<tr class="memdesc:ga128a701f82f6250a3a907f417959182e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The USB Device endpoint complete callback handler registration.  <a href="#ga128a701f82f6250a3a907f417959182e">More...</a><br /></td></tr>
 <tr class="separator:ga128a701f82f6250a3a907f417959182e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ga692c047c9e8dd81883b52c43ef9c7f81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga692c047c9e8dd81883b52c43ef9c7f81">&#9670;&nbsp;</a></span>CYHAL_USB_DEV_IS_IN_EP</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_USB_DEV_IS_IN_EP</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">endpoint</td><td>)</td>
-          <td>&#160;&#160;&#160;(0U != (0x80U &amp; (uint32_t) (endpoint)))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Returns true if endpoint direction is IN </p>
-
-</div>
-</div>
-<a id="gaa077cda11942124fc133e6637057f58b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa077cda11942124fc133e6637057f58b">&#9670;&nbsp;</a></span>CYHAL_USB_DEV_GET_EP_NUM</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_USB_DEV_GET_EP_NUM</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">endpoint</td><td>)</td>
-          <td>&#160;&#160;&#160;((uint32_t) (endpoint) &amp; 0x0FU)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Returns endpoint number (type uint32_t) </p>
-
-</div>
-</div>
-<a id="ga17dc71e801edbd6b7d120319e1185505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga17dc71e801edbd6b7d120319e1185505">&#9670;&nbsp;</a></span>CYHAL_USB_DEV_GET_EP_IDX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CYHAL_USB_DEV_GET_EP_IDX</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">endpoint</td><td>)</td>
-          <td>&#160;&#160;&#160;(<a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa077cda11942124fc133e6637057f58b">CYHAL_USB_DEV_GET_EP_NUM</a>(endpoint) - 1U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Returns endpoint index (type uint32_t) </p>
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="ga62a268fe35f5e68f1faf9b362ee6c307"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga62a268fe35f5e68f1faf9b362ee6c307">&#9670;&nbsp;</a></span>cyhal_usb_dev_ep_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef uint8_t <a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>USB endpoint address (consists from endpoint number and direction) </p>
-
-</div>
-</div>
-<a id="ga8e9b21021ff08b7d2d53aaaef5c8f1b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8e9b21021ff08b7d2d53aaaef5c8f1b6">&#9670;&nbsp;</a></span>cyhal_usb_dev_endpoint_callback_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(*  cyhal_usb_dev_endpoint_callback_t) (<a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a> endpoint)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Callback handler for the transfer completion event for data endpoints (not applicable for endpoint 0) </p>
-
-</div>
-</div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="gaa050c9639ab34294735f8ef572b9e417"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa050c9639ab34294735f8ef572b9e417">&#9670;&nbsp;</a></span>cyhal_usb_dev_ep_type_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__group__hal__usb__dev__endpoint.html#gaa050c9639ab34294735f8ef572b9e417">cyhal_usb_dev_ep_type_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>USB Device Endpoints types </p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga3e695b7f2026ecf6ea125c1b7c765ab8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3e695b7f2026ecf6ea125c1b7c765ab8">&#9670;&nbsp;</a></span>cyhal_usb_dev_endpoint_add()</h2>
+<a id="ga19afd43bcec6dc1c3a54cc3d3620bdcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga19afd43bcec6dc1c3a54cc3d3620bdcf">&#9670;&nbsp;</a></span>cyhal_usb_dev_endpoint_add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,14 +188,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>maxPacket</em>, </td>
+          <td class="paramname"><em>max_packet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -301,14 +210,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Configure an endpoint.</p>
+
+<p>Configure an endpoint. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">alloc</td><td>True to allocates buffer for the endpoint, false to skip allocation </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>True to enable endpoint operation, false to skip enablement </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to configure and enable </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxPacket</td><td>The maximum packet size that can be sent or received </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_packet</td><td>The maximum packet size that can be sent or received </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>The type of endpoint (does not care when enable parameter is false)</td></tr>
   </table>
   </dd>
@@ -337,7 +247,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -347,10 +257,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Disable an endpoint</p>
+
+<p>Disable an endpoint. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to disable</td></tr>
   </table>
   </dd>
@@ -374,7 +285,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -384,11 +295,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Perform a functional stall on the given endpoint</p>
+
+<p>Perform a functional stall on the given endpoint. </p>
 <p>Set the HALT feature for this endpoint so that all further communication is aborted.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to stall</td></tr>
   </table>
   </dd>
@@ -412,7 +324,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -422,11 +334,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Unstall the endpoint</p>
+
+<p>Unstall the endpoint. </p>
 <p>Clear the HALT feature on this endpoint so communication can resume.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to stall</td></tr>
   </table>
   </dd>
@@ -450,7 +363,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -460,10 +373,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Return the endpoint stall state</p>
+
+<p>Return the endpoint stall state. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to check stall state</td></tr>
   </table>
   </dd>
@@ -487,7 +401,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -509,10 +423,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Start a read on the given endpoint</p>
+
+<p>Start a read on the given endpoint. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to start the read on </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>Buffer to fill with data </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Size of the read buffer. This must be at least the max packet size for this endpoint.</td></tr>
@@ -523,8 +438,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga2f7be1637c9bd6a89dba812d7fa74040"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2f7be1637c9bd6a89dba812d7fa74040">&#9670;&nbsp;</a></span>cyhal_usb_dev_endpoint_read_result()</h2>
+<a id="ga2739d5c3160be023a33cbaaf7ea08bc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2739d5c3160be023a33cbaaf7ea08bc0">&#9670;&nbsp;</a></span>cyhal_usb_dev_endpoint_read_result()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -538,14 +453,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint32_t *&#160;</td>
-          <td class="paramname"><em>actSize</em>&#160;</td>
+          <td class="paramname"><em>act_size</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -554,12 +469,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Finish a read on the given endpoint</p>
+
+<p>Finish a read on the given endpoint. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to check </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">actSize</td><td>Actual number of bytes that was read</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">act_size</td><td>Actual number of bytes that was read</td></tr>
   </table>
   </dd>
 </dl>
@@ -582,7 +498,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -604,10 +520,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Start a write on the given endpoint</p>
+
+<p>Start a write on the given endpoint. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to write to </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>Buffer to write </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Size of data to write</td></tr>
@@ -633,7 +550,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -643,10 +560,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Abort the current transfer if it has not yet been sent</p>
+
+<p>Abort the current transfer if it has not yet been sent. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to abort the transfer on. It is implementation defined if this function has an effect on receive endpoints.</td></tr>
   </table>
   </dd>
@@ -671,13 +589,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga62a268fe35f5e68f1faf9b362ee6c307">cyhal_usb_dev_ep_t</a>&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__endpoint.html#ga8e9b21021ff08b7d2d53aaaef5c8f1b6">cyhal_usb_dev_endpoint_callback_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__usb__dev__common.html#ga8e9b21021ff08b7d2d53aaaef5c8f1b6">cyhal_usb_dev_endpoint_callback_t</a>&#160;</td>
           <td class="paramname"><em>callback</em>&#160;</td>
         </tr>
         <tr>
@@ -687,10 +605,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The USB Device endpoint complete callback handler registration</p>
+
+<p>The USB Device endpoint complete callback handler registration. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The usb device object </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The USB device object </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">endpoint</td><td>Endpoint to registers handler </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td>The callback handler which will be invoked when the endpoint comp </td></tr>
   </table>

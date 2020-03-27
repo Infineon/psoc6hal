@@ -16,8 +16,5 @@ var group__group__hal__psoc6__pin__package =
     [ "PSoC6_03 100-TQFP", "group__group__hal__psoc6__pin__package__psoc6__03__100__tqfp.html", "group__group__hal__psoc6__pin__package__psoc6__03__100__tqfp" ],
     [ "PSoC6_03 49-WLCSP", "group__group__hal__psoc6__pin__package__psoc6__03__49__wlcsp.html", "group__group__hal__psoc6__pin__package__psoc6__03__49__wlcsp" ],
     [ "PSoC6_03 68-QFN", "group__group__hal__psoc6__pin__package__psoc6__03__68__qfn.html", "group__group__hal__psoc6__pin__package__psoc6__03__68__qfn" ],
-    [ "CY_GPIO_CFG_GET_MODE", "group__group__hal__psoc6__pin__package.html#gaf11d14fd085b94021916dee338e2f139", null ],
-    [ "CY_GPIO_CFG_GET_HSIOM", "group__group__hal__psoc6__pin__package.html#ga1b915b31f5fbdd2ba25399b467a84273", null ],
-    [ "cyhal_gpio_mapping_cfg_t", "group__group__hal__psoc6__pin__package.html#ga48b92c387e432bfc22ac50e7c18c8cc1", null ],
     [ "cyhal_port_t", "group__group__hal__psoc6__pin__package.html#gac30c50b470a38324d9a19057ac1eb0be", null ]
 ];

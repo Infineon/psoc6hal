@@ -26,7 +26,7 @@ var group__group__hal__gpio =
     ] ],
     [ "cyhal_gpio_init", "group__group__hal__gpio.html#gab93322030909d3af6a9fc1a3b2eccbaa", null ],
     [ "cyhal_gpio_free", "group__group__hal__gpio.html#gae5ef384dcdef1d08d4a9e88592bda173", null ],
-    [ "cyhal_gpio_configure", "group__group__hal__gpio.html#gab5bce4c54b8236ca70d8eace4fded5e2", null ],
+    [ "cyhal_gpio_configure", "group__group__hal__gpio.html#ga3e5ed18d7f97f80560131311281d3f4c", null ],
     [ "cyhal_gpio_write", "group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291", null ],
     [ "cyhal_gpio_read", "group__group__hal__gpio.html#ga3d38f1dd86c2e74b8ad10f1f6d1945c2", null ],
     [ "cyhal_gpio_toggle", "group__group__hal__gpio.html#gacf9c6cb7d4f6f25828a62d44648b745d", null ],

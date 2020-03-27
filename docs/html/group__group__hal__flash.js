@@ -1,5 +1,6 @@
 var group__group__hal__flash =
 [
+    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
     [ "cyhal_flash_block_info_t", "group__group__hal__flash.html#structcyhal__flash__block__info__t", [
       [ "start_address", "group__group__hal__flash.html#a7066dc8bfd2f85ba0a0a8fa61afe9a9d", null ],
       [ "size", "group__group__hal__flash.html#a28cdf0683abfa135ae3711631cb137a7", null ],
@@ -11,7 +12,6 @@ var group__group__hal__flash =
       [ "block_count", "group__group__hal__flash.html#a4084c53e5f07ca60c8fb3bcbb2af11a4", null ],
       [ "blocks", "group__group__hal__flash.html#abf8824c2c183140e0904dec90cffe877", null ]
     ] ],
-    [ "CYHAL_FLASH_RSLT_ERR_ADDRESS", "group__group__hal__flash.html#gaadb7f0cb44015fc9a6f9abdb9c914f41", null ],
     [ "cyhal_flash_init", "group__group__hal__flash.html#ga669e3789204d0cf9610a85f26a28c55b", null ],
     [ "cyhal_flash_free", "group__group__hal__flash.html#ga27db9641684bfa6d0b64088448b8e050", null ],
     [ "cyhal_flash_get_info", "group__group__hal__flash.html#gaab923541b1d1f71b0b9545306a9c559a", null ],

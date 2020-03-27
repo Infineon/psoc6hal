@@ -1,5 +1,6 @@
 var group__group__hal__sdio =
 [
+    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
     [ "cyhal_sdio_cfg_t", "group__group__hal__sdio.html#structcyhal__sdio__cfg__t", [
       [ "frequencyhal_hz", "group__group__hal__sdio.html#a5a5ce0393c501c3675d683f5076bdd0a", null ],
       [ "block_size", "group__group__hal__sdio.html#a918b317033419d8b40d052a4f88aa91c", null ]
@@ -18,13 +19,10 @@ var group__group__hal__sdio =
     [ "CYHAL_SDIO_SEMA_NOT_INITED", "group__group__hal__sdio.html#gaaa1807174393223ed00adec2ec0e54cf", null ],
     [ "CYHAL_SDIO_FUNC_NOT_SUPPORTED", "group__group__hal__sdio.html#ga160200aaac0169315a0f9f7e4ef20dfa", null ],
     [ "CYHAL_SDIO_CANCELED", "group__group__hal__sdio.html#gaef5dbc5be11e7b7d828e4e422906ba50", null ],
-    [ "CYHAL_SDIO_RSLT_ERR_BAD_PARAM", "group__group__hal__sdio.html#ga1f27b8e1818e538100599a3c3f1f62ff", null ],
-    [ "CYHAL_SDIO_RSLT_ERR_CLOCK", "group__group__hal__sdio.html#ga2a97a51e0fece4c6b155d42480549550", null ],
-    [ "CYHAL_SDIO_RSLT_ERR_SEMA_NOT_INITED", "group__group__hal__sdio.html#gacd25c0029e3749c9b7c35a89f241be06", null ],
-    [ "CYHAL_SDIO_RSLT_ERR_FUNC_RET", "group__group__hal__sdio.html#gab4c2636348981568a62baeb2fcdfa731", null ],
-    [ "CYHAL_SDIO_RSLT_CANCELED", "group__group__hal__sdio.html#ga9648e74eef73b52dcf386af70e3ebe72", null ],
+    [ "CYHAL_SDIO_PM_PENDING_ERROR", "group__group__hal__sdio.html#gae83bcc604a9ac225166c4fd34f823d36", null ],
     [ "cyhal_sdio_event_callback_t", "group__group__hal__sdio.html#ga2d710752e057c4dfddd10e0c699de694", null ],
     [ "cyhal_sdio_command_t", "group__group__hal__sdio.html#ga25cddf5200bffe914579005c59d0c0e3", [
+      [ "CYHAL_SDIO_CMD_GO_IDLE_STATE", "group__group__hal__sdio.html#gga25cddf5200bffe914579005c59d0c0e3a7ca2dcd36a054cc8727854674fac25ab", null ],
       [ "CYHAL_SDIO_CMD_SEND_RELATIVE_ADDR", "group__group__hal__sdio.html#gga25cddf5200bffe914579005c59d0c0e3a02b4ba5ae745a611f7217faee122dc0f", null ],
       [ "CYHAL_SDIO_CMD_IO_SEND_OP_COND", "group__group__hal__sdio.html#gga25cddf5200bffe914579005c59d0c0e3ae2bc26a3263f71c0aa63abd1623de9b0", null ],
       [ "CYHAL_SDIO_CMD_SELECT_CARD", "group__group__hal__sdio.html#gga25cddf5200bffe914579005c59d0c0e3a4085b09bebe2f8e8de956350dd9f48ba", null ],
@@ -33,9 +31,11 @@ var group__group__hal__sdio =
       [ "CYHAL_SDIO_CMD_IO_RW_EXTENDED", "group__group__hal__sdio.html#gga25cddf5200bffe914579005c59d0c0e3a039524638cd3381971564b1d0443ce1a", null ]
     ] ],
     [ "cyhal_transfer_t", "group__group__hal__sdio.html#gad220f74b1594b8832349e120fd7e2b91", [
+      [ "CYHAL_READ", "group__group__hal__sdio.html#ggad220f74b1594b8832349e120fd7e2b91a9cce01d8ef3cf445f99df559a804f9df", null ],
       [ "CYHAL_WRITE", "group__group__hal__sdio.html#ggad220f74b1594b8832349e120fd7e2b91a52c3859afab58f7656ceb99a9688d3b7", null ]
     ] ],
     [ "cyhal_sdio_event_t", "group__group__hal__sdio.html#gaabd12f41a517ee8a5097479ec0101d3a", [
+      [ "CYHAL_SDIO_CMD_COMPLETE", "group__group__hal__sdio.html#ggaabd12f41a517ee8a5097479ec0101d3aa33a10369852ac53d71ff2c5828d03c5a", null ],
       [ "CYHAL_SDIO_XFER_COMPLETE", "group__group__hal__sdio.html#ggaabd12f41a517ee8a5097479ec0101d3aa8b6b40006ded2bc54775075d2fdd1ca2", null ],
       [ "CYHAL_SDIO_BGAP_EVENT", "group__group__hal__sdio.html#ggaabd12f41a517ee8a5097479ec0101d3aae56edd5cd3cbe3369c9f94fee0e3aa84", null ],
       [ "CYHAL_SDIO_DMA_INTERRUPT", "group__group__hal__sdio.html#ggaabd12f41a517ee8a5097479ec0101d3aac2fea62aa5d70c89359f7f773b2cb3c1", null ],
@@ -64,5 +64,5 @@ var group__group__hal__sdio =
     [ "cyhal_sdio_is_busy", "group__group__hal__sdio.html#gad90e4fad46d5d3f656853226ea31ea80", null ],
     [ "cyhal_sdio_abort_async", "group__group__hal__sdio.html#ga631a8d956f11aba63d1c06c1bfd41913", null ],
     [ "cyhal_sdio_register_callback", "group__group__hal__sdio.html#ga578b8e176f1aa9444c2da358547ec3df", null ],
-    [ "cyhal_sdio_enable_event", "group__group__hal__sdio.html#gad5a3a22563fb6347e24039f6170a3e0e", null ]
+    [ "cyhal_sdio_enable_event", "group__group__hal__sdio.html#gad89734727c93fb79714fd94ced75cce5", null ]
 ];

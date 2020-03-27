@@ -1,5 +1,6 @@
 var group__group__hal__rtc =
 [
+    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
     [ "cyhal_alarm_active_t", "group__group__hal__rtc.html#structcyhal__alarm__active__t", [
       [ "en_sec", "group__group__hal__rtc.html#aa36c2142cb8a0dead7b6d40fcd499099", null ],
       [ "en_min", "group__group__hal__rtc.html#a320940624827f9d754184447393a95f0", null ],
@@ -20,8 +21,6 @@ var group__group__hal__rtc =
       [ "dayOfWeek", "group__group__hal__rtc.html#ace4dee25729a2b40b820be71381ef6e8", null ],
       [ "weekOfMonth", "group__group__hal__rtc.html#abf56bc091977265c543ca16fd0189045", null ]
     ] ],
-    [ "CY_RSLT_RTC_NOT_INITIALIZED", "group__group__hal__rtc.html#gaae3e49201de8355a8b8f9bcfd88a2d0b", null ],
-    [ "CY_RSLT_RTC_BAD_ARGUMENT", "group__group__hal__rtc.html#ga6c6143b437306d30ee23482cce83d461", null ],
     [ "cyhal_rtc_event_callback_t", "group__group__hal__rtc.html#ga2fe62b8562ac40925a243c75b0e6810f", null ],
     [ "cyhal_rtc_event_t", "group__group__hal__rtc.html#ga65837a686b1fab2e3b11e0d3ba1fdafe", null ],
     [ "cyhal_rtc_dst_format_t", "group__group__hal__rtc.html#ga70f0bde8db19e6aacbbd72afc1fa3f9f", [
@@ -36,6 +35,7 @@ var group__group__hal__rtc =
     [ "cyhal_rtc_set_dst", "group__group__hal__rtc.html#ga5e6893121f3be9026d5cf4cb10c008bf", null ],
     [ "cyhal_rtc_is_dst", "group__group__hal__rtc.html#ga3e56df18a9506e3d25050d4dabe7fd4c", null ],
     [ "cyhal_rtc_set_alarm", "group__group__hal__rtc.html#ga4281bd53cab53fb245a1e98a618e1679", null ],
+    [ "cyhal_rtc_set_alarm_by_seconds", "group__group__hal__rtc.html#ga2b3a85af9b9b878e8cae824d5f847b88", null ],
     [ "cyhal_rtc_register_callback", "group__group__hal__rtc.html#ga64761d1bb0c23aedc4329b50f8d3361d", null ],
-    [ "cyhal_rtc_enable_event", "group__group__hal__rtc.html#ga155f24733e1c8dad3f38daf490f273f7", null ]
+    [ "cyhal_rtc_enable_event", "group__group__hal__rtc.html#ga92d82cf6e7ca376c5a41004d2d67cd4d", null ]
 ];

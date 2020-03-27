@@ -1,8 +1,9 @@
 var group__group__hal__qspi =
 [
+    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
     [ "cyhal_qspi_command_t", "group__group__hal__qspi.html#structcyhal__qspi__command__t", [
       [ "instruction", "group__group__hal__qspi.html#a08599350f3641e17c920fdc050cb7018", null ],
-      [ "address", "group__group__hal__qspi.html#a8ba1a851d619001c2c00955afa4c268b", null ],
+      [ "address", "group__group__hal__qspi.html#abf4f39284ab8bbc2e42feaaedb58e0ec", null ],
       [ "mode_bits", "group__group__hal__qspi.html#a15223b1038366a5e54e45190e9f7b063", null ],
       [ "dummy_count", "group__group__hal__qspi.html#a972b6ca026d8e28490ab029d431b7a20", null ],
       [ "data", "group__group__hal__qspi.html#aca4af49eaf3ffcc98d6fcaa1b49fb601", null ]
@@ -27,14 +28,19 @@ var group__group__hal__qspi =
     [ "cyhal_qspi_command_t.data", "group__group__hal__qspi.html#structcyhal__qspi__command__t_8data", [
       [ "bus_width", "group__group__hal__qspi.html#aaea78d2eed5d55bf6a19b3a4933520d2", null ]
     ] ],
-    [ "CYHAL_QSPI_RSLT_ERR_BUS_WIDTH", "group__group__hal__qspi.html#gacbb2bfd332dbbd3589ce6677bc068066", null ],
-    [ "CYHAL_QSPI_RSLT_ERR_PIN", "group__group__hal__qspi.html#gaaff3affb5a155c8341d8081c04ba5fc2", null ],
-    [ "CYHAL_QSPI_RSLT_ERR_DATA_SEL", "group__group__hal__qspi.html#ga71bf90ec56d0ff067b535f1ea667fb01", null ],
-    [ "CYHAL_QSPI_RSLT_ERR_INSTANCE", "group__group__hal__qspi.html#ga98afbaa8e54635a5033feffdc5ee3a8d", null ],
-    [ "CYHAL_QSPI_RSLT_ERR_FREQUENCY", "group__group__hal__qspi.html#ga01bf613bc3c9e26af1008d79e1e9cbeb", null ],
     [ "cyhal_qspi_event_callback_t", "group__group__hal__qspi.html#ga42887dff6257345711b353990edb1ab1", null ],
-    [ "cyhal_qspi_bus_width_t", "group__group__hal__qspi.html#gaddc93a79f0708fd53897d0c37bc7544b", null ],
-    [ "cyhal_qspi_size_t", "group__group__hal__qspi.html#ga0633be58b4427d173d1f94c4e6e4e058", null ],
+    [ "cyhal_qspi_bus_width_t", "group__group__hal__qspi.html#gaddc93a79f0708fd53897d0c37bc7544b", [
+      [ "CYHAL_QSPI_CFG_BUS_SINGLE", "group__group__hal__qspi.html#ggaddc93a79f0708fd53897d0c37bc7544bab14f0354fdb42ea40c30274df3eeb74f", null ],
+      [ "CYHAL_QSPI_CFG_BUS_DUAL", "group__group__hal__qspi.html#ggaddc93a79f0708fd53897d0c37bc7544baca253e83014241113acff2120db94c4a", null ],
+      [ "CYHAL_QSPI_CFG_BUS_QUAD", "group__group__hal__qspi.html#ggaddc93a79f0708fd53897d0c37bc7544ba9e084c6cdea0e030633d139720cad303", null ],
+      [ "CYHAL_QSPI_CFG_BUS_OCTAL", "group__group__hal__qspi.html#ggaddc93a79f0708fd53897d0c37bc7544ba29b9bcb8d38a946e6b629d0950cce40d", null ]
+    ] ],
+    [ "cyhal_qspi_size_t", "group__group__hal__qspi.html#ga0633be58b4427d173d1f94c4e6e4e058", [
+      [ "CYHAL_QSPI_CFG_SIZE_8", "group__group__hal__qspi.html#gga0633be58b4427d173d1f94c4e6e4e058a3a800b560a9a1ff08d80174908a5b577", null ],
+      [ "CYHAL_QSPI_CFG_SIZE_16", "group__group__hal__qspi.html#gga0633be58b4427d173d1f94c4e6e4e058ababf1c204fafe33c239c4304ecb7dd0b", null ],
+      [ "CYHAL_QSPI_CFG_SIZE_24", "group__group__hal__qspi.html#gga0633be58b4427d173d1f94c4e6e4e058a3255bb7d1a9fbf71e28c121df749135e", null ],
+      [ "CYHAL_QSPI_CFG_SIZE_32", "group__group__hal__qspi.html#gga0633be58b4427d173d1f94c4e6e4e058a065035b5f8a48d6edfb798e8e3390eed", null ]
+    ] ],
     [ "cyhal_qspi_event_t", "group__group__hal__qspi.html#gadae12b69a94f743b345655ec751d8aad", [
       [ "CYHAL_QSPI_EVENT_NONE", "group__group__hal__qspi.html#ggadae12b69a94f743b345655ec751d8aadac4bda5668bc258f4508d4a1d5cdec9df", null ],
       [ "CYHAL_QSPI_IRQ_TRANSMIT_DONE", "group__group__hal__qspi.html#ggadae12b69a94f743b345655ec751d8aadab1b4499185f082601c68a36c6be0d034", null ],
@@ -49,5 +55,5 @@ var group__group__hal__qspi =
     [ "cyhal_qspi_write_async", "group__group__hal__qspi.html#gab4e9be936651ce19e56c16c0b3ae07af", null ],
     [ "cyhal_qspi_transfer", "group__group__hal__qspi.html#gad2ec06f4a49520a89d6b9e0299d0c1ce", null ],
     [ "cyhal_qspi_register_callback", "group__group__hal__qspi.html#ga3650436f640ed3e7640dafaa90268700", null ],
-    [ "cyhal_qspi_enable_event", "group__group__hal__qspi.html#gaed074770bfe073453581fef037cc006d", null ]
+    [ "cyhal_qspi_enable_event", "group__group__hal__qspi.html#ga133e886b33443ee76ad7239623290079", null ]
 ];

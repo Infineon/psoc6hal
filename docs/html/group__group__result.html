@@ -90,15 +90,17 @@ $(document).ready(function(){initNavTree('group__group__result.html','');});
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">Result Type<div class="ingroups"><a class="el" href="group__group__hal.html">HAL Drivers</a></div></div>  </div>
+<div class="title">Result Type<div class="ingroups"><a class="el" href="group__group__hal__types.html">HAL General Types/Macros</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<p><a class="anchor" id="anchor_general_description"></a> Defines a type and related utilities for function result handling.</p>
-<p>The cy_rslt_t type is a structured bitfield which encodes information about result type, the originating module, and a code for the specific error (or warning etc). In order to extract these individual fields from a cy_rslt_t value, the utility macros <a class="el" href="group__group__result.html#ga9ae9b152a38632a9e0f8620845c6cea9">CY_RSLT_GET_TYPE</a>, <a class="el" href="group__group__result.html#gab959fc67da8489c03d3ab631442393b4">CY_RSLT_GET_MODULE</a>, and <a class="el" href="group__group__result.html#ga5a7fc037210b7ff81c65160e11823443">CY_RSLT_GET_CODE</a> are provided. For example: </p><div class="fragment"><div class="line"><a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = cy_hal_do_operation(arg);</div><div class="line"><span class="comment">// Will be CY_RSLT_TYPE_INFO, CY_RSLT_TYPE_WARNING, CY_RSLT_TYPE_ERROR, or CY_RSLT_TYPE_FATAL</span></div><div class="line">uint8_t type = <a class="code" href="group__group__result.html#ga9ae9b152a38632a9e0f8620845c6cea9">CY_RSLT_GET_TYPE</a>(result)</div><div class="line"><span class="comment">// See the &quot;Modules&quot; section for possible values</span></div><div class="line">uint16_t module_id = <a class="code" href="group__group__result.html#gab959fc67da8489c03d3ab631442393b4">CY_RSLT_GET_MODULE</a>(result);</div><div class="line"><span class="comment">// Specific error codes are defined by each module</span></div><div class="line">uint16_t error_code = <a class="code" href="group__group__result.html#ga5a7fc037210b7ff81c65160e11823443">CY_RSLT_GET_CODE</a>(result);</div></div><!-- fragment --> <table class="memberdecls">
+<p>Defines a type and related utilities for function result handling. </p>
+<p><a class="anchor" id="anchor_general_description"></a>The <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> type is a structured bitfield which encodes information about result type, the originating module, and a code for the specific error (or warning etc). In order to extract these individual fields from a <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> value, the utility macros <a class="el" href="group__group__result.html#ga9ae9b152a38632a9e0f8620845c6cea9">CY_RSLT_GET_TYPE</a>, <a class="el" href="group__group__result.html#gab959fc67da8489c03d3ab631442393b4">CY_RSLT_GET_MODULE</a>, and <a class="el" href="group__group__result.html#ga5a7fc037210b7ff81c65160e11823443">CY_RSLT_GET_CODE</a> are provided. For example: </p><div class="fragment"><div class="line"><a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = cy_hal_do_operation(arg);</div><div class="line"><span class="comment">// Will be CY_RSLT_TYPE_INFO, CY_RSLT_TYPE_WARNING, CY_RSLT_TYPE_ERROR, or CY_RSLT_TYPE_FATAL</span></div><div class="line">uint8_t type = <a class="code" href="group__group__result.html#ga9ae9b152a38632a9e0f8620845c6cea9">CY_RSLT_GET_TYPE</a>(result)</div><div class="line"><span class="comment">// See the &quot;Modules&quot; section for possible values</span></div><div class="line">uint16_t module_id = <a class="code" href="group__group__result.html#gab959fc67da8489c03d3ab631442393b4">CY_RSLT_GET_MODULE</a>(result);</div><div class="line"><span class="comment">// Specific error codes are defined by each module</span></div><div class="line">uint16_t error_code = <a class="code" href="group__group__result.html#ga5a7fc037210b7ff81c65160e11823443">CY_RSLT_GET_CODE</a>(result);</div></div><!-- fragment --> <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:gaf58fac450d9fff4472f03ad68f6e546e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>&#160;&#160;&#160;((<a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>)0x00000000U)</td></tr>
+<tr class="memitem:gaf58fac450d9fff4472f03ad68f6e546e"><td class="memItemLeft" align="right" valign="top"><a id="gaf58fac450d9fff4472f03ad68f6e546e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>&#160;&#160;&#160;((<a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>)0x00000000U)</td></tr>
+<tr class="memdesc:gaf58fac450d9fff4472f03ad68f6e546e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> return value indicating success <br /></td></tr>
 <tr class="separator:gaf58fac450d9fff4472f03ad68f6e546e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -106,43 +108,6 @@ Typedefs</h2></td></tr>
 <tr class="memitem:gaca79700fcc701534ce61778a9bcf57d1"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a></td></tr>
 <tr class="memdesc:gaca79700fcc701534ce61778a9bcf57d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the result of an operation as a structured bitfield.  <a href="#gaca79700fcc701534ce61778a9bcf57d1">More...</a><br /></td></tr>
 <tr class="separator:gaca79700fcc701534ce61778a9bcf57d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga84f32ecb6376e2088d4f048e35f52005"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga84f32ecb6376e2088d4f048e35f52005">cyhal_rslt_module_chip</a> { <br />
-&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a717c803d1524878107ea23d0e6866bcd">CYHAL_RSLT_MODULE_CHIP_HWMGR</a> = CY_RSLT_MODULE_ABSTRACTION_HAL_BASE, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a5d2be4eb2e87e5d4f89f4b01cc69abc1">CYHAL_RSLT_MODULE_ADC</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a381517173cfef57e367895000979e1cb">CYHAL_RSLT_MODULE_COMP</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005ab957798178a7d11049efcba5bf4887fc">CYHAL_RSLT_MODULE_CRC</a>, 
-<br />
-&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a06cacdcbcf43191ea723f86b18ab68e8">CYHAL_RSLT_MODULE_DAC</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a7f8347561e9fbf193dd8b77904163acc">CYHAL_RSLT_MODULE_DMA</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005adae9f9541be461434c4e2011fe477bc3">CYHAL_RSLT_MODULE_FLASH</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a8a22f6926766c2e3e69868ec51c2572b">CYHAL_RSLT_MODULE_GPIO</a>, 
-<br />
-&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a48c873ac3890a78ae0379e725396c607">CYHAL_RSLT_MODULE_I2C</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a8f3c272518c2a32f2455e34137a5180d">CYHAL_RSLT_MODULE_I2S</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005ab9373b6613ccb00bd4dedab0ae06d11c">CYHAL_RSLT_MODULE_INTERCONNECT</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a291ed2da7ed5183c3e2164ab8b6a8c3e">CYHAL_RSLT_MODULE_OPAMP</a>, 
-<br />
-&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a52c9005959fa8236fc262a990d3bd48f">CYHAL_RSLT_MODULE_PDMPCM</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005ac0436b7ec40cb5d645207a8bb23c0e0d">CYHAL_RSLT_MODULE_PWM</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af001a4e0cb1173e8797a0a77c820bf0c">CYHAL_RSLT_MODULE_QSPI</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b">CYHAL_RSLT_MODULE_RTC</a>, 
-<br />
-&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a70df074a301b74eb9ebb1f48e65c9377">CYHAL_RSLT_MODULE_SDHC</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a9b6bd9637f353699d08637ac19f7f6fe">CYHAL_RSLT_MODULE_SDIO</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005ab8eb6c73c4faba6bc4921c84ab03f065">CYHAL_RSLT_MODULE_SPI</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a421e006fc5d9ec6b40ae85276209f526">CYHAL_RSLT_MODULE_SYSTEM</a>, 
-<br />
-&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15">CYHAL_RSLT_MODULE_TIMER</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a9d65008cd494335a5b5decf3533efed2">CYHAL_RSLT_MODULE_TRNG</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a61db0997675c2dc43ad7cf91e7160be5">CYHAL_RSLT_MODULE_UART</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a608cd624d7042ae5d77c6134f7ea382f">CYHAL_RSLT_MODULE_USB</a>, 
-<br />
-&#160;&#160;<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba">CYHAL_RSLT_MODULE_WDT</a>, 
-<a class="el" href="group__group__result.html#gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da">CYHAL_RSLT_MODULE_EZI2C</a>
-<br />
- }</td></tr>
-<tr class="memdesc:ga84f32ecb6376e2088d4f048e35f52005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum to specify module IDs for <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> values returned from the HAL.  <a href="group__group__result.html#ga84f32ecb6376e2088d4f048e35f52005">More...</a><br /></td></tr>
-<tr class="separator:ga84f32ecb6376e2088d4f048e35f52005"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 Fields</h2></td></tr>
@@ -158,19 +123,20 @@ Fields</h2></td></tr>
 <tr class="memdesc:ga5a7fc037210b7ff81c65160e11823443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the result code field.  <a href="#ga5a7fc037210b7ff81c65160e11823443">More...</a><br /></td></tr>
 <tr class="separator:ga5a7fc037210b7ff81c65160e11823443"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga711a53e03635b4f3e21c41aaf9459251"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga711a53e03635b4f3e21c41aaf9459251">CY_RSLT_CREATE</a>(type,  module,  code)</td></tr>
-<tr class="memdesc:ga711a53e03635b4f3e21c41aaf9459251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> value that encodes the specified type, module, and result code. <br />
-  <a href="#ga711a53e03635b4f3e21c41aaf9459251">More...</a><br /></td></tr>
+<tr class="memdesc:ga711a53e03635b4f3e21c41aaf9459251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> value that encodes the specified type, module, and result code.  <a href="#ga711a53e03635b4f3e21c41aaf9459251">More...</a><br /></td></tr>
 <tr class="separator:ga711a53e03635b4f3e21c41aaf9459251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 Result Types</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrpdb574203515eb819dfd259bece7254c3"></a>Defines codes to identify the type of result. </p>
+</td></tr>
 <tr class="memitem:ga611032ac7ceaccf05943b73868e13438"><td class="memItemLeft" align="right" valign="top"><a id="ga611032ac7ceaccf05943b73868e13438"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga611032ac7ceaccf05943b73868e13438">CY_RSLT_TYPE_INFO</a>&#160;&#160;&#160;(0U)</td></tr>
 <tr class="memdesc:ga611032ac7ceaccf05943b73868e13438"><td class="mdescLeft">&#160;</td><td class="mdescRight">The result code is informational-only. <br /></td></tr>
 <tr class="separator:ga611032ac7ceaccf05943b73868e13438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5aa8f2db241158e42052d8940045d2a0"><td class="memItemLeft" align="right" valign="top"><a id="ga5aa8f2db241158e42052d8940045d2a0"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga5aa8f2db241158e42052d8940045d2a0">CY_RSLT_TYPE_WARNING</a>&#160;&#160;&#160;(1U)</td></tr>
-<tr class="memdesc:ga5aa8f2db241158e42052d8940045d2a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The result code is a warning. <br /></td></tr>
+<tr class="memdesc:ga5aa8f2db241158e42052d8940045d2a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The result code is warning of a problem but will proceed. <br /></td></tr>
 <tr class="separator:ga5aa8f2db241158e42052d8940045d2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8d656d344524464af71296f2140a7b37"><td class="memItemLeft" align="right" valign="top"><a id="ga8d656d344524464af71296f2140a7b37"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>&#160;&#160;&#160;(2U)</td></tr>
@@ -183,57 +149,81 @@ Result Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 Modules</h2></td></tr>
-<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrpbf17ac149e2e7a530c677e9bd51d3fd2"></a><a class="anchor" id="anchor_modules"></a> Defines codes to identify the module from which an error originated. For some large libraries, a range of module codes is defined here; see the library documentation for values corresonding to individual modules. </p>
+<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrpbf17ac149e2e7a530c677e9bd51d3fd2"></a><a class="anchor" id="anchor_modules"></a>Defines codes to identify the module from which an error originated. For some large libraries, a range of module codes is defined here; see the library documentation for values corresponding to individual modules. Valid range is 0x0000-0x4000. </p>
 </td></tr>
-<tr class="memitem:gaf229ad57884c3c8e4c5ecc7f217ce8aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaf229ad57884c3c8e4c5ecc7f217ce8aa">CY_RSLT_MODULE_DRIVERS_PDL_BASE</a>&#160;&#160;&#160;(0x0000U)</td></tr>
+<tr class="memitem:gaf229ad57884c3c8e4c5ecc7f217ce8aa"><td class="memItemLeft" align="right" valign="top"><a id="gaf229ad57884c3c8e4c5ecc7f217ce8aa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaf229ad57884c3c8e4c5ecc7f217ce8aa">CY_RSLT_MODULE_DRIVERS_PDL_BASE</a>&#160;&#160;&#160;(0x0000U)</td></tr>
+<tr class="memdesc:gaf229ad57884c3c8e4c5ecc7f217ce8aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base module identifier for peripheral driver library drivers (0x0000 - 0x007F) <br /></td></tr>
 <tr class="separator:gaf229ad57884c3c8e4c5ecc7f217ce8aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga328dd4831cad3621a05e3fad151f9cd5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga328dd4831cad3621a05e3fad151f9cd5">CY_RSLT_MODULE_DRIVERS_WHD_BASE</a>&#160;&#160;&#160;(0x0080U)</td></tr>
+<tr class="memitem:ga328dd4831cad3621a05e3fad151f9cd5"><td class="memItemLeft" align="right" valign="top"><a id="ga328dd4831cad3621a05e3fad151f9cd5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga328dd4831cad3621a05e3fad151f9cd5">CY_RSLT_MODULE_DRIVERS_WHD_BASE</a>&#160;&#160;&#160;(0x0080U)</td></tr>
+<tr class="memdesc:ga328dd4831cad3621a05e3fad151f9cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base module identifier for wireless host driver library modules (0x0080 - 0x00FF) <br /></td></tr>
 <tr class="separator:ga328dd4831cad3621a05e3fad151f9cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaba8505defe4e04a5927b6e0590e256f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaba8505defe4e04a5927b6e0590e256f0">CY_RSLT_MODULE_ABSTRACTION_HAL_BASE</a>&#160;&#160;&#160;(0x0100U)</td></tr>
+<tr class="memdesc:gaba8505defe4e04a5927b6e0590e256f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deprecated.  <a href="#gaba8505defe4e04a5927b6e0590e256f0">More...</a><br /></td></tr>
 <tr class="separator:gaba8505defe4e04a5927b6e0590e256f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4f6360a8bf5a570d6927d50123e95c1d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga4f6360a8bf5a570d6927d50123e95c1d">CY_RSLT_MODULE_ABSTRACTION_BSP</a>&#160;&#160;&#160;(0x0180U)</td></tr>
+<tr class="memitem:gada155710418c5225c8ccaa8e75e9a577"><td class="memItemLeft" align="right" valign="top"><a id="gada155710418c5225c8ccaa8e75e9a577"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gada155710418c5225c8ccaa8e75e9a577">CY_RSLT_MODULE_ABSTRACTION_HAL</a>&#160;&#160;&#160;(0x0100U)</td></tr>
+<tr class="memdesc:gada155710418c5225c8ccaa8e75e9a577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for the Hardware Abstraction Layer. <br /></td></tr>
+<tr class="separator:gada155710418c5225c8ccaa8e75e9a577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4f6360a8bf5a570d6927d50123e95c1d"><td class="memItemLeft" align="right" valign="top"><a id="ga4f6360a8bf5a570d6927d50123e95c1d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga4f6360a8bf5a570d6927d50123e95c1d">CY_RSLT_MODULE_ABSTRACTION_BSP</a>&#160;&#160;&#160;(0x0180U)</td></tr>
+<tr class="memdesc:ga4f6360a8bf5a570d6927d50123e95c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for board support package. <br /></td></tr>
 <tr class="separator:ga4f6360a8bf5a570d6927d50123e95c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9cde2c478cdd2b7f626bc45c2a4a0543"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga9cde2c478cdd2b7f626bc45c2a4a0543">CY_RSLT_MODULE_ABSTRACTION_FS</a>&#160;&#160;&#160;(0x0181U)</td></tr>
+<tr class="memitem:ga9cde2c478cdd2b7f626bc45c2a4a0543"><td class="memItemLeft" align="right" valign="top"><a id="ga9cde2c478cdd2b7f626bc45c2a4a0543"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga9cde2c478cdd2b7f626bc45c2a4a0543">CY_RSLT_MODULE_ABSTRACTION_FS</a>&#160;&#160;&#160;(0x0181U)</td></tr>
+<tr class="memdesc:ga9cde2c478cdd2b7f626bc45c2a4a0543"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for file system abstraction. <br /></td></tr>
 <tr class="separator:ga9cde2c478cdd2b7f626bc45c2a4a0543"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab757b71680be515dd43368895fa73b7d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gab757b71680be515dd43368895fa73b7d">CY_RSLT_MODULE_ABSTRACTION_RESOURCE</a>&#160;&#160;&#160;(0x0182U)</td></tr>
+<tr class="memitem:gab757b71680be515dd43368895fa73b7d"><td class="memItemLeft" align="right" valign="top"><a id="gab757b71680be515dd43368895fa73b7d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gab757b71680be515dd43368895fa73b7d">CY_RSLT_MODULE_ABSTRACTION_RESOURCE</a>&#160;&#160;&#160;(0x0182U)</td></tr>
+<tr class="memdesc:gab757b71680be515dd43368895fa73b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for resource abstraction. <br /></td></tr>
 <tr class="separator:gab757b71680be515dd43368895fa73b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5a59f041b014217d0d699bc3b0ae3cca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga5a59f041b014217d0d699bc3b0ae3cca">CY_RSLT_MODULE_ABSTRACTION_OS</a>&#160;&#160;&#160;(0x0183U)</td></tr>
+<tr class="memitem:ga5a59f041b014217d0d699bc3b0ae3cca"><td class="memItemLeft" align="right" valign="top"><a id="ga5a59f041b014217d0d699bc3b0ae3cca"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga5a59f041b014217d0d699bc3b0ae3cca">CY_RSLT_MODULE_ABSTRACTION_OS</a>&#160;&#160;&#160;(0x0183U)</td></tr>
+<tr class="memdesc:ga5a59f041b014217d0d699bc3b0ae3cca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for rtos abstraction. <br /></td></tr>
 <tr class="separator:ga5a59f041b014217d0d699bc3b0ae3cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad1c76e11af277ca324da1c8516d7d31a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gad1c76e11af277ca324da1c8516d7d31a">CY_RSLT_MODULE_ABSTRACTION_ENV</a>&#160;&#160;&#160;(0x0184U)</td></tr>
+<tr class="memitem:gad1c76e11af277ca324da1c8516d7d31a"><td class="memItemLeft" align="right" valign="top"><a id="gad1c76e11af277ca324da1c8516d7d31a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gad1c76e11af277ca324da1c8516d7d31a">CY_RSLT_MODULE_ABSTRACTION_ENV</a>&#160;&#160;&#160;(0x0184U)</td></tr>
+<tr class="memdesc:gad1c76e11af277ca324da1c8516d7d31a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base identifier for environment abstraction modules (0x0184 - 0x01FF) <br /></td></tr>
 <tr class="separator:gad1c76e11af277ca324da1c8516d7d31a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga809314d87ef1e8f175564e88ccef70a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga809314d87ef1e8f175564e88ccef70a9">CY_RSLT_MODULE_BOARD_LIB_BASE</a>&#160;&#160;&#160;(0x01A0U)</td></tr>
+<tr class="memitem:ga809314d87ef1e8f175564e88ccef70a9"><td class="memItemLeft" align="right" valign="top"><a id="ga809314d87ef1e8f175564e88ccef70a9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga809314d87ef1e8f175564e88ccef70a9">CY_RSLT_MODULE_BOARD_LIB_BASE</a>&#160;&#160;&#160;(0x01A0U)</td></tr>
+<tr class="memdesc:ga809314d87ef1e8f175564e88ccef70a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base module identifier for Board Libraries (0x01A0 - 0x01BF) <br /></td></tr>
 <tr class="separator:ga809314d87ef1e8f175564e88ccef70a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2424e0be0c1e672c829fb3798720465f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga2424e0be0c1e672c829fb3798720465f">CY_RSLT_MODULE_BOARD_LIB_RETARGET_IO</a>&#160;&#160;&#160;(0x1A0U)</td></tr>
+<tr class="memitem:ga2424e0be0c1e672c829fb3798720465f"><td class="memItemLeft" align="right" valign="top"><a id="ga2424e0be0c1e672c829fb3798720465f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga2424e0be0c1e672c829fb3798720465f">CY_RSLT_MODULE_BOARD_LIB_RETARGET_IO</a>&#160;&#160;&#160;(0x1A0U)</td></tr>
+<tr class="memdesc:ga2424e0be0c1e672c829fb3798720465f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for the Retarget IO Board Library. <br /></td></tr>
 <tr class="separator:ga2424e0be0c1e672c829fb3798720465f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaea80fb321cb0b3e298a3a2e90e445d3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaea80fb321cb0b3e298a3a2e90e445d3d">CY_RSLT_MODULE_BOARD_LIB_RGB_LED</a>&#160;&#160;&#160;(0x01A1U)</td></tr>
+<tr class="memitem:gaea80fb321cb0b3e298a3a2e90e445d3d"><td class="memItemLeft" align="right" valign="top"><a id="gaea80fb321cb0b3e298a3a2e90e445d3d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaea80fb321cb0b3e298a3a2e90e445d3d">CY_RSLT_MODULE_BOARD_LIB_RGB_LED</a>&#160;&#160;&#160;(0x01A1U)</td></tr>
+<tr class="memdesc:gaea80fb321cb0b3e298a3a2e90e445d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for the RGB LED Board Library. <br /></td></tr>
 <tr class="separator:gaea80fb321cb0b3e298a3a2e90e445d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0ce9bf3fc06bf768cd32558b44aaaf0f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga0ce9bf3fc06bf768cd32558b44aaaf0f">CY_RSLT_MODULE_BOARD_LIB_SERIAL_FLASH</a>&#160;&#160;&#160;(0x01A2U)</td></tr>
+<tr class="memitem:ga0ce9bf3fc06bf768cd32558b44aaaf0f"><td class="memItemLeft" align="right" valign="top"><a id="ga0ce9bf3fc06bf768cd32558b44aaaf0f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga0ce9bf3fc06bf768cd32558b44aaaf0f">CY_RSLT_MODULE_BOARD_LIB_SERIAL_FLASH</a>&#160;&#160;&#160;(0x01A2U)</td></tr>
+<tr class="memdesc:ga0ce9bf3fc06bf768cd32558b44aaaf0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for the Serial Flash Board Library. <br /></td></tr>
 <tr class="separator:ga0ce9bf3fc06bf768cd32558b44aaaf0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga76bcb30b36e7fea0c8165c55e561de73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga76bcb30b36e7fea0c8165c55e561de73">CY_RSLT_MODULE_BOARD_SHIELD_BASE</a>&#160;&#160;&#160;(0x01C0U)</td></tr>
+<tr class="memitem:ga927ff40c1f2cbe51a3c5c3f52c533e57"><td class="memItemLeft" align="right" valign="top"><a id="ga927ff40c1f2cbe51a3c5c3f52c533e57"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga927ff40c1f2cbe51a3c5c3f52c533e57">CY_RSLT_MODULE_BOARD_LIB_WHD_INTEGRATION</a>&#160;&#160;&#160;(0x01A3U)</td></tr>
+<tr class="memdesc:ga927ff40c1f2cbe51a3c5c3f52c533e57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for the WiFi Host Driver + Board Support Integration Library. <br /></td></tr>
+<tr class="separator:ga927ff40c1f2cbe51a3c5c3f52c533e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga76bcb30b36e7fea0c8165c55e561de73"><td class="memItemLeft" align="right" valign="top"><a id="ga76bcb30b36e7fea0c8165c55e561de73"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga76bcb30b36e7fea0c8165c55e561de73">CY_RSLT_MODULE_BOARD_SHIELD_BASE</a>&#160;&#160;&#160;(0x01C0U)</td></tr>
+<tr class="memdesc:ga76bcb30b36e7fea0c8165c55e561de73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base module identifier for Shield Board Libraries (0x01C0 - 0x01FF) <br /></td></tr>
 <tr class="separator:ga76bcb30b36e7fea0c8165c55e561de73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa5b8e84947e9bf1a7fb5d8003ef276bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaa5b8e84947e9bf1a7fb5d8003ef276bf">CY_RSLT_MODULE_BOARD_SHIELD_028_EPD</a>&#160;&#160;&#160;(0x01C0U)</td></tr>
+<tr class="memitem:gaa5b8e84947e9bf1a7fb5d8003ef276bf"><td class="memItemLeft" align="right" valign="top"><a id="gaa5b8e84947e9bf1a7fb5d8003ef276bf"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#gaa5b8e84947e9bf1a7fb5d8003ef276bf">CY_RSLT_MODULE_BOARD_SHIELD_028_EPD</a>&#160;&#160;&#160;(0x01C0U)</td></tr>
+<tr class="memdesc:gaa5b8e84947e9bf1a7fb5d8003ef276bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for Shield Board CY8CKIT-028-EPD. <br /></td></tr>
 <tr class="separator:gaa5b8e84947e9bf1a7fb5d8003ef276bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga40e8ea560bec96d98a8397308ce773cd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga40e8ea560bec96d98a8397308ce773cd">CY_RSLT_MODULE_BOARD_SHIELD_028_TFT</a>&#160;&#160;&#160;(0x01C1U)</td></tr>
+<tr class="memitem:ga40e8ea560bec96d98a8397308ce773cd"><td class="memItemLeft" align="right" valign="top"><a id="ga40e8ea560bec96d98a8397308ce773cd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga40e8ea560bec96d98a8397308ce773cd">CY_RSLT_MODULE_BOARD_SHIELD_028_TFT</a>&#160;&#160;&#160;(0x01C1U)</td></tr>
+<tr class="memdesc:ga40e8ea560bec96d98a8397308ce773cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module identifier for Shield Board CY8CKIT-028-TFT. <br /></td></tr>
 <tr class="separator:ga40e8ea560bec96d98a8397308ce773cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2db34d05e5194f919d6cc45957dc5047"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga2db34d05e5194f919d6cc45957dc5047">CY_RSLT_MODULE_MIDDLEWARE_BASE</a>&#160;&#160;&#160;(0x0200U)</td></tr>
+<tr class="memitem:ga2db34d05e5194f919d6cc45957dc5047"><td class="memItemLeft" align="right" valign="top"><a id="ga2db34d05e5194f919d6cc45957dc5047"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__result.html#ga2db34d05e5194f919d6cc45957dc5047">CY_RSLT_MODULE_MIDDLEWARE_BASE</a>&#160;&#160;&#160;(0x0200U)</td></tr>
+<tr class="memdesc:ga2db34d05e5194f919d6cc45957dc5047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base module identifier for Middleware Libraries (0x0200 - 0x02FF) <br /></td></tr>
 <tr class="separator:ga2db34d05e5194f919d6cc45957dc5047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="gaf58fac450d9fff4472f03ad68f6e546e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf58fac450d9fff4472f03ad68f6e546e">&#9670;&nbsp;</a></span>CY_RSLT_SUCCESS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_SUCCESS&#160;&#160;&#160;((<a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>)0x00000000U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> return value indicating success </p>
-
-</div>
-</div>
 <a id="ga9ae9b152a38632a9e0f8620845c6cea9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga9ae9b152a38632a9e0f8620845c6cea9">&#9670;&nbsp;</a></span>CY_RSLT_GET_TYPE</h2>
 
@@ -344,48 +334,15 @@ Modules</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">((((module) &amp; CY_RSLT_MODULE_MASK) &lt;&lt; CY_RSLT_MODULE_POSITION) | \</div><div class="line">    (((code) &amp; CY_RSLT_CODE_MASK) &lt;&lt; CY_RSLT_CODE_POSITION) | \</div><div class="line">    (((type) &amp; CY_RSLT_TYPE_MASK) &lt;&lt; CY_RSLT_TYPE_POSITION))</div></div><!-- fragment -->
-<p>Create a new <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> value that encodes the specified type, module, and result code. <br />
- </p>
+<p>Create a new <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> value that encodes the specified type, module, and result code. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">type</td><td>one of <a class="el" href="group__group__result.html#ga611032ac7ceaccf05943b73868e13438">CY_RSLT_TYPE_INFO</a>, <a class="el" href="group__group__result.html#ga5aa8f2db241158e42052d8940045d2a0">CY_RSLT_TYPE_WARNING</a>, <a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#ga2bc4a48af22980d72766f825eda62658">CY_RSLT_TYPE_FATAL</a> <br />
-</td></tr>
-    <tr><td class="paramname">module</td><td>Identifies the module where this result originated; see <a class="el" href="group__group__result.html#anchor_modules">Modules</a>. <br />
-</td></tr>
+    <tr><td class="paramname">type</td><td>one of <a class="el" href="group__group__result.html#ga611032ac7ceaccf05943b73868e13438">CY_RSLT_TYPE_INFO</a>, <a class="el" href="group__group__result.html#ga5aa8f2db241158e42052d8940045d2a0">CY_RSLT_TYPE_WARNING</a>, <a class="el" href="group__group__result.html#ga8d656d344524464af71296f2140a7b37">CY_RSLT_TYPE_ERROR</a>, <a class="el" href="group__group__result.html#ga2bc4a48af22980d72766f825eda62658">CY_RSLT_TYPE_FATAL</a> </td></tr>
+    <tr><td class="paramname">module</td><td>Identifies the module where this result originated; see <a class="el" href="group__group__result.html#anchor_modules">Modules</a>. </td></tr>
     <tr><td class="paramname">code</td><td>a module-defined identifier to identify the specific situation that this result describes. </td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="gaf229ad57884c3c8e4c5ecc7f217ce8aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf229ad57884c3c8e4c5ecc7f217ce8aa">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_DRIVERS_PDL_BASE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_DRIVERS_PDL_BASE&#160;&#160;&#160;(0x0000U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Base module identifier for peripheral driver library drivers (0x0000 - 0x007F) </p>
-
-</div>
-</div>
-<a id="ga328dd4831cad3621a05e3fad151f9cd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga328dd4831cad3621a05e3fad151f9cd5">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_DRIVERS_WHD_BASE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_DRIVERS_WHD_BASE&#160;&#160;&#160;(0x0080U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Base module identifier for wireless host driver library modules (0x0080 - 0x00FF) </p>
 
 </div>
 </div>
@@ -400,202 +357,9 @@ Modules</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Base module identifier for HAL drivers (0x0100 - 0x017F) </p>
 
-</div>
-</div>
-<a id="ga4f6360a8bf5a570d6927d50123e95c1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4f6360a8bf5a570d6927d50123e95c1d">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_ABSTRACTION_BSP</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_ABSTRACTION_BSP&#160;&#160;&#160;(0x0180U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for board support package </p>
-
-</div>
-</div>
-<a id="ga9cde2c478cdd2b7f626bc45c2a4a0543"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9cde2c478cdd2b7f626bc45c2a4a0543">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_ABSTRACTION_FS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_ABSTRACTION_FS&#160;&#160;&#160;(0x0181U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for file system abstraction </p>
-
-</div>
-</div>
-<a id="gab757b71680be515dd43368895fa73b7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab757b71680be515dd43368895fa73b7d">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_ABSTRACTION_RESOURCE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_ABSTRACTION_RESOURCE&#160;&#160;&#160;(0x0182U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for resource abstraction </p>
-
-</div>
-</div>
-<a id="ga5a59f041b014217d0d699bc3b0ae3cca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5a59f041b014217d0d699bc3b0ae3cca">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_ABSTRACTION_OS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_ABSTRACTION_OS&#160;&#160;&#160;(0x0183U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for rtos abstraction </p>
-
-</div>
-</div>
-<a id="gad1c76e11af277ca324da1c8516d7d31a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad1c76e11af277ca324da1c8516d7d31a">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_ABSTRACTION_ENV</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_ABSTRACTION_ENV&#160;&#160;&#160;(0x0184U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Base identifier for environment abstraction modules (0x0184 - 0x01FF) </p>
-
-</div>
-</div>
-<a id="ga809314d87ef1e8f175564e88ccef70a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga809314d87ef1e8f175564e88ccef70a9">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_LIB_BASE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_BOARD_LIB_BASE&#160;&#160;&#160;(0x01A0U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Base module identifier for Board Libraries (0x01A0 - 0x01BF) </p>
-
-</div>
-</div>
-<a id="ga2424e0be0c1e672c829fb3798720465f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2424e0be0c1e672c829fb3798720465f">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_LIB_RETARGET_IO</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_BOARD_LIB_RETARGET_IO&#160;&#160;&#160;(0x1A0U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for the Retarget IO Board Library </p>
-
-</div>
-</div>
-<a id="gaea80fb321cb0b3e298a3a2e90e445d3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaea80fb321cb0b3e298a3a2e90e445d3d">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_LIB_RGB_LED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_BOARD_LIB_RGB_LED&#160;&#160;&#160;(0x01A1U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for the RGB LED Board Library </p>
-
-</div>
-</div>
-<a id="ga0ce9bf3fc06bf768cd32558b44aaaf0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0ce9bf3fc06bf768cd32558b44aaaf0f">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_LIB_SERIAL_FLASH</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_BOARD_LIB_SERIAL_FLASH&#160;&#160;&#160;(0x01A2U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for the Serial Flash Board Library </p>
-
-</div>
-</div>
-<a id="ga76bcb30b36e7fea0c8165c55e561de73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga76bcb30b36e7fea0c8165c55e561de73">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_SHIELD_BASE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_BOARD_SHIELD_BASE&#160;&#160;&#160;(0x01C0U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Base module identifier for Shield Board Libraries (0x01C0 - 0x01FF) </p>
-
-</div>
-</div>
-<a id="gaa5b8e84947e9bf1a7fb5d8003ef276bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa5b8e84947e9bf1a7fb5d8003ef276bf">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_SHIELD_028_EPD</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_BOARD_SHIELD_028_EPD&#160;&#160;&#160;(0x01C0U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for Shield Board CY8CKIT-028-EPD </p>
-
-</div>
-</div>
-<a id="ga40e8ea560bec96d98a8397308ce773cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga40e8ea560bec96d98a8397308ce773cd">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_BOARD_SHIELD_028_TFT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_BOARD_SHIELD_028_TFT&#160;&#160;&#160;(0x01C1U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Module identifier for Shield Board CY8CKIT-028-TFT </p>
-
-</div>
-</div>
-<a id="ga2db34d05e5194f919d6cc45957dc5047"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2db34d05e5194f919d6cc45957dc5047">&#9670;&nbsp;</a></span>CY_RSLT_MODULE_MIDDLEWARE_BASE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CY_RSLT_MODULE_MIDDLEWARE_BASE&#160;&#160;&#160;(0x0200U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Base module identifier for Middleware Libraries (0x0200 - 0x02FF) </p>
+<p>Deprecated. </p>
+<p>Use <a class="el" href="group__group__result.html#gada155710418c5225c8ccaa8e75e9a577">CY_RSLT_MODULE_ABSTRACTION_HAL</a> </p>
 
 </div>
 </div>
@@ -614,78 +378,6 @@ Modules</h2></td></tr>
 
 <p>Provides the result of an operation as a structured bitfield. </p>
 <p>See the <a class="el" href="group__group__result.html#anchor_general_description">General Description</a> for more details on structure and usage. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="ga84f32ecb6376e2088d4f048e35f52005"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga84f32ecb6376e2088d4f048e35f52005">&#9670;&nbsp;</a></span>cyhal_rslt_module_chip</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__group__result.html#ga84f32ecb6376e2088d4f048e35f52005">cyhal_rslt_module_chip</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Enum to specify module IDs for <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> values returned from the HAL. </p>
-<p>Enum definition for all HAL resource modules.Enum to in indicate which module an errors occurred in. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a717c803d1524878107ea23d0e6866bcd"></a>CYHAL_RSLT_MODULE_CHIP_HWMGR&#160;</td><td class="fielddoc"><p>An error occurred in hardware management module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a5d2be4eb2e87e5d4f89f4b01cc69abc1"></a>CYHAL_RSLT_MODULE_ADC&#160;</td><td class="fielddoc"><p>An error occurred in ADC module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a381517173cfef57e367895000979e1cb"></a>CYHAL_RSLT_MODULE_COMP&#160;</td><td class="fielddoc"><p>An error occurred in comparator module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab957798178a7d11049efcba5bf4887fc"></a>CYHAL_RSLT_MODULE_CRC&#160;</td><td class="fielddoc"><p>An error occurred in crypto CRC module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a06cacdcbcf43191ea723f86b18ab68e8"></a>CYHAL_RSLT_MODULE_DAC&#160;</td><td class="fielddoc"><p>An error occurred in DAC module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a7f8347561e9fbf193dd8b77904163acc"></a>CYHAL_RSLT_MODULE_DMA&#160;</td><td class="fielddoc"><p>An error occurred in DMA module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005adae9f9541be461434c4e2011fe477bc3"></a>CYHAL_RSLT_MODULE_FLASH&#160;</td><td class="fielddoc"><p>An error occurred in flash module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a8a22f6926766c2e3e69868ec51c2572b"></a>CYHAL_RSLT_MODULE_GPIO&#160;</td><td class="fielddoc"><p>An error occurred in GPIO module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a48c873ac3890a78ae0379e725396c607"></a>CYHAL_RSLT_MODULE_I2C&#160;</td><td class="fielddoc"><p>An error occurred in I2C module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a8f3c272518c2a32f2455e34137a5180d"></a>CYHAL_RSLT_MODULE_I2S&#160;</td><td class="fielddoc"><p>An error occurred in I2S module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab9373b6613ccb00bd4dedab0ae06d11c"></a>CYHAL_RSLT_MODULE_INTERCONNECT&#160;</td><td class="fielddoc"><p>An error occurred in Interconnct module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a291ed2da7ed5183c3e2164ab8b6a8c3e"></a>CYHAL_RSLT_MODULE_OPAMP&#160;</td><td class="fielddoc"><p>An error occurred in OpAmp module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a52c9005959fa8236fc262a990d3bd48f"></a>CYHAL_RSLT_MODULE_PDMPCM&#160;</td><td class="fielddoc"><p>An error occurred in PDM/PCM module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ac0436b7ec40cb5d645207a8bb23c0e0d"></a>CYHAL_RSLT_MODULE_PWM&#160;</td><td class="fielddoc"><p>An error occurred in PWM module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005af001a4e0cb1173e8797a0a77c820bf0c"></a>CYHAL_RSLT_MODULE_QSPI&#160;</td><td class="fielddoc"><p>An error occurred in QSPI module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a14d37547bcd694a6e968b9acf3eadd7b"></a>CYHAL_RSLT_MODULE_RTC&#160;</td><td class="fielddoc"><p>An error occurred in RTC module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a70df074a301b74eb9ebb1f48e65c9377"></a>CYHAL_RSLT_MODULE_SDHC&#160;</td><td class="fielddoc"><p>An error occurred in SDHC module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a9b6bd9637f353699d08637ac19f7f6fe"></a>CYHAL_RSLT_MODULE_SDIO&#160;</td><td class="fielddoc"><p>An error occurred in SDIO module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005ab8eb6c73c4faba6bc4921c84ab03f065"></a>CYHAL_RSLT_MODULE_SPI&#160;</td><td class="fielddoc"><p>An error occurred in SPI module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a421e006fc5d9ec6b40ae85276209f526"></a>CYHAL_RSLT_MODULE_SYSTEM&#160;</td><td class="fielddoc"><p>An error occurred in System module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a95968938f689d6e820293e66ffd59b15"></a>CYHAL_RSLT_MODULE_TIMER&#160;</td><td class="fielddoc"><p>An error occurred in Timer module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a9d65008cd494335a5b5decf3533efed2"></a>CYHAL_RSLT_MODULE_TRNG&#160;</td><td class="fielddoc"><p>An error occurred in RNG module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a61db0997675c2dc43ad7cf91e7160be5"></a>CYHAL_RSLT_MODULE_UART&#160;</td><td class="fielddoc"><p>An error occurred in UART module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a608cd624d7042ae5d77c6134f7ea382f"></a>CYHAL_RSLT_MODULE_USB&#160;</td><td class="fielddoc"><p>An error occurred in USB module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005a012172915d19c167e1db5ff7e188adba"></a>CYHAL_RSLT_MODULE_WDT&#160;</td><td class="fielddoc"><p>An error occurred in WDT module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga84f32ecb6376e2088d4f048e35f52005af4818692bb8ff6b7b19c2b15e395c1da"></a>CYHAL_RSLT_MODULE_EZI2C&#160;</td><td class="fielddoc"><p>An error occurred in EZI2C module. </p>
-</td></tr>
-</table>
 
 </div>
 </div>

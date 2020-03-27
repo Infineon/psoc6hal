@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['port_20specific_20hardware_20types',['Port Specific Hardware Types',['../group__group__hal__hw__types__data__structures.html',1,'']]],
+  ['pdm_2fpcm_20_28pulse_2ddensity_20modulation_20to_20pulse_2dcode_20modulation_20converter_29',['PDM/PCM (Pulse-Density Modulation to Pulse-Code Modulation Converter)',['../group__group__hal__pdmpcm.html',1,'']]],
   ['psoc_206_20implementation_20specific',['PSoC 6 Implementation Specific',['../group__group__hal__psoc6.html',1,'']]],
-  ['psoc6_20specific_20hardware_20types',['PSoC6 Specific Hardware Types',['../group__group__hal__psoc6__hw__types.html',1,'']]],
+  ['psoc_206_20specific_20hardware_20types',['PSoC 6 Specific Hardware Types',['../group__group__hal__psoc6__hw__types.html',1,'']]],
+  ['pdm_2fpcm_20_28pulse_20density_20modulation_20to_20pulse_20code_20modulation_20converter_29',['PDM/PCM (Pulse Density Modulation to Pulse Code Modulation Converter)',['../group__group__hal__psoc6__pdmpcm.html',1,'']]],
   ['pins',['Pins',['../group__group__hal__psoc6__pin__package.html',1,'']]],
   ['psoc6_5f01_20104_2dm_2dcsp_2dble',['PSoC6_01 104-M-CSP-BLE',['../group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html',1,'']]],
   ['psoc6_5f01_20104_2dm_2dcsp_2dble_2dusb',['PSoC6_01 104-M-CSP-BLE-USB',['../group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble__usb.html',1,'']]],
