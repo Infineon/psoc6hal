@@ -48,5 +48,6 @@ var group__group__hal__syspm =
     [ "cyhal_syspm_deepsleep", "group__group__hal__syspm.html#ga0afe7e58c0df4a2eda5010ac628ea981", null ],
     [ "cyhal_syspm_lock_deepsleep", "group__group__hal__syspm.html#ga3568214a6038240239f99768fe6707d6", null ],
     [ "cyhal_syspm_unlock_deepsleep", "group__group__hal__syspm.html#ga028b85f03d4607ccac8494b46ec8413c", null ],
-    [ "cyhal_syspm_tickless_deepsleep", "group__group__hal__syspm.html#ga2217e0c4c24cc5fe14d5765681de191d", null ]
+    [ "cyhal_syspm_tickless_deepsleep", "group__group__hal__syspm.html#ga2217e0c4c24cc5fe14d5765681de191d", null ],
+    [ "cyhal_syspm_tickless_sleep", "group__group__hal__syspm.html#ga777835c494bbea3923a4cf9795249fd6", null ]
 ];

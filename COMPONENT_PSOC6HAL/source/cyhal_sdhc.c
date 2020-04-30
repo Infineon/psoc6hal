@@ -291,6 +291,12 @@ static bool cyhal_sdio_syspm_callback(cyhal_syspm_callback_state_t state, cyhal_
                 break;
             }
 
+            case CYHAL_SYSPM_BEFORE_TRANSITION:
+            {
+                /* Nothing to do */
+                break;
+            }
+
             case CYHAL_SYSPM_AFTER_TRANSITION:
             case CYHAL_SYSPM_CHECK_FAIL:
             {
@@ -347,6 +353,12 @@ static bool cyhal_sdhc_syspm_callback(cyhal_syspm_callback_state_t state, cyhal_
                     /* Set transition flag to prevent any further transaction */
                     obj->pm_transition_pending = true;
                 }
+                break;
+            }
+
+            case CYHAL_SYSPM_BEFORE_TRANSITION:
+            {
+                /* Nothing to do */
                 break;
             }
 
@@ -786,7 +798,10 @@ cy_rslt_t cyhal_sdhc_init(cyhal_sdhc_t *obj,
             obj->pm_callback_data.states = (cyhal_syspm_callback_state_t)(CYHAL_SYSPM_CB_CPU_DEEPSLEEP | CYHAL_SYSPM_CB_SYSTEM_HIBERNATE);
             obj->pm_callback_data.next = NULL;
             obj->pm_callback_data.args = obj;
-            obj->pm_callback_data.ignore_modes = CYHAL_SYSPM_BEFORE_TRANSITION,
+            /* The CYHAL_SYSPM_BEFORE_TRANSITION mode cannot be ignored because the PM handler
+             * calls the PDL deep-sleep callback that disables the block in this mode before transitioning.
+             */
+            obj->pm_callback_data.ignore_modes = (cyhal_syspm_callback_mode_t)0,
 
             cyhal_syspm_register_peripheral_callback(&obj->pm_callback_data);
         }
@@ -1292,7 +1307,10 @@ cy_rslt_t cyhal_sdio_init(cyhal_sdio_t *obj, cyhal_gpio_t cmd, cyhal_gpio_t clk,
                     obj->pm_callback_data.states = (cyhal_syspm_callback_state_t)(CYHAL_SYSPM_CB_CPU_DEEPSLEEP | CYHAL_SYSPM_CB_SYSTEM_HIBERNATE);
                     obj->pm_callback_data.next = NULL;
                     obj->pm_callback_data.args = obj;
-                    obj->pm_callback_data.ignore_modes = CYHAL_SYSPM_BEFORE_TRANSITION;
+                    /* The CYHAL_SYSPM_BEFORE_TRANSITION mode cannot be ignored because the PM handler
+                     * calls the PDL deep-sleep callback that disables the block in this mode before transitioning.
+                     */
+                    obj->pm_callback_data.ignore_modes = (cyhal_syspm_callback_mode_t)0;
 
                     cyhal_syspm_register_peripheral_callback(&obj->pm_callback_data);
                 }

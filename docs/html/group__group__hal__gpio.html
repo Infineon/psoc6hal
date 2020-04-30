@@ -286,22 +286,31 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>When the <b> drive_mode </b> of the <b> pin </b> is set to <b> CYHAL_GPIO_DRIVE_PULL_NONE </b>, it is set to <b> CYHAL_GPIO_DRIVE_STRONG </b> if the <b> direction </b> of the <b> pin </b> is <b> CYHAL_GPIO_DIR_OUTPUT </b> or <b> CYHAL_GPIO_DIR_BIDIRECTIONAL</b>. If not, the <b> drive_mode </b> of the <b> pin </b> is set to <b> CYHAL_GPIO_DRIVE_NONE</b>. </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2a181685dd155f58d036420b61778a7394"></a>CYHAL_GPIO_DRIVE_NONE&#160;</td><td class="fielddoc"><p>Digital Hi-Z. </p>
+<p>Input only. Input init value(s): 0 or 1 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2add31d230860a15fb28b1c51aeb34f3d7"></a>CYHAL_GPIO_DRIVE_ANALOG&#160;</td><td class="fielddoc"><p>Analog Hi-Z. </p>
+<p>Use only for analog purpose </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2a062567632c803124bc394a1e0ea36e80"></a>CYHAL_GPIO_DRIVE_PULLUP&#160;</td><td class="fielddoc"><p>Pull-up resistor. </p>
+<p>Input and output. Input init value(s): 1, output value(s): 0 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2aa71fcf0c207fb35936fe3e41c39ff043"></a>CYHAL_GPIO_DRIVE_PULLDOWN&#160;</td><td class="fielddoc"><p>Pull-down resistor. </p>
+<p>Input and output. Input init value(s): 0, output value(s): 1 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2a9c51fc7bcc4196c011af96495d358d95"></a>CYHAL_GPIO_DRIVE_OPENDRAINDRIVESLOW&#160;</td><td class="fielddoc"><p>Open-drain, Drives Low. </p>
+<p>Input and output. Input init value(s): 1, output value(s): 0 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2ae233e78cc7f6df331630ef11c243a9ac"></a>CYHAL_GPIO_DRIVE_OPENDRAINDRIVESHIGH&#160;</td><td class="fielddoc"><p>Open-drain, Drives High. </p>
+<p>Input and output. Input init value(s): 0, output value(s): 1 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2a697e0520cb1b71b748bb76eaafb3ad1b"></a>CYHAL_GPIO_DRIVE_STRONG&#160;</td><td class="fielddoc"><p>Strong output. </p>
+<p>Output only. Output init value(s): 0 or 1 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2a42913f4c174583d37970c81aa6a20a5a"></a>CYHAL_GPIO_DRIVE_PULLUPDOWN&#160;</td><td class="fielddoc"><p>Pull-up and pull-down resistors. </p>
+<p>Input and output. Input init value(s): 0 or 1, output value(s): 0 or 1 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga2eb76143375648febb0ef73f00a681b2abe59e87a4fa3903889d94d13b2f09a38"></a>CYHAL_GPIO_DRIVE_PULL_NONE&#160;</td><td class="fielddoc"><p>No Pull-up or pull-down resistors. </p>
+<p>Input and output. Input init value(s): 0 or 1, output value(s): 0 or 1 </p>
 </td></tr>
 </table>
 
@@ -357,7 +366,8 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the init request </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the init request</dd></dl>
+<p>Guidance for using gpio drive modes ( <a class="el" href="group__group__hal__gpio.html#ga2eb76143375648febb0ef73f00a681b2">cyhal_gpio_drive_mode_t</a> for details). For default use drive modes: Input GPIO direction - <a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a181685dd155f58d036420b61778a7394">CYHAL_GPIO_DRIVE_NONE</a> Output GPIO direction - <a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a697e0520cb1b71b748bb76eaafb3ad1b">CYHAL_GPIO_DRIVE_STRONG</a> Bidirectional GPIO - <a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a42913f4c174583d37970c81aa6a20a5a">CYHAL_GPIO_DRIVE_PULLUPDOWN</a> </p><dl class="section warning"><dt>Warning</dt><dd>Don't use <a class="el" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a697e0520cb1b71b748bb76eaafb3ad1b">CYHAL_GPIO_DRIVE_STRONG</a> for input GPIO direction. It may cause an overcurrent issue. </dd></dl>
 
 </div>
 </div>

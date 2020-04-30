@@ -353,7 +353,7 @@ void cyhal_syspm_unlock_deepsleep(void)
     cyhal_system_critical_section_exit(intr_status);
 }
 
-cy_rslt_t cyhal_syspm_tickless_deepsleep(cyhal_lptimer_t *obj, uint32_t desired_ms, uint32_t *actual_ms)
+cy_rslt_t cyhal_syspm_tickless_sleep_deepsleep(cyhal_lptimer_t *obj, uint32_t desired_ms, uint32_t *actual_ms, bool deep_sleep)
 {
     CY_ASSERT(obj != NULL);
     uint32_t initial_ticks;
@@ -379,7 +379,7 @@ cy_rslt_t cyhal_syspm_tickless_deepsleep(cyhal_lptimer_t *obj, uint32_t desired_
 
             cyhal_lptimer_enable_event(obj, CYHAL_LPTIMER_COMPARE_MATCH, CYHAL_ISR_PRIORITY_DEFAULT, true);
 
-            result = cyhal_syspm_deepsleep();
+            result = deep_sleep ? cyhal_syspm_deepsleep() : cyhal_syspm_sleep();
             if(result == CY_RSLT_SUCCESS)
             {
                 uint32_t final_ticks = cyhal_lptimer_read(obj);

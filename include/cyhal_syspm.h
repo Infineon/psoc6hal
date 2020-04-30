@@ -352,10 +352,28 @@ void cyhal_syspm_unlock_deepsleep(void);
  * @param[in]   desired_ms  Desired number of ms to deep-sleep.
  * @param[out]  actual_ms   Actual number of ms that was spent in deep-sleep.
  *                          This value can range from 0 to desired_ms - 1
- *                          depending on how long the device was able to sleep.
+ *                          depending on how long the device was able to deep-sleep.
  * @return The status of the deep-sleep request.
  */
 cy_rslt_t cyhal_syspm_tickless_deepsleep(cyhal_lptimer_t *obj, uint32_t desired_ms, uint32_t *actual_ms);
+
+/** Timed sleep without system timer.
+ *
+ * Provides a way to sleep for a desired number of milliseconds(ms) with the system timer disabled.
+ * The system timer is disabled before sleeping and a low power timer is setup to wake
+ * the device from sleep after the desired number of ms have elapsed.
+ *
+ * @note The actual ms in the best case will be 1 ms less than the desired time to
+ * prevent the device from over-sleeping due to low clock accuracy.
+ *
+ * @param[in]   obj         Pre-Initialized LPTimer object.
+ * @param[in]   desired_ms  Desired number of ms to sleep.
+ * @param[out]  actual_ms   Actual number of ms that was spent in sleep.
+ *                          This value can range from 0 to desired_ms - 1
+ *                          depending on how long the device was able to sleep.
+ * @return The status of the sleep request.
+ */
+cy_rslt_t cyhal_syspm_tickless_sleep(cyhal_lptimer_t *obj, uint32_t desired_ms, uint32_t *actual_ms);
 
 #if defined(__cplusplus)
 }

@@ -125,15 +125,15 @@ typedef enum {
  * If not, the <b> drive_mode </b> of the <b> pin </b> is set to <b> CYHAL_GPIO_DRIVE_NONE</b>.
  */
 typedef enum {
-    CYHAL_GPIO_DRIVE_NONE,                /**< Digital Hi-Z */
-    CYHAL_GPIO_DRIVE_ANALOG,              /**< Analog Hi-Z */
-    CYHAL_GPIO_DRIVE_PULLUP,              /**< Pull-up resistor */
-    CYHAL_GPIO_DRIVE_PULLDOWN,            /**< Pull-down resistor */
-    CYHAL_GPIO_DRIVE_OPENDRAINDRIVESLOW,  /**< Open-drain, Drives Low */
-    CYHAL_GPIO_DRIVE_OPENDRAINDRIVESHIGH, /**< Open-drain, Drives High */
-    CYHAL_GPIO_DRIVE_STRONG,              /**< Strong output */
-    CYHAL_GPIO_DRIVE_PULLUPDOWN,          /**< Pull-up and pull-down resistors */
-    CYHAL_GPIO_DRIVE_PULL_NONE,           /**< No Pull-up or pull-down resistors */
+    CYHAL_GPIO_DRIVE_NONE,                /**< Digital Hi-Z. Input only. Input init value(s): 0 or 1 */
+    CYHAL_GPIO_DRIVE_ANALOG,              /**< Analog Hi-Z. Use only for analog purpose */
+    CYHAL_GPIO_DRIVE_PULLUP,              /**< Pull-up resistor. Input and output. Input init value(s): 1, output value(s): 0 */
+    CYHAL_GPIO_DRIVE_PULLDOWN,            /**< Pull-down resistor. Input and output. Input init value(s): 0, output value(s): 1 */
+    CYHAL_GPIO_DRIVE_OPENDRAINDRIVESLOW,  /**< Open-drain, Drives Low. Input and output. Input init value(s): 1, output value(s): 0 */
+    CYHAL_GPIO_DRIVE_OPENDRAINDRIVESHIGH, /**< Open-drain, Drives High. Input and output. Input init value(s): 0, output value(s): 1 */
+    CYHAL_GPIO_DRIVE_STRONG,              /**< Strong output. Output only. Output init value(s): 0 or 1 */
+    CYHAL_GPIO_DRIVE_PULLUPDOWN,          /**< Pull-up and pull-down resistors. Input and output. Input init value(s): 0 or 1, output value(s): 0 or 1 */
+    CYHAL_GPIO_DRIVE_PULL_NONE,           /**< No Pull-up or pull-down resistors. Input and output. Input init value(s): 0 or 1, output value(s): 0 or 1 */
 } cyhal_gpio_drive_mode_t;
 
 /** GPIO callback function type */
@@ -152,6 +152,13 @@ typedef void (*cyhal_gpio_event_callback_t)(void *callback_arg, cyhal_gpio_event
  * @param[in] init_val    Initial value on the pin
  *
  * @return The status of the init request
+ *
+ * Guidance for using gpio drive modes ( \ref cyhal_gpio_drive_mode_t for details).
+ * For default use drive modes:
+ * Input GPIO direction - \ref CYHAL_GPIO_DRIVE_NONE
+ * Output GPIO direction - \ref CYHAL_GPIO_DRIVE_STRONG
+ * Bidirectional GPIO - \ref CYHAL_GPIO_DRIVE_PULLUPDOWN
+ * \warning Don't use \ref CYHAL_GPIO_DRIVE_STRONG for input GPIO direction. It may cause an overcurrent issue.
  */
 cy_rslt_t cyhal_gpio_init(cyhal_gpio_t pin, cyhal_gpio_direction_t direction, cyhal_gpio_drive_mode_t drive_mode, bool init_val);
 

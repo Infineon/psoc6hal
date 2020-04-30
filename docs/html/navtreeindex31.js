@@ -1,5 +1,7 @@
 var NAVTREEINDEX31 =
 {
+"group__group__hal__usb__dev__common.html#ga8e9b21021ff08b7d2d53aaaef5c8f1b6":[1,1,25,2,2],
+"group__group__hal__usb__dev__common.html#ga93a43b761729183af402967f11c212ae":[1,1,25,2,12],
 "group__group__hal__usb__dev__common.html#gaa1cbb4285b35e80b57a6fce5127890ce":[1,1,25,2,17],
 "group__group__hal__usb__dev__common.html#gaa5db167ff60bc74a118823bb876bcdd6":[1,1,25,2,16],
 "group__group__hal__usb__dev__common.html#gaaa88f3aa7717c333c7966588f38a9b47":[1,1,25,2,7],

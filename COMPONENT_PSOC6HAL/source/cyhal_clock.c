@@ -301,9 +301,7 @@ const cyhal_resource_inst_t *CYHAL_CLOCK_SOURCE_LF[] =
     &CYHAL_CLOCK_ALTLF,
 #endif
 };
-
-
-const cyhal_resource_inst_t *CYHAL_CLOCK_SOURCE_PATH_ON[] =
+const cyhal_resource_inst_t *CYHAL_CLOCK_SOURCE_HF[] =
 {
     &CYHAL_CLOCK_FLL,
 #if (SRSS_NUM_PLL > 0)
@@ -351,9 +349,6 @@ const cyhal_resource_inst_t *CYHAL_CLOCK_SOURCE_PATH_ON[] =
 #if (SRSS_NUM_PLL > 14)
     &CYHAL_CLOCK_PLL[14],
 #endif
-};
-const cyhal_resource_inst_t *CYHAL_CLOCK_SOURCE_PATH_OFF[] =
-{
     &CYHAL_CLOCK_PATHMUX[0],
 #if (SRSS_NUM_CLKPATH > 1)
     &CYHAL_CLOCK_PATHMUX[1],
@@ -401,6 +396,16 @@ const cyhal_resource_inst_t *CYHAL_CLOCK_SOURCE_PATH_OFF[] =
     &CYHAL_CLOCK_PATHMUX[15],
 #endif
 };
+
+
+
+
+
+
+
+
+
+
 
 
 /******************************************************************************
@@ -750,6 +755,7 @@ static inline cy_rslt_t cyhal_set_fll_freq(uint32_t new_freq)
 }
 
 #if (SRSS_NUM_PLL > 0)
+//pll_idx is the path mux index (eg PLL number + 1) as used by PDL APIs
 static inline cy_rslt_t cyhal_change_pll_enablement(uint8_t pll_idx, bool enable, bool wait_for_lock)
 {
     cy_stc_pll_manual_config_t cfg;
@@ -758,7 +764,7 @@ static inline cy_rslt_t cyhal_change_pll_enablement(uint8_t pll_idx, bool enable
     {
         uint32_t new_freq, old_freq;
         uint32_t div = (uint32_t)Cy_SysClk_ClkHfGetDivider(0);
-        uint32_t src_freq = Cy_SysClk_ClkPathMuxGetFrequency(0);
+        uint32_t src_freq = Cy_SysClk_ClkPathMuxGetFrequency(pll_idx);
         uint32_t pll_freq = CY_SYSLIB_DIV_ROUND((uint64_t)src_freq * (uint64_t)cfg.feedbackDiv, (uint32_t)cfg.referenceDiv * (uint32_t)cfg.outputDiv);
         if (enable)
         {
@@ -1468,12 +1474,12 @@ cy_rslt_t cyhal_clock_get_sources(const cyhal_clock_t *clock, const cyhal_resour
             *count = sizeof(CYHAL_CLOCK_SOURCE_PATHMUX) / sizeof(CYHAL_CLOCK_SOURCE_PATHMUX[0]);
             break;
         case CYHAL_CLOCK_BLOCK_FLL:
-            *sources = &(CYHAL_CLOCK_SOURCE_PATH_OFF[0]); /* CYHAL_CLOCK_PATHMUX */
+            *sources = &(CYHAL_CLOCK_SOURCE_HF[1 + SRSS_NUM_PLL]); /* PATHMUX[0] entry is after the FLL/PLLs */
             *count = 1;
             break;
 #if (SRSS_NUM_PLL > 0)
         case CYHAL_CLOCK_BLOCK_PLL:
-            *sources = &(CYHAL_CLOCK_SOURCE_PATH_OFF[1 + clock->channel]); /* CYHAL_CLOCK_PATHMUX */
+            *sources = &(CYHAL_CLOCK_SOURCE_HF[2 + SRSS_NUM_PLL + clock->channel]); /* PATHMUX[n] entry is after the FLL/PLLs + 1 for FLL path */
             *count = 1;
             break;
 #endif
@@ -1483,22 +1489,9 @@ cy_rslt_t cyhal_clock_get_sources(const cyhal_clock_t *clock, const cyhal_resour
             break;
         case CYHAL_CLOCK_BLOCK_HF:
         case CYHAL_CLOCK_BLOCK_PUMP:
-        {
-            *count = 1;
-            if (0 == clock->channel)
-            {
-                *sources = Cy_SysClk_FllIsEnabled()
-                    ? &(CYHAL_CLOCK_SOURCE_PATH_ON[0])
-                    : &(CYHAL_CLOCK_SOURCE_PATH_OFF[0]);
-            }
-            else
-            {
-                *sources = ((clock->channel <= CY_SRSS_NUM_PLL) && Cy_SysClk_PllIsEnabled(clock->channel))
-                    ? &(CYHAL_CLOCK_SOURCE_PATH_ON[clock->channel])
-                    : &(CYHAL_CLOCK_SOURCE_PATH_OFF[clock->channel]);
-            }
+            *sources = CYHAL_CLOCK_SOURCE_HF;
+            *count = sizeof(CYHAL_CLOCK_SOURCE_HF) / sizeof(CYHAL_CLOCK_SOURCE_HF[0]);
             break;
-        }
         case CYHAL_CLOCK_BLOCK_BAK:
             *sources = CYHAL_CLOCK_SOURCE_BAK;
             *count = sizeof(CYHAL_CLOCK_SOURCE_BAK) / sizeof(CYHAL_CLOCK_SOURCE_BAK[0]);

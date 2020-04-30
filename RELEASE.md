@@ -31,6 +31,9 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * WDT
 
 ### What Changed?
+#### v1.2.1
+* Fixed an issue with deep-sleep wake-up in the SDIO and SDHC drivers that could cause intermittent communication failures.
+* Minor bug fixes and documentation improvements.
 #### v1.2.0
 * Added new Clock driver
 * Added new SysPM Power Management driver
