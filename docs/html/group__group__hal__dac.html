@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -88,6 +88,7 @@ $(document).ready(function(){initNavTree('group__group__hal__dac.html','');});
 <div class="header">
   <div class="summary">
 <a href="#groups">API Reference</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">DAC (Digital to Analog Converter)<div class="ingroups"><a class="el" href="group__group__hal.html">HAL Drivers</a></div></div>  </div>
@@ -112,28 +113,71 @@ Quick Start</h1>
 Code Snippets</h1>
 <h2><a class="anchor" id="subsection_dac_use_case_1"></a>
 Use case 1: Simple DAC initialization</h2>
-<p>The following snippet initializes a DAC resource and assigns the output to the specified <b>pin</b> using <a class="el" href="group__group__hal__dac.html#gaa33e893eccc66deff01287434a847687">cyhal_dac_init</a>. <a class="el" href="group__group__hal__dac.html#gabb6bdec361f3805b7086cef3ea3b9d56">cyhal_dac_write</a> is used to set the DAC output value. <a class="el" href="group__group__hal__dac.html#ga2ad162f2317e6f1666d7eadebbddca82">cyhal_dac_read</a> is used to read back DAC register. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> my_dac_obj;</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> dac_result;</div><div class="line"></div><div class="line">    <span class="comment">/* Full Scale value for the DAC */</span></div><div class="line">    uint16_t dac_value = 0xFFFF;</div><div class="line">    uint16_t dac_read;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize DAC, set Pin 9[6] as the DAC output */</span></div><div class="line">    dac_result = <a class="code" href="group__group__hal__dac.html#gaa33e893eccc66deff01287434a847687">cyhal_dac_init</a>(&amp;my_dac_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__116__bga__ble.html#ggaf78d7d92acc4005cc057d8a9b48e6f28aca42e6dc954ab8b8625f87b8e37f9bf2">P9_6</a>);</div><div class="line"></div><div class="line">    <span class="comment">/* Check the return of cyhal_dac_init to confirm initialization was successful */</span></div><div class="line">    <span class="keywordflow">if</span> (dac_result == <a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Write the 16 bit value as DAC input */</span></div><div class="line">        <a class="code" href="group__group__hal__dac.html#gabb6bdec361f3805b7086cef3ea3b9d56">cyhal_dac_write</a>(&amp;my_dac_obj, dac_value);</div><div class="line"></div><div class="line">        <span class="comment">/* Return the 16 bit DAC register value */</span></div><div class="line">        dac_read = <a class="code" href="group__group__hal__dac.html#ga2ad162f2317e6f1666d7eadebbddca82">cyhal_dac_read</a>(&amp;my_dac_obj);</div><div class="line"></div><div class="line">        <span class="keywordflow">if</span> (dac_read == 0xFFFF)</div><div class="line">        {</div><div class="line">            <span class="comment">/* Insert code */</span></div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/* Release DAC object after use by calling cyhal_dac_free, this de-initializes the DAC (including its output) */</span></div><div class="line"></div></div><!-- fragment --><table class="memberdecls">
+<p>The following snippet initializes a DAC resource and assigns the output to the specified <b>pin</b> using <a class="el" href="group__group__hal__dac.html#gaa33e893eccc66deff01287434a847687">cyhal_dac_init</a>. <a class="el" href="group__group__hal__dac.html#gabb6bdec361f3805b7086cef3ea3b9d56">cyhal_dac_write</a> is used to set the DAC output value. <a class="el" href="group__group__hal__dac.html#ga2ad162f2317e6f1666d7eadebbddca82">cyhal_dac_read</a> is used to read back DAC register. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> my_dac_obj;</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> dac_result;</div><div class="line"></div><div class="line">    <span class="comment">/* Full Scale value for the DAC */</span></div><div class="line">    uint16_t dac_value = 0xFFFF;</div><div class="line">    uint16_t dac_read;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize DAC, set Pin 9[6] as the DAC output */</span></div><div class="line">    dac_result = <a class="code" href="group__group__hal__dac.html#gaa33e893eccc66deff01287434a847687">cyhal_dac_init</a>(&amp;my_dac_obj, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__116__bga__ble.html#ggaf78d7d92acc4005cc057d8a9b48e6f28aca42e6dc954ab8b8625f87b8e37f9bf2">P9_6</a>);</div><div class="line"></div><div class="line">    <span class="comment">/* Check the return of cyhal_dac_init to confirm initialization was successful */</span></div><div class="line">    <span class="keywordflow">if</span> (dac_result == <a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Write the 16 bit value as DAC input */</span></div><div class="line">        <a class="code" href="group__group__hal__dac.html#gabb6bdec361f3805b7086cef3ea3b9d56">cyhal_dac_write</a>(&amp;my_dac_obj, dac_value);</div><div class="line"></div><div class="line">        <span class="comment">/* Return the 16 bit DAC register value */</span></div><div class="line">        dac_read = <a class="code" href="group__group__hal__dac.html#ga2ad162f2317e6f1666d7eadebbddca82">cyhal_dac_read</a>(&amp;my_dac_obj);</div><div class="line"></div><div class="line">        <span class="keywordflow">if</span> (dac_read == 0xFFFF)</div><div class="line">        {</div><div class="line">            <span class="comment">/* Insert code */</span></div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/* Release DAC object after use by calling cyhal_dac_free, this de-initializes the DAC (including its output) */</span></div><div class="line"></div></div><!-- fragment --><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 API Reference</h2></td></tr>
 <tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
 <tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gab8bd602f1b7d91eacd4126873148e5a3"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#gab8bd602f1b7d91eacd4126873148e5a3">cyhal_dac_ref_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__dac.html#ggab8bd602f1b7d91eacd4126873148e5a3aa38d2cb249af9c70780d9b6aaa225e24">CYHAL_DAC_REF_VDDA</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__dac.html#ggab8bd602f1b7d91eacd4126873148e5a3af87f660f3058a173c6fbdeb24528e46f">CYHAL_DAC_REF_VREF</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gab8bd602f1b7d91eacd4126873148e5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference choices for the DAC.  <a href="group__group__hal__dac.html#gab8bd602f1b7d91eacd4126873148e5a3">More...</a><br /></td></tr>
+<tr class="separator:gab8bd602f1b7d91eacd4126873148e5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaa33e893eccc66deff01287434a847687"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#gaa33e893eccc66deff01287434a847687">cyhal_dac_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> pin)</td></tr>
+<tr class="memitem:gaa33e893eccc66deff01287434a847687"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#gaa33e893eccc66deff01287434a847687">cyhal_dac_init</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> pin)</td></tr>
 <tr class="memdesc:gaa33e893eccc66deff01287434a847687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the DAC peripheral.  <a href="#gaa33e893eccc66deff01287434a847687">More...</a><br /></td></tr>
 <tr class="separator:gaa33e893eccc66deff01287434a847687"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae157cda193ce7fc45eb5b390e40d0d0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#gae157cda193ce7fc45eb5b390e40d0d0b">cyhal_dac_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj)</td></tr>
+<tr class="memitem:gae157cda193ce7fc45eb5b390e40d0d0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#gae157cda193ce7fc45eb5b390e40d0d0b">cyhal_dac_free</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj)</td></tr>
 <tr class="memdesc:gae157cda193ce7fc45eb5b390e40d0d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release the dac object.  <a href="#gae157cda193ce7fc45eb5b390e40d0d0b">More...</a><br /></td></tr>
 <tr class="separator:gae157cda193ce7fc45eb5b390e40d0d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabb6bdec361f3805b7086cef3ea3b9d56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#gabb6bdec361f3805b7086cef3ea3b9d56">cyhal_dac_write</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj, uint16_t value)</td></tr>
+<tr class="memitem:ga0fd4a8c9b2b5e3b712904d3e63ed8a41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#ga0fd4a8c9b2b5e3b712904d3e63ed8a41">cyhal_dac_set_reference</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj, <a class="el" href="group__group__hal__dac.html#gab8bd602f1b7d91eacd4126873148e5a3">cyhal_dac_ref_t</a> ref)</td></tr>
+<tr class="memdesc:ga0fd4a8c9b2b5e3b712904d3e63ed8a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the DAC voltage reference.  <a href="#ga0fd4a8c9b2b5e3b712904d3e63ed8a41">More...</a><br /></td></tr>
+<tr class="separator:ga0fd4a8c9b2b5e3b712904d3e63ed8a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb6bdec361f3805b7086cef3ea3b9d56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#gabb6bdec361f3805b7086cef3ea3b9d56">cyhal_dac_write</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj, uint16_t value)</td></tr>
 <tr class="memdesc:gabb6bdec361f3805b7086cef3ea3b9d56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output voltage, as a normalized unsigned 16-bit value (where 0 is the lowest value the DAC can output and 0xFFFF is the highest)  <a href="#gabb6bdec361f3805b7086cef3ea3b9d56">More...</a><br /></td></tr>
 <tr class="separator:gabb6bdec361f3805b7086cef3ea3b9d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2ad162f2317e6f1666d7eadebbddca82"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#ga2ad162f2317e6f1666d7eadebbddca82">cyhal_dac_read</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj)</td></tr>
+<tr class="memitem:ga1f3c2d83b1d94abc0c77bc55379459bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#ga1f3c2d83b1d94abc0c77bc55379459bb">cyhal_dac_write_mv</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj, uint16_t value)</td></tr>
+<tr class="memdesc:ga1f3c2d83b1d94abc0c77bc55379459bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output voltage, as an unsigned number of millivolts.  <a href="#ga1f3c2d83b1d94abc0c77bc55379459bb">More...</a><br /></td></tr>
+<tr class="separator:ga1f3c2d83b1d94abc0c77bc55379459bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2ad162f2317e6f1666d7eadebbddca82"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#ga2ad162f2317e6f1666d7eadebbddca82">cyhal_dac_read</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj)</td></tr>
 <tr class="memdesc:ga2ad162f2317e6f1666d7eadebbddca82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current DAC output voltage setting, as a normalized unsigned 16-bit value (where 0 is the lowest value the DAC can output and 0xFFFF is the highest).  <a href="#ga2ad162f2317e6f1666d7eadebbddca82">More...</a><br /></td></tr>
 <tr class="separator:ga2ad162f2317e6f1666d7eadebbddca82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7a08830e80bd91017013c5f7cf306f0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__dac.html#ga7a08830e80bd91017013c5f7cf306f0d">cyhal_dac_set_power</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *obj, <a class="el" href="group__group__hal__general__types.html#ga246fde0e79029f514ce3846b31e366d7">cyhal_power_level_t</a> power)</td></tr>
+<tr class="memdesc:ga7a08830e80bd91017013c5f7cf306f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the current operating power level of the DAC.  <a href="#ga7a08830e80bd91017013c5f7cf306f0d">More...</a><br /></td></tr>
+<tr class="separator:ga7a08830e80bd91017013c5f7cf306f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="gab8bd602f1b7d91eacd4126873148e5a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab8bd602f1b7d91eacd4126873148e5a3">&#9670;&nbsp;</a></span>cyhal_dac_ref_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__group__hal__dac.html#gab8bd602f1b7d91eacd4126873148e5a3">cyhal_dac_ref_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reference choices for the DAC. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggab8bd602f1b7d91eacd4126873148e5a3aa38d2cb249af9c70780d9b6aaa225e24"></a>CYHAL_DAC_REF_VDDA&#160;</td><td class="fielddoc"><p>Analog supply (default) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggab8bd602f1b7d91eacd4126873148e5a3af87f660f3058a173c6fbdeb24528e46f"></a>CYHAL_DAC_REF_VREF&#160;</td><td class="fielddoc"><p>Internal reference. See the BSP documentation for the reference value. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="gaa33e893eccc66deff01287434a847687"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaa33e893eccc66deff01287434a847687">&#9670;&nbsp;</a></span>cyhal_dac_init()</h2>
@@ -144,13 +188,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_dac_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>&#160;</td>
         </tr>
         <tr>
@@ -162,7 +206,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the DAC peripheral. </p>
-<p>Configures the pin used by dac.</p>
+<p>By default, the reference will be set to <a class="el" href="group__group__hal__dac.html#ggab8bd602f1b7d91eacd4126873148e5a3aa38d2cb249af9c70780d9b6aaa225e24">CYHAL_DAC_REF_VDDA</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>Pointer to a DAC object. The caller must allocate the memory for this object but the init function will initialize its contents. </td></tr>
@@ -185,7 +229,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_dac_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -202,6 +246,45 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga0fd4a8c9b2b5e3b712904d3e63ed8a41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0fd4a8c9b2b5e3b712904d3e63ed8a41">&#9670;&nbsp;</a></span>cyhal_dac_set_reference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_dac_set_reference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__dac.html#gab8bd602f1b7d91eacd4126873148e5a3">cyhal_dac_ref_t</a>&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the DAC voltage reference. </p>
+<p>This determines the highest value that the DAC can output.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>The DAC object </td></tr>
+    <tr><td class="paramname">ref</td><td>The selected voltage reference. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the reference selection request </dd></dl>
+
+</div>
+</div>
 <a id="gabb6bdec361f3805b7086cef3ea3b9d56"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gabb6bdec361f3805b7086cef3ea3b9d56">&#9670;&nbsp;</a></span>cyhal_dac_write()</h2>
 
@@ -211,7 +294,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_dac_write </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -229,6 +312,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set the output voltage, as a normalized unsigned 16-bit value (where 0 is the lowest value the DAC can output and 0xFFFF is the highest) </p>
+<dl class="section note"><dt>Note</dt><dd>While the input value is 16 bits, the actual resolution that can be achieved is dependent on what the underlying hardware supports. See the device datasheet for details.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The dac object </td></tr>
@@ -236,6 +320,46 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ga1f3c2d83b1d94abc0c77bc55379459bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1f3c2d83b1d94abc0c77bc55379459bb">&#9670;&nbsp;</a></span>cyhal_dac_write_mv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_dac_write_mv </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the output voltage, as an unsigned number of millivolts. </p>
+<dl class="section note"><dt>Note</dt><dd>Depending on the resolution of the underlying hardware, it may not be possible to achieve the precise voltage requested. See the device datasheet for more details about the DAC resolution.</dd></dl>
+<p>It is an error to specify a value that is outside of the DAC's operating range.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The dac object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The number of millivolts to output set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the write request. </dd></dl>
 
 </div>
 </div>
@@ -248,7 +372,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">uint16_t cyhal_dac_read </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -264,6 +388,45 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The 16-bit output value </dd></dl>
+
+</div>
+</div>
+<a id="ga7a08830e80bd91017013c5f7cf306f0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7a08830e80bd91017013c5f7cf306f0d">&#9670;&nbsp;</a></span>cyhal_dac_set_power()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_dac_set_power </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__dac__t">cyhal_dac_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__general__types.html#ga246fde0e79029f514ce3846b31e366d7">cyhal_power_level_t</a>&#160;</td>
+          <td class="paramname"><em>power</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the current operating power level of the DAC. </p>
+<p>If the power level is set to <a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7a0f601c5d5843c59e58ee1988dd0e6861">CYHAL_POWER_LEVEL_OFF</a>, the DAC will be powered-off but it will retain its configuration, so it is not necessary to reconfigure it when changing the power level from <a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7a0f601c5d5843c59e58ee1988dd0e6861">CYHAL_POWER_LEVEL_OFF</a> to any other value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>dac object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">power</td><td>The power level to set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the set power request </dd></dl>
 
 </div>
 </div>

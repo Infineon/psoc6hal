@@ -110,7 +110,7 @@ typedef enum
     CYHAL_EZI2C_SUB_ADDR16_BITS    /**< Sub-address is 16 bits */
 } cyhal_ezi2c_sub_addr_size_t;
 
-/** Size of Sub-Address */
+/** Data rate of the slave */
 typedef enum
 {
     CYHAL_EZI2C_DATA_RATE_100KHZ = 100000,

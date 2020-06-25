@@ -50,9 +50,10 @@
 * The following snippet initializes a LPTimer in free running mode.
 * \snippet lptimer.c snippet_cyhal_lptimer_simple_init_def
 *
-* \subsection subsection_lptimer_snippet_2 Snippet 2: Simple LPTimer initialization with set Match value
-* The following snippet initializes a LPTimer and assigns the Match value to the LPTimer.
-* \snippet lptimer.c snippet_cyhal_lptimer_simple_init
+* \subsection subsection_lptimer_snippet_2 Snippet 2: LPTimer interrupts
+* The following snippet initializes a LPTimer and uses \ref cyhal_lptimer_set_match() to trigger an interrupt
+* on match. Subsequent interrupts can be triggered at required times using \ref cyhal_lptimer_set_delay() called from the ISR.
+* \snippet lptimer.c snippet_cyhal_lptimer_interrupt
 */
 
 #pragma once

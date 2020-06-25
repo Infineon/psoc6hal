@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -221,6 +221,14 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ga716955af458772e538910575cbf6e1dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags enum for the hibernate wakeup sources.  <a href="group__group__hal__syspm.html#ga716955af458772e538910575cbf6e1dd">More...</a><br /></td></tr>
 <tr class="separator:ga716955af458772e538910575cbf6e1dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga843f8267deb62a570fff3ce7ebf1a6c4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__syspm.html#ga843f8267deb62a570fff3ce7ebf1a6c4">cyhal_syspm_voltage_supply_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__syspm.html#gga843f8267deb62a570fff3ce7ebf1a6c4af5c399ada3960bb3f5e6784be9bdccc9">CYHAL_VOLTAGE_SUPPLY_VDDA</a> = 0u, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__syspm.html#gga843f8267deb62a570fff3ce7ebf1a6c4a072774e669a76b4999d596b27bf897b0">CYHAL_VOLTAGE_SUPPLY_MAX</a> = CYHAL_VOLTAGE_SUPPLY_VDDA
+<br />
+ }</td></tr>
+<tr class="memdesc:ga843f8267deb62a570fff3ce7ebf1a6c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supply voltages whose levels can be specified and queried via <a class="el" href="group__group__hal__syspm.html#ga01d10df7bebeb345902a0d8e1c193ad1">cyhal_syspm_set_supply_voltage</a> and <a class="el" href="group__group__hal__syspm.html#ga6bbb8993f1add4b31d7b168fb670f842">cyhal_syspm_get_supply_voltage</a>, respectively.  <a href="group__group__hal__syspm.html#ga843f8267deb62a570fff3ce7ebf1a6c4">More...</a><br /></td></tr>
+<tr class="separator:ga843f8267deb62a570fff3ce7ebf1a6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -251,12 +259,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ga028b85f03d4607ccac8494b46ec8413c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__syspm.html#ga028b85f03d4607ccac8494b46ec8413c">cyhal_syspm_unlock_deepsleep</a> (void)</td></tr>
 <tr class="memdesc:ga028b85f03d4607ccac8494b46ec8413c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlock deep sleep.  <a href="#ga028b85f03d4607ccac8494b46ec8413c">More...</a><br /></td></tr>
 <tr class="separator:ga028b85f03d4607ccac8494b46ec8413c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2217e0c4c24cc5fe14d5765681de191d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__syspm.html#ga2217e0c4c24cc5fe14d5765681de191d">cyhal_syspm_tickless_deepsleep</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t desired_ms, uint32_t *actual_ms)</td></tr>
+<tr class="memitem:ga2217e0c4c24cc5fe14d5765681de191d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__syspm.html#ga2217e0c4c24cc5fe14d5765681de191d">cyhal_syspm_tickless_deepsleep</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t desired_ms, uint32_t *actual_ms)</td></tr>
 <tr class="memdesc:ga2217e0c4c24cc5fe14d5765681de191d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timed deep-sleep without system timer.  <a href="#ga2217e0c4c24cc5fe14d5765681de191d">More...</a><br /></td></tr>
 <tr class="separator:ga2217e0c4c24cc5fe14d5765681de191d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga777835c494bbea3923a4cf9795249fd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__syspm.html#ga777835c494bbea3923a4cf9795249fd6">cyhal_syspm_tickless_sleep</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t desired_ms, uint32_t *actual_ms)</td></tr>
+<tr class="memitem:ga777835c494bbea3923a4cf9795249fd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__syspm.html#ga777835c494bbea3923a4cf9795249fd6">cyhal_syspm_tickless_sleep</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t desired_ms, uint32_t *actual_ms)</td></tr>
 <tr class="memdesc:ga777835c494bbea3923a4cf9795249fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timed sleep without system timer.  <a href="#ga777835c494bbea3923a4cf9795249fd6">More...</a><br /></td></tr>
 <tr class="separator:ga777835c494bbea3923a4cf9795249fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga01d10df7bebeb345902a0d8e1c193ad1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__syspm.html#ga01d10df7bebeb345902a0d8e1c193ad1">cyhal_syspm_set_supply_voltage</a> (<a class="el" href="group__group__hal__syspm.html#ga843f8267deb62a570fff3ce7ebf1a6c4">cyhal_syspm_voltage_supply_t</a> supply, uint32_t mvolts)</td></tr>
+<tr class="memdesc:ga01d10df7bebeb345902a0d8e1c193ad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Informs the system of the current voltage level on the specified supply.  <a href="#ga01d10df7bebeb345902a0d8e1c193ad1">More...</a><br /></td></tr>
+<tr class="separator:ga01d10df7bebeb345902a0d8e1c193ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6bbb8993f1add4b31d7b168fb670f842"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__syspm.html#ga6bbb8993f1add4b31d7b168fb670f842">cyhal_syspm_get_supply_voltage</a> (<a class="el" href="group__group__hal__syspm.html#ga843f8267deb62a570fff3ce7ebf1a6c4">cyhal_syspm_voltage_supply_t</a> supply)</td></tr>
+<tr class="memdesc:ga6bbb8993f1add4b31d7b168fb670f842"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current voltage level on the specified supply, as set in <a class="el" href="group__group__hal__syspm.html#ga01d10df7bebeb345902a0d8e1c193ad1">cyhal_syspm_set_supply_voltage</a>.  <a href="#ga6bbb8993f1add4b31d7b168fb670f842">More...</a><br /></td></tr>
+<tr class="separator:ga6bbb8993f1add4b31d7b168fb670f842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
 <a name="structcyhal__syspm__callback__data__t" id="structcyhal__syspm__callback__data__t"></a>
@@ -321,11 +335,11 @@ Pointer to the next callback strucure. <p>This should be initialized to NULL. </
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">(<a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2a30f5d217aded3c5525b1d9cea03ac5a8">CYHAL_SYSPM_CB_CPU_SLEEP</a>\</div><div class="line">                                        | <a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2aeaae71eba11b9c861e4a86a6f5c0f2aa">CYHAL_SYSPM_CB_CPU_DEEPSLEEP</a>\</div><div class="line">                                        | <a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2ac9de4348b02a53d947ce48bd7bc6922a">CYHAL_SYSPM_CB_SYSTEM_HIBERNATE</a>\</div><div class="line">                                        | <a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2aca71bfa3460ce92a9eed50dace3b8b5a">CYHAL_SYSPM_CB_SYSTEM_NORMAL</a>\</div><div class="line">                                        | <a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2af13d1c94115a90b1f9d734ace0017045">CYHAL_SYSPM_CB_SYSTEM_LOW</a>)</div><div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2a30f5d217aded3c5525b1d9cea03ac5a8"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2a30f5d217aded3c5525b1d9cea03ac5a8">CYHAL_SYSPM_CB_CPU_SLEEP</a></div><div class="ttdoc">Flag for MCU sleep callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:117</div></div>
-<div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2aca71bfa3460ce92a9eed50dace3b8b5a"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2aca71bfa3460ce92a9eed50dace3b8b5a">CYHAL_SYSPM_CB_SYSTEM_NORMAL</a></div><div class="ttdoc">Flag for Normal mode callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:120</div></div>
-<div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2ac9de4348b02a53d947ce48bd7bc6922a"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2ac9de4348b02a53d947ce48bd7bc6922a">CYHAL_SYSPM_CB_SYSTEM_HIBERNATE</a></div><div class="ttdoc">Flag for Hibernate callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:119</div></div>
-<div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2af13d1c94115a90b1f9d734ace0017045"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2af13d1c94115a90b1f9d734ace0017045">CYHAL_SYSPM_CB_SYSTEM_LOW</a></div><div class="ttdoc">Flag for Low power mode callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:121</div></div>
-<div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2aeaae71eba11b9c861e4a86a6f5c0f2aa"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2aeaae71eba11b9c861e4a86a6f5c0f2aa">CYHAL_SYSPM_CB_CPU_DEEPSLEEP</a></div><div class="ttdoc">Flag for MCU deep sleep callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:118</div></div>
+<b>Value:</b><div class="fragment"><div class="line">(<a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2a30f5d217aded3c5525b1d9cea03ac5a8">CYHAL_SYSPM_CB_CPU_SLEEP</a>\</div><div class="line">                                        | <a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2aeaae71eba11b9c861e4a86a6f5c0f2aa">CYHAL_SYSPM_CB_CPU_DEEPSLEEP</a>\</div><div class="line">                                        | <a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2ac9de4348b02a53d947ce48bd7bc6922a">CYHAL_SYSPM_CB_SYSTEM_HIBERNATE</a>\</div><div class="line">                                        | <a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2aca71bfa3460ce92a9eed50dace3b8b5a">CYHAL_SYSPM_CB_SYSTEM_NORMAL</a>\</div><div class="line">                                        | <a class="code" href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2af13d1c94115a90b1f9d734ace0017045">CYHAL_SYSPM_CB_SYSTEM_LOW</a>)</div><div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2a30f5d217aded3c5525b1d9cea03ac5a8"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2a30f5d217aded3c5525b1d9cea03ac5a8">CYHAL_SYSPM_CB_CPU_SLEEP</a></div><div class="ttdoc">Flag for MCU sleep callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:146</div></div>
+<div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2aca71bfa3460ce92a9eed50dace3b8b5a"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2aca71bfa3460ce92a9eed50dace3b8b5a">CYHAL_SYSPM_CB_SYSTEM_NORMAL</a></div><div class="ttdoc">Flag for Normal mode callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:149</div></div>
+<div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2ac9de4348b02a53d947ce48bd7bc6922a"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2ac9de4348b02a53d947ce48bd7bc6922a">CYHAL_SYSPM_CB_SYSTEM_HIBERNATE</a></div><div class="ttdoc">Flag for Hibernate callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:148</div></div>
+<div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2af13d1c94115a90b1f9d734ace0017045"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2af13d1c94115a90b1f9d734ace0017045">CYHAL_SYSPM_CB_SYSTEM_LOW</a></div><div class="ttdoc">Flag for Low power mode callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:150</div></div>
+<div class="ttc" id="group__group__hal__syspm_html_gga560aa7873d3131c4eb5d1453711305d2aeaae71eba11b9c861e4a86a6f5c0f2aa"><div class="ttname"><a href="group__group__hal__syspm.html#gga560aa7873d3131c4eb5d1453711305d2aeaae71eba11b9c861e4a86a6f5c0f2aa">CYHAL_SYSPM_CB_CPU_DEEPSLEEP</a></div><div class="ttdoc">Flag for MCU deep sleep callback. </div><div class="ttdef"><b>Definition:</b> cyhal_general_types.h:147</div></div>
 </div><!-- fragment -->
 <p>Define for enabling all system and MCU state callbacks . </p>
 
@@ -478,6 +492,29 @@ Pointer to the next callback strucure. <p>This should be initialized to NULL. </
 </td></tr>
 <tr><td class="fieldname"><a id="gga716955af458772e538910575cbf6e1dda69f639b3f33245d1a789fd443b94b47d"></a>CYHAL_SYSPM_HIBERNATE_PINB_HIGH&#160;</td><td class="fielddoc"><p>Configure a high logic level for the second wakeup-pin. </p>
 <p>See device datasheet for specific pin. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="ga843f8267deb62a570fff3ce7ebf1a6c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga843f8267deb62a570fff3ce7ebf1a6c4">&#9670;&nbsp;</a></span>cyhal_syspm_voltage_supply_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__group__hal__syspm.html#ga843f8267deb62a570fff3ce7ebf1a6c4">cyhal_syspm_voltage_supply_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Supply voltages whose levels can be specified and queried via <a class="el" href="group__group__hal__syspm.html#ga01d10df7bebeb345902a0d8e1c193ad1">cyhal_syspm_set_supply_voltage</a> and <a class="el" href="group__group__hal__syspm.html#ga6bbb8993f1add4b31d7b168fb670f842">cyhal_syspm_get_supply_voltage</a>, respectively. </p>
+<dl class="section note"><dt>Note</dt><dd>Not all supplies which are present are included here. This enum only contains the voltage supplies whose values are relevant to the operation of one or more HAL drivers. </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga843f8267deb62a570fff3ce7ebf1a6c4af5c399ada3960bb3f5e6784be9bdccc9"></a>CYHAL_VOLTAGE_SUPPLY_VDDA&#160;</td><td class="fielddoc"><p>VDDA - Analog supply voltage. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga843f8267deb62a570fff3ce7ebf1a6c4a072774e669a76b4999d596b27bf897b0"></a>CYHAL_VOLTAGE_SUPPLY_MAX&#160;</td><td class="fielddoc"><p>Alias for the highest value in this enum. </p>
 </td></tr>
 </table>
 
@@ -722,7 +759,7 @@ Pointer to the next callback strucure. <p>This should be initialized to NULL. </
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_syspm_tickless_deepsleep </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -769,7 +806,7 @@ Pointer to the next callback strucure. <p>This should be initialized to NULL. </
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_syspm_tickless_sleep </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -804,6 +841,73 @@ Pointer to the next callback strucure. <p>This should be initialized to NULL. </
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The status of the sleep request. </dd></dl>
+
+</div>
+</div>
+<a id="ga01d10df7bebeb345902a0d8e1c193ad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga01d10df7bebeb345902a0d8e1c193ad1">&#9670;&nbsp;</a></span>cyhal_syspm_set_supply_voltage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cyhal_syspm_set_supply_voltage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__syspm.html#ga843f8267deb62a570fff3ce7ebf1a6c4">cyhal_syspm_voltage_supply_t</a>&#160;</td>
+          <td class="paramname"><em>supply</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>mvolts</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Informs the system of the current voltage level on the specified supply. </p>
+<p>This is generally expected to be set once at system startup, but it may be set repeatedly during runtime if operating conditions change. Once set, this value can be queried via <a class="el" href="group__group__hal__syspm.html#ga6bbb8993f1add4b31d7b168fb670f842">cyhal_syspm_get_supply_voltage</a>.</p>
+<dl class="section note"><dt>Note</dt><dd>This only informs the system of the voltage level. It does not alter any of the device operating conditions.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">supply</td><td>The supply whose voltage is being specified. </td></tr>
+    <tr><td class="paramname">mvolts</td><td>The voltage level on the specified supply, in millivolts. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga6bbb8993f1add4b31d7b168fb670f842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6bbb8993f1add4b31d7b168fb670f842">&#9670;&nbsp;</a></span>cyhal_syspm_get_supply_voltage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t cyhal_syspm_get_supply_voltage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__syspm.html#ga843f8267deb62a570fff3ce7ebf1a6c4">cyhal_syspm_voltage_supply_t</a>&#160;</td>
+          <td class="paramname"><em>supply</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieves the current voltage level on the specified supply, as set in <a class="el" href="group__group__hal__syspm.html#ga01d10df7bebeb345902a0d8e1c193ad1">cyhal_syspm_set_supply_voltage</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>This only returns the value provided to <a class="el" href="group__group__hal__syspm.html#ga01d10df7bebeb345902a0d8e1c193ad1">cyhal_syspm_set_supply_voltage</a>. It does not perform any measurements of the current supply level.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">supply</td><td>The supply whose voltage is being specified. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The voltage level on the specified supply, in millivolts. If the voltage has not been specified, returns 0. </dd></dl>
 
 </div>
 </div>

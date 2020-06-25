@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -110,14 +110,14 @@ Features</h1>
 <h1><a class="anchor" id="subsection_lptimer_quickstart"></a>
 Quick Start</h1>
 <p><a class="el" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init</a> can be used for a LPTimer initialization which resets all the clocking and prescaler registers, along with disabling the compare interrupt.</p>
-<p>See <a class="el" href="group__group__hal__lptimer.html#subsection_lptimer_snippet_2">Snippet 2: Simple LPTimer initialization with set Match value</a>.</p>
+<p>See <a class="el" href="group__group__hal__lptimer.html#subsection_lptimer_snippet_2">Snippet 2: LPTimer interrupts</a>.</p>
 <h1><a class="anchor" id="subsection_lptimer_snippets"></a>
 Code snippets</h1>
 <h2><a class="anchor" id="subsection_lptimer_snippet_1"></a>
 Snippet 1: LPTimer initialization with Default configuration</h2>
-<p>The following snippet initializes a LPTimer in free running mode. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> lptimer_obj;</div><div class="line">    uint32_t lptimer_value;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the LPTIMER with default configuration */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init</a>(&amp;lptimer_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Read the LPTIMER count value */</span></div><div class="line">    lptimer_value = <a class="code" href="group__group__hal__lptimer.html#gae759c60b5865a26599353e436518b1d3">cyhal_lptimer_read</a>(&amp;lptimer_obj);</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_lptimer_snippet_2"></a>
-Snippet 2: Simple LPTimer initialization with set Match value</h2>
-<p>The following snippet initializes a LPTimer and assigns the Match value to the LPTimer. </p><div class="fragment"><div class="line"><span class="preprocessor">#define LPTIMER_MATCH_VALUE    (8192u)</span></div><div class="line"><span class="preprocessor">#define LPTIMER_INTR_PRIORITY     (3u)</span></div><div class="line"></div><div class="line"><a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> lptimer_obj;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_lptimer_init()</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the LPTIMER */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init</a>(&amp;lptimer_obj);</div><div class="line">    CY_ASSERT(rslt == <a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>);</div><div class="line"></div><div class="line">    <span class="comment">/* We are setting the match value of 8192 counts and after a match, the lptimer event is executed.*/</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a>(&amp;lptimer_obj, LPTIMER_MATCH_VALUE);</div><div class="line"></div><div class="line">    <span class="comment">/* Reload/Reset the Low-Power timer to get periodic interrupt . */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#ga5ed361c85190707574565009eb325473">cyhal_lptimer_reload</a>(&amp;lptimer_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Register the callback handler which will be invoked when the interrupt triggers */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#gac670fa5380ffd41e548dac6975500b3d">cyhal_lptimer_register_callback</a>(&amp;lptimer_obj, lptimer_interrupt_handler, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Configure and Enable the LPTIMER events */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#gaa07d09cfeb275d1343a335f6b4caec9c">cyhal_lptimer_enable_event</a>(&amp;lptimer_obj, CYHAL_LPTIMER_COMPARE_MATCH, LPTIMER_INTR_PRIORITY, <span class="keyword">true</span>);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> lptimer_interrupt_handler(<span class="keywordtype">void</span> *handler_arg, <a class="code" href="group__group__hal__lptimer.html#ga8a2db5e37e9e36afd382844cf909278f">cyhal_lptimer_event_t</a> event)</div><div class="line">{</div><div class="line">    <span class="comment">/* Reload/Reset the LPTIMER to get periodic interrupt */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#ga5ed361c85190707574565009eb325473">cyhal_lptimer_reload</a>(&amp;lptimer_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Update the match/compare value */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a>(&amp;lptimer_obj, LPTIMER_MATCH_VALUE);</div><div class="line">}</div><div class="line"></div></div><!-- fragment --><table class="memberdecls">
+<p>The following snippet initializes a LPTimer in free running mode. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> lptimer_obj;</div><div class="line">    uint32_t lptimer_value;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the LPTIMER with default configuration */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init</a>(&amp;lptimer_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Read the LPTIMER count value */</span></div><div class="line">    lptimer_value = <a class="code" href="group__group__hal__lptimer.html#gae759c60b5865a26599353e436518b1d3">cyhal_lptimer_read</a>(&amp;lptimer_obj);</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_lptimer_snippet_2"></a>
+Snippet 2: LPTimer interrupts</h2>
+<p>The following snippet initializes a LPTimer and uses <a class="el" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match()</a> to trigger an interrupt on match. Subsequent interrupts can be triggered at required times using <a class="el" href="group__group__hal__lptimer.html#gae91cdc8b63ef191f5a2013df3aaa5d78">cyhal_lptimer_set_delay()</a> called from the ISR. </p><div class="fragment"><div class="line"><span class="preprocessor">#define LPTIMER_MATCH_VALUE    (8192u)</span></div><div class="line"><span class="preprocessor">#define LPTIMER_INTR_PRIORITY     (3u)</span></div><div class="line"></div><div class="line"><a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> lptimer_obj;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_lptimer_init()</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the LPTIMER */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init</a>(&amp;lptimer_obj);</div><div class="line">    CY_ASSERT(rslt == <a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>);</div><div class="line"></div><div class="line">    <span class="comment">/* Set a match value of 8192 counts (~0.25 seconds for a clock source of 32768 Hz) */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a>(&amp;lptimer_obj, LPTIMER_MATCH_VALUE);</div><div class="line"></div><div class="line">    <span class="comment">/* Register the callback handler which will be invoked when the interrupt triggers */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#gac670fa5380ffd41e548dac6975500b3d">cyhal_lptimer_register_callback</a>(&amp;lptimer_obj, lptimer_interrupt_handler, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Configure and Enable the LPTIMER events */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#gaa07d09cfeb275d1343a335f6b4caec9c">cyhal_lptimer_enable_event</a>(&amp;lptimer_obj, CYHAL_LPTIMER_COMPARE_MATCH, LPTIMER_INTR_PRIORITY, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Reload/Reset the Low-Power timer to start counting from this instant */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#ga5ed361c85190707574565009eb325473">cyhal_lptimer_reload</a>(&amp;lptimer_obj);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> lptimer_interrupt_handler(<span class="keywordtype">void</span> *handler_arg, <a class="code" href="group__group__hal__lptimer.html#ga8a2db5e37e9e36afd382844cf909278f">cyhal_lptimer_event_t</a> event)</div><div class="line">{</div><div class="line">    CY_UNUSED_PARAMETER(handler_arg);</div><div class="line">    CY_UNUSED_PARAMETER(event);</div><div class="line">    <span class="comment">/* Reload/Reset the Low-Power timer to start counting from this instant */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#gae91cdc8b63ef191f5a2013df3aaa5d78">cyhal_lptimer_set_delay</a>(&amp;lptimer_obj, LPTIMER_MATCH_VALUE);</div><div class="line">}</div><div class="line"></div></div><!-- fragment --><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 API Reference</h2></td></tr>
 <tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
@@ -152,34 +152,34 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gad5438541af765572369ee96588bd4ee5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
+<tr class="memitem:gad5438541af765572369ee96588bd4ee5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
 <tr class="memdesc:gad5438541af765572369ee96588bd4ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the LPTimer.  <a href="#gad5438541af765572369ee96588bd4ee5">More...</a><br /></td></tr>
 <tr class="separator:gad5438541af765572369ee96588bd4ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0cbaebaddaa47faf71a69d46c65f7917"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga0cbaebaddaa47faf71a69d46c65f7917">cyhal_lptimer_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
+<tr class="memitem:ga0cbaebaddaa47faf71a69d46c65f7917"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga0cbaebaddaa47faf71a69d46c65f7917">cyhal_lptimer_free</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
 <tr class="memdesc:ga0cbaebaddaa47faf71a69d46c65f7917"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize the LPTimer.  <a href="#ga0cbaebaddaa47faf71a69d46c65f7917">More...</a><br /></td></tr>
 <tr class="separator:ga0cbaebaddaa47faf71a69d46c65f7917"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5ed361c85190707574565009eb325473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga5ed361c85190707574565009eb325473">cyhal_lptimer_reload</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
+<tr class="memitem:ga5ed361c85190707574565009eb325473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga5ed361c85190707574565009eb325473">cyhal_lptimer_reload</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
 <tr class="memdesc:ga5ed361c85190707574565009eb325473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reload/Reset the Low-Power timer.  <a href="#ga5ed361c85190707574565009eb325473">More...</a><br /></td></tr>
 <tr class="separator:ga5ed361c85190707574565009eb325473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga39d049f6f4bdd0bcd4e0be2ab48d3394"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t value)</td></tr>
+<tr class="memitem:ga39d049f6f4bdd0bcd4e0be2ab48d3394"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t value)</td></tr>
 <tr class="memdesc:ga39d049f6f4bdd0bcd4e0be2ab48d3394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the match/compare value.  <a href="#ga39d049f6f4bdd0bcd4e0be2ab48d3394">More...</a><br /></td></tr>
 <tr class="separator:ga39d049f6f4bdd0bcd4e0be2ab48d3394"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae91cdc8b63ef191f5a2013df3aaa5d78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gae91cdc8b63ef191f5a2013df3aaa5d78">cyhal_lptimer_set_delay</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t delay)</td></tr>
+<tr class="memitem:gae91cdc8b63ef191f5a2013df3aaa5d78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gae91cdc8b63ef191f5a2013df3aaa5d78">cyhal_lptimer_set_delay</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, uint32_t delay)</td></tr>
 <tr class="memdesc:gae91cdc8b63ef191f5a2013df3aaa5d78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the match/compare value.  <a href="#gae91cdc8b63ef191f5a2013df3aaa5d78">More...</a><br /></td></tr>
 <tr class="separator:gae91cdc8b63ef191f5a2013df3aaa5d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae759c60b5865a26599353e436518b1d3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gae759c60b5865a26599353e436518b1d3">cyhal_lptimer_read</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
+<tr class="memitem:gae759c60b5865a26599353e436518b1d3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gae759c60b5865a26599353e436518b1d3">cyhal_lptimer_read</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
 <tr class="memdesc:gae759c60b5865a26599353e436518b1d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current tick.  <a href="#gae759c60b5865a26599353e436518b1d3">More...</a><br /></td></tr>
 <tr class="separator:gae759c60b5865a26599353e436518b1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac670fa5380ffd41e548dac6975500b3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gac670fa5380ffd41e548dac6975500b3d">cyhal_lptimer_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, <a class="el" href="group__group__hal__lptimer.html#ga09c30c6a9abcbd1a738529102aa9c9b5">cyhal_lptimer_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memitem:gac670fa5380ffd41e548dac6975500b3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gac670fa5380ffd41e548dac6975500b3d">cyhal_lptimer_register_callback</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, <a class="el" href="group__group__hal__lptimer.html#ga09c30c6a9abcbd1a738529102aa9c9b5">cyhal_lptimer_event_callback_t</a> callback, void *callback_arg)</td></tr>
 <tr class="memdesc:gac670fa5380ffd41e548dac6975500b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a LPTimer match event handler.  <a href="#gac670fa5380ffd41e548dac6975500b3d">More...</a><br /></td></tr>
 <tr class="separator:gac670fa5380ffd41e548dac6975500b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa07d09cfeb275d1343a335f6b4caec9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gaa07d09cfeb275d1343a335f6b4caec9c">cyhal_lptimer_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, <a class="el" href="group__group__hal__lptimer.html#ga8a2db5e37e9e36afd382844cf909278f">cyhal_lptimer_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memitem:gaa07d09cfeb275d1343a335f6b4caec9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#gaa07d09cfeb275d1343a335f6b4caec9c">cyhal_lptimer_enable_event</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, <a class="el" href="group__group__hal__lptimer.html#ga8a2db5e37e9e36afd382844cf909278f">cyhal_lptimer_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
 <tr class="memdesc:gaa07d09cfeb275d1343a335f6b4caec9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure and Enable/Disable the LPTimer events.  <a href="#gaa07d09cfeb275d1343a335f6b4caec9c">More...</a><br /></td></tr>
 <tr class="separator:gaa07d09cfeb275d1343a335f6b4caec9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6c86e106c2cc0e5ce0cc4168924a7d41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga6c86e106c2cc0e5ce0cc4168924a7d41">cyhal_lptimer_irq_trigger</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
+<tr class="memitem:ga6c86e106c2cc0e5ce0cc4168924a7d41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga6c86e106c2cc0e5ce0cc4168924a7d41">cyhal_lptimer_irq_trigger</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj)</td></tr>
 <tr class="memdesc:ga6c86e106c2cc0e5ce0cc4168924a7d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually trigger the LPTimer interrupt.  <a href="#ga6c86e106c2cc0e5ce0cc4168924a7d41">More...</a><br /></td></tr>
 <tr class="separator:ga6c86e106c2cc0e5ce0cc4168924a7d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga35efd806c6a7e0a3c80ef41b0f1e989d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga35efd806c6a7e0a3c80ef41b0f1e989d">cyhal_lptimer_get_info</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, <a class="el" href="group__group__hal__lptimer.html#structcyhal__lptimer__info__t">cyhal_lptimer_info_t</a> *info)</td></tr>
+<tr class="memitem:ga35efd806c6a7e0a3c80ef41b0f1e989d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__lptimer.html#ga35efd806c6a7e0a3c80ef41b0f1e989d">cyhal_lptimer_get_info</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *obj, <a class="el" href="group__group__hal__lptimer.html#structcyhal__lptimer__info__t">cyhal_lptimer_info_t</a> *info)</td></tr>
 <tr class="memdesc:ga35efd806c6a7e0a3c80ef41b0f1e989d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the LPTimer.  <a href="#ga35efd806c6a7e0a3c80ef41b0f1e989d">More...</a><br /></td></tr>
 <tr class="separator:ga35efd806c6a7e0a3c80ef41b0f1e989d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -247,7 +247,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_lptimer_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -275,7 +275,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname">void cyhal_lptimer_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -302,7 +302,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_lptimer_reload </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -329,7 +329,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_lptimer_set_match </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -368,7 +368,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_lptimer_set_delay </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -395,8 +395,6 @@ Maximum value of the counter. </td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The status of the set_match request. On success it returns <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>. </dd></dl>
-<p>16 bit C0/C1 are cascaded to generated a 32 bit counter. Counter0 continues counting after reaching its match value Interrupt is generated on Counter1 match.</p>
-<p>Supposed T=C0=C1=0, and we need to trigger an interrupt at T=0x28000. We set C0_match to 0x8000 and C1 match to 1. At T = 0x8000, C0_value matches C0_match so C1 get incremented. C1/C0=0x18000. At T = 0x18000, C0_value matches C0_match again so C1 get incremented from 1 to 2. When C1 get incremented from 1 to 2 theinterrupt is generated. At T = 0x18000, C1/C0 = 0x28000.</p>
 
 </div>
 </div>
@@ -409,7 +407,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname">uint32_t cyhal_lptimer_read </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -437,7 +435,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname">void cyhal_lptimer_register_callback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -482,7 +480,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname">void cyhal_lptimer_enable_event </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -534,7 +532,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname">void cyhal_lptimer_irq_trigger </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -560,7 +558,7 @@ Maximum value of the counter. </td></tr>
         <tr>
           <td class="memname">void cyhal_lptimer_get_info </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>

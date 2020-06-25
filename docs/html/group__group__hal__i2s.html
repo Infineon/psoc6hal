@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -112,7 +112,7 @@ Features</h1>
 <h1><a class="anchor" id="section_i2s_quickstart"></a>
 Quick Start</h1>
 <p>Initialize an I2S instance using the <a class="el" href="group__group__hal__i2s.html#ga4f2766cc7263f8a8d20eb7fdf60b3286">cyhal_i2s_init</a> and provide the transmit (tx) and/or receive (rx) pins.<br />
- See <a class="el" href="group__group__hal__i2s.html#subsection_i2s_snippet_1">Snippet 1: I2S Initialization and Configuration</a> for example initialization as transmit or receive. </p><dl class="section note"><dt>Note</dt><dd>The clock parameter (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk) is optional and can be set to NULL to generate and use an available clock resource with a default frequency.</dd></dl>
+ See <a class="el" href="group__group__hal__i2s.html#subsection_i2s_snippet_1">Snippet 1: I2S Initialization and Configuration</a> for example initialization as transmit or receive. </p><dl class="section note"><dt>Note</dt><dd>The clock parameter (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk) is optional and can be set to NULL to generate and use an available clock resource with a default frequency.</dd></dl>
 <p>The sclk frequency is determined as <code>sclk = sample_rate_hz * channel_length * 2</code> (multiplying by 2 for 2 channels - left and right). The input clock must be a multiple of this sclk frequency; see the implementation specific documentation for the supported multipliers.</p>
 <p>It is possible to use either only TX functionality, only RX functionality, or both RX and TX functionality at the same time. If RX and TX are both in use, the same sample rate, channel length, word length, sclk frequency will be used for both.</p>
 <h1><a class="anchor" id="section_i2s_snippets"></a>
@@ -120,19 +120,19 @@ Code Snippets</h1>
 <h2><a class="anchor" id="subsection_i2s_snippet_1"></a>
 Snippet 1: I2S Initialization and Configuration</h2>
 <p>This snippet initializes an I2S resource for transmit or receive and assigns the pins.</p>
-<p>Initializing as I2S transmitter </p><div class="fragment"><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <a class="code" href="group__group__hal__i2s.html#structcyhal__i2s__pins__t">cyhal_i2s_pins_t</a> tx_pins = { .<a class="code" href="group__group__hal__i2s.html#a06f418e1a73780daacabb034e78ad0d9">sck</a> = <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a6e81efad69a0ea034651af008bd857b9">P5_1</a>, .ws = <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a48fead26a455d15e627a59f49e735ed6">P5_2</a>, .data = <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51ac4e840a9752ddcf910485a9ad3bda6c3">P5_3</a> };</div><div class="line">    <a class="code" href="group__group__hal__i2s.html#structcyhal__i2s__config__t">cyhal_i2s_config_t</a> config =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__i2s.html#aa83c7a4b2a6f43a7ef74ad0d23c6546c">is_tx_slave</a> = <span class="keyword">false</span>,</div><div class="line">        .is_rx_slave = <span class="keyword">false</span>,</div><div class="line">        .mclk_hz = 0,</div><div class="line">        .channel_length = 32,</div><div class="line">        .word_length = 32,</div><div class="line">        .sample_rate_hz = 44000</div><div class="line">    };</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga4f2766cc7263f8a8d20eb7fdf60b3286">cyhal_i2s_init</a>(&amp;i2s, &amp;tx_pins, NULL, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3dbd1016ea99d087d747530418b89a01">NC</a>, &amp;config, NULL);</div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> != result)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Handle error */</span></div><div class="line">    }</div></div><!-- fragment --><p> Initializing as I2S receiver </p><div class="fragment"><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <a class="code" href="group__group__hal__i2s.html#structcyhal__i2s__pins__t">cyhal_i2s_pins_t</a> rx_pins = { .<a class="code" href="group__group__hal__i2s.html#a06f418e1a73780daacabb034e78ad0d9">sck</a> = <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3f2896cca74b9552337ba66e54412050">P5_4</a>, .ws = <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a8ab80e76a8624109b9b303f2d2c3645d">P5_5</a>, .data = <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a5a6e676f2fbd259451a8035c6d286748">P5_6</a> };</div><div class="line">    <a class="code" href="group__group__hal__i2s.html#structcyhal__i2s__config__t">cyhal_i2s_config_t</a> config =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__i2s.html#aa83c7a4b2a6f43a7ef74ad0d23c6546c">is_tx_slave</a> = <span class="keyword">false</span>,</div><div class="line">        .is_rx_slave = <span class="keyword">true</span>,</div><div class="line">        .mclk_hz = 0,</div><div class="line">        .channel_length = 32,</div><div class="line">        .word_length = 32,</div><div class="line">        .sample_rate_hz = 44000</div><div class="line">    };</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga4f2766cc7263f8a8d20eb7fdf60b3286">cyhal_i2s_init</a>(&amp;i2s, NULL, &amp;rx_pins, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3dbd1016ea99d087d747530418b89a01">NC</a>, &amp;config, NULL);</div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> != result)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Handle error */</span></div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_i2s_snippet_2"></a>
+<p>Initializing as I2S transmitter </p><div class="fragment"><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <a class="code" href="group__group__hal__i2s.html#structcyhal__i2s__pins__t">cyhal_i2s_pins_t</a> tx_pins = { .<a class="code" href="group__group__hal__i2s.html#a06f418e1a73780daacabb034e78ad0d9">sck</a> = <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a6e81efad69a0ea034651af008bd857b9">P5_1</a>, .ws = <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a48fead26a455d15e627a59f49e735ed6">P5_2</a>, .data = <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51ac4e840a9752ddcf910485a9ad3bda6c3">P5_3</a> };</div><div class="line">    <a class="code" href="group__group__hal__i2s.html#structcyhal__i2s__config__t">cyhal_i2s_config_t</a> config =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__i2s.html#aa83c7a4b2a6f43a7ef74ad0d23c6546c">is_tx_slave</a> = <span class="keyword">false</span>,</div><div class="line">        .is_rx_slave = <span class="keyword">false</span>,</div><div class="line">        .mclk_hz = 0,</div><div class="line">        .channel_length = 32,</div><div class="line">        .word_length = 32,</div><div class="line">        .sample_rate_hz = 44000</div><div class="line">    };</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga4f2766cc7263f8a8d20eb7fdf60b3286">cyhal_i2s_init</a>(&amp;i2s, &amp;tx_pins, NULL, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3dbd1016ea99d087d747530418b89a01">NC</a>, &amp;config, NULL);</div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> != result)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Handle error */</span></div><div class="line">    }</div></div><!-- fragment --><p> Initializing as I2S receiver </p><div class="fragment"><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <a class="code" href="group__group__hal__i2s.html#structcyhal__i2s__pins__t">cyhal_i2s_pins_t</a> rx_pins = { .<a class="code" href="group__group__hal__i2s.html#a06f418e1a73780daacabb034e78ad0d9">sck</a> = <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3f2896cca74b9552337ba66e54412050">P5_4</a>, .ws = <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a8ab80e76a8624109b9b303f2d2c3645d">P5_5</a>, .data = <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a5a6e676f2fbd259451a8035c6d286748">P5_6</a> };</div><div class="line">    <a class="code" href="group__group__hal__i2s.html#structcyhal__i2s__config__t">cyhal_i2s_config_t</a> config =</div><div class="line">    {</div><div class="line">        .<a class="code" href="group__group__hal__i2s.html#aa83c7a4b2a6f43a7ef74ad0d23c6546c">is_tx_slave</a> = <span class="keyword">false</span>,</div><div class="line">        .is_rx_slave = <span class="keyword">true</span>,</div><div class="line">        .mclk_hz = 0,</div><div class="line">        .channel_length = 32,</div><div class="line">        .word_length = 32,</div><div class="line">        .sample_rate_hz = 44000</div><div class="line">    };</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga4f2766cc7263f8a8d20eb7fdf60b3286">cyhal_i2s_init</a>(&amp;i2s, NULL, &amp;rx_pins, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3dbd1016ea99d087d747530418b89a01">NC</a>, &amp;config, NULL);</div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> != result)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Handle error */</span></div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_i2s_snippet_2"></a>
 Snippet 2: I2S Transmit One-shot</h2>
 <p>This snippet shows how to transmit data using <a class="el" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a> when the entire sample is available at once. <br />
 </p>
-<div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> i2s_event_handler_transmit_one_shot(<span class="keywordtype">void</span>* arg, <a class="code" href="group__group__hal__i2s.html#ga98bc78188673aae2c4e27b660a3f20fe">cyhal_i2s_event_t</a> event)</div><div class="line">{</div><div class="line">    <span class="comment">/* When we registered the callback, we set &#39;arg&#39; to point to the i2s object */</span></div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *i2s = (<a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *)arg;</div><div class="line">    <span class="keywordflow">if</span>(0u != (event &amp; <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20feaf860cfe6a5c38f054a44b53f854c8126">CYHAL_I2S_TX_EMPTY</a>))</div><div class="line">    {</div><div class="line">        <a class="code" href="group__group__hal__i2s.html#gae809b73f16e9dbc25e12c0c2687e1ba0">cyhal_i2s_stop_tx</a>(i2s); </div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/* Data to transmit, defined e.g. an array stored in flash */</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> uint32_t* tx_buffer; </div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span>    tx_buffer_len;</div><div class="line"><a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> snippet_cyhal_i2s_async_transmit_one_shot(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <span class="comment">/* Initialize the object as shown in Snippet 1 */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback and set the callback argument to be a pointer to the I2S object,</span></div><div class="line"><span class="comment">     * so that we can easily reference it from the callback handler.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">     <a class="code" href="group__group__hal__i2s.html#gade0855962b32a1b4d4dbb9bbf9b6354b">cyhal_i2s_register_callback</a>(&amp;i2s, &amp;i2s_event_handler_transmit_one_shot, &amp;i2s);</div><div class="line"></div><div class="line">    <span class="comment">/* Subscribe to the TX Empty event so that we can stop the interface when the transfer is complete */</span></div><div class="line">    <a class="code" href="group__group__hal__i2s.html#gac8adecacf62147f30023e69010b52bf9">cyhal_i2s_enable_event</a>(&amp;i2s, <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20feaf860cfe6a5c38f054a44b53f854c8126">CYHAL_I2S_TX_EMPTY</a>, <a class="code" href="group__group__hal__psoc6__hw__types.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a>(&amp;i2s, tx_buffer, tx_buffer_len);</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#gabe95fc12ff1d9264a60e8eeda35d885a">cyhal_i2s_start_tx</a>(&amp;i2s);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> result;</div><div class="line">}</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_i2s_snippet_3"></a>
+<div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> i2s_event_handler_transmit_one_shot(<span class="keywordtype">void</span>* arg, <a class="code" href="group__group__hal__i2s.html#ga98bc78188673aae2c4e27b660a3f20fe">cyhal_i2s_event_t</a> event)</div><div class="line">{</div><div class="line">    <span class="comment">/* When we registered the callback, we set &#39;arg&#39; to point to the i2s object */</span></div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *i2s = (<a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *)arg;</div><div class="line">    <span class="keywordflow">if</span>(0u != (event &amp; <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20feaf860cfe6a5c38f054a44b53f854c8126">CYHAL_I2S_TX_EMPTY</a>))</div><div class="line">    {</div><div class="line">        <a class="code" href="group__group__hal__i2s.html#gae809b73f16e9dbc25e12c0c2687e1ba0">cyhal_i2s_stop_tx</a>(i2s); </div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/* Data to transmit, defined e.g. an array stored in flash */</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> uint32_t* tx_buffer; </div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span>    tx_buffer_len;</div><div class="line"><a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> snippet_cyhal_i2s_async_transmit_one_shot(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <span class="comment">/* Initialize the object as shown in Snippet 1 */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback and set the callback argument to be a pointer to the I2S object,</span></div><div class="line"><span class="comment">     * so that we can easily reference it from the callback handler.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">     <a class="code" href="group__group__hal__i2s.html#gade0855962b32a1b4d4dbb9bbf9b6354b">cyhal_i2s_register_callback</a>(&amp;i2s, &amp;i2s_event_handler_transmit_one_shot, &amp;i2s);</div><div class="line"></div><div class="line">    <span class="comment">/* Subscribe to the TX Empty event so that we can stop the interface when the transfer is complete */</span></div><div class="line">    <a class="code" href="group__group__hal__i2s.html#gac8adecacf62147f30023e69010b52bf9">cyhal_i2s_enable_event</a>(&amp;i2s, <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20feaf860cfe6a5c38f054a44b53f854c8126">CYHAL_I2S_TX_EMPTY</a>, <a class="code" href="group__group__hal__impl__hw__types.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a>(&amp;i2s, tx_buffer, tx_buffer_len);</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#gabe95fc12ff1d9264a60e8eeda35d885a">cyhal_i2s_start_tx</a>(&amp;i2s);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> result;</div><div class="line">}</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_i2s_snippet_3"></a>
 Snippet 3: I2S Transmit Streaming</h2>
 <p>This snippet shows how to transmit data using <a class="el" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a> when sample data is being continuously loaded and transmitted (e.g. streaming over the network). <br />
 </p>
-<div class="fragment"><div class="line"><span class="comment">/* We use a dual buffer system so that one buffer can be transmitting while the other is being filled */</span></div><div class="line"><span class="preprocessor">#define BUFFER_SIZE 128u</span></div><div class="line"><span class="keyword">const</span> uint32_t tx_buffer0[BUFFER_SIZE];</div><div class="line"><span class="keyword">const</span> uint32_t tx_buffer1[BUFFER_SIZE];</div><div class="line"><span class="keyword">const</span> uint32_t *active_tx_buffer;</div><div class="line"><span class="keyword">const</span> uint32_t *next_tx_buffer;</div><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> i2s_event_handler_transmit_streaming(<span class="keywordtype">void</span>* arg, <a class="code" href="group__group__hal__i2s.html#ga98bc78188673aae2c4e27b660a3f20fe">cyhal_i2s_event_t</a> event)</div><div class="line">{</div><div class="line">    <span class="comment">/* When we registered the callback, we set &#39;arg&#39; to point to the i2s object */</span></div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *i2s = (<a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *)arg;</div><div class="line">    <span class="keywordflow">if</span>(0u != (event &amp; <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20fea090269cec878bec745bb2e393606e41e">CYHAL_I2S_ASYNC_TX_COMPLETE</a>))</div><div class="line">    {</div><div class="line">        <span class="comment">/* Flip the active and the next tx buffers */</span></div><div class="line">        <span class="keyword">const</span> uint32_t *temp = active_tx_buffer;</div><div class="line">        active_tx_buffer = next_tx_buffer;</div><div class="line">        next_tx_buffer = temp;</div><div class="line"></div><div class="line">        <span class="comment">/* Start writing the next buffer while the just-freed one is repopulated */</span></div><div class="line">        <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a>(i2s, active_tx_buffer, BUFFER_SIZE);</div><div class="line"></div><div class="line">        <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">        {</div><div class="line">            <span class="comment">/* Load the next set of data into next_tx_buffer */</span></div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> snippet_cyhal_i2s_async_transmit_streaming(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <span class="comment">/* Initialize the object as shown in Snippet 1 */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback and set the callback argument to be a pointer to the I2S object,</span></div><div class="line"><span class="comment">     * so that we can easily reference it from the callback handler.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <a class="code" href="group__group__hal__i2s.html#gade0855962b32a1b4d4dbb9bbf9b6354b">cyhal_i2s_register_callback</a>(&amp;i2s, &amp;i2s_event_handler_transmit_streaming, &amp;i2s);</div><div class="line"></div><div class="line">    <span class="comment">/* Subscribe to the async complete event so that we can queue up another transfer when this one completes */</span></div><div class="line">    <a class="code" href="group__group__hal__i2s.html#gac8adecacf62147f30023e69010b52bf9">cyhal_i2s_enable_event</a>(&amp;i2s, <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20fea090269cec878bec745bb2e393606e41e">CYHAL_I2S_ASYNC_TX_COMPLETE</a>, <a class="code" href="group__group__hal__psoc6__hw__types.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Configure asynchronous transfers to use DMA to free up the CPU during transfers */</span></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga9fba9ea64bd2ec92a2ae41459020825c">cyhal_i2s_set_async_mode</a>(&amp;i2s, <a class="code" href="group__group__hal__general__types.html#ggab2d2acfb82599df54152be0b170c6ec2a580896db2028c77f9f89cb8772a1eb90">CYHAL_ASYNC_DMA</a>, <a class="code" href="group__group__hal__psoc6__dma.html#ga81946da56dd6ba8afd28f6056b1d779a">CYHAL_DMA_PRIORITY_DEFAULT</a>);</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Populate initial data in the two tx buffers (e.g. by streaming over the network) */</span></div><div class="line"></div><div class="line">        active_tx_buffer = tx_buffer0; </div><div class="line">        next_tx_buffer = tx_buffer1;</div><div class="line"></div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a>(&amp;i2s, active_tx_buffer, BUFFER_SIZE);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#gabe95fc12ff1d9264a60e8eeda35d885a">cyhal_i2s_start_tx</a>(&amp;i2s);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> result;</div><div class="line">}</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_i2s_snippet_4"></a>
+<div class="fragment"><div class="line"><span class="comment">/* We use a dual buffer system so that one buffer can be transmitting while the other is being filled */</span></div><div class="line"><span class="preprocessor">#define BUFFER_SIZE 128u</span></div><div class="line"><span class="keyword">const</span> uint32_t tx_buffer0[BUFFER_SIZE];</div><div class="line"><span class="keyword">const</span> uint32_t tx_buffer1[BUFFER_SIZE];</div><div class="line"><span class="keyword">const</span> uint32_t *active_tx_buffer;</div><div class="line"><span class="keyword">const</span> uint32_t *next_tx_buffer;</div><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> i2s_event_handler_transmit_streaming(<span class="keywordtype">void</span>* arg, <a class="code" href="group__group__hal__i2s.html#ga98bc78188673aae2c4e27b660a3f20fe">cyhal_i2s_event_t</a> event)</div><div class="line">{</div><div class="line">    <span class="comment">/* When we registered the callback, we set &#39;arg&#39; to point to the i2s object */</span></div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *i2s = (<a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *)arg;</div><div class="line">    <span class="keywordflow">if</span>(0u != (event &amp; <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20fea090269cec878bec745bb2e393606e41e">CYHAL_I2S_ASYNC_TX_COMPLETE</a>))</div><div class="line">    {</div><div class="line">        <span class="comment">/* Flip the active and the next tx buffers */</span></div><div class="line">        <span class="keyword">const</span> uint32_t *temp = active_tx_buffer;</div><div class="line">        active_tx_buffer = next_tx_buffer;</div><div class="line">        next_tx_buffer = temp;</div><div class="line"></div><div class="line">        <span class="comment">/* Start writing the next buffer while the just-freed one is repopulated */</span></div><div class="line">        <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a>(i2s, active_tx_buffer, BUFFER_SIZE);</div><div class="line"></div><div class="line">        <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">        {</div><div class="line">            <span class="comment">/* Load the next set of data into next_tx_buffer */</span></div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> snippet_cyhal_i2s_async_transmit_streaming(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <span class="comment">/* Initialize the object as shown in Snippet 1 */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback and set the callback argument to be a pointer to the I2S object,</span></div><div class="line"><span class="comment">     * so that we can easily reference it from the callback handler.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <a class="code" href="group__group__hal__i2s.html#gade0855962b32a1b4d4dbb9bbf9b6354b">cyhal_i2s_register_callback</a>(&amp;i2s, &amp;i2s_event_handler_transmit_streaming, &amp;i2s);</div><div class="line"></div><div class="line">    <span class="comment">/* Subscribe to the async complete event so that we can queue up another transfer when this one completes */</span></div><div class="line">    <a class="code" href="group__group__hal__i2s.html#gac8adecacf62147f30023e69010b52bf9">cyhal_i2s_enable_event</a>(&amp;i2s, <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20fea090269cec878bec745bb2e393606e41e">CYHAL_I2S_ASYNC_TX_COMPLETE</a>, <a class="code" href="group__group__hal__impl__hw__types.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Configure asynchronous transfers to use DMA to free up the CPU during transfers */</span></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga9fba9ea64bd2ec92a2ae41459020825c">cyhal_i2s_set_async_mode</a>(&amp;i2s, <a class="code" href="group__group__hal__general__types.html#ggab2d2acfb82599df54152be0b170c6ec2a580896db2028c77f9f89cb8772a1eb90">CYHAL_ASYNC_DMA</a>, <a class="code" href="group__group__hal__impl__dma.html#ga81946da56dd6ba8afd28f6056b1d779a">CYHAL_DMA_PRIORITY_DEFAULT</a>);</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Populate initial data in the two tx buffers (e.g. by streaming over the network) */</span></div><div class="line"></div><div class="line">        active_tx_buffer = tx_buffer0; </div><div class="line">        next_tx_buffer = tx_buffer1;</div><div class="line"></div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a>(&amp;i2s, active_tx_buffer, BUFFER_SIZE);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#gabe95fc12ff1d9264a60e8eeda35d885a">cyhal_i2s_start_tx</a>(&amp;i2s);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> result;</div><div class="line">}</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_i2s_snippet_4"></a>
 Snippet 4: I2S Receive</h2>
 <p>This snippet shows how to receive data using <a class="el" href="group__group__hal__i2s.html#ga94357835c6f16b979680420f951d8980">cyhal_i2s_read_async</a>. <br />
 </p>
-<div class="fragment"><div class="line"><span class="comment">/* We use a dual buffer system so that one buffer can be filling while the other is being processed */</span></div><div class="line"><span class="preprocessor">#define BUFFER_SIZE 128u</span></div><div class="line">uint32_t rx_buffer0[BUFFER_SIZE];</div><div class="line">uint32_t rx_buffer1[BUFFER_SIZE];</div><div class="line">uint32_t *active_rx_buffer;</div><div class="line">uint32_t *full_rx_buffer;</div><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> i2s_event_handler_receive(<span class="keywordtype">void</span>* arg, <a class="code" href="group__group__hal__i2s.html#ga98bc78188673aae2c4e27b660a3f20fe">cyhal_i2s_event_t</a> event)</div><div class="line">{</div><div class="line">    <span class="comment">/* When we registered the callback, we set &#39;arg&#39; to point to the i2s object */</span></div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *i2s = (<a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *)arg;</div><div class="line">    <span class="keywordflow">if</span>(0u != (event &amp; <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20feab4a3a412a6b61efbd39ab540120713e9">CYHAL_I2S_ASYNC_RX_COMPLETE</a>))</div><div class="line">    {</div><div class="line">        <span class="comment">/* Flip the active and the next rx buffers */</span></div><div class="line">        uint32_t *temp = active_rx_buffer;</div><div class="line">        active_rx_buffer = full_rx_buffer;</div><div class="line">        full_rx_buffer = temp;</div><div class="line"></div><div class="line">        <span class="comment">/* Start reading into the next buffer while the just-filled one is being processed */</span></div><div class="line">        <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga94357835c6f16b979680420f951d8980">cyhal_i2s_read_async</a>(i2s, active_rx_buffer, BUFFER_SIZE);</div><div class="line"></div><div class="line">        <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">        {</div><div class="line">            <span class="comment">/* Process the data in the full_rx_buffer */</span></div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> snippet_cyhal_i2s_async_receive(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <span class="comment">/* Initialize the object as shown in Snippet 1 */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback and set the callback argument to be a pointer to the I2S object,</span></div><div class="line"><span class="comment">     * so that we can easily reference it from the callback handler.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <a class="code" href="group__group__hal__i2s.html#gade0855962b32a1b4d4dbb9bbf9b6354b">cyhal_i2s_register_callback</a>(&amp;i2s, &amp;i2s_event_handler_receive, &amp;i2s);</div><div class="line"></div><div class="line">    <span class="comment">/* Subscribe to the async complete event so that we can queue up another transfer when this one completes */</span></div><div class="line">     <a class="code" href="group__group__hal__i2s.html#gac8adecacf62147f30023e69010b52bf9">cyhal_i2s_enable_event</a>(&amp;i2s, <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20feab4a3a412a6b61efbd39ab540120713e9">CYHAL_I2S_ASYNC_RX_COMPLETE</a>, <a class="code" href="group__group__hal__psoc6__hw__types.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Configure asynchronous transfers to use DMA to free up the CPU during transfers */</span></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga9fba9ea64bd2ec92a2ae41459020825c">cyhal_i2s_set_async_mode</a>(&amp;i2s, <a class="code" href="group__group__hal__general__types.html#ggab2d2acfb82599df54152be0b170c6ec2a580896db2028c77f9f89cb8772a1eb90">CYHAL_ASYNC_DMA</a>, <a class="code" href="group__group__hal__psoc6__dma.html#ga81946da56dd6ba8afd28f6056b1d779a">CYHAL_DMA_PRIORITY_DEFAULT</a>);</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        active_rx_buffer = rx_buffer0; </div><div class="line">        full_rx_buffer = rx_buffer1;</div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#ga94357835c6f16b979680420f951d8980">cyhal_i2s_read_async</a>(&amp;i2s, active_rx_buffer, BUFFER_SIZE);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#gabc95dd1600db8fdb379e7e7cc3d39039">cyhal_i2s_start_rx</a>(&amp;i2s);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> result;</div><div class="line">}</div></div><!-- fragment --> <h1><a class="anchor" id="subsection_i2s_moreinformation"></a>
+<div class="fragment"><div class="line"><span class="comment">/* We use a dual buffer system so that one buffer can be filling while the other is being processed */</span></div><div class="line"><span class="preprocessor">#define BUFFER_SIZE 128u</span></div><div class="line">uint32_t rx_buffer0[BUFFER_SIZE];</div><div class="line">uint32_t rx_buffer1[BUFFER_SIZE];</div><div class="line">uint32_t *active_rx_buffer;</div><div class="line">uint32_t *full_rx_buffer;</div><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> i2s_event_handler_receive(<span class="keywordtype">void</span>* arg, <a class="code" href="group__group__hal__i2s.html#ga98bc78188673aae2c4e27b660a3f20fe">cyhal_i2s_event_t</a> event)</div><div class="line">{</div><div class="line">    <span class="comment">/* When we registered the callback, we set &#39;arg&#39; to point to the i2s object */</span></div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *i2s = (<a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *)arg;</div><div class="line">    <span class="keywordflow">if</span>(0u != (event &amp; <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20feab4a3a412a6b61efbd39ab540120713e9">CYHAL_I2S_ASYNC_RX_COMPLETE</a>))</div><div class="line">    {</div><div class="line">        <span class="comment">/* Flip the active and the next rx buffers */</span></div><div class="line">        uint32_t *temp = active_rx_buffer;</div><div class="line">        active_rx_buffer = full_rx_buffer;</div><div class="line">        full_rx_buffer = temp;</div><div class="line"></div><div class="line">        <span class="comment">/* Start reading into the next buffer while the just-filled one is being processed */</span></div><div class="line">        <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga94357835c6f16b979680420f951d8980">cyhal_i2s_read_async</a>(i2s, active_rx_buffer, BUFFER_SIZE);</div><div class="line"></div><div class="line">        <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">        {</div><div class="line">            <span class="comment">/* Process the data in the full_rx_buffer */</span></div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> snippet_cyhal_i2s_async_receive(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> i2s;</div><div class="line">    <span class="comment">/* Initialize the object as shown in Snippet 1 */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback and set the callback argument to be a pointer to the I2S object,</span></div><div class="line"><span class="comment">     * so that we can easily reference it from the callback handler.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <a class="code" href="group__group__hal__i2s.html#gade0855962b32a1b4d4dbb9bbf9b6354b">cyhal_i2s_register_callback</a>(&amp;i2s, &amp;i2s_event_handler_receive, &amp;i2s);</div><div class="line"></div><div class="line">    <span class="comment">/* Subscribe to the async complete event so that we can queue up another transfer when this one completes */</span></div><div class="line">     <a class="code" href="group__group__hal__i2s.html#gac8adecacf62147f30023e69010b52bf9">cyhal_i2s_enable_event</a>(&amp;i2s, <a class="code" href="group__group__hal__i2s.html#gga98bc78188673aae2c4e27b660a3f20feab4a3a412a6b61efbd39ab540120713e9">CYHAL_I2S_ASYNC_RX_COMPLETE</a>, <a class="code" href="group__group__hal__impl__hw__types.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Configure asynchronous transfers to use DMA to free up the CPU during transfers */</span></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> result = <a class="code" href="group__group__hal__i2s.html#ga9fba9ea64bd2ec92a2ae41459020825c">cyhal_i2s_set_async_mode</a>(&amp;i2s, <a class="code" href="group__group__hal__general__types.html#ggab2d2acfb82599df54152be0b170c6ec2a580896db2028c77f9f89cb8772a1eb90">CYHAL_ASYNC_DMA</a>, <a class="code" href="group__group__hal__impl__dma.html#ga81946da56dd6ba8afd28f6056b1d779a">CYHAL_DMA_PRIORITY_DEFAULT</a>);</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        active_rx_buffer = rx_buffer0; </div><div class="line">        full_rx_buffer = rx_buffer1;</div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#ga94357835c6f16b979680420f951d8980">cyhal_i2s_read_async</a>(&amp;i2s, active_rx_buffer, BUFFER_SIZE);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == result)</div><div class="line">    {</div><div class="line">        result = <a class="code" href="group__group__hal__i2s.html#gabc95dd1600db8fdb379e7e7cc3d39039">cyhal_i2s_start_rx</a>(&amp;i2s);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> result;</div><div class="line">}</div></div><!-- fragment --> <h1><a class="anchor" id="subsection_i2s_moreinformation"></a>
 More Information</h1>
 <p><b>Code examples (Github)</b></p><ul>
 <li><a href="https://github.com/cypresssemiconductorco/mtb-example-psoc6-i2s"><b> PSoC 6 MCU: Inter-IC Sound (I2S)</b></a></li>
@@ -194,64 +194,76 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga4f2766cc7263f8a8d20eb7fdf60b3286"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga4f2766cc7263f8a8d20eb7fdf60b3286">cyhal_i2s_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, const <a class="el" href="group__group__hal__i2s.html#structcyhal__i2s__pins__t">cyhal_i2s_pins_t</a> *tx_pins, const <a class="el" href="group__group__hal__i2s.html#structcyhal__i2s__pins__t">cyhal_i2s_pins_t</a> *rx_pins, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> mclk, const <a class="el" href="group__group__hal__i2s.html#structcyhal__i2s__config__t">cyhal_i2s_config_t</a> *config, <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk)</td></tr>
+<tr class="memitem:ga4f2766cc7263f8a8d20eb7fdf60b3286"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga4f2766cc7263f8a8d20eb7fdf60b3286">cyhal_i2s_init</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, const <a class="el" href="group__group__hal__i2s.html#structcyhal__i2s__pins__t">cyhal_i2s_pins_t</a> *tx_pins, const <a class="el" href="group__group__hal__i2s.html#structcyhal__i2s__pins__t">cyhal_i2s_pins_t</a> *rx_pins, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> mclk, const <a class="el" href="group__group__hal__i2s.html#structcyhal__i2s__config__t">cyhal_i2s_config_t</a> *config, <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk)</td></tr>
 <tr class="memdesc:ga4f2766cc7263f8a8d20eb7fdf60b3286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the I2S peripheral.  <a href="#ga4f2766cc7263f8a8d20eb7fdf60b3286">More...</a><br /></td></tr>
 <tr class="separator:ga4f2766cc7263f8a8d20eb7fdf60b3286"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabda3b41391e8567f52599268dd6b721e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gabda3b41391e8567f52599268dd6b721e">cyhal_i2s_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:gabda3b41391e8567f52599268dd6b721e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gabda3b41391e8567f52599268dd6b721e">cyhal_i2s_free</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:gabda3b41391e8567f52599268dd6b721e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize the i2s object.  <a href="#gabda3b41391e8567f52599268dd6b721e">More...</a><br /></td></tr>
 <tr class="separator:gabda3b41391e8567f52599268dd6b721e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1bb2c6da52278fc4f4c4558846bfa20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga1bb2c6da52278fc4f4c4558846bfa20a">cyhal_i2s_set_sample_rate</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, uint32_t sample_rate_hz)</td></tr>
+<tr class="memitem:ga1bb2c6da52278fc4f4c4558846bfa20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga1bb2c6da52278fc4f4c4558846bfa20a">cyhal_i2s_set_sample_rate</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, uint32_t sample_rate_hz)</td></tr>
 <tr class="memdesc:ga1bb2c6da52278fc4f4c4558846bfa20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the I2S sample rate.  <a href="#ga1bb2c6da52278fc4f4c4558846bfa20a">More...</a><br /></td></tr>
 <tr class="separator:ga1bb2c6da52278fc4f4c4558846bfa20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabe95fc12ff1d9264a60e8eeda35d885a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gabe95fc12ff1d9264a60e8eeda35d885a">cyhal_i2s_start_tx</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:gabe95fc12ff1d9264a60e8eeda35d885a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gabe95fc12ff1d9264a60e8eeda35d885a">cyhal_i2s_start_tx</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:gabe95fc12ff1d9264a60e8eeda35d885a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts transmitting data.  <a href="#gabe95fc12ff1d9264a60e8eeda35d885a">More...</a><br /></td></tr>
 <tr class="separator:gabe95fc12ff1d9264a60e8eeda35d885a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae809b73f16e9dbc25e12c0c2687e1ba0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gae809b73f16e9dbc25e12c0c2687e1ba0">cyhal_i2s_stop_tx</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:gae809b73f16e9dbc25e12c0c2687e1ba0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gae809b73f16e9dbc25e12c0c2687e1ba0">cyhal_i2s_stop_tx</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:gae809b73f16e9dbc25e12c0c2687e1ba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops transmitting data.  <a href="#gae809b73f16e9dbc25e12c0c2687e1ba0">More...</a><br /></td></tr>
 <tr class="separator:gae809b73f16e9dbc25e12c0c2687e1ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabc95dd1600db8fdb379e7e7cc3d39039"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gabc95dd1600db8fdb379e7e7cc3d39039">cyhal_i2s_start_rx</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:ga5b0c26d3c1193984873cfd1970287bdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga5b0c26d3c1193984873cfd1970287bdc">cyhal_i2s_clear_tx</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memdesc:ga5b0c26d3c1193984873cfd1970287bdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the tx hardware buffer.  <a href="#ga5b0c26d3c1193984873cfd1970287bdc">More...</a><br /></td></tr>
+<tr class="separator:ga5b0c26d3c1193984873cfd1970287bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabc95dd1600db8fdb379e7e7cc3d39039"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gabc95dd1600db8fdb379e7e7cc3d39039">cyhal_i2s_start_rx</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:gabc95dd1600db8fdb379e7e7cc3d39039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts receiving data.  <a href="#gabc95dd1600db8fdb379e7e7cc3d39039">More...</a><br /></td></tr>
 <tr class="separator:gabc95dd1600db8fdb379e7e7cc3d39039"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad76c51ccedc76681490c74e7d859ee8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gad76c51ccedc76681490c74e7d859ee8a">cyhal_i2s_stop_rx</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:gad76c51ccedc76681490c74e7d859ee8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gad76c51ccedc76681490c74e7d859ee8a">cyhal_i2s_stop_rx</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:gad76c51ccedc76681490c74e7d859ee8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops receiving data.  <a href="#gad76c51ccedc76681490c74e7d859ee8a">More...</a><br /></td></tr>
 <tr class="separator:gad76c51ccedc76681490c74e7d859ee8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga29f8aaf72795492ac915dbddc0353c4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga29f8aaf72795492ac915dbddc0353c4c">cyhal_i2s_read</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, void *data, size_t *length)</td></tr>
+<tr class="memitem:ga0e0d62ba6e2038bd7c45b8c9cbdea88d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga0e0d62ba6e2038bd7c45b8c9cbdea88d">cyhal_i2s_clear_rx</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memdesc:ga0e0d62ba6e2038bd7c45b8c9cbdea88d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the rx hardware buffer.  <a href="#ga0e0d62ba6e2038bd7c45b8c9cbdea88d">More...</a><br /></td></tr>
+<tr class="separator:ga0e0d62ba6e2038bd7c45b8c9cbdea88d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga29f8aaf72795492ac915dbddc0353c4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga29f8aaf72795492ac915dbddc0353c4c">cyhal_i2s_read</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, void *data, size_t *length)</td></tr>
 <tr class="memdesc:ga29f8aaf72795492ac915dbddc0353c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data synchronously.  <a href="#ga29f8aaf72795492ac915dbddc0353c4c">More...</a><br /></td></tr>
 <tr class="separator:ga29f8aaf72795492ac915dbddc0353c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5362911702d7ab8687107159fb6a07e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga5362911702d7ab8687107159fb6a07e6">cyhal_i2s_write</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, const void *data, size_t *length)</td></tr>
+<tr class="memitem:ga5362911702d7ab8687107159fb6a07e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga5362911702d7ab8687107159fb6a07e6">cyhal_i2s_write</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, const void *data, size_t *length)</td></tr>
 <tr class="memdesc:ga5362911702d7ab8687107159fb6a07e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data synchronously.  <a href="#ga5362911702d7ab8687107159fb6a07e6">More...</a><br /></td></tr>
 <tr class="separator:ga5362911702d7ab8687107159fb6a07e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7204d762c6cff08d79916e12e66848b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga7204d762c6cff08d79916e12e66848b2">cyhal_i2s_is_tx_busy</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:ga6d036772b1ab51351907de2b1da7b8e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga6d036772b1ab51351907de2b1da7b8e4">cyhal_i2s_is_tx_enabled</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memdesc:ga6d036772b1ab51351907de2b1da7b8e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the transmit functionality is enabled for the specified I2S peripheral (regardless of whether data is currently queued for transmission).  <a href="#ga6d036772b1ab51351907de2b1da7b8e4">More...</a><br /></td></tr>
+<tr class="separator:ga6d036772b1ab51351907de2b1da7b8e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7204d762c6cff08d79916e12e66848b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga7204d762c6cff08d79916e12e66848b2">cyhal_i2s_is_tx_busy</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:ga7204d762c6cff08d79916e12e66848b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the specified I2S peripheral is transmitting data, including if a pending async transfer is waiting to write more data to the transmit buffer.  <a href="#ga7204d762c6cff08d79916e12e66848b2">More...</a><br /></td></tr>
 <tr class="separator:ga7204d762c6cff08d79916e12e66848b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga636ca3ae4d499af1c99af59bddf19166"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga636ca3ae4d499af1c99af59bddf19166">cyhal_i2s_is_rx_busy</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:gae5cbf3706ddde3acc4852025887190ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gae5cbf3706ddde3acc4852025887190ba">cyhal_i2s_is_rx_enabled</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memdesc:gae5cbf3706ddde3acc4852025887190ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the receive functionality is enabled for the specified I2S peripheral (regardless of whether any unread data has been received).  <a href="#gae5cbf3706ddde3acc4852025887190ba">More...</a><br /></td></tr>
+<tr class="separator:gae5cbf3706ddde3acc4852025887190ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga636ca3ae4d499af1c99af59bddf19166"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga636ca3ae4d499af1c99af59bddf19166">cyhal_i2s_is_rx_busy</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:ga636ca3ae4d499af1c99af59bddf19166"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the specified I2S peripheral has received data that has not yet been read out of the hardware buffer.  <a href="#ga636ca3ae4d499af1c99af59bddf19166">More...</a><br /></td></tr>
 <tr class="separator:ga636ca3ae4d499af1c99af59bddf19166"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga94357835c6f16b979680420f951d8980"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga94357835c6f16b979680420f951d8980">cyhal_i2s_read_async</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, void *rx, size_t rx_length)</td></tr>
+<tr class="memitem:ga94357835c6f16b979680420f951d8980"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga94357835c6f16b979680420f951d8980">cyhal_i2s_read_async</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, void *rx, size_t rx_length)</td></tr>
 <tr class="memdesc:ga94357835c6f16b979680420f951d8980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start I2S asynchronous read.  <a href="#ga94357835c6f16b979680420f951d8980">More...</a><br /></td></tr>
 <tr class="separator:ga94357835c6f16b979680420f951d8980"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5f4dd73de0bd46bee15d82fe793f5ca3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, const void *tx, size_t tx_length)</td></tr>
+<tr class="memitem:ga5f4dd73de0bd46bee15d82fe793f5ca3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga5f4dd73de0bd46bee15d82fe793f5ca3">cyhal_i2s_write_async</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, const void *tx, size_t tx_length)</td></tr>
 <tr class="memdesc:ga5f4dd73de0bd46bee15d82fe793f5ca3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start I2S asynchronous write.  <a href="#ga5f4dd73de0bd46bee15d82fe793f5ca3">More...</a><br /></td></tr>
 <tr class="separator:ga5f4dd73de0bd46bee15d82fe793f5ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9fba9ea64bd2ec92a2ae41459020825c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga9fba9ea64bd2ec92a2ae41459020825c">cyhal_i2s_set_async_mode</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, <a class="el" href="group__group__hal__general__types.html#gab2d2acfb82599df54152be0b170c6ec2">cyhal_async_mode_t</a> mode, uint8_t dma_priority)</td></tr>
+<tr class="memitem:ga9fba9ea64bd2ec92a2ae41459020825c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga9fba9ea64bd2ec92a2ae41459020825c">cyhal_i2s_set_async_mode</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, <a class="el" href="group__group__hal__general__types.html#gab2d2acfb82599df54152be0b170c6ec2">cyhal_async_mode_t</a> mode, uint8_t dma_priority)</td></tr>
 <tr class="memdesc:ga9fba9ea64bd2ec92a2ae41459020825c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mechanism that is used to perform I2S asynchronous transfers.  <a href="#ga9fba9ea64bd2ec92a2ae41459020825c">More...</a><br /></td></tr>
 <tr class="separator:ga9fba9ea64bd2ec92a2ae41459020825c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9ee30034685c4559212a5180ecfac7dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga9ee30034685c4559212a5180ecfac7dc">cyhal_i2s_is_read_pending</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:ga9ee30034685c4559212a5180ecfac7dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga9ee30034685c4559212a5180ecfac7dc">cyhal_i2s_is_read_pending</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:ga9ee30034685c4559212a5180ecfac7dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the specified I2S peripheral is in the process of reading data from the hardware buffer into RAM.  <a href="#ga9ee30034685c4559212a5180ecfac7dc">More...</a><br /></td></tr>
 <tr class="separator:ga9ee30034685c4559212a5180ecfac7dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3e151230ed3442aed1295ee2a3d8e8bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga3e151230ed3442aed1295ee2a3d8e8bf">cyhal_i2s_is_write_pending</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:ga3e151230ed3442aed1295ee2a3d8e8bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga3e151230ed3442aed1295ee2a3d8e8bf">cyhal_i2s_is_write_pending</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:ga3e151230ed3442aed1295ee2a3d8e8bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the specified I2S peripheral is in the process of writing data into the hardware buffer.  <a href="#ga3e151230ed3442aed1295ee2a3d8e8bf">More...</a><br /></td></tr>
 <tr class="separator:ga3e151230ed3442aed1295ee2a3d8e8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9d755179f6a38da673df11331541e2e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga9d755179f6a38da673df11331541e2e6">cyhal_i2s_abort_read_async</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:ga9d755179f6a38da673df11331541e2e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#ga9d755179f6a38da673df11331541e2e6">cyhal_i2s_abort_read_async</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:ga9d755179f6a38da673df11331541e2e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort I2S asynchronous read.  <a href="#ga9d755179f6a38da673df11331541e2e6">More...</a><br /></td></tr>
 <tr class="separator:ga9d755179f6a38da673df11331541e2e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf15b5df60f51c5678931e06ddb3c9fb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gaf15b5df60f51c5678931e06ddb3c9fb6">cyhal_i2s_abort_write_async</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
+<tr class="memitem:gaf15b5df60f51c5678931e06ddb3c9fb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gaf15b5df60f51c5678931e06ddb3c9fb6">cyhal_i2s_abort_write_async</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj)</td></tr>
 <tr class="memdesc:gaf15b5df60f51c5678931e06ddb3c9fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort I2S asynchronous write.  <a href="#gaf15b5df60f51c5678931e06ddb3c9fb6">More...</a><br /></td></tr>
 <tr class="separator:gaf15b5df60f51c5678931e06ddb3c9fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gade0855962b32a1b4d4dbb9bbf9b6354b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gade0855962b32a1b4d4dbb9bbf9b6354b">cyhal_i2s_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, <a class="el" href="group__group__hal__i2s.html#ga7c7aa98ff4eb219144157f2af9a9c794">cyhal_i2s_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memitem:gade0855962b32a1b4d4dbb9bbf9b6354b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gade0855962b32a1b4d4dbb9bbf9b6354b">cyhal_i2s_register_callback</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, <a class="el" href="group__group__hal__i2s.html#ga7c7aa98ff4eb219144157f2af9a9c794">cyhal_i2s_event_callback_t</a> callback, void *callback_arg)</td></tr>
 <tr class="memdesc:gade0855962b32a1b4d4dbb9bbf9b6354b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an I2S callback handler.  <a href="#gade0855962b32a1b4d4dbb9bbf9b6354b">More...</a><br /></td></tr>
 <tr class="separator:gade0855962b32a1b4d4dbb9bbf9b6354b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac8adecacf62147f30023e69010b52bf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gac8adecacf62147f30023e69010b52bf9">cyhal_i2s_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, <a class="el" href="group__group__hal__i2s.html#ga98bc78188673aae2c4e27b660a3f20fe">cyhal_i2s_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memitem:gac8adecacf62147f30023e69010b52bf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__i2s.html#gac8adecacf62147f30023e69010b52bf9">cyhal_i2s_enable_event</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *obj, <a class="el" href="group__group__hal__i2s.html#ga98bc78188673aae2c4e27b660a3f20fe">cyhal_i2s_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
 <tr class="memdesc:gac8adecacf62147f30023e69010b52bf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure I2S events.  <a href="#gac8adecacf62147f30023e69010b52bf9">More...</a><br /></td></tr>
 <tr class="separator:gac8adecacf62147f30023e69010b52bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -270,19 +282,19 @@ Functions</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="3">Data Fields</th></tr>
 <tr><td class="fieldtype">
-<a id="a06f418e1a73780daacabb034e78ad0d9"></a><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a></td>
+<a id="a06f418e1a73780daacabb034e78ad0d9"></a><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a></td>
 <td class="fieldname">
 sck</td>
 <td class="fielddoc">
 Clock pin. </td></tr>
 <tr><td class="fieldtype">
-<a id="ac1888b4fa0b934f7c48598ced0fc5ba5"></a><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a></td>
+<a id="ac1888b4fa0b934f7c48598ced0fc5ba5"></a><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a></td>
 <td class="fieldname">
 ws</td>
 <td class="fielddoc">
 Word select. </td></tr>
 <tr><td class="fieldtype">
-<a id="a9b80d91c0f3aa4d02905351de66016c4"></a><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a></td>
+<a id="a9b80d91c0f3aa4d02905351de66016c4"></a><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a></td>
 <td class="fieldname">
 data</td>
 <td class="fielddoc">
@@ -400,7 +412,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -418,7 +430,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>mclk</em>, </td>
         </tr>
         <tr>
@@ -430,7 +442,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *&#160;</td>
           <td class="paramname"><em>clk</em>&#160;</td>
         </tr>
         <tr>
@@ -467,7 +479,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname">void cyhal_i2s_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -493,7 +505,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_set_sample_rate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -531,7 +543,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_start_tx </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -558,7 +570,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_stop_tx </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -576,6 +588,33 @@ Sample rate in Hz. </td></tr>
 
 </div>
 </div>
+<a id="ga5b0c26d3c1193984873cfd1970287bdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5b0c26d3c1193984873cfd1970287bdc">&#9670;&nbsp;</a></span>cyhal_i2s_clear_tx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_clear_tx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clears the tx hardware buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The i2s peripheral </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the clear request </dd></dl>
+
+</div>
+</div>
 <a id="gabc95dd1600db8fdb379e7e7cc3d39039"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gabc95dd1600db8fdb379e7e7cc3d39039">&#9670;&nbsp;</a></span>cyhal_i2s_start_rx()</h2>
 
@@ -585,7 +624,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_start_rx </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -612,7 +651,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_stop_rx </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -630,6 +669,33 @@ Sample rate in Hz. </td></tr>
 
 </div>
 </div>
+<a id="ga0e0d62ba6e2038bd7c45b8c9cbdea88d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0e0d62ba6e2038bd7c45b8c9cbdea88d">&#9670;&nbsp;</a></span>cyhal_i2s_clear_rx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_clear_rx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clears the rx hardware buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The i2s peripheral </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the clear request </dd></dl>
+
+</div>
+</div>
 <a id="ga29f8aaf72795492ac915dbddc0353c4c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga29f8aaf72795492ac915dbddc0353c4c">&#9670;&nbsp;</a></span>cyhal_i2s_read()</h2>
 
@@ -639,7 +705,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_read </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -687,7 +753,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -725,6 +791,34 @@ Sample rate in Hz. </td></tr>
 
 </div>
 </div>
+<a id="ga6d036772b1ab51351907de2b1da7b8e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6d036772b1ab51351907de2b1da7b8e4">&#9670;&nbsp;</a></span>cyhal_i2s_is_tx_enabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cyhal_i2s_is_tx_enabled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the transmit functionality is enabled for the specified I2S peripheral (regardless of whether data is currently queued for transmission). </p>
+<p>The transmit functionality can be enabled by calling <a class="el" href="group__group__hal__i2s.html#gabe95fc12ff1d9264a60e8eeda35d885a">cyhal_i2s_start_tx</a> and disabled by calling <a class="el" href="group__group__hal__i2s.html#gae809b73f16e9dbc25e12c0c2687e1ba0">cyhal_i2s_stop_tx</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The I2S peripheral to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the I2S transmit function is enabled. </dd></dl>
+
+</div>
+</div>
 <a id="ga7204d762c6cff08d79916e12e66848b2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga7204d762c6cff08d79916e12e66848b2">&#9670;&nbsp;</a></span>cyhal_i2s_is_tx_busy()</h2>
 
@@ -734,7 +828,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname">bool cyhal_i2s_is_tx_busy </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -752,6 +846,34 @@ Sample rate in Hz. </td></tr>
 
 </div>
 </div>
+<a id="gae5cbf3706ddde3acc4852025887190ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae5cbf3706ddde3acc4852025887190ba">&#9670;&nbsp;</a></span>cyhal_i2s_is_rx_enabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cyhal_i2s_is_rx_enabled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the receive functionality is enabled for the specified I2S peripheral (regardless of whether any unread data has been received). </p>
+<p>The receive functionality can be enabled by calling <a class="el" href="group__group__hal__i2s.html#gabc95dd1600db8fdb379e7e7cc3d39039">cyhal_i2s_start_rx</a> and disabled by calling <a class="el" href="group__group__hal__i2s.html#gad76c51ccedc76681490c74e7d859ee8a">cyhal_i2s_stop_rx</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The I2S peripheral to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the I2S receive function is enabled. </dd></dl>
+
+</div>
+</div>
 <a id="ga636ca3ae4d499af1c99af59bddf19166"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga636ca3ae4d499af1c99af59bddf19166">&#9670;&nbsp;</a></span>cyhal_i2s_is_rx_busy()</h2>
 
@@ -761,7 +883,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname">bool cyhal_i2s_is_rx_busy </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -789,7 +911,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_read_async </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -837,7 +959,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_write_async </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -885,7 +1007,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_set_async_mode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -931,7 +1053,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname">bool cyhal_i2s_is_read_pending </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -959,7 +1081,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname">bool cyhal_i2s_is_write_pending </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -987,7 +1109,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_abort_read_async </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1015,7 +1137,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_i2s_abort_write_async </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1043,7 +1165,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname">void cyhal_i2s_register_callback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -1088,7 +1210,7 @@ Sample rate in Hz. </td></tr>
         <tr>
           <td class="memname">void cyhal_i2s_enable_event </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__i2s__t">cyhal_i2s_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>

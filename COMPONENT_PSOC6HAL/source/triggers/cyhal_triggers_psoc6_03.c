@@ -5,7 +5,7 @@
 * PSoC6_03 family HAL triggers header
 *
 * \note
-* Generator version: 1.5.7254.19579
+* Generator version: 1.6.7458.30860
 *
 ********************************************************************************
 * \copyright

@@ -22,10 +22,11 @@ var group__group__hal__pdmpcm =
       [ "CYHAL_PDM_PCM_MODE_RIGHT", "group__group__hal__pdmpcm.html#ggac81a68ee166ff48752095f82e6852565a10f63e46718c10aefbc64bfda8b82cfd", null ],
       [ "CYHAL_PDM_PCM_MODE_STEREO", "group__group__hal__pdmpcm.html#ggac81a68ee166ff48752095f82e6852565a3422b29a54a23f1133a62c2b566196dc", null ]
     ] ],
-    [ "cyhal_pdm_pcm_init", "group__group__hal__pdmpcm.html#ga0eab1c5719c1865aeff21abadaca6740", null ],
+    [ "cyhal_pdm_pcm_init", "group__group__hal__pdmpcm.html#gac2baa0d5162498463cc5228e0ab70909", null ],
     [ "cyhal_pdm_pcm_free", "group__group__hal__pdmpcm.html#ga89ce18cbdd29884ea093ea413df76c6f", null ],
     [ "cyhal_pdm_pcm_start", "group__group__hal__pdmpcm.html#gabbab5aafb181de83230b834074994b61", null ],
     [ "cyhal_pdm_pcm_stop", "group__group__hal__pdmpcm.html#gae3832916c19f3031dddcee394047e499", null ],
+    [ "cyhal_pdm_pcm_is_enabled", "group__group__hal__pdmpcm.html#ga70af22e5c029ef0899d14da93253fcc1", null ],
     [ "cyhal_pdm_pcm_set_gain", "group__group__hal__pdmpcm.html#gad2dc5543b500a97a938d6c642932e772", null ],
     [ "cyhal_pdm_pcm_clear", "group__group__hal__pdmpcm.html#ga4f6559e37a2ea3facdffe3cac6241356", null ],
     [ "cyhal_pdm_pcm_read", "group__group__hal__pdmpcm.html#ga5694092b3f4bc66a0a649829d346d1c7", null ],

@@ -26,6 +26,15 @@ var group__group__result =
     [ "CY_RSLT_MODULE_BOARD_SHIELD_BASE", "group__group__result.html#ga76bcb30b36e7fea0c8165c55e561de73", null ],
     [ "CY_RSLT_MODULE_BOARD_SHIELD_028_EPD", "group__group__result.html#gaa5b8e84947e9bf1a7fb5d8003ef276bf", null ],
     [ "CY_RSLT_MODULE_BOARD_SHIELD_028_TFT", "group__group__result.html#ga40e8ea560bec96d98a8397308ce773cd", null ],
+    [ "CY_RSLT_MODULE_BOARD_SHIELD_032", "group__group__result.html#gad3e437a0d81d24329914409b890d05e9", null ],
+    [ "CY_RSLT_MODULE_BOARD_HARDWARE_BASE", "group__group__result.html#ga57f83cdac42fe9fc2afbe82609a00d74", null ],
+    [ "CY_RSLT_MODULE_BOARD_HARDWARE_BMI160", "group__group__result.html#ga19d6abe548162ac238afbc69ace1a2d4", null ],
+    [ "CY_RSLT_MODULE_BOARD_HARDWARE_E2271CS021", "group__group__result.html#ga36f615a1ecf7bba46416720e0892c115", null ],
+    [ "CY_RSLT_MODULE_BOARD_HARDWARE_THERMISTOR", "group__group__result.html#ga052784c9e3c64b33e5d056aa1db57c59", null ],
+    [ "CY_RSLT_MODULE_BOARD_HARDWARE_SSD1306", "group__group__result.html#ga9c77295c2fb9f887a857b8b63810f18d", null ],
+    [ "CY_RSLT_MODULE_BOARD_HARDWARE_ST7789V", "group__group__result.html#ga646b094bb857dcf1bdf21448224f8b7a", null ],
+    [ "CY_RSLT_MODULE_BOARD_HARDWARE_LIGHT_SENSOR", "group__group__result.html#ga929b1c06f7aa2a85ea6e3c317c3d5cf6", null ],
+    [ "CY_RSLT_MODULE_BOARD_HARDWARE_AK4954A", "group__group__result.html#ga3cb51b341c4dac2984d76e0ab00056bb", null ],
     [ "CY_RSLT_MODULE_MIDDLEWARE_BASE", "group__group__result.html#ga2db34d05e5194f919d6cc45957dc5047", null ],
     [ "cy_rslt_t", "group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1", null ]
 ];

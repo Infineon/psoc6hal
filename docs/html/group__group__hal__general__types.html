@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -118,6 +118,20 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:gab2d2acfb82599df54152be0b170c6ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">group_hal_results  <a href="group__group__hal__general__types.html#gab2d2acfb82599df54152be0b170c6ec2">More...</a><br /></td></tr>
 <tr class="separator:gab2d2acfb82599df54152be0b170c6ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga246fde0e79029f514ce3846b31e366d7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__general__types.html#ga246fde0e79029f514ce3846b31e366d7">cyhal_power_level_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7a0f601c5d5843c59e58ee1988dd0e6861">CYHAL_POWER_LEVEL_OFF</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7ae06723d07ff431a2f427d95ac61e2afb">CYHAL_POWER_LEVEL_LOW</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7ae189a666d589f8acf4c64142365def61">CYHAL_POWER_LEVEL_MEDIUM</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7a4d8ce140c28177e31de20cf8da8e2a99">CYHAL_POWER_LEVEL_HIGH</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7a6f0f4df45e9cac012a2c8e5ba736241b">CYHAL_POWER_LEVEL_DEFAULT</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ga246fde0e79029f514ce3846b31e366d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selectable power levels.  <a href="group__group__hal__general__types.html#ga246fde0e79029f514ce3846b31e366d7">More...</a><br /></td></tr>
+<tr class="separator:ga246fde0e79029f514ce3846b31e366d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="gab2d2acfb82599df54152be0b170c6ec2"></a>
@@ -139,6 +153,48 @@ Enumerations</h2></td></tr>
 <p>Otherwise fall back to software transfer. (Default) </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ggab2d2acfb82599df54152be0b170c6ec2ad748e5570bc89fd722da9720b3d22a19"></a>CYHAL_ASYNC_SW&#160;</td><td class="fielddoc"><p>Always perform a software transfer. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="ga246fde0e79029f514ce3846b31e366d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga246fde0e79029f514ce3846b31e366d7">&#9670;&nbsp;</a></span>cyhal_power_level_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__group__hal__general__types.html#ga246fde0e79029f514ce3846b31e366d7">cyhal_power_level_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selectable power levels. </p>
+<p>Power levels are defined relative to others. Higher power levels offer better performance but consume more power.</p>
+<p>Not all hardware supports four discrete power levels. If fewer power levels are supported, the values will be mapped as follows: </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">4 Levels  </th><th class="markdownTableHeadNone">3 Levels  </th><th class="markdownTableHeadNone">2 Levels   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Off  </td><td class="markdownTableBodyNone">Off  </td><td class="markdownTableBodyNone">Off   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Low  </td><td class="markdownTableBodyNone">Low = Medium  </td><td class="markdownTableBodyNone">Low = Medium = High = Default   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Medium  </td><td class="markdownTableBodyNone">High = Default  </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">High = Default  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<p>See the implementation specific documentation for details. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga246fde0e79029f514ce3846b31e366d7a0f601c5d5843c59e58ee1988dd0e6861"></a>CYHAL_POWER_LEVEL_OFF&#160;</td><td class="fielddoc"><p>Power-off the comparator, while retaining configuration. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga246fde0e79029f514ce3846b31e366d7ae06723d07ff431a2f427d95ac61e2afb"></a>CYHAL_POWER_LEVEL_LOW&#160;</td><td class="fielddoc"><p>Low comparator power and speed. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga246fde0e79029f514ce3846b31e366d7ae189a666d589f8acf4c64142365def61"></a>CYHAL_POWER_LEVEL_MEDIUM&#160;</td><td class="fielddoc"><p>Medium comparator power and speed. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga246fde0e79029f514ce3846b31e366d7a4d8ce140c28177e31de20cf8da8e2a99"></a>CYHAL_POWER_LEVEL_HIGH&#160;</td><td class="fielddoc"><p>High comparator power and speed. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga246fde0e79029f514ce3846b31e366d7a6f0f4df45e9cac012a2c8e5ba736241b"></a>CYHAL_POWER_LEVEL_DEFAULT&#160;</td><td class="fielddoc"><p>Default comparator power and speed. </p>
 </td></tr>
 </table>
 

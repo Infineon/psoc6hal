@@ -17,6 +17,10 @@ var group__group__hal__spi =
       [ "CYHAL_SPI_IRQ_DONE", "group__group__hal__spi.html#ggae8f0cf0233d0225a80815f8282d87b85a3f926937b0199cc8729c443d8e71f91b", null ],
       [ "CYHAL_SPI_IRQ_ERROR", "group__group__hal__spi.html#ggae8f0cf0233d0225a80815f8282d87b85a808355edbb46ce1950705e55f32dc093", null ]
     ] ],
+    [ "cyhal_spi_ssel_polarity_t", "group__group__hal__spi.html#gabfadf37558e1092ac2fe3a5bd2b912d5", [
+      [ "CYHAL_SPI_SSEL_ACTIVE_LOW", "group__group__hal__spi.html#ggabfadf37558e1092ac2fe3a5bd2b912d5a3a6c47381becf05d991f9e321ec9fea6", null ],
+      [ "CYHAL_SPI_SSEL_ACTIVE_HIGH", "group__group__hal__spi.html#ggabfadf37558e1092ac2fe3a5bd2b912d5ab9e114bf73df1ff5ae5bab536f96c242", null ]
+    ] ],
     [ "cyhal_spi_mode_t", "group__group__hal__spi.html#gaf56d895e50b0cf0e858a1ff221c58d51", [
       [ "CYHAL_SPI_MODE_00_MSB", "group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a", null ],
       [ "CYHAL_SPI_MODE_00_LSB", "group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a33951c55abcba6e01a67fa8252ec81e1", null ],
@@ -30,6 +34,8 @@ var group__group__hal__spi =
     [ "cyhal_spi_init", "group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d", null ],
     [ "cyhal_spi_free", "group__group__hal__spi.html#gab2bbcc53213e50e43a9bd223573b7870", null ],
     [ "cyhal_spi_set_frequency", "group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb", null ],
+    [ "cyhal_spi_slave_select_config", "group__group__hal__spi.html#gaf933d1bcc357b515bd3cc0ad4518c764", null ],
+    [ "cyhal_spi_select_active_ssel", "group__group__hal__spi.html#gab545fa07b788c83398c0265b2e9220c9", null ],
     [ "cyhal_spi_recv", "group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1", null ],
     [ "cyhal_spi_send", "group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53", null ],
     [ "cyhal_spi_transfer", "group__group__hal__spi.html#gad21547fa4048c45f15308c0b1ff62c1f", null ],

@@ -38,8 +38,8 @@
 #include "cy_device.h"
 
 /**
-* \addtogroup group_hal_psoc6_i2s I2S (Inter-IC Sound)
-* \ingroup group_hal_psoc6
+* \addtogroup group_hal_impl_i2s I2S (Inter-IC Sound)
+* \ingroup group_hal_impl
 * \{
 * The PSoC 6 I2S Supports the following values for word and channel lengths (with the constraint that word length must be less than or equal to channel length):
 * - 8 bits
@@ -51,7 +51,7 @@
 *
 * The sclk signal is formed by integer division of the input clock source (either internally provided or from the mclk pin).
 * The PSoC 6 I2S supports sclk divider values from 1 to 64.
-* \} group_hal_psoc6_i2s
+* \} group_hal_impl_i2s
 */
 
 
@@ -62,10 +62,10 @@ extern "C"
 {
 #endif
 
-#define CYHAL_I2S_FIFO_DEPTH (256)
-#define CYHAL_I2S_DMA_BURST_SIZE (CYHAL_I2S_FIFO_DEPTH / 2)
+#define _CYHAL_I2S_FIFO_DEPTH (256)
+#define _CYHAL_I2S_DMA_BURST_SIZE (_CYHAL_I2S_FIFO_DEPTH / 2)
 
-static I2S_Type *const cyhal_i2s_base[] =
+static I2S_Type *const _cyhal_i2s_base[] =
 {
 #if (CY_IP_MXAUDIOSS_INSTANCES == 1 && defined(AUDIOSS_I2S) && AUDIOSS_I2S)
     I2S,
@@ -81,9 +81,9 @@ static I2S_Type *const cyhal_i2s_base[] =
 #endif
 };
 
-static cyhal_i2s_t* cyhal_i2s_config_structs[CY_IP_MXAUDIOSS_INSTANCES];
+static cyhal_i2s_t* _cyhal_i2s_config_structs[CY_IP_MXAUDIOSS_INSTANCES];
 
-static const IRQn_Type cyhal_i2s_irq_n[] =
+static const IRQn_Type _cyhal_i2s_irq_n[] =
 {
 #if (CY_IP_MXAUDIOSS_INSTANCES == 1 && defined(AUDIOSS_I2S) && AUDIOSS_I2S) // Without index suffix
     audioss_interrupt_i2s_IRQn,
@@ -99,7 +99,7 @@ static const IRQn_Type cyhal_i2s_irq_n[] =
 #endif
 };
 
-static uint8_t cyhal_i2s_get_block_from_irqn(IRQn_Type irqn) {
+static uint8_t _cyhal_i2s_get_block_from_irqn(IRQn_Type irqn) {
     switch (irqn)
     {
 #if (CY_CPU_CORTEX_M4)
@@ -124,22 +124,22 @@ static uint8_t cyhal_i2s_get_block_from_irqn(IRQn_Type irqn) {
     }
 }
 
-static cyhal_i2s_event_t cyhal_i2s_convert_interrupt_cause(uint32_t pdl_cause);
-static uint32_t cyhal_i2s_convert_event(cyhal_i2s_event_t event);
-static cy_rslt_t cyhal_i2s_convert_length(uint8_t user_length, cy_en_i2s_len_t *pdl_length);
-static void cyhal_i2s_irq_handler(void);
-static void cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event);
-static void cyhal_i2s_update_enabled_events(cyhal_i2s_t* obj);
-static cy_rslt_t cyhal_i2s_dma_perform_rx(cyhal_i2s_t *obj);
-static cy_rslt_t cyhal_i2s_dma_perform_tx(cyhal_i2s_t *obj);
-static void cyhal_i2s_dma_handler_rx(void *callback_arg, cyhal_dma_event_t event);
-static void cyhal_i2s_dma_handler_tx(void *callback_arg, cyhal_dma_event_t event);
-static uint8_t cyhal_i2s_rounded_word_length(cyhal_i2s_t *obj);
-static bool cyhal_i2s_pm_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_callback_mode_t mode, void* callback_arg);
-static cy_rslt_t cyhal_i2s_populate_pdl_config(cyhal_i2s_t *obj, cy_stc_i2s_config_t* pdl_config, uint8_t sclk_div);
-static cy_rslt_t cyhal_i2s_compute_sclk_div(cyhal_i2s_t *obj, uint32_t sample_rate_hz, uint8_t *sclk_div);
+static cyhal_i2s_event_t _cyhal_i2s_convert_interrupt_cause(uint32_t pdl_cause);
+static uint32_t _cyhal_i2s_convert_event(cyhal_i2s_event_t event);
+static cy_rslt_t _cyhal_i2s_convert_length(uint8_t user_length, cy_en_i2s_len_t *pdl_length);
+static void _cyhal_i2s_irq_handler(void);
+static void _cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event);
+static void _cyhal_i2s_update_enabled_events(cyhal_i2s_t* obj);
+static cy_rslt_t _cyhal_i2s_dma_perform_rx(cyhal_i2s_t *obj);
+static cy_rslt_t _cyhal_i2s_dma_perform_tx(cyhal_i2s_t *obj);
+static void _cyhal_i2s_dma_handler_rx(void *callback_arg, cyhal_dma_event_t event);
+static void _cyhal_i2s_dma_handler_tx(void *callback_arg, cyhal_dma_event_t event);
+static uint8_t _cyhal_i2s_rounded_word_length(cyhal_i2s_t *obj);
+static bool _cyhal_i2s_pm_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_callback_mode_t mode, void* callback_arg);
+static cy_rslt_t _cyhal_i2s_populate_pdl_config(cyhal_i2s_t *obj, cy_stc_i2s_config_t* pdl_config, uint8_t sclk_div);
+static cy_rslt_t _cyhal_i2s_compute_sclk_div(cyhal_i2s_t *obj, uint32_t sample_rate_hz, uint8_t *sclk_div);
 
-static const cy_stc_i2s_config_t default_i2s_config = {
+static const cy_stc_i2s_config_t _cyhal_i2s_default_config = {
     /* tx_enabled and rx_enabled set per-instance */
     .txDmaTrigger = false,
     .rxDmaTrigger = false,
@@ -157,7 +157,7 @@ static const cy_stc_i2s_config_t default_i2s_config = {
     /* txChannelLength set per-instance */
     /* txWordLength set per-instance */
     .txOverheadValue = CY_I2S_OVHDATA_ZERO,
-    .txFifoTriggerLevel = CYHAL_I2S_FIFO_DEPTH / 2 + 1, // Trigger at half empty
+    .txFifoTriggerLevel = _CYHAL_I2S_FIFO_DEPTH / 2 + 1, // Trigger at half empty
     /* rxMasterMode set per-instance */
     .rxAlignment = CY_I2S_I2S_MODE,        /**< RX data alignment, see: #cy_en_i2s_alignment_t. */
     .rxWsPulseWidth = CY_I2S_WS_ONE_CHANNEL_LENGTH, /* only supported value for I2S mode */
@@ -167,11 +167,10 @@ static const cy_stc_i2s_config_t default_i2s_config = {
     .rxSckoInversion = false,
     .rxSckiInversion = false,
     .rxChannels = 2, /* Only supported value for I2s mode */
-    //TODO Dynamic channel length
     /* rxChannelLength set per-instance */
     /* rxWordLength set per-instance */
     .rxSignExtension = false, /* All MSB are filled by zeros */
-    .rxFifoTriggerLevel = CYHAL_I2S_FIFO_DEPTH / 2 - 1, // Trigger at half full
+    .rxFifoTriggerLevel = _CYHAL_I2S_FIFO_DEPTH / 2 - 1, // Trigger at half full
 };
 
 cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, const cyhal_i2s_pins_t* rx_pins, cyhal_gpio_t mclk,
@@ -215,20 +214,20 @@ cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, cons
     cy_rslt_t result = CY_RSLT_SUCCESS;
 
     /* Determine which I2S instance to use */
-    const cyhal_resource_pin_mapping_t *tx_sck_map = (NULL != tx_pins) ? CY_UTILS_GET_RESOURCE(tx_pins->sck, cyhal_pin_map_audioss_tx_sck) : NULL;
-    const cyhal_resource_pin_mapping_t *tx_ws_map  = (NULL != tx_pins) ? CY_UTILS_GET_RESOURCE(tx_pins->ws, cyhal_pin_map_audioss_tx_ws) : NULL;
-    const cyhal_resource_pin_mapping_t *tx_sdo_map = (NULL != tx_pins) ? CY_UTILS_GET_RESOURCE(tx_pins->data, cyhal_pin_map_audioss_tx_sdo) : NULL;
+    const cyhal_resource_pin_mapping_t *tx_sck_map = (NULL != tx_pins) ? _CYHAL_UTILS_GET_RESOURCE(tx_pins->sck, cyhal_pin_map_audioss_tx_sck) : NULL;
+    const cyhal_resource_pin_mapping_t *tx_ws_map  = (NULL != tx_pins) ? _CYHAL_UTILS_GET_RESOURCE(tx_pins->ws, cyhal_pin_map_audioss_tx_ws) : NULL;
+    const cyhal_resource_pin_mapping_t *tx_sdo_map = (NULL != tx_pins) ? _CYHAL_UTILS_GET_RESOURCE(tx_pins->data, cyhal_pin_map_audioss_tx_sdo) : NULL;
 
-    const cyhal_resource_pin_mapping_t *rx_sck_map = (NULL != rx_pins) ? CY_UTILS_GET_RESOURCE(rx_pins->sck, cyhal_pin_map_audioss_rx_sck) : NULL;
-    const cyhal_resource_pin_mapping_t *rx_ws_map  = (NULL != rx_pins) ? CY_UTILS_GET_RESOURCE(rx_pins->ws, cyhal_pin_map_audioss_rx_ws) : NULL;
-    const cyhal_resource_pin_mapping_t *rx_sdi_map = (NULL != rx_pins) ? CY_UTILS_GET_RESOURCE(rx_pins->data, cyhal_pin_map_audioss_rx_sdi) : NULL;
+    const cyhal_resource_pin_mapping_t *rx_sck_map = (NULL != rx_pins) ? _CYHAL_UTILS_GET_RESOURCE(rx_pins->sck, cyhal_pin_map_audioss_rx_sck) : NULL;
+    const cyhal_resource_pin_mapping_t *rx_ws_map  = (NULL != rx_pins) ? _CYHAL_UTILS_GET_RESOURCE(rx_pins->ws, cyhal_pin_map_audioss_rx_ws) : NULL;
+    const cyhal_resource_pin_mapping_t *rx_sdi_map = (NULL != rx_pins) ? _CYHAL_UTILS_GET_RESOURCE(rx_pins->data, cyhal_pin_map_audioss_rx_sdi) : NULL;
 
-    const cyhal_resource_pin_mapping_t *mclk_map = CY_UTILS_GET_RESOURCE(mclk, cyhal_pin_map_audioss_clk_i2s_if);
+    const cyhal_resource_pin_mapping_t *mclk_map = _CYHAL_UTILS_GET_RESOURCE(mclk, cyhal_pin_map_audioss_clk_i2s_if);
 
     if(NULL != tx_pins) /* It is valid to leave either tx or rx empty */
     {
         if(NULL != tx_sck_map && NULL != tx_ws_map && NULL != tx_sdo_map
-            && cyhal_utils_resources_equal_all(3, tx_sck_map->inst, tx_ws_map->inst, tx_sdo_map->inst))
+            && _cyhal_utils_resources_equal_all(3, tx_sck_map->inst, tx_ws_map->inst, tx_sdo_map->inst))
         {
             obj->resource = *(tx_sck_map->inst);
         }
@@ -241,14 +240,14 @@ cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, cons
     if(CY_RSLT_SUCCESS == result && NULL != rx_pins)
     {
         if(NULL == rx_sck_map || NULL == rx_ws_map || NULL == rx_sdi_map ||
-            (false == cyhal_utils_resources_equal_all(3, rx_sck_map->inst, rx_ws_map->inst, rx_sdi_map->inst)))
+            (false == _cyhal_utils_resources_equal_all(3, rx_sck_map->inst, rx_ws_map->inst, rx_sdi_map->inst)))
         {
             result = CYHAL_I2S_RSLT_ERR_INVALID_PIN;
         }
         else
         {
             if((obj->resource.type != CYHAL_RSC_INVALID)
-                && (false == cyhal_utils_resources_equal(&(obj->resource), rx_sck_map->inst)))
+                && (false == _cyhal_utils_resources_equal(&(obj->resource), rx_sck_map->inst)))
             {
                 /* TX pins and RX pins don't map to the same instance */
                 result = CYHAL_I2S_RSLT_ERR_INVALID_PIN;
@@ -264,7 +263,7 @@ cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, cons
 
     if(CY_RSLT_SUCCESS == result && CYHAL_NC_PIN_VALUE != mclk )
     {
-        if(NULL == mclk_map || (false == cyhal_utils_resources_equal(&(obj->resource), mclk_map->inst)))
+        if(NULL == mclk_map || (false == _cyhal_utils_resources_equal(&(obj->resource), mclk_map->inst)))
         {
             result = CYHAL_I2S_RSLT_ERR_INVALID_PIN;
         }
@@ -273,22 +272,22 @@ cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, cons
     if(CY_RSLT_SUCCESS == result)
     {
         result = cyhal_hwmgr_reserve(&(obj->resource));
-        obj->base = cyhal_i2s_base[obj->resource.block_num];
+        obj->base = _cyhal_i2s_base[obj->resource.block_num];
     }
 
     /* Reserve the pins */
     if(CY_RSLT_SUCCESS == result && NULL != tx_pins)
     {
-        result = cyhal_utils_reserve_and_connect(tx_pins->sck, tx_sck_map);
+        result = _cyhal_utils_reserve_and_connect(tx_pins->sck, tx_sck_map);
         if(CY_RSLT_SUCCESS == result)
         {
             obj->pin_tx_sck = tx_pins->sck;
-            result = cyhal_utils_reserve_and_connect(tx_pins->ws, tx_ws_map);
+            result = _cyhal_utils_reserve_and_connect(tx_pins->ws, tx_ws_map);
         }
         if(CY_RSLT_SUCCESS == result)
         {
             obj->pin_tx_ws = tx_pins->ws;
-            result = cyhal_utils_reserve_and_connect(tx_pins->data, tx_sdo_map);
+            result = _cyhal_utils_reserve_and_connect(tx_pins->data, tx_sdo_map);
         }
         if(CY_RSLT_SUCCESS == result)
         {
@@ -308,16 +307,16 @@ cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, cons
 
     if(CY_RSLT_SUCCESS == result && NULL != rx_pins)
     {
-        result = cyhal_utils_reserve_and_connect(rx_pins->sck, rx_sck_map);
+        result = _cyhal_utils_reserve_and_connect(rx_pins->sck, rx_sck_map);
         if(CY_RSLT_SUCCESS == result)
         {
             obj->pin_rx_sck = rx_pins->sck;
-            result = cyhal_utils_reserve_and_connect(rx_pins->ws, rx_ws_map);
+            result = _cyhal_utils_reserve_and_connect(rx_pins->ws, rx_ws_map);
         }
         if(CY_RSLT_SUCCESS == result)
         {
             obj->pin_rx_ws = rx_pins->ws;
-            result = cyhal_utils_reserve_and_connect(rx_pins->data, rx_sdi_map);
+            result = _cyhal_utils_reserve_and_connect(rx_pins->data, rx_sdi_map);
         }
         if(CY_RSLT_SUCCESS == result)
         {
@@ -344,7 +343,7 @@ cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, cons
         }
         else
         {
-            result = cyhal_utils_reserve_and_connect(mclk, mclk_map);
+            result = _cyhal_utils_reserve_and_connect(mclk, mclk_map);
             if(CY_RSLT_SUCCESS == result)
             {
                 obj->pin_mclk = mclk;
@@ -369,33 +368,33 @@ cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, cons
 
     if (CY_RSLT_SUCCESS == result)
     {
-        if (clk == NULL && CYHAL_NC_PIN_VALUE == mclk) // No need to reserve a clock if we're using the mclk pin
+        if (clk != NULL)
+        {
+            obj->clock = *clk;
+        }
+        else if (CYHAL_NC_PIN_VALUE == mclk) // No need to reserve a clock if we're using the mclk pin
         {
             // The hardware is generally going to be hardwired to an hfclk, which has very limited divider options. In the event
             // that we're hooked up a PERI divider, we don't have any particular expectations about its width - so just ask for 8-bit
-            result = cyhal_utils_allocate_clock(&(obj->clock), &(obj->resource), CY_SYSCLK_DIV_8_BIT, true);
+            result = _cyhal_utils_allocate_clock(&(obj->clock), &(obj->resource), CYHAL_CLOCK_BLOCK_PERIPHERAL_16BIT, true);
             if(CY_RSLT_SUCCESS == result)
             {
                 obj->is_clock_owned = true;
                 result = cyhal_clock_set_enabled(&(obj->clock), true, true);
             }
         }
-        else
-        {
-            obj->clock = *clk;
-        }
     }
 
     uint8_t sclk_div;
     if(CY_RSLT_SUCCESS == result)
     {
-        result = cyhal_i2s_compute_sclk_div(obj, obj->sample_rate_hz, &sclk_div);
+        result = _cyhal_i2s_compute_sclk_div(obj, obj->sample_rate_hz, &sclk_div);
     }
 
     cy_stc_i2s_config_t pdl_config;
     if (CY_RSLT_SUCCESS == result)
     {
-        result = cyhal_i2s_populate_pdl_config(obj, &pdl_config, sclk_div);
+        result = _cyhal_i2s_populate_pdl_config(obj, &pdl_config, sclk_div);
     }
 
     if (CY_RSLT_SUCCESS == result)
@@ -415,17 +414,17 @@ cy_rslt_t cyhal_i2s_init(cyhal_i2s_t *obj, const cyhal_i2s_pins_t* tx_pins, cons
         }
 
         obj->pm_callback.states = (cyhal_syspm_callback_state_t)(CYHAL_SYSPM_CB_CPU_DEEPSLEEP | CYHAL_SYSPM_CB_SYSTEM_HIBERNATE);
-        obj->pm_callback.callback = &cyhal_i2s_pm_callback;
+        obj->pm_callback.callback = &_cyhal_i2s_pm_callback;
         obj->pm_callback.next = NULL;
         obj->pm_callback.args = (void*)obj;
         obj->pm_callback.ignore_modes = CYHAL_SYSPM_BEFORE_TRANSITION;
         obj->pm_transition_ready = false;
-        cyhal_syspm_register_peripheral_callback(&(obj->pm_callback));
+        _cyhal_syspm_register_peripheral_callback(&(obj->pm_callback));
 
-        cyhal_i2s_config_structs[obj->resource.block_num] = obj;
-        cy_stc_sysint_t irqCfg = { cyhal_i2s_irq_n[obj->resource.block_num], CYHAL_ISR_PRIORITY_DEFAULT };
-        Cy_SysInt_Init(&irqCfg, cyhal_i2s_irq_handler);
-        NVIC_EnableIRQ(cyhal_i2s_irq_n[obj->resource.block_num]);
+        _cyhal_i2s_config_structs[obj->resource.block_num] = obj;
+        cy_stc_sysint_t irqCfg = { _cyhal_i2s_irq_n[obj->resource.block_num], CYHAL_ISR_PRIORITY_DEFAULT };
+        Cy_SysInt_Init(&irqCfg, _cyhal_i2s_irq_handler);
+        NVIC_EnableIRQ(_cyhal_i2s_irq_n[obj->resource.block_num]);
     }
 
     if (CY_RSLT_SUCCESS != result)
@@ -441,22 +440,22 @@ void cyhal_i2s_free(cyhal_i2s_t *obj)
 
     if(CYHAL_RSC_INVALID != obj->resource.type)
     {
-        IRQn_Type irqn = cyhal_i2s_irq_n[obj->resource.block_num];
+        IRQn_Type irqn = _cyhal_i2s_irq_n[obj->resource.block_num];
         NVIC_DisableIRQ(irqn);
 
-        cyhal_syspm_unregister_peripheral_callback(&(obj->pm_callback));
+        _cyhal_syspm_unregister_peripheral_callback(&(obj->pm_callback));
         cyhal_hwmgr_free(&(obj->resource));
         obj->base = NULL;
         obj->resource.type = CYHAL_RSC_INVALID;
     }
 
-    cyhal_utils_release_if_used(&(obj->pin_tx_sck));
-    cyhal_utils_release_if_used(&(obj->pin_tx_ws));
-    cyhal_utils_release_if_used(&(obj->pin_tx_sdo));
-    cyhal_utils_release_if_used(&(obj->pin_rx_sck));
-    cyhal_utils_release_if_used(&(obj->pin_rx_ws));
-    cyhal_utils_release_if_used(&(obj->pin_rx_sdi));
-    cyhal_utils_release_if_used(&(obj->pin_mclk));
+    _cyhal_utils_release_if_used(&(obj->pin_tx_sck));
+    _cyhal_utils_release_if_used(&(obj->pin_tx_ws));
+    _cyhal_utils_release_if_used(&(obj->pin_tx_sdo));
+    _cyhal_utils_release_if_used(&(obj->pin_rx_sck));
+    _cyhal_utils_release_if_used(&(obj->pin_rx_ws));
+    _cyhal_utils_release_if_used(&(obj->pin_rx_sdi));
+    _cyhal_utils_release_if_used(&(obj->pin_mclk));
 
     if(obj->is_clock_owned)
     {
@@ -474,7 +473,7 @@ void cyhal_i2s_free(cyhal_i2s_t *obj)
     }
 }
 
-static cy_rslt_t cyhal_i2s_compute_sclk_div(cyhal_i2s_t *obj, uint32_t sample_rate_hz, uint8_t *sclk_div)
+static cy_rslt_t _cyhal_i2s_compute_sclk_div(cyhal_i2s_t *obj, uint32_t sample_rate_hz, uint8_t *sclk_div)
 {
     const uint8_t MAX_SCLK_DIVIDER = 64; // Divider value internal to the I2S block
     const cyhal_clock_tolerance_t SCLK_TOLERANCE = { .type = CYHAL_TOLERANCE_PERCENT, .value = 1 };
@@ -488,7 +487,7 @@ static cy_rslt_t cyhal_i2s_compute_sclk_div(cyhal_i2s_t *obj, uint32_t sample_ra
         for(uint8_t i = 1; i <= MAX_SCLK_DIVIDER; ++i)
         {
             uint32_t desired_source_freq = sclk_target * i * 8; // I2S hw has a hard-wired 8x divider
-            cy_rslt_t freq_result = cyhal_utils_set_clock_frequency(&(obj->clock), desired_source_freq, &SCLK_TOLERANCE);
+            cy_rslt_t freq_result = _cyhal_utils_set_clock_frequency(&(obj->clock), desired_source_freq, &SCLK_TOLERANCE);
             if(CY_RSLT_SUCCESS == freq_result)
             {
                 *sclk_div = i;
@@ -503,10 +502,10 @@ static cy_rslt_t cyhal_i2s_compute_sclk_div(cyhal_i2s_t *obj, uint32_t sample_ra
         uint32_t actual_source_freq = (CYHAL_NC_PIN_VALUE == obj->pin_mclk) ? cyhal_clock_get_frequency(&obj->clock) : obj->mclk_hz;
         uint32_t best_divider = (actual_source_freq + (desired_divided_freq / 2)) / desired_divided_freq; // Round to nearest divider
         uint32_t desired_source_freq = desired_divided_freq * best_divider;
-        uint32_t diff = abs(cyhal_utils_calculate_tolerance(SCLK_TOLERANCE.type, desired_source_freq, actual_source_freq));
+        uint32_t diff = (uint32_t)abs(_cyhal_utils_calculate_tolerance(SCLK_TOLERANCE.type, desired_source_freq, actual_source_freq));
         if(diff <= SCLK_TOLERANCE.value && best_divider <= MAX_SCLK_DIVIDER)
         {
-            *sclk_div = best_divider;
+            *sclk_div = (uint8_t)best_divider;
         }
     }
 
@@ -518,10 +517,10 @@ cy_rslt_t cyhal_i2s_set_sample_rate(cyhal_i2s_t *obj, uint32_t sample_rate_hz)
     uint8_t sclk_div;
     cy_stc_i2s_config_t pdl_config;
 
-    cy_rslt_t result = cyhal_i2s_compute_sclk_div(obj, sample_rate_hz, &sclk_div);
+    cy_rslt_t result = _cyhal_i2s_compute_sclk_div(obj, sample_rate_hz, &sclk_div);
     if(CY_RSLT_SUCCESS == result)
     {
-        result = cyhal_i2s_populate_pdl_config(obj, &pdl_config, sclk_div);
+        result = _cyhal_i2s_populate_pdl_config(obj, &pdl_config, sclk_div);
     }
     if(CY_RSLT_SUCCESS == result)
     {
@@ -559,8 +558,8 @@ void cyhal_i2s_enable_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event, uint8_t i
         obj->user_enabled_events &= ~event;
     }
 
-    cyhal_i2s_update_enabled_events(obj);
-    IRQn_Type irqn = cyhal_i2s_irq_n[obj->resource.block_num];
+    _cyhal_i2s_update_enabled_events(obj);
+    IRQn_Type irqn = _cyhal_i2s_irq_n[obj->resource.block_num];
     NVIC_SetPriority(irqn, intr_priority);
 }
 
@@ -580,6 +579,12 @@ cy_rslt_t cyhal_i2s_stop_tx(cyhal_i2s_t *obj)
     return CY_RSLT_SUCCESS;
 }
 
+cy_rslt_t cyhal_i2s_clear_tx(cyhal_i2s_t *obj)
+{
+    Cy_I2S_ClearTxFifo(obj->base);
+    return CY_RSLT_SUCCESS;
+}
+
 cy_rslt_t cyhal_i2s_start_rx(cyhal_i2s_t *obj)
 {
     if (obj->pm_transition_ready)
@@ -596,6 +601,12 @@ cy_rslt_t cyhal_i2s_stop_rx(cyhal_i2s_t *obj)
     return CY_RSLT_SUCCESS;
 }
 
+cy_rslt_t cyhal_i2s_clear_rx(cyhal_i2s_t *obj)
+{
+    Cy_I2S_ClearRxFifo(obj->base);
+    return CY_RSLT_SUCCESS;
+}
+
 // Reads until empty, then updates the length and buffer address to their new locations
 static void cyhal_i2s_read_until_empty(cyhal_i2s_t *obj, void** buffer, size_t* length)
 {
@@ -609,7 +620,7 @@ static void cyhal_i2s_read_until_empty(cyhal_i2s_t *obj, void** buffer, size_t* 
 
         while(*length > 0 && Cy_I2S_GetNumInRxFifo(obj->base) > 0)
         {
-            *cast_buffer = Cy_I2S_ReadRxData(obj->base);
+            *cast_buffer = (uint8_t)Cy_I2S_ReadRxData(obj->base);
             ++cast_buffer;
             --(*length);
         }
@@ -621,7 +632,7 @@ static void cyhal_i2s_read_until_empty(cyhal_i2s_t *obj, void** buffer, size_t* 
 
         while(*length > 0 && Cy_I2S_GetNumInRxFifo(obj->base) > 0)
         {
-            *cast_buffer = Cy_I2S_ReadRxData(obj->base);
+            *cast_buffer = (uint8_t)Cy_I2S_ReadRxData(obj->base);
             ++cast_buffer;
             --(*length);
         }
@@ -666,7 +677,7 @@ static void cyhal_i2s_write_until_full(cyhal_i2s_t *obj, const void** buffer, si
     {
         const uint8_t *cast_buffer = (const uint8_t*)(*buffer);
 
-        while(*length > 0 && Cy_I2S_GetNumInTxFifo(obj->base) < CYHAL_I2S_FIFO_DEPTH)
+        while(*length > 0 && Cy_I2S_GetNumInTxFifo(obj->base) < _CYHAL_I2S_FIFO_DEPTH)
         {
             Cy_I2S_WriteTxData(obj->base, *cast_buffer);
             ++cast_buffer;
@@ -678,7 +689,7 @@ static void cyhal_i2s_write_until_full(cyhal_i2s_t *obj, const void** buffer, si
     {
         const uint16_t *cast_buffer = (const uint16_t*)(*buffer);
 
-        while(*length > 0 && Cy_I2S_GetNumInTxFifo(obj->base) < CYHAL_I2S_FIFO_DEPTH)
+        while(*length > 0 && Cy_I2S_GetNumInTxFifo(obj->base) < _CYHAL_I2S_FIFO_DEPTH)
         {
             Cy_I2S_WriteTxData(obj->base, *cast_buffer);
             ++cast_buffer;
@@ -691,7 +702,7 @@ static void cyhal_i2s_write_until_full(cyhal_i2s_t *obj, const void** buffer, si
         CY_ASSERT(obj->word_length <= 32);
         const uint32_t *cast_buffer = (const uint32_t*)(*buffer);
 
-        while(*length > 0 && Cy_I2S_GetNumInTxFifo(obj->base) < CYHAL_I2S_FIFO_DEPTH)
+        while(*length > 0 && Cy_I2S_GetNumInTxFifo(obj->base) < _CYHAL_I2S_FIFO_DEPTH)
         {
             Cy_I2S_WriteTxData(obj->base, *cast_buffer);
             ++cast_buffer;
@@ -715,11 +726,25 @@ cy_rslt_t cyhal_i2s_write(cyhal_i2s_t *obj, const void *data, size_t *length)
     return CY_RSLT_SUCCESS;
 }
 
+bool cyhal_i2s_is_tx_enabled(cyhal_i2s_t *obj)
+{
+    CY_ASSERT(NULL != obj);
+
+    return (0 != (CY_I2S_TX_START & Cy_I2S_GetCurrentState(obj->base)));
+}
+
 bool cyhal_i2s_is_tx_busy(cyhal_i2s_t *obj)
 {
     CY_ASSERT(NULL != obj);
 
     return (0 != Cy_I2S_GetNumInTxFifo(obj->base)) || cyhal_i2s_is_write_pending(obj);
+}
+
+bool cyhal_i2s_is_rx_enabled(cyhal_i2s_t *obj)
+{
+    CY_ASSERT(NULL != obj);
+
+    return (0 != (CY_I2S_RX_START & Cy_I2S_GetCurrentState(obj->base)));
 }
 
 bool cyhal_i2s_is_rx_busy(cyhal_i2s_t *obj)
@@ -755,18 +780,18 @@ cy_rslt_t cyhal_i2s_read_async(cyhal_i2s_t *obj, void *rx, size_t rx_length)
             Cy_I2S_SetInterruptMask(obj->base, old_interrupt_mask);
             if(obj->async_rx_length > 0)
             {
-                cyhal_i2s_update_enabled_events(obj);
+                _cyhal_i2s_update_enabled_events(obj);
             }
             else
             {
-                cyhal_i2s_update_enabled_events(obj);
-                cyhal_i2s_process_event(obj, CYHAL_I2S_ASYNC_RX_COMPLETE);
+                _cyhal_i2s_update_enabled_events(obj);
+                _cyhal_i2s_process_event(obj, CYHAL_I2S_ASYNC_RX_COMPLETE);
             }
            break;
         }
         case CYHAL_ASYNC_DMA:
         {
-            cyhal_i2s_dma_perform_rx(obj);
+            _cyhal_i2s_dma_perform_rx(obj);
             break;
         }
         default:
@@ -776,18 +801,18 @@ cy_rslt_t cyhal_i2s_read_async(cyhal_i2s_t *obj, void *rx, size_t rx_length)
     return CY_RSLT_SUCCESS;
 }
 
-static cy_rslt_t cyhal_i2s_populate_pdl_config(cyhal_i2s_t *obj, cy_stc_i2s_config_t* pdl_config, uint8_t sclk_div)
+static cy_rslt_t _cyhal_i2s_populate_pdl_config(cyhal_i2s_t *obj, cy_stc_i2s_config_t* pdl_config, uint8_t sclk_div)
 {
     cy_en_i2s_len_t pdl_word_length, pdl_channel_length;
-    cy_rslt_t result = cyhal_i2s_convert_length(obj->channel_length, &pdl_channel_length);
+    cy_rslt_t result = _cyhal_i2s_convert_length(obj->channel_length, &pdl_channel_length);
     if (CY_RSLT_SUCCESS == result)
     {
-        result = cyhal_i2s_convert_length(obj->word_length, &pdl_word_length);
+        result = _cyhal_i2s_convert_length(obj->word_length, &pdl_word_length);
     }
 
     if(CY_RSLT_SUCCESS == result)
     {
-        *pdl_config = default_i2s_config;
+        *pdl_config = _cyhal_i2s_default_config;
         pdl_config->txEnabled = (CYHAL_NC_PIN_VALUE != obj->pin_tx_sdo);
         pdl_config->rxEnabled = (CYHAL_NC_PIN_VALUE != obj->pin_rx_sdi);
         pdl_config->extClk = (CYHAL_NC_PIN_VALUE != obj->pin_mclk);
@@ -803,7 +828,7 @@ static cy_rslt_t cyhal_i2s_populate_pdl_config(cyhal_i2s_t *obj, cy_stc_i2s_conf
 }
 
 // Round up the word length to the next power of 2
-static uint8_t cyhal_i2s_rounded_word_length(cyhal_i2s_t *obj)
+static uint8_t _cyhal_i2s_rounded_word_length(cyhal_i2s_t *obj)
 {
     CY_ASSERT(obj->word_length <= 32);
     if(obj->word_length <= 8)
@@ -844,17 +869,17 @@ cy_rslt_t cyhal_i2s_write_async(cyhal_i2s_t *obj, const void *tx, size_t tx_leng
             Cy_I2S_SetInterruptMask(obj->base, old_interrupt_mask);
             if(obj->async_tx_length > 0)
             {
-                cyhal_i2s_update_enabled_events(obj);
+                _cyhal_i2s_update_enabled_events(obj);
             }
             else
             {
-                cyhal_i2s_process_event(obj, CYHAL_I2S_ASYNC_TX_COMPLETE);
+                _cyhal_i2s_process_event(obj, CYHAL_I2S_ASYNC_TX_COMPLETE);
             }
             break;
         }
         case CYHAL_ASYNC_DMA:
         {
-            cyhal_i2s_dma_perform_tx(obj);
+            _cyhal_i2s_dma_perform_tx(obj);
             break;
         }
         default:
@@ -880,13 +905,13 @@ cy_rslt_t cyhal_i2s_set_async_mode(cyhal_i2s_t *obj, cyhal_async_mode_t mode, ui
         {
             /* Reserve a DMA channel for async transmit if tx is enabled */
             result = cyhal_dma_init(&obj->tx_dma, CYHAL_DMA_PRIORITY_DEFAULT, CYHAL_DMA_DIRECTION_MEM2PERIPH);
-            cyhal_dma_register_callback(&obj->tx_dma, &cyhal_i2s_dma_handler_tx, obj);
+            cyhal_dma_register_callback(&obj->tx_dma, &_cyhal_i2s_dma_handler_tx, obj);
         }
         if(mode == CYHAL_ASYNC_DMA && CYHAL_NC_PIN_VALUE != obj->pin_rx_sck && CYHAL_RSC_INVALID == obj->rx_dma.resource.type)
         {
             /* Reserve a DMA channel for async receive if tx is enabled */
             result = cyhal_dma_init(&obj->rx_dma, CYHAL_DMA_PRIORITY_DEFAULT, CYHAL_DMA_DIRECTION_MEM2PERIPH);
-            cyhal_dma_register_callback(&obj->rx_dma, &cyhal_i2s_dma_handler_rx, obj);
+            cyhal_dma_register_callback(&obj->rx_dma, &_cyhal_i2s_dma_handler_rx, obj);
         }
     }
     else
@@ -925,7 +950,7 @@ bool cyhal_i2s_is_write_pending(cyhal_i2s_t *obj)
 cy_rslt_t cyhal_i2s_abort_read_async(cyhal_i2s_t *obj) {
     uint32_t saved_intr = cyhal_system_critical_section_enter();
     obj->async_rx_buff = NULL;
-    cyhal_i2s_update_enabled_events(obj);
+    _cyhal_i2s_update_enabled_events(obj);
     cyhal_system_critical_section_exit(saved_intr);
     return CY_RSLT_SUCCESS;
 }
@@ -934,12 +959,12 @@ cy_rslt_t cyhal_i2s_abort_write_async(cyhal_i2s_t *obj)
 {
     uint32_t saved_intr = cyhal_system_critical_section_enter();
     obj->async_tx_buff = NULL;
-    cyhal_i2s_update_enabled_events(obj);
+    _cyhal_i2s_update_enabled_events(obj);
     cyhal_system_critical_section_exit(saved_intr);
     return CY_RSLT_SUCCESS;
 }
 
-static cyhal_i2s_event_t cyhal_i2s_convert_interrupt_cause(uint32_t pdl_cause)
+static cyhal_i2s_event_t _cyhal_i2s_convert_interrupt_cause(uint32_t pdl_cause)
 {
     cyhal_i2s_event_t result = (cyhal_i2s_event_t)0u;
     if(0 != (pdl_cause & CY_I2S_INTR_TX_NOT_FULL))
@@ -986,7 +1011,7 @@ static cyhal_i2s_event_t cyhal_i2s_convert_interrupt_cause(uint32_t pdl_cause)
     return result;
 }
 
-static uint32_t cyhal_i2s_convert_event(cyhal_i2s_event_t event)
+static uint32_t _cyhal_i2s_convert_event(cyhal_i2s_event_t event)
 {
     uint32_t pdl_event = 0u;
     if(0 != (event & CYHAL_I2S_TX_NOT_FULL))
@@ -1033,7 +1058,7 @@ static uint32_t cyhal_i2s_convert_event(cyhal_i2s_event_t event)
     return pdl_event;
 }
 
-static cy_rslt_t cyhal_i2s_convert_length(uint8_t user_length, cy_en_i2s_len_t *pdl_length)
+static cy_rslt_t _cyhal_i2s_convert_length(uint8_t user_length, cy_en_i2s_len_t *pdl_length)
 {
     cy_rslt_t result = CY_RSLT_SUCCESS;
     switch(user_length)
@@ -1062,19 +1087,19 @@ static cy_rslt_t cyhal_i2s_convert_length(uint8_t user_length, cy_en_i2s_len_t *
     return result;
 }
 
-static void cyhal_i2s_irq_handler(void)
+static void _cyhal_i2s_irq_handler(void)
 {
-    IRQn_Type irqn = CYHAL_GET_CURRENT_IRQN();
-    uint8_t block = cyhal_i2s_get_block_from_irqn(irqn);
-    cyhal_i2s_t* obj = cyhal_i2s_config_structs[block];
+    IRQn_Type irqn = _CYHAL_UTILS_GET_CURRENT_IRQN();
+    uint8_t block = _cyhal_i2s_get_block_from_irqn(irqn);
+    cyhal_i2s_t* obj = _cyhal_i2s_config_structs[block];
 
     uint32_t interrupt_status = Cy_I2S_GetInterruptStatusMasked(obj->base);
     Cy_I2S_ClearInterrupt(obj->base, interrupt_status);
-    cyhal_i2s_event_t event = cyhal_i2s_convert_interrupt_cause(interrupt_status);
-    cyhal_i2s_process_event(obj, event);
+    cyhal_i2s_event_t event = _cyhal_i2s_convert_interrupt_cause(interrupt_status);
+    _cyhal_i2s_process_event(obj, event);
 }
 
-static void cyhal_i2s_update_enabled_events(cyhal_i2s_t *obj)
+static void _cyhal_i2s_update_enabled_events(cyhal_i2s_t *obj)
 {
     cyhal_i2s_event_t events = (cyhal_i2s_event_t)obj->user_enabled_events;
     if(CYHAL_ASYNC_SW == obj->async_mode)
@@ -1085,7 +1110,7 @@ static void cyhal_i2s_update_enabled_events(cyhal_i2s_t *obj)
         }
         if(NULL != obj->async_rx_buff)
         {
-            if(obj->async_rx_length >= (CYHAL_I2S_FIFO_DEPTH / 2))
+            if(obj->async_rx_length >= (_CYHAL_I2S_FIFO_DEPTH / 2))
             {
                 events |= (CYHAL_I2S_RX_FULL | CYHAL_I2S_RX_HALF_FULL);
             }
@@ -1099,7 +1124,7 @@ static void cyhal_i2s_update_enabled_events(cyhal_i2s_t *obj)
         }
     }
 
-    uint32_t mask = cyhal_i2s_convert_event(events);
+    uint32_t mask = _cyhal_i2s_convert_event(events);
     // The register is 24 bits wide but the hardware pads the value out with 1's when read.
     // So mask down to just the bits that we actually care about.
     uint32_t old_mask = Cy_I2S_GetInterruptMask(obj->base) & CY_I2S_INTR_MASK;
@@ -1111,9 +1136,9 @@ static void cyhal_i2s_update_enabled_events(cyhal_i2s_t *obj)
     Cy_I2S_SetInterruptMask(obj->base, mask);
 }
 
-static cy_rslt_t cyhal_i2s_dma_perform_rx(cyhal_i2s_t *obj)
+static cy_rslt_t _cyhal_i2s_dma_perform_rx(cyhal_i2s_t *obj)
 {
-    size_t transfer_size = CYHAL_I2S_DMA_BURST_SIZE;
+    size_t transfer_size = _CYHAL_I2S_DMA_BURST_SIZE;
     if (transfer_size >= obj->async_rx_length)
     {
         transfer_size = obj->async_rx_length;
@@ -1127,7 +1152,7 @@ static cy_rslt_t cyhal_i2s_dma_perform_rx(cyhal_i2s_t *obj)
         .src_increment = 0,
         .dst_addr = (uint32_t)obj->async_rx_buff,
         .dst_increment = 1,
-        .transfer_width = cyhal_i2s_rounded_word_length(obj),
+        .transfer_width = _cyhal_i2s_rounded_word_length(obj),
         .length = transfer_size,
         .burst_size = 0,
         .action = CYHAL_DMA_TRANSFER_FULL,
@@ -1137,7 +1162,7 @@ static cy_rslt_t cyhal_i2s_dma_perform_rx(cyhal_i2s_t *obj)
     // Update the buffer first so that it's guaranteed to be correct whenever the DMA completes
     if(CY_RSLT_SUCCESS == result)
     {
-        size_t increment_bytes = transfer_size * (cyhal_i2s_rounded_word_length(obj) / 8);
+        size_t increment_bytes = transfer_size * (_cyhal_i2s_rounded_word_length(obj) / 8);
         uint32_t savedIntrStatus = cyhal_system_critical_section_enter();
         obj->async_rx_buff = (void*)(((uint8_t*) obj->async_rx_buff) + increment_bytes);
         obj->async_tx_length -= transfer_size;
@@ -1149,9 +1174,9 @@ static cy_rslt_t cyhal_i2s_dma_perform_rx(cyhal_i2s_t *obj)
     return result;
 }
 
-static cy_rslt_t cyhal_i2s_dma_perform_tx(cyhal_i2s_t *obj)
+static cy_rslt_t _cyhal_i2s_dma_perform_tx(cyhal_i2s_t *obj)
 {
-    size_t transfer_size = CYHAL_I2S_DMA_BURST_SIZE;
+    size_t transfer_size = _CYHAL_I2S_DMA_BURST_SIZE;
     if (transfer_size >= obj->async_tx_length)
     {
         transfer_size = obj->async_tx_length;
@@ -1165,7 +1190,7 @@ static cy_rslt_t cyhal_i2s_dma_perform_tx(cyhal_i2s_t *obj)
         .src_increment = 1,
         .dst_addr = (uint32_t)(&(obj->base->TX_FIFO_WR)),
         .dst_increment = 0,
-        .transfer_width = cyhal_i2s_rounded_word_length(obj),
+        .transfer_width = _cyhal_i2s_rounded_word_length(obj),
         .length = transfer_size,
         .burst_size = 0,
         .action = CYHAL_DMA_TRANSFER_FULL,
@@ -1175,7 +1200,7 @@ static cy_rslt_t cyhal_i2s_dma_perform_tx(cyhal_i2s_t *obj)
     // Update the buffer first so that it's guaranteed to be correct whenever the DMA completes
     if(CY_RSLT_SUCCESS == result)
     {
-        size_t increment_bytes = transfer_size * (cyhal_i2s_rounded_word_length(obj) / 8);
+        size_t increment_bytes = transfer_size * (_cyhal_i2s_rounded_word_length(obj) / 8);
         uint32_t savedIntrStatus = cyhal_system_critical_section_enter();
         obj->async_tx_buff = (void*)(((uint8_t*) obj->async_tx_buff) + increment_bytes);
         obj->async_tx_length -= transfer_size;
@@ -1188,30 +1213,32 @@ static cy_rslt_t cyhal_i2s_dma_perform_tx(cyhal_i2s_t *obj)
 }
 
 /* Callback argument is the I2S instance */
-static void cyhal_i2s_dma_handler_rx(void *callback_arg, cyhal_dma_event_t event)
+static void _cyhal_i2s_dma_handler_rx(void *callback_arg, cyhal_dma_event_t event)
 {
+    CY_UNUSED_PARAMETER(event);
     /* We only hook this handler up when we're doing the final transfer, so send the completed event */
     CY_ASSERT(CYHAL_DMA_TRANSFER_COMPLETE == event);
 
     cyhal_i2s_t *obj = (cyhal_i2s_t*)callback_arg;
     obj->async_rx_buff = NULL;
     cyhal_dma_enable_event(&obj->rx_dma, CYHAL_DMA_TRANSFER_COMPLETE, obj->async_dma_priority, false);
-    cyhal_i2s_process_event(obj, CYHAL_I2S_ASYNC_RX_COMPLETE);
+    _cyhal_i2s_process_event(obj, CYHAL_I2S_ASYNC_RX_COMPLETE);
 }
 
 /* Callback argument is the I2S instance */
-static void cyhal_i2s_dma_handler_tx(void *callback_arg, cyhal_dma_event_t event)
+static void _cyhal_i2s_dma_handler_tx(void *callback_arg, cyhal_dma_event_t event)
 {
+    CY_UNUSED_PARAMETER(event);
     /* We only hook this handler up when we're doing the final transfer, so send the completed event */
     CY_ASSERT(CYHAL_DMA_TRANSFER_COMPLETE == event);
 
     cyhal_i2s_t *obj = (cyhal_i2s_t*)callback_arg;
     obj->async_tx_buff = NULL;
     cyhal_dma_enable_event(&obj->tx_dma, CYHAL_DMA_TRANSFER_COMPLETE, obj->async_dma_priority, false);
-    cyhal_i2s_process_event(obj, CYHAL_I2S_ASYNC_TX_COMPLETE);
+    _cyhal_i2s_process_event(obj, CYHAL_I2S_ASYNC_TX_COMPLETE);
 }
 
-static void cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event)
+static void _cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event)
 {
     if(0 != (event & (CYHAL_I2S_TX_HALF_EMPTY | CYHAL_I2S_TX_EMPTY)))
     {
@@ -1241,7 +1268,7 @@ static void cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event)
                     break;
                 }
                 case CYHAL_ASYNC_DMA:
-                    cyhal_i2s_dma_perform_tx(obj);
+                    _cyhal_i2s_dma_perform_tx(obj);
                     break;
                 default:
                     CY_ASSERT(0); /* Unrecognized async mode */
@@ -1250,7 +1277,7 @@ static void cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event)
         }
     }
     if(0 != (event & (CYHAL_I2S_RX_HALF_FULL | CYHAL_I2S_RX_FULL))
-        || (obj->async_rx_length < (CYHAL_I2S_FIFO_DEPTH / 2) && (0u != (event & CYHAL_I2S_RX_NOT_EMPTY))))
+        || (obj->async_rx_length < (_CYHAL_I2S_FIFO_DEPTH / 2) && (0u != (event & CYHAL_I2S_RX_NOT_EMPTY))))
     {
         /* Similar to TX, we don't expect to receive the "full" interrupt, but check for it out of caution */
         if(NULL != obj->async_rx_buff && obj->async_rx_length > 0)
@@ -1267,13 +1294,13 @@ static void cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event)
                    Cy_I2S_SetInterruptMask(obj->base, 0u);
                    cyhal_i2s_read_until_empty(obj, &obj->async_rx_buff, &obj->async_rx_length);
                    Cy_I2S_SetInterruptMask(obj->base, old_interrupt_mask);
-                   if(obj->async_rx_length < (CYHAL_I2S_FIFO_DEPTH / 2))
+                   if(obj->async_rx_length < (_CYHAL_I2S_FIFO_DEPTH / 2))
                    {
                        /* At this point the half full interrupt won't fire until after we've received
                         * the remaining data, so switch to reading out each word as it comes in.
                         * Call update enabled when we're at 0 too so that the RX not empty event gets turned off again
                         */
-                        cyhal_i2s_update_enabled_events(obj);
+                        _cyhal_i2s_update_enabled_events(obj);
                         if(0 == obj->async_rx_length)
                         {
                             /* We finished the async transfer.  */
@@ -1283,7 +1310,7 @@ static void cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event)
                    break;
                 }
                 case CYHAL_ASYNC_DMA:
-                   cyhal_i2s_dma_perform_rx(obj);
+                   _cyhal_i2s_dma_perform_rx(obj);
                    break;
 
                 default:
@@ -1296,12 +1323,12 @@ static void cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event)
     if(0 != (event & CYHAL_I2S_ASYNC_TX_COMPLETE))
     {
         obj->async_tx_buff = NULL;
-        cyhal_i2s_update_enabled_events(obj);
+        _cyhal_i2s_update_enabled_events(obj);
     }
     if(0 != (event & CYHAL_I2S_ASYNC_RX_COMPLETE))
     {
         obj->async_rx_buff = NULL;
-        cyhal_i2s_update_enabled_events(obj);
+        _cyhal_i2s_update_enabled_events(obj);
     }
 
     if(0 != (event & ((cyhal_i2s_event_t)obj->user_enabled_events)))
@@ -1314,7 +1341,7 @@ static void cyhal_i2s_process_event(cyhal_i2s_t *obj, cyhal_i2s_event_t event)
     }
 }
 
-static bool cyhal_i2s_pm_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_callback_mode_t mode, void* callback_arg)
+static bool _cyhal_i2s_pm_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_callback_mode_t mode, void* callback_arg)
 {
     cyhal_i2s_t *obj = (cyhal_i2s_t *)callback_arg;
     CY_UNUSED_PARAMETER(state);

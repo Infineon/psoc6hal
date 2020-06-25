@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -121,13 +121,13 @@ Quick Start</h1>
 Code snippets</h1>
 <h2><a class="anchor" id="subsection_spi_snippet_1"></a>
 Snippet 1: SPI Master - Single byte transfer operation (Read and Write)</h2>
-<p>The following code snippet initialises an SPI Master interface using the <a class="el" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init()</a>. The data rate of transfer is set using <a class="el" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency()</a>. The code snippet shows how to transfer a single byte of data using <a class="el" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send()</a> and <a class="el" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv()</a>. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> mSPI;</div><div class="line">    uint32_t spi_master_frequency = 1000000;</div><div class="line">    uint32_t transmit_data = 0x01;</div><div class="line">    uint32_t receive_data;</div><div class="line"></div><div class="line">    <span class="comment">/* Configuring the  SPI master:  Specify the SPI interface pins, frame size, SPI Motorola mode and master mode */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a>(&amp;mSPI, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a607fcf269fc2a6e4ecffd80d4a345516">P10_1</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51aec9f8c6c169e3ffce4866e4a1677d873">P10_2</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a687b4a01d80cb5284be1bc42362f79d6">P10_3</a>, NULL, 8, <a class="code" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a>, <span class="keyword">false</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the data rate to 1 Mbps */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>(&amp;mSPI, spi_master_frequency);</div><div class="line"></div><div class="line">    <span class="comment">/* Transfer one byte of data to the slave. */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send</a>(&amp;mSPI, transmit_data))</div><div class="line">    {</div><div class="line">    <span class="comment">/* Receives one byte of data from the slave by transmiting a dummy byte 0xFF. */</span></div><div class="line">        <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv</a>(&amp;mSPI, &amp;receive_data))</div><div class="line">        {</div><div class="line">            <span class="comment">/* Transfer Complete and successful */</span></div><div class="line">        }</div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_spi_snippet_2"></a>
+<p>The following code snippet initialises an SPI Master interface using the <a class="el" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init()</a>. The data rate of transfer is set using <a class="el" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency()</a>. The code snippet shows how to transfer a single byte of data using <a class="el" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send()</a> and <a class="el" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv()</a>. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> mSPI;</div><div class="line">    uint32_t spi_master_frequency = 1000000;</div><div class="line">    uint32_t transmit_data = 0x01;</div><div class="line">    uint32_t receive_data;</div><div class="line"></div><div class="line">    <span class="comment">/* Configuring the  SPI master:  Specify the SPI interface pins, frame size, SPI Motorola mode and master mode */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a>(&amp;mSPI, CYBSP_SPI_MOSI, CYBSP_SPI_MISO, CYBSP_SPI_CLK, CYBSP_SPI_CS, NULL, 8, <a class="code" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a>, <span class="keyword">false</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the data rate to 1 Mbps */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>(&amp;mSPI, spi_master_frequency);</div><div class="line"></div><div class="line">    <span class="comment">/* Transfer one byte of data to the slave. */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send</a>(&amp;mSPI, transmit_data))</div><div class="line">    {</div><div class="line">    <span class="comment">/* Receives one byte of data from the slave by transmiting a dummy byte 0xFF. */</span></div><div class="line">        <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv</a>(&amp;mSPI, &amp;receive_data))</div><div class="line">        {</div><div class="line">            <span class="comment">/* Transfer Complete and successful */</span></div><div class="line">        }</div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_spi_snippet_2"></a>
 Snippet 2: SPI Slave - Single byte transfer operation (Read and Write)</h2>
-<p>The following code snippet initialises an SPI Slave interface using the <a class="el" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init()</a>. The data rate of transfer is set using <a class="el" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>. The code snippet shows how to transfer a single byte of data using <a class="el" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send()</a> and <a class="el" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv</a>. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> sSPI;</div><div class="line">    uint32_t spi_slave_frequency = 1000000;</div><div class="line">    uint32_t transmit_data = 1;</div><div class="line">    uint32_t receive_data;</div><div class="line"></div><div class="line">    <span class="comment">/* Configuring the  SPI slave:  Specify the SPI interface pins, frame size, SPI Motorola mode and slave mode */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a>(&amp;sSPI, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a651caedfece9cfdc1054b06bdb19ef5c">P6_0</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3e0cb355dfc40a09ddbcb3e2a646e186">P6_1</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a314f040c789cfa222f71ac693d4634b3">P6_2</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51ab8284593b459e295b454e59c33e16325">P6_3</a>, NULL, 8, <a class="code" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the data rate to 1 Mbps */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>(&amp;sSPI, spi_slave_frequency);</div><div class="line"></div><div class="line">    <span class="comment">/* Place a byte in the TX FIFO to be read by the master */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send</a>(&amp;sSPI, transmit_data))</div><div class="line">    {</div><div class="line">        <span class="comment">/* Get a received value out of the SPI receive buffer. This API Blocks until a value is available */</span></div><div class="line">        <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv</a>(&amp;sSPI, &amp;receive_data))</div><div class="line">        {</div><div class="line">            <span class="comment">/* Transfer successful */</span></div><div class="line">        }</div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_spi_snippet_3"></a>
+<p>The following code snippet initialises an SPI Slave interface using the <a class="el" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init()</a>. The data rate of transfer is set using <a class="el" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>. The code snippet shows how to transfer a single byte of data using <a class="el" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send()</a> and <a class="el" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv</a>. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> sSPI;</div><div class="line">    uint32_t spi_slave_frequency = 1000000;</div><div class="line">    uint32_t transmit_data = 1;</div><div class="line">    uint32_t receive_data;</div><div class="line"></div><div class="line">    <span class="comment">/* Configuring the  SPI slave:  Specify the SPI interface pins, frame size, SPI Motorola mode and slave mode */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a>(&amp;sSPI, CYBSP_SPI_MOSI, CYBSP_SPI_MISO, CYBSP_SPI_CLK, CYBSP_SPI_CS, NULL, 8, <a class="code" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the data rate to 1 Mbps */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>(&amp;sSPI, spi_slave_frequency);</div><div class="line"></div><div class="line">    <span class="comment">/* Place a byte in the TX FIFO to be read by the master */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send</a>(&amp;sSPI, transmit_data))</div><div class="line">    {</div><div class="line">        <span class="comment">/* Get a received value out of the SPI receive buffer. This API Blocks until a value is available */</span></div><div class="line">        <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv</a>(&amp;sSPI, &amp;receive_data))</div><div class="line">        {</div><div class="line">            <span class="comment">/* Transfer successful */</span></div><div class="line">        }</div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_spi_snippet_3"></a>
 Snippet 3: SPI Block Data transfer</h2>
-<p>The following snippet sends and receives an array of data in a single SPI transaction using <a class="el" href="group__group__hal__spi.html#gad21547fa4048c45f15308c0b1ff62c1f">cyhal_spi_transfer()</a>. The example uses SPI master to transmit 5 bytes of data and receive 5 bytes of data in a single transaction. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> mSPI;</div><div class="line">    uint32_t spi_frequency = 1000000;</div><div class="line">    uint8_t transmit_data[5] = {0x1, 0x2, 0x3, 0x4, 0x5};</div><div class="line">    uint8_t receive_data[5];</div><div class="line"></div><div class="line">    <span class="comment">/* BSP-1637 workaround  */</span></div><div class="line">    memset(&amp;mSPI, 0, <span class="keyword">sizeof</span>(mSPI));</div><div class="line"></div><div class="line">    <span class="comment">/* Configuring the  SPI interface:  Specify the SPI interface pins, frame size, SPI Motorola mode and master/slave mode */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a>(&amp;mSPI, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a607fcf269fc2a6e4ecffd80d4a345516">P10_1</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51aec9f8c6c169e3ffce4866e4a1677d873">P10_2</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a687b4a01d80cb5284be1bc42362f79d6">P10_3</a>, NULL, 8, <a class="code" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a>, <span class="keyword">false</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the data rate to 1 Mbps */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>(&amp;mSPI, spi_frequency);</div><div class="line"></div><div class="line">    <span class="comment">/* Master: Starts a data transfer. Slave: Prepares the slave for data transfer. It is a blocking function */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> ==  <a class="code" href="group__group__hal__spi.html#gad21547fa4048c45f15308c0b1ff62c1f">cyhal_spi_transfer</a>(&amp;mSPI, transmit_data, 5u, receive_data, 5u, 0xFF))</div><div class="line">    {</div><div class="line">        <span class="comment">/* Transfer Complete */</span></div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_spi_snippet_4"></a>
+<p>The following snippet sends and receives an array of data in a single SPI transaction using <a class="el" href="group__group__hal__spi.html#gad21547fa4048c45f15308c0b1ff62c1f">cyhal_spi_transfer()</a>. The example uses SPI master to transmit 5 bytes of data and receive 5 bytes of data in a single transaction. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> mSPI;</div><div class="line">    uint32_t spi_frequency = 1000000;</div><div class="line">    uint8_t transmit_data[5] = {0x1, 0x2, 0x3, 0x4, 0x5};</div><div class="line">    uint8_t receive_data[5];</div><div class="line"></div><div class="line">    <span class="comment">/* BSP-1637 workaround  */</span></div><div class="line">    memset(&amp;mSPI, 0, <span class="keyword">sizeof</span>(mSPI));</div><div class="line"></div><div class="line">    <span class="comment">/* Configuring the  SPI interface:  Specify the SPI interface pins, frame size, SPI Motorola mode and master/slave mode */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a>(&amp;mSPI, CYBSP_SPI_MOSI, CYBSP_SPI_MISO, CYBSP_SPI_CLK, CYBSP_SPI_CS, NULL, 8, <a class="code" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a>, <span class="keyword">false</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the data rate to 1 Mbps */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>(&amp;mSPI, spi_frequency);</div><div class="line"></div><div class="line">    <span class="comment">/* Master: Starts a data transfer. Slave: Prepares the slave for data transfer. It is a blocking function */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> ==  <a class="code" href="group__group__hal__spi.html#gad21547fa4048c45f15308c0b1ff62c1f">cyhal_spi_transfer</a>(&amp;mSPI, transmit_data, 5u, receive_data, 5u, 0xFF))</div><div class="line">    {</div><div class="line">        <span class="comment">/* Transfer Complete */</span></div><div class="line">    }</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_spi_snippet_4"></a>
 Snippet 4: Interrupts on SPI events</h2>
-<p>SPI interrupt events ( <a class="el" href="group__group__hal__spi.html#gae8f0cf0233d0225a80815f8282d87b85">cyhal_spi_event_t</a>) can be mapped to an interrupt and assigned to a callback function. The callback function needs to be first registered and then the event needs to be enabled. The following snippet initialises a SPI master to perform a block transfer using <a class="el" href="group__group__hal__spi.html#ga3cbcb44263ba6af2668f8847b8c90210">cyhal_spi_transfer_async()</a>. This is a non-blocking function. A callback function is registered using <a class="el" href="group__group__hal__spi.html#ga5efa8d542f1ab5307d7896a249581a6a">cyhal_spi_register_callback</a> to notify whenever the SPI transfer is complete. </p><div class="fragment"><div class="line"></div><div class="line"><span class="keywordtype">void</span> spi_interrupt_callback(<span class="keywordtype">void</span> *arg, <a class="code" href="group__group__hal__spi.html#gae8f0cf0233d0225a80815f8282d87b85">cyhal_spi_event_t</a> event)</div><div class="line">{</div><div class="line">    (void)arg;</div><div class="line">    <span class="keywordflow">if</span> ((event &amp; <a class="code" href="group__group__hal__spi.html#ggae8f0cf0233d0225a80815f8282d87b85a3f926937b0199cc8729c443d8e71f91b">CYHAL_SPI_IRQ_DONE</a> ) != 0u)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Transmission is complete. Handle Event */</span></div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_interrupt_callback_events(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> mSPI;</div><div class="line">    uint32_t spi_frequency = 1000000;</div><div class="line">    uint32_t rx_transfer_count = 5, tx_transfer_count = 5;</div><div class="line">    uint8_t receive_data[5];</div><div class="line">    uint8_t transmit_data[5] = {0x1, 0x2, 0x3, 0x4, 0x5};</div><div class="line"></div><div class="line">    <span class="comment">/* Configuring the  SPI interface:  Specify the SPI interface pins, frame size, SPI Motorola mode and master/slave mode */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a>(&amp;mSPI, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a607fcf269fc2a6e4ecffd80d4a345516">P10_1</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51aec9f8c6c169e3ffce4866e4a1677d873">P10_2</a>, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a687b4a01d80cb5284be1bc42362f79d6">P10_3</a>, NULL, 8, <a class="code" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a>, <span class="keyword">false</span>);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the data rate to 1 Mbps */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>(&amp;mSPI, spi_frequency);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback function to be called when the interrupt fires */</span></div><div class="line">    <a class="code" href="group__group__hal__spi.html#ga5efa8d542f1ab5307d7896a249581a6a">cyhal_spi_register_callback</a>(&amp;mSPI, (<a class="code" href="group__group__hal__spi.html#ga49db139205e26d6150dc9a83338d8a1c">cyhal_spi_event_callback_t</a>) spi_interrupt_callback, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Enable the events that will trigger the call back function */</span></div><div class="line">    <a class="code" href="group__group__hal__spi.html#ga6d53ecb445603a2470ec1fd7e456bba3">cyhal_spi_enable_event</a>(&amp;mSPI, <a class="code" href="group__group__hal__spi.html#ggae8f0cf0233d0225a80815f8282d87b85a3f926937b0199cc8729c443d8e71f91b">CYHAL_SPI_IRQ_DONE</a>, 3, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Master: Initiates a data transfer. Slave: Prepares the slave for data transfer. It is a non-blocking function  */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#ga3cbcb44263ba6af2668f8847b8c90210">cyhal_spi_transfer_async</a>(&amp;mSPI, transmit_data, rx_transfer_count, receive_data, tx_transfer_count))</div><div class="line">    {</div><div class="line">        <span class="comment">/* SPI Master: Transfer started. SPI Slave: Prepares for data transfer */</span></div><div class="line">    }</div><div class="line">}</div></div><!-- fragment --> <h1><a class="anchor" id="subsection_spi_moreinfor"></a>
+<p>SPI interrupt events ( <a class="el" href="group__group__hal__spi.html#gae8f0cf0233d0225a80815f8282d87b85">cyhal_spi_event_t</a>) can be mapped to an interrupt and assigned to a callback function. The callback function needs to be first registered and then the event needs to be enabled. The following snippet initialises a SPI master to perform a block transfer using <a class="el" href="group__group__hal__spi.html#ga3cbcb44263ba6af2668f8847b8c90210">cyhal_spi_transfer_async()</a>. This is a non-blocking function. A callback function is registered using <a class="el" href="group__group__hal__spi.html#ga5efa8d542f1ab5307d7896a249581a6a">cyhal_spi_register_callback</a> to notify whenever the SPI transfer is complete. </p><div class="fragment"><div class="line"></div><div class="line"><span class="keywordtype">void</span> spi_interrupt_callback(<span class="keywordtype">void</span> *arg, <a class="code" href="group__group__hal__spi.html#gae8f0cf0233d0225a80815f8282d87b85">cyhal_spi_event_t</a> event)</div><div class="line">{</div><div class="line">    (void)arg;</div><div class="line">    <span class="keywordflow">if</span> ((event &amp; <a class="code" href="group__group__hal__spi.html#ggae8f0cf0233d0225a80815f8282d87b85a3f926937b0199cc8729c443d8e71f91b">CYHAL_SPI_IRQ_DONE</a> ) != 0u)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Transmission is complete. Handle Event */</span></div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_interrupt_callback_events(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> mSPI;</div><div class="line">    uint32_t spi_frequency = 1000000;</div><div class="line">    uint32_t rx_transfer_count = 5, tx_transfer_count = 5;</div><div class="line">    uint8_t receive_data[5];</div><div class="line">    uint8_t transmit_data[5] = {0x1, 0x2, 0x3, 0x4, 0x5};</div><div class="line"></div><div class="line">    <span class="comment">/* Configuring the  SPI interface:  Specify the SPI interface pins, frame size, SPI Motorola mode and master/slave mode */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a>(&amp;mSPI, CYBSP_SPI_MOSI, CYBSP_SPI_MISO, CYBSP_SPI_CLK, CYBSP_SPI_CS, NULL, 8, <a class="code" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a>, <span class="keyword">false</span>);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Set the data rate to 1 Mbps */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a>(&amp;mSPI, spi_frequency);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback function to be called when the interrupt fires */</span></div><div class="line">    <a class="code" href="group__group__hal__spi.html#ga5efa8d542f1ab5307d7896a249581a6a">cyhal_spi_register_callback</a>(&amp;mSPI, (<a class="code" href="group__group__hal__spi.html#ga49db139205e26d6150dc9a83338d8a1c">cyhal_spi_event_callback_t</a>) spi_interrupt_callback, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Enable the events that will trigger the call back function */</span></div><div class="line">    <a class="code" href="group__group__hal__spi.html#ga6d53ecb445603a2470ec1fd7e456bba3">cyhal_spi_enable_event</a>(&amp;mSPI, <a class="code" href="group__group__hal__spi.html#ggae8f0cf0233d0225a80815f8282d87b85a3f926937b0199cc8729c443d8e71f91b">CYHAL_SPI_IRQ_DONE</a>, 3, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Master: Initiates a data transfer. Slave: Prepares the slave for data transfer. It is a non-blocking function  */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == <a class="code" href="group__group__hal__spi.html#ga3cbcb44263ba6af2668f8847b8c90210">cyhal_spi_transfer_async</a>(&amp;mSPI, transmit_data, rx_transfer_count, receive_data, tx_transfer_count))</div><div class="line">    {</div><div class="line">        <span class="comment">/* SPI Master: Transfer started. SPI Slave: Prepares for data transfer */</span></div><div class="line">    }</div><div class="line">}</div></div><!-- fragment --> <h1><a class="anchor" id="subsection_spi_moreinfor"></a>
 More Information</h1>
 <ul>
 <li><a href="https://github.com/cypresssemiconductorco/mtb-example-psoc6-spi-master"><b>mtb-example-psoc6-spi-master</b></a>: This example project demonstrates use of SPI (HAL) resource in PSoC® 6 MCU in Master mode to write data to an SPI slave. </li>
@@ -182,6 +182,14 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:gae8f0cf0233d0225a80815f8282d87b85"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI interrupt triggers.  <a href="group__group__hal__spi.html#gae8f0cf0233d0225a80815f8282d87b85">More...</a><br /></td></tr>
 <tr class="separator:gae8f0cf0233d0225a80815f8282d87b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabfadf37558e1092ac2fe3a5bd2b912d5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gabfadf37558e1092ac2fe3a5bd2b912d5">cyhal_spi_ssel_polarity_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__spi.html#ggabfadf37558e1092ac2fe3a5bd2b912d5a3a6c47381becf05d991f9e321ec9fea6">CYHAL_SPI_SSEL_ACTIVE_LOW</a> = 0, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__spi.html#ggabfadf37558e1092ac2fe3a5bd2b912d5ab9e114bf73df1ff5ae5bab536f96c242">CYHAL_SPI_SSEL_ACTIVE_HIGH</a> = 1
+<br />
+ }</td></tr>
+<tr class="memdesc:gabfadf37558e1092ac2fe3a5bd2b912d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI Slave Select polarity.  <a href="group__group__hal__spi.html#gabfadf37558e1092ac2fe3a5bd2b912d5">More...</a><br /></td></tr>
+<tr class="separator:gabfadf37558e1092ac2fe3a5bd2b912d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf56d895e50b0cf0e858a1ff221c58d51"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gaf56d895e50b0cf0e858a1ff221c58d51">cyhal_spi_mode_t</a> { <br />
 &#160;&#160;<a class="el" href="group__group__hal__spi.html#ggaf56d895e50b0cf0e858a1ff221c58d51a8109c5d0edd4c10a68d82e98bd76de8a">CYHAL_SPI_MODE_00_MSB</a> = CYHAL_SPI_MODE(0, 0, 0), 
 <br />
@@ -205,37 +213,43 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga20c9cdb5b051ff8b68cf313fc19b550d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> mosi, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> miso, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> sclk, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> ssel, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk, uint8_t bits, <a class="el" href="group__group__hal__spi.html#gaf56d895e50b0cf0e858a1ff221c58d51">cyhal_spi_mode_t</a> mode, bool is_slave)</td></tr>
+<tr class="memitem:ga20c9cdb5b051ff8b68cf313fc19b550d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> mosi, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> miso, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> sclk, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> ssel, const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk, uint8_t bits, <a class="el" href="group__group__hal__spi.html#gaf56d895e50b0cf0e858a1ff221c58d51">cyhal_spi_mode_t</a> mode, bool is_slave)</td></tr>
 <tr class="memdesc:ga20c9cdb5b051ff8b68cf313fc19b550d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the SPI peripheral.  <a href="#ga20c9cdb5b051ff8b68cf313fc19b550d">More...</a><br /></td></tr>
 <tr class="separator:ga20c9cdb5b051ff8b68cf313fc19b550d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab2bbcc53213e50e43a9bd223573b7870"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gab2bbcc53213e50e43a9bd223573b7870">cyhal_spi_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj)</td></tr>
+<tr class="memitem:gab2bbcc53213e50e43a9bd223573b7870"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gab2bbcc53213e50e43a9bd223573b7870">cyhal_spi_free</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj)</td></tr>
 <tr class="memdesc:gab2bbcc53213e50e43a9bd223573b7870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a SPI object.  <a href="#gab2bbcc53213e50e43a9bd223573b7870">More...</a><br /></td></tr>
 <tr class="separator:gab2bbcc53213e50e43a9bd223573b7870"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga536ac25a0556330a35651e32b5c180cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, uint32_t hz)</td></tr>
+<tr class="memitem:ga536ac25a0556330a35651e32b5c180cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga536ac25a0556330a35651e32b5c180cb">cyhal_spi_set_frequency</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, uint32_t hz)</td></tr>
 <tr class="memdesc:ga536ac25a0556330a35651e32b5c180cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the SPI baud rate.  <a href="#ga536ac25a0556330a35651e32b5c180cb">More...</a><br /></td></tr>
 <tr class="separator:ga536ac25a0556330a35651e32b5c180cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad9e6f6399f3096426b718d58e813b0d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, uint32_t *value)</td></tr>
+<tr class="memitem:gaf933d1bcc357b515bd3cc0ad4518c764"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gaf933d1bcc357b515bd3cc0ad4518c764">cyhal_spi_slave_select_config</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> ssel, <a class="el" href="group__group__hal__spi.html#gabfadf37558e1092ac2fe3a5bd2b912d5">cyhal_spi_ssel_polarity_t</a> polarity)</td></tr>
+<tr class="memdesc:gaf933d1bcc357b515bd3cc0ad4518c764"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures provided ssel pin to work as SPI slave select with specified polarity.  <a href="#gaf933d1bcc357b515bd3cc0ad4518c764">More...</a><br /></td></tr>
+<tr class="separator:gaf933d1bcc357b515bd3cc0ad4518c764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab545fa07b788c83398c0265b2e9220c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gab545fa07b788c83398c0265b2e9220c9">cyhal_spi_select_active_ssel</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> ssel)</td></tr>
+<tr class="memdesc:gab545fa07b788c83398c0265b2e9220c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects an active slave select line from one of available.  <a href="#gab545fa07b788c83398c0265b2e9220c9">More...</a><br /></td></tr>
+<tr class="separator:gab545fa07b788c83398c0265b2e9220c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad9e6f6399f3096426b718d58e813b0d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gad9e6f6399f3096426b718d58e813b0d1">cyhal_spi_recv</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, uint32_t *value)</td></tr>
 <tr class="memdesc:gad9e6f6399f3096426b718d58e813b0d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronously get a received value out of the SPI receive buffer.  <a href="#gad9e6f6399f3096426b718d58e813b0d1">More...</a><br /></td></tr>
 <tr class="separator:gad9e6f6399f3096426b718d58e813b0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga24b88b94f4869a34a98a54fc0edf9e53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, uint32_t value)</td></tr>
+<tr class="memitem:ga24b88b94f4869a34a98a54fc0edf9e53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga24b88b94f4869a34a98a54fc0edf9e53">cyhal_spi_send</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, uint32_t value)</td></tr>
 <tr class="memdesc:ga24b88b94f4869a34a98a54fc0edf9e53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronously send a byte out.  <a href="#ga24b88b94f4869a34a98a54fc0edf9e53">More...</a><br /></td></tr>
 <tr class="separator:ga24b88b94f4869a34a98a54fc0edf9e53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad21547fa4048c45f15308c0b1ff62c1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gad21547fa4048c45f15308c0b1ff62c1f">cyhal_spi_transfer</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, const uint8_t *tx, size_t tx_length, uint8_t *rx, size_t rx_length, uint8_t write_fill)</td></tr>
+<tr class="memitem:gad21547fa4048c45f15308c0b1ff62c1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#gad21547fa4048c45f15308c0b1ff62c1f">cyhal_spi_transfer</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, const uint8_t *tx, size_t tx_length, uint8_t *rx, size_t rx_length, uint8_t write_fill)</td></tr>
 <tr class="memdesc:gad21547fa4048c45f15308c0b1ff62c1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronously Write a block out and receive a value.  <a href="#gad21547fa4048c45f15308c0b1ff62c1f">More...</a><br /></td></tr>
 <tr class="separator:gad21547fa4048c45f15308c0b1ff62c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3cbcb44263ba6af2668f8847b8c90210"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga3cbcb44263ba6af2668f8847b8c90210">cyhal_spi_transfer_async</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, const uint8_t *tx, size_t tx_length, uint8_t *rx, size_t rx_length)</td></tr>
+<tr class="memitem:ga3cbcb44263ba6af2668f8847b8c90210"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga3cbcb44263ba6af2668f8847b8c90210">cyhal_spi_transfer_async</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, const uint8_t *tx, size_t tx_length, uint8_t *rx, size_t rx_length)</td></tr>
 <tr class="memdesc:ga3cbcb44263ba6af2668f8847b8c90210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start an asynchronous SPI transfer.  <a href="#ga3cbcb44263ba6af2668f8847b8c90210">More...</a><br /></td></tr>
 <tr class="separator:ga3cbcb44263ba6af2668f8847b8c90210"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga94cd6755137c445776a75f29af355cab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga94cd6755137c445776a75f29af355cab">cyhal_spi_is_busy</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj)</td></tr>
+<tr class="memitem:ga94cd6755137c445776a75f29af355cab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga94cd6755137c445776a75f29af355cab">cyhal_spi_is_busy</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj)</td></tr>
 <tr class="memdesc:ga94cd6755137c445776a75f29af355cab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the specified SPI peripheral is in use.  <a href="#ga94cd6755137c445776a75f29af355cab">More...</a><br /></td></tr>
 <tr class="separator:ga94cd6755137c445776a75f29af355cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2d4d48b53480a80e11d6ae5ebd01c0c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga2d4d48b53480a80e11d6ae5ebd01c0c2">cyhal_spi_abort_async</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj)</td></tr>
+<tr class="memitem:ga2d4d48b53480a80e11d6ae5ebd01c0c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga2d4d48b53480a80e11d6ae5ebd01c0c2">cyhal_spi_abort_async</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj)</td></tr>
 <tr class="memdesc:ga2d4d48b53480a80e11d6ae5ebd01c0c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort an SPI transfer.  <a href="#ga2d4d48b53480a80e11d6ae5ebd01c0c2">More...</a><br /></td></tr>
 <tr class="separator:ga2d4d48b53480a80e11d6ae5ebd01c0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5efa8d542f1ab5307d7896a249581a6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga5efa8d542f1ab5307d7896a249581a6a">cyhal_spi_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, <a class="el" href="group__group__hal__spi.html#ga49db139205e26d6150dc9a83338d8a1c">cyhal_spi_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memitem:ga5efa8d542f1ab5307d7896a249581a6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga5efa8d542f1ab5307d7896a249581a6a">cyhal_spi_register_callback</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, <a class="el" href="group__group__hal__spi.html#ga49db139205e26d6150dc9a83338d8a1c">cyhal_spi_event_callback_t</a> callback, void *callback_arg)</td></tr>
 <tr class="memdesc:ga5efa8d542f1ab5307d7896a249581a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a SPI callback handler.  <a href="#ga5efa8d542f1ab5307d7896a249581a6a">More...</a><br /></td></tr>
 <tr class="separator:ga5efa8d542f1ab5307d7896a249581a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6d53ecb445603a2470ec1fd7e456bba3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga6d53ecb445603a2470ec1fd7e456bba3">cyhal_spi_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, <a class="el" href="group__group__hal__spi.html#gae8f0cf0233d0225a80815f8282d87b85">cyhal_spi_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memitem:ga6d53ecb445603a2470ec1fd7e456bba3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__spi.html#ga6d53ecb445603a2470ec1fd7e456bba3">cyhal_spi_enable_event</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *obj, <a class="el" href="group__group__hal__spi.html#gae8f0cf0233d0225a80815f8282d87b85">cyhal_spi_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
 <tr class="memdesc:ga6d53ecb445603a2470ec1fd7e456bba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure SPI interrupt.  <a href="#ga6d53ecb445603a2470ec1fd7e456bba3">More...</a><br /></td></tr>
 <tr class="separator:ga6d53ecb445603a2470ec1fd7e456bba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -371,9 +385,9 @@ Whether the peripheral is operating as slave or master. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">(((cpol &gt; 0) ? <a class="code" href="group__group__hal__spi.html#ga028740fed4f8c4dac07d1b33d68adf94">CYHAL_SPI_MODE_FLAG_CPOL</a> : 0) | \</div><div class="line">                                             ((cpha &gt; 0) ? <a class="code" href="group__group__hal__spi.html#gaad78a88937b2e405bd296dc88d2720d8">CYHAL_SPI_MODE_FLAG_CPHA</a> : 0) | \</div><div class="line">                                             (( lsb &gt; 0) ? <a class="code" href="group__group__hal__spi.html#ga71078e4a04040e81f171c21bae4269b9">CYHAL_SPI_MODE_FLAG_LSB</a>  : 0))</div><div class="ttc" id="group__group__hal__spi_html_gaad78a88937b2e405bd296dc88d2720d8"><div class="ttname"><a href="group__group__hal__spi.html#gaad78a88937b2e405bd296dc88d2720d8">CYHAL_SPI_MODE_FLAG_CPHA</a></div><div class="ttdeci">#define CYHAL_SPI_MODE_FLAG_CPHA</div><div class="ttdoc">Flag for SPI cyhal_spi_mode_t values indicating that the CPHA=1. </div><div class="ttdef"><b>Definition:</b> cyhal_spi.h:149</div></div>
-<div class="ttc" id="group__group__hal__spi_html_ga028740fed4f8c4dac07d1b33d68adf94"><div class="ttname"><a href="group__group__hal__spi.html#ga028740fed4f8c4dac07d1b33d68adf94">CYHAL_SPI_MODE_FLAG_CPOL</a></div><div class="ttdeci">#define CYHAL_SPI_MODE_FLAG_CPOL</div><div class="ttdoc">Flag for SPI cyhal_spi_mode_t values indicating that the CPOL=1. </div><div class="ttdef"><b>Definition:</b> cyhal_spi.h:151</div></div>
-<div class="ttc" id="group__group__hal__spi_html_ga71078e4a04040e81f171c21bae4269b9"><div class="ttname"><a href="group__group__hal__spi.html#ga71078e4a04040e81f171c21bae4269b9">CYHAL_SPI_MODE_FLAG_LSB</a></div><div class="ttdeci">#define CYHAL_SPI_MODE_FLAG_LSB</div><div class="ttdoc">Flag for SPI cyhal_spi_mode_t values indicating that the LSB is sent first. </div><div class="ttdef"><b>Definition:</b> cyhal_spi.h:147</div></div>
+<b>Value:</b><div class="fragment"><div class="line">(((cpol &gt; 0) ? <a class="code" href="group__group__hal__spi.html#ga028740fed4f8c4dac07d1b33d68adf94">CYHAL_SPI_MODE_FLAG_CPOL</a> : 0) | \</div><div class="line">                                             ((cpha &gt; 0) ? <a class="code" href="group__group__hal__spi.html#gaad78a88937b2e405bd296dc88d2720d8">CYHAL_SPI_MODE_FLAG_CPHA</a> : 0) | \</div><div class="line">                                             (( lsb &gt; 0) ? <a class="code" href="group__group__hal__spi.html#ga71078e4a04040e81f171c21bae4269b9">CYHAL_SPI_MODE_FLAG_LSB</a>  : 0))</div><div class="ttc" id="group__group__hal__spi_html_gaad78a88937b2e405bd296dc88d2720d8"><div class="ttname"><a href="group__group__hal__spi.html#gaad78a88937b2e405bd296dc88d2720d8">CYHAL_SPI_MODE_FLAG_CPHA</a></div><div class="ttdeci">#define CYHAL_SPI_MODE_FLAG_CPHA</div><div class="ttdoc">Flag for SPI cyhal_spi_mode_t values indicating that the CPHA=1. </div><div class="ttdef"><b>Definition:</b> cyhal_spi.h:163</div></div>
+<div class="ttc" id="group__group__hal__spi_html_ga028740fed4f8c4dac07d1b33d68adf94"><div class="ttname"><a href="group__group__hal__spi.html#ga028740fed4f8c4dac07d1b33d68adf94">CYHAL_SPI_MODE_FLAG_CPOL</a></div><div class="ttdeci">#define CYHAL_SPI_MODE_FLAG_CPOL</div><div class="ttdoc">Flag for SPI cyhal_spi_mode_t values indicating that the CPOL=1. </div><div class="ttdef"><b>Definition:</b> cyhal_spi.h:165</div></div>
+<div class="ttc" id="group__group__hal__spi_html_ga71078e4a04040e81f171c21bae4269b9"><div class="ttname"><a href="group__group__hal__spi.html#ga71078e4a04040e81f171c21bae4269b9">CYHAL_SPI_MODE_FLAG_LSB</a></div><div class="ttdeci">#define CYHAL_SPI_MODE_FLAG_LSB</div><div class="ttdoc">Flag for SPI cyhal_spi_mode_t values indicating that the LSB is sent first. </div><div class="ttdef"><b>Definition:</b> cyhal_spi.h:161</div></div>
 </div><!-- fragment -->
 <p>Creates a <a class="el" href="group__group__hal__spi.html#gaf56d895e50b0cf0e858a1ff221c58d51">cyhal_spi_mode_t</a> value given the cpol, cpha, lsb values. </p>
 
@@ -399,6 +413,28 @@ Whether the peripheral is operating as slave or master. </td></tr>
 <tr><td class="fieldname"><a id="ggae8f0cf0233d0225a80815f8282d87b85a3f926937b0199cc8729c443d8e71f91b"></a>CYHAL_SPI_IRQ_DONE&#160;</td><td class="fielddoc"><p>Transfer complete. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ggae8f0cf0233d0225a80815f8282d87b85a808355edbb46ce1950705e55f32dc093"></a>CYHAL_SPI_IRQ_ERROR&#160;</td><td class="fielddoc"><p>An error occurred while transferring data. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="gabfadf37558e1092ac2fe3a5bd2b912d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabfadf37558e1092ac2fe3a5bd2b912d5">&#9670;&nbsp;</a></span>cyhal_spi_ssel_polarity_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__group__hal__spi.html#gabfadf37558e1092ac2fe3a5bd2b912d5">cyhal_spi_ssel_polarity_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SPI Slave Select polarity. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggabfadf37558e1092ac2fe3a5bd2b912d5a3a6c47381becf05d991f9e321ec9fea6"></a>CYHAL_SPI_SSEL_ACTIVE_LOW&#160;</td><td class="fielddoc"><p>SSEL signal is active low. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggabfadf37558e1092ac2fe3a5bd2b912d5ab9e114bf73df1ff5ae5bab536f96c242"></a>CYHAL_SPI_SSEL_ACTIVE_HIGH&#160;</td><td class="fielddoc"><p>SSEL signal is active high. </p>
 </td></tr>
 </table>
 
@@ -448,37 +484,37 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>mosi</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>miso</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>sclk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>ssel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *&#160;</td>
           <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
@@ -536,7 +572,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This pin can be NC </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Provided pin will be configured for <a class="el" href="group__group__hal__spi.html#ggabfadf37558e1092ac2fe3a5bd2b912d5a3a6c47381becf05d991f9e321ec9fea6">CYHAL_SPI_SSEL_ACTIVE_LOW</a> polarity and set as active. This can be changed (as well as additional ssel pins can be added) by <a class="el" href="group__group__hal__spi.html#gaf933d1bcc357b515bd3cc0ad4518c764">cyhal_spi_slave_select_config</a> and <a class="el" href="group__group__hal__spi.html#gab545fa07b788c83398c0265b2e9220c9">cyhal_spi_select_active_ssel</a> functions. This pin can be NC. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">clk</td><td>The clock to use can be shared, if not provided a new clock will be allocated </td></tr>
@@ -565,7 +601,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname">void cyhal_spi_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -591,7 +627,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_set_frequency </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -620,6 +656,89 @@ Whether the peripheral is operating as slave or master. </td></tr>
 
 </div>
 </div>
+<a id="gaf933d1bcc357b515bd3cc0ad4518c764"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf933d1bcc357b515bd3cc0ad4518c764">&#9670;&nbsp;</a></span>cyhal_spi_slave_select_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_slave_select_config </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramname"><em>ssel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__spi.html#gabfadf37558e1092ac2fe3a5bd2b912d5">cyhal_spi_ssel_polarity_t</a>&#160;</td>
+          <td class="paramname"><em>polarity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configures provided ssel pin to work as SPI slave select with specified polarity. </p>
+<p>Multiple pins can be configured as SPI slave select pins. Please refer to device datasheet for details. Switching between configured slave select pins is done by <a class="el" href="group__group__hal__spi.html#gab545fa07b788c83398c0265b2e9220c9">cyhal_spi_select_active_ssel</a> function. Unless modified with this function, the SSEL pin provided as part of <a class="el" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a> is the default. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The SPI object to add slave select for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ssel</td><td>Slave select pin to be added </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">polarity</td><td>Polarity of slave select </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of ssel pin configuration </dd></dl>
+
+</div>
+</div>
+<a id="gab545fa07b788c83398c0265b2e9220c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab545fa07b788c83398c0265b2e9220c9">&#9670;&nbsp;</a></span>cyhal_spi_select_active_ssel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_select_active_ssel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramname"><em>ssel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selects an active slave select line from one of available. </p>
+<p>This function is applicable for the master and slave. SSEL pin should be configured by <a class="el" href="group__group__hal__spi.html#gaf933d1bcc357b515bd3cc0ad4518c764">cyhal_spi_slave_select_config</a> or <a class="el" href="group__group__hal__spi.html#ga20c9cdb5b051ff8b68cf313fc19b550d">cyhal_spi_init</a> functions prior to selecting it as active. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The SPI object for switching </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ssel</td><td>Slave select pin to be set as active </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CY_RSLT_SUCCESS if slave select was switched successfully, otherwise - CYHAL_SPI_RSLT_ERR_CANNOT_SWITCH_SSEL </dd></dl>
+
+</div>
+</div>
 <a id="gad9e6f6399f3096426b718d58e813b0d1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad9e6f6399f3096426b718d58e813b0d1">&#9670;&nbsp;</a></span>cyhal_spi_recv()</h2>
 
@@ -629,7 +748,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_recv </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -673,7 +792,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_send </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -717,7 +836,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_transfer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -786,7 +905,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_transfer_async </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -847,7 +966,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname">bool cyhal_spi_is_busy </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -874,7 +993,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_spi_abort_async </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -901,7 +1020,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname">void cyhal_spi_register_callback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -946,7 +1065,7 @@ Whether the peripheral is operating as slave or master. </td></tr>
         <tr>
           <td class="memname">void cyhal_spi_enable_event </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__spi__t">cyhal_spi_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>

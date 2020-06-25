@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -87,7 +87,6 @@ $(document).ready(function(){initNavTree('group__group__hal__system.html','');})
 
 <div class="header">
   <div class="summary">
-<a href="#groups">API Reference</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -117,13 +116,7 @@ Snippet 1: Critical Section</h2>
 <p>Critical section is a portion in the code where all active interrupts are disabled. This is usually provided in places where the code execution must not be disturbed by an interrupt. An example is a firmware controlled communication protocol where timing of each byte must be maintained and any interrupt might cause loss of data. <br />
  <a class="el" href="group__group__hal__system.html#ga70a306e5108a38aa995c0ab7d0147e43">cyhal_system_critical_section_enter</a> returns the current state of interrupts which denote the active interrupts in the system. This must be passed as argument to <a class="el" href="group__group__hal__system.html#ga9fe83f08f46b64c956ec7ed3c335f659">cyhal_system_critical_section_exit</a> while exiting the critical section. </p><div class="fragment"><div class="line">    <span class="comment">/* Disables all interrupts */</span></div><div class="line">    uint32_t state = <a class="code" href="group__group__hal__system.html#ga70a306e5108a38aa995c0ab7d0147e43">cyhal_system_critical_section_enter</a>();</div><div class="line"></div><div class="line">    <span class="comment">/* Application code where interrupts must be disabled */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Re-enable all interrupts that were enabled before */</span></div><div class="line">    <a class="code" href="group__group__hal__system.html#ga9fe83f08f46b64c956ec7ed3c335f659">cyhal_system_critical_section_exit</a>(state);</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_system_snippet2"></a>
 Snippet 2: Reset reason</h2>
-<p><a class="el" href="group__group__hal__system.html#ga9a7b601e0b06a896860f411103a4abc6">cyhal_system_get_reset_reason</a> must be called at the beginning of the main to determine the reason for reset. The return parameters are present in <a class="el" href="group__group__hal__system.html#ga53ba6a7416574a1b03890d23b7a90264">cyhal_reset_reason_t</a>. </p><div class="fragment"><div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__group__hal__system.html#gga53ba6a7416574a1b03890d23b7a90264a28d2eb1bf90f731f930c487d8dcd8079">CYHAL_SYSTEM_RESET_WDT</a> == <a class="code" href="group__group__hal__system.html#ga9a7b601e0b06a896860f411103a4abc6">cyhal_system_get_reset_reason</a> ())</div><div class="line">    {</div><div class="line">        <span class="comment">/* WDT caused system reset */</span></div><div class="line"></div><div class="line">        <span class="comment">/* Application code to perform some action to indicate</span></div><div class="line"><span class="comment">         * that WDT caused the interrupt</span></div><div class="line"><span class="comment">         */</span></div><div class="line"></div><div class="line">        <span class="comment">/* Clear the reset reason */</span></div><div class="line">        <a class="code" href="group__group__hal__system.html#ga9a935d5e4f43343e7bbb4f9a86a10df0">cyhal_system_clear_reset_reason</a>();</div><div class="line">    }</div><div class="line">    <span class="keywordflow">else</span></div><div class="line">    {</div><div class="line">        <span class="comment">/* Reset reason is not WDT</span></div><div class="line"><span class="comment">         * Could be POR or XRES.</span></div><div class="line"><span class="comment">         * Specify application code to perform some action to indicate</span></div><div class="line"><span class="comment">         * WDT was not the reset reaon</span></div><div class="line"><span class="comment">         */</span></div><div class="line">    }</div></div><!-- fragment --><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
-API Reference</h2></td></tr>
-<tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
-<tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
+<p><a class="el" href="group__group__hal__system.html#ga9a7b601e0b06a896860f411103a4abc6">cyhal_system_get_reset_reason</a> must be called at the beginning of the main to determine the reason for reset. The return parameters are present in <a class="el" href="group__group__hal__system.html#ga53ba6a7416574a1b03890d23b7a90264">cyhal_reset_reason_t</a>. </p><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__hal__system.html#gga53ba6a7416574a1b03890d23b7a90264a28d2eb1bf90f731f930c487d8dcd8079">CYHAL_SYSTEM_RESET_WDT</a> == <a class="code" href="group__group__hal__system.html#ga9a7b601e0b06a896860f411103a4abc6">cyhal_system_get_reset_reason</a>())</div><div class="line">    {</div><div class="line">        <span class="comment">/* WDT caused system reset */</span></div><div class="line"></div><div class="line">        <span class="comment">/* Application code to perform some action to indicate</span></div><div class="line"><span class="comment">         * that WDT caused the interrupt</span></div><div class="line"><span class="comment">         */</span></div><div class="line"></div><div class="line">        <span class="comment">/* Clear the reset reason */</span></div><div class="line">        <a class="code" href="group__group__hal__system.html#ga9a935d5e4f43343e7bbb4f9a86a10df0">cyhal_system_clear_reset_reason</a>();</div><div class="line">    }</div><div class="line">    <span class="keywordflow">else</span></div><div class="line">    {</div><div class="line">        <span class="comment">/* Reset reason is not WDT</span></div><div class="line"><span class="comment">         * Could be POR or XRES.</span></div><div class="line"><span class="comment">         * Specify application code to perform some action to indicate</span></div><div class="line"><span class="comment">         * WDT was not the reset reaon</span></div><div class="line"><span class="comment">         */</span></div><div class="line">    }</div></div><!-- fragment --><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:ga53ba6a7416574a1b03890d23b7a90264"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__system.html#ga53ba6a7416574a1b03890d23b7a90264">cyhal_reset_reason_t</a> { <br />
@@ -141,7 +134,9 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="group__group__hal__system.html#gga53ba6a7416574a1b03890d23b7a90264a9f7bc88bd31996816b0c87e66b6ed3ab">CYHAL_SYSTEM_RESET_WCO_ERR</a> = 1 &lt;&lt; 5, 
 <br />
-&#160;&#160;<a class="el" href="group__group__hal__system.html#gga53ba6a7416574a1b03890d23b7a90264a47ca71b4cbbccce8cce116e61d5054c0">CYHAL_SYSTEM_RESET_SYS_CLK_ERR</a> = 1 &lt;&lt; 6
+&#160;&#160;<a class="el" href="group__group__hal__system.html#gga53ba6a7416574a1b03890d23b7a90264a47ca71b4cbbccce8cce116e61d5054c0">CYHAL_SYSTEM_RESET_SYS_CLK_ERR</a> = 1 &lt;&lt; 6, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__system.html#gga53ba6a7416574a1b03890d23b7a90264a2ed57102eaf30e7b73e04b380d8abe10">CYHAL_SYSTEM_RESET_PROTECTION</a> = 1 &lt;&lt; 7
 <br />
  }</td></tr>
 <tr class="memdesc:ga53ba6a7416574a1b03890d23b7a90264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags enum of possible system reset causes.  <a href="group__group__hal__system.html#ga53ba6a7416574a1b03890d23b7a90264">More...</a><br /></td></tr>
@@ -199,6 +194,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr><td class="fieldname"><a id="gga53ba6a7416574a1b03890d23b7a90264a9f7bc88bd31996816b0c87e66b6ed3ab"></a>CYHAL_SYSTEM_RESET_WCO_ERR&#160;</td><td class="fielddoc"><p>A reset has occurred due to a watch-crystal clock error. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga53ba6a7416574a1b03890d23b7a90264a47ca71b4cbbccce8cce116e61d5054c0"></a>CYHAL_SYSTEM_RESET_SYS_CLK_ERR&#160;</td><td class="fielddoc"><p>A reset has occurred due to a system clock error. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga53ba6a7416574a1b03890d23b7a90264a2ed57102eaf30e7b73e04b380d8abe10"></a>CYHAL_SYSTEM_RESET_PROTECTION&#160;</td><td class="fielddoc"><p>A reset has occurred due to a protection violation. </p>
 </td></tr>
 </table>
 
@@ -273,7 +270,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 </div><div class="memdoc">
 
 <p>Requests that the current operation delays for at least the specified length of time. </p>
-<p>If this is running in an RTOS aware environment (-DCY_RTOS_AWARE) it will attempt to have the RTOS suspend the current task so others can continue to run. If this is not run under an RTOS it will then defer to the standard system delay which is likely to be a busy loop. If this is part of an application that is build with RTOS awareness, but the delay should not depend on the RTOS for whatever reason, use <a class="el" href="group__group__hal__system.html#ga25235eff5e6695bfdcc9943e7095a83b" title="Requests that the current operation delay for at least the specified number of micro-seconds. ">cyhal_system_delay_us()</a> with the appropriate 1000x multiplier to the delay time.</p>
+<p>If this is running in an RTOS aware environment (COMPONENTS+=RTOS_AWARE) or (DEFINES+=CY_RTOS_AWARE) it will attempt to have the RTOS suspend the current task so others can continue to run. If this is not run under an RTOS it will then defer to the standard system delay which is likely to be a busy loop. If this is part of an application that is build with RTOS awareness, but the delay should not depend on the RTOS for whatever reason, use <a class="el" href="group__group__hal__system.html#ga25235eff5e6695bfdcc9943e7095a83b" title="Requests that the current operation delay for at least the specified number of micro-seconds. ">cyhal_system_delay_us()</a> with the appropriate 1000x multiplier to the delay time.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">milliseconds</td><td>The number of milliseconds to delay for </td></tr>

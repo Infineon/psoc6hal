@@ -102,6 +102,35 @@ typedef enum {
     CYHAL_ASYNC_SW,
 } cyhal_async_mode_t;
 
+/** @brief Selectable power levels.
+  *
+  * Power levels are defined relative to others. Higher power levels
+  * offer better performance but consume more power.
+  *
+  * Not all hardware supports four discrete power levels. If fewer
+  * power levels are supported, the values will be mapped as follows:
+  * | 4 Levels       | 3 Levels       | 2 Levels                      |
+  * | ---------------| -------------- | ----------------------------- |
+  * | Off            | Off            | Off                           |
+  * | Low            | Low = Medium   | Low = Medium = High = Default |
+  * | Medium         | High = Default |                               |
+  * | High = Default |                |                               |
+  * See the implementation specific documentation for details.
+  */
+typedef enum
+{
+    /** Power-off the comparator, while retaining configuration */
+    CYHAL_POWER_LEVEL_OFF,
+    /** Low comparator power and speed */
+    CYHAL_POWER_LEVEL_LOW,
+    /** Medium comparator power and speed */
+    CYHAL_POWER_LEVEL_MEDIUM,
+    /** High comparator power and speed */
+    CYHAL_POWER_LEVEL_HIGH,
+    /** Default comparator power and speed */
+    CYHAL_POWER_LEVEL_DEFAULT
+} cyhal_power_level_t;
+
 /**
  * \addtogroup group_hal_syspm System Power Management
  * \ingroup group_hal
@@ -182,7 +211,7 @@ typedef struct cyhal_syspm_callback_data
 } cyhal_syspm_callback_data_t;
 
 /**
- * \} group_hal_syspm_apis
+ * \} group_hal_syspm
  */
 
 /**

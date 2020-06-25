@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -114,9 +114,9 @@ Quick Start</h1>
 Code Snippets</h1>
 <h2><a class="anchor" id="subsection_sdhc_snippet_1"></a>
 Snippet 1: SDHC Initialization and configuration</h2>
-<p>The following snippet is used to initialize the SDHC block. SDHC object - <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a>, SDHC card configuration structure (const <a class="el" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> * config). The pins connected to the SDHC block needs to be provided to the <a class="el" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a> function. </p><div class="fragment"><div class="line"></div><div class="line">    <span class="comment">/* Pins connected to the SDHC block */</span></div><div class="line"><span class="preprocessor">    #define CMD     P12_4</span></div><div class="line"><span class="preprocessor">    #define CLK     P12_5</span></div><div class="line"><span class="preprocessor">    #define DAT0    P13_0</span></div><div class="line"><span class="preprocessor">    #define DAT1    P13_1</span></div><div class="line"><span class="preprocessor">    #define DAT2    P13_2</span></div><div class="line"><span class="preprocessor">    #define DAT3    P13_3</span></div><div class="line"></div><div class="line">    <span class="comment">/* dat4 to dat7 are reserved for future use and should be NC */</span></div><div class="line"><span class="preprocessor">    #define DAT4    NC</span></div><div class="line"><span class="preprocessor">    #define DAT5    NC</span></div><div class="line"><span class="preprocessor">    #define DAT6    NC</span></div><div class="line"><span class="preprocessor">    #define DAT7    NC</span></div><div class="line"><span class="preprocessor">    #define CARD_DETECT     P12_1</span></div><div class="line"><span class="preprocessor">    #define EMMC_RESET      NC</span></div><div class="line"><span class="preprocessor">    #define IO_VOLT_SEL     NC</span></div><div class="line"><span class="preprocessor">    #define CARD_IF_PWREN   NC</span></div><div class="line"><span class="preprocessor">    #define CARD_MECH_WRITEPROT     NC</span></div><div class="line"><span class="preprocessor">    #define LED_CTL NC</span></div><div class="line"></div><div class="line"><span class="preprocessor">    #define ENABLE_LED_CONTROL      false</span></div><div class="line"><span class="preprocessor">    #define LOW_VOLTAGE_SIGNALLING  false</span></div><div class="line"><span class="preprocessor">    #define IS_EMMC                 false</span></div><div class="line"><span class="preprocessor">    #define BUS_WIDTH               4</span></div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line"></div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> sdhc_obj;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> sdhc_config = {ENABLE_LED_CONTROL,</div><div class="line">                                            LOW_VOLTAGE_SIGNALLING,</div><div class="line">                                            IS_EMMC, BUS_WIDTH};</div><div class="line"></div><div class="line">    rslt = <a class="code" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a>(&amp;sdhc_obj, &amp;sdhc_config, CMD, CLK,</div><div class="line">                        DAT0, DAT1, DAT2, DAT3, DAT4, DAT5, DAT6, DAT7,</div><div class="line">                        CARD_DETECT, IO_VOLT_SEL, CARD_IF_PWREN,</div><div class="line">                        CARD_MECH_WRITEPROT, LED_CTL, EMMC_RESET);</div><div class="line"></div></div><!-- fragment --> <h2><a class="anchor" id="subsection_sdhc_snippet_2"></a>
+<p>The following snippet is used to initialize the SDHC block. SDHC object - <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a>, SDHC card configuration structure (const <a class="el" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> * config). The pins connected to the SDHC block needs to be provided to the <a class="el" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a> function. </p><div class="fragment"><div class="line"></div><div class="line">    <span class="comment">/* Pins connected to the SDHC block */</span></div><div class="line"><span class="preprocessor">    #define CMD     P12_4</span></div><div class="line"><span class="preprocessor">    #define CLK     P12_5</span></div><div class="line"><span class="preprocessor">    #define DAT0    P13_0</span></div><div class="line"><span class="preprocessor">    #define DAT1    P13_1</span></div><div class="line"><span class="preprocessor">    #define DAT2    P13_2</span></div><div class="line"><span class="preprocessor">    #define DAT3    P13_3</span></div><div class="line"></div><div class="line">    <span class="comment">/* dat4 to dat7 are reserved for future use and should be NC */</span></div><div class="line"><span class="preprocessor">    #define DAT4    NC</span></div><div class="line"><span class="preprocessor">    #define DAT5    NC</span></div><div class="line"><span class="preprocessor">    #define DAT6    NC</span></div><div class="line"><span class="preprocessor">    #define DAT7    NC</span></div><div class="line"><span class="preprocessor">    #define CARD_DETECT     P12_1</span></div><div class="line"><span class="preprocessor">    #define EMMC_RESET      NC</span></div><div class="line"><span class="preprocessor">    #define IO_VOLT_SEL     NC</span></div><div class="line"><span class="preprocessor">    #define CARD_IF_PWREN   NC</span></div><div class="line"><span class="preprocessor">    #define CARD_MECH_WRITEPROT     NC</span></div><div class="line"><span class="preprocessor">    #define LED_CTL NC</span></div><div class="line"></div><div class="line"><span class="preprocessor">    #define ENABLE_LED_CONTROL      false</span></div><div class="line"><span class="preprocessor">    #define LOW_VOLTAGE_SIGNALLING  false</span></div><div class="line"><span class="preprocessor">    #define IS_EMMC                 false</span></div><div class="line"><span class="preprocessor">    #define BUS_WIDTH               4</span></div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line"></div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> sdhc_obj;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> sdhc_config = {ENABLE_LED_CONTROL,</div><div class="line">                                            LOW_VOLTAGE_SIGNALLING,</div><div class="line">                                            IS_EMMC, BUS_WIDTH};</div><div class="line"></div><div class="line">    rslt = <a class="code" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a>(&amp;sdhc_obj, &amp;sdhc_config, CMD, CLK,</div><div class="line">                        DAT0, DAT1, DAT2, DAT3, DAT4, DAT5, DAT6, DAT7,</div><div class="line">                        CARD_DETECT, IO_VOLT_SEL, CARD_IF_PWREN,</div><div class="line">                        CARD_MECH_WRITEPROT, LED_CTL, EMMC_RESET);</div><div class="line"></div></div><!-- fragment --> <h2><a class="anchor" id="subsection_sdhc_snippet_2"></a>
 Snippet 2: SDHC Initialization and configuration with custom card detect pin</h2>
-<p>The following snippet is used to initialize the SDHC block with a custom card detect pin. Cy_SD_Host_IsCardConnected() function needs to be over-ridden depending on the card detect pin selected. </p><div class="fragment"><div class="line"></div><div class="line"><span class="preprocessor">#define CUSTOM_CARD_DETECT  P13_5</span></div><div class="line"></div><div class="line">__USED <span class="keywordtype">bool</span> Cy_SD_Host_IsCardConnected(SDHC_Type <span class="keyword">const</span> *base __attribute__((unused)))</div><div class="line">{</div><div class="line">    <span class="comment">/* Card detect pin reads 0 (false) when card detected, 1 (true) when card not detected */</span></div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="group__group__hal__gpio.html#ga3d38f1dd86c2e74b8ad10f1f6d1945c2">cyhal_gpio_read</a>(CUSTOM_CARD_DETECT) ? false : <span class="keyword">true</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_sdhc_init_custom_card_detect()</div><div class="line">{</div><div class="line">    <span class="comment">/* Pins connected to the SDHC block */</span></div><div class="line"><span class="preprocessor">    #define CMD     P12_4</span></div><div class="line"><span class="preprocessor">    #define CLK     P12_5</span></div><div class="line"><span class="preprocessor">    #define DAT0    P13_0</span></div><div class="line"><span class="preprocessor">    #define DAT1    P13_1</span></div><div class="line"><span class="preprocessor">    #define DAT2    P13_2</span></div><div class="line"><span class="preprocessor">    #define DAT3    P13_3</span></div><div class="line"></div><div class="line">    <span class="comment">/* dat4 to dat7 are reserved for future use and should be NC */</span></div><div class="line"><span class="preprocessor">    #define DAT4    NC</span></div><div class="line"><span class="preprocessor">    #define DAT5    NC</span></div><div class="line"><span class="preprocessor">    #define DAT6    NC</span></div><div class="line"><span class="preprocessor">    #define DAT7    NC</span></div><div class="line"><span class="preprocessor">    #define CARD_DETECT     P12_1</span></div><div class="line"><span class="preprocessor">    #define EMMC_RESET      NC</span></div><div class="line"><span class="preprocessor">    #define IO_VOLT_SEL     NC</span></div><div class="line"><span class="preprocessor">    #define CARD_IF_PWREN   NC</span></div><div class="line"><span class="preprocessor">    #define CARD_MECH_WRITEPROT     NC</span></div><div class="line"><span class="preprocessor">    #define LED_CTL NC</span></div><div class="line"></div><div class="line"><span class="preprocessor">    #define ENABLE_LED_CONTROL      false</span></div><div class="line"><span class="preprocessor">    #define LOW_VOLTAGE_SIGNALLING  false</span></div><div class="line"><span class="preprocessor">    #define IS_EMMC                 false</span></div><div class="line"><span class="preprocessor">    #define BUS_WIDTH               4</span></div><div class="line"></div><div class="line"><span class="preprocessor">    #define INITIAL_VALUE   true</span></div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> sdhc_obj;</div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> sdhc_config = {ENABLE_LED_CONTROL,</div><div class="line">                                            LOW_VOLTAGE_SIGNALLING,</div><div class="line">                                            IS_EMMC, BUS_WIDTH};</div><div class="line"></div><div class="line">    rslt = <a class="code" href="group__group__hal__gpio.html#gab93322030909d3af6a9fc1a3b2eccbaa">cyhal_gpio_init</a>(CUSTOM_CARD_DETECT, <a class="code" href="group__group__hal__gpio.html#gga54f023b4b455556095b64f4f5d7e3446a0b8ce046272e1971aea1248bd86f2698">CYHAL_GPIO_DIR_INPUT</a>, <a class="code" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a181685dd155f58d036420b61778a7394">CYHAL_GPIO_DRIVE_NONE</a>, INITIAL_VALUE);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    rslt = <a class="code" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a>(&amp;sdhc_obj, &amp;sdhc_config, CMD, CLK,</div><div class="line">                        DAT0, DAT1, DAT2, DAT3, DAT4, DAT5, DAT6, DAT7,</div><div class="line">                        CARD_DETECT, IO_VOLT_SEL, CARD_IF_PWREN,</div><div class="line">                        CARD_MECH_WRITEPROT, LED_CTL, EMMC_RESET);</div><div class="line">}</div><div class="line"></div></div><!-- fragment --> <h2><a class="anchor" id="subsection_sdhc_snippet_3"></a>
+<p>The following snippet is used to initialize the SDHC block with a custom card detect pin. Cy_SD_Host_IsCardConnected() function needs to be over-ridden depending on the card detect pin selected. </p><div class="fragment"><div class="line"></div><div class="line"><span class="preprocessor">#define CUSTOM_CARD_DETECT  P13_5</span></div><div class="line"></div><div class="line">__USED <span class="keywordtype">bool</span> Cy_SD_Host_IsCardConnected(SDHC_Type <span class="keyword">const</span> *base __attribute__((unused)))</div><div class="line">{</div><div class="line">    <span class="comment">/* Card detect pin reads 0 (false) when card detected, 1 (true) when card not detected */</span></div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="group__group__hal__gpio.html#ga3d38f1dd86c2e74b8ad10f1f6d1945c2">cyhal_gpio_read</a>(CUSTOM_CARD_DETECT) ? false : <span class="keyword">true</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_sdhc_init_custom_card_detect()</div><div class="line">{</div><div class="line">    <span class="comment">/* Pins connected to the SDHC block */</span></div><div class="line"><span class="preprocessor">    #define CMD     P12_4</span></div><div class="line"><span class="preprocessor">    #define CLK     P12_5</span></div><div class="line"><span class="preprocessor">    #define DAT0    P13_0</span></div><div class="line"><span class="preprocessor">    #define DAT1    P13_1</span></div><div class="line"><span class="preprocessor">    #define DAT2    P13_2</span></div><div class="line"><span class="preprocessor">    #define DAT3    P13_3</span></div><div class="line"></div><div class="line">    <span class="comment">/* dat4 to dat7 are reserved for future use and should be NC */</span></div><div class="line"><span class="preprocessor">    #define DAT4    NC</span></div><div class="line"><span class="preprocessor">    #define DAT5    NC</span></div><div class="line"><span class="preprocessor">    #define DAT6    NC</span></div><div class="line"><span class="preprocessor">    #define DAT7    NC</span></div><div class="line"><span class="preprocessor">    #define CARD_DETECT     P12_1</span></div><div class="line"><span class="preprocessor">    #define EMMC_RESET      NC</span></div><div class="line"><span class="preprocessor">    #define IO_VOLT_SEL     NC</span></div><div class="line"><span class="preprocessor">    #define CARD_IF_PWREN   NC</span></div><div class="line"><span class="preprocessor">    #define CARD_MECH_WRITEPROT     NC</span></div><div class="line"><span class="preprocessor">    #define LED_CTL NC</span></div><div class="line"></div><div class="line"><span class="preprocessor">    #define ENABLE_LED_CONTROL      false</span></div><div class="line"><span class="preprocessor">    #define LOW_VOLTAGE_SIGNALLING  false</span></div><div class="line"><span class="preprocessor">    #define IS_EMMC                 false</span></div><div class="line"><span class="preprocessor">    #define BUS_WIDTH               4</span></div><div class="line"></div><div class="line"><span class="preprocessor">    #define INITIAL_VALUE   true</span></div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> sdhc_obj;</div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> sdhc_config = {ENABLE_LED_CONTROL,</div><div class="line">                                            LOW_VOLTAGE_SIGNALLING,</div><div class="line">                                            IS_EMMC, BUS_WIDTH};</div><div class="line"></div><div class="line">    rslt = <a class="code" href="group__group__hal__gpio.html#gab93322030909d3af6a9fc1a3b2eccbaa">cyhal_gpio_init</a>(CUSTOM_CARD_DETECT, <a class="code" href="group__group__hal__gpio.html#gga54f023b4b455556095b64f4f5d7e3446a0b8ce046272e1971aea1248bd86f2698">CYHAL_GPIO_DIR_INPUT</a>, <a class="code" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a181685dd155f58d036420b61778a7394">CYHAL_GPIO_DRIVE_NONE</a>, INITIAL_VALUE);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    rslt = <a class="code" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a>(&amp;sdhc_obj, &amp;sdhc_config, CMD, CLK,</div><div class="line">                        DAT0, DAT1, DAT2, DAT3, DAT4, DAT5, DAT6, DAT7,</div><div class="line">                        CARD_DETECT, IO_VOLT_SEL, CARD_IF_PWREN,</div><div class="line">                        CARD_MECH_WRITEPROT, LED_CTL, EMMC_RESET);</div><div class="line">}</div><div class="line"></div></div><!-- fragment --> <h2><a class="anchor" id="subsection_sdhc_snippet_3"></a>
 Snippet 3: Reading a block of data from an SD Card</h2>
 <p>The following snippet reads a block of data from the SD Card. </p><div class="fragment"><div class="line"><span class="preprocessor">    #define DEFAULT_BLOCKSIZE 512</span></div><div class="line"></div><div class="line">    <span class="comment">/* Data buffer to store the data read from the SD Card */</span></div><div class="line">    uint8_t read_buff[DEFAULT_BLOCKSIZE] = {0};</div><div class="line"></div><div class="line">    <span class="comment">/* Starting block address from which the data needs to be read */</span></div><div class="line">    uint32_t block_address = 0;</div><div class="line"></div><div class="line">    <span class="comment">/* Number of blocks that needs to be read */</span></div><div class="line">    <span class="keywordtype">size_t</span> block_count = 1;</div><div class="line"></div><div class="line">    rslt = <a class="code" href="group__group__hal__sdhc.html#ga4714e8b2507eefd5e6df9105f2944a1e">cyhal_sdhc_read</a>(&amp;sdhc_obj, block_address, read_buff, &amp;block_count);</div><div class="line"></div></div><!-- fragment --> <h2><a class="anchor" id="subsection_sdhc_snippet_4"></a>
 Snippet 4: Writing a block of data to an SD Card</h2>
@@ -203,37 +203,37 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gae748a1d5e7c6f91eeb78801979c5abe6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, const <a class="el" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> *config, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cmd, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> clk, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data0, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data1, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data2, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data3, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data4, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data5, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data6, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data7, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cardDetect, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> ioVoltSel, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cardIfPwrEn, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cardMechWriteProt, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> ledCtrl, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cardEmmcReset)</td></tr>
+<tr class="memitem:gae748a1d5e7c6f91eeb78801979c5abe6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gae748a1d5e7c6f91eeb78801979c5abe6">cyhal_sdhc_init</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, const <a class="el" href="group__group__hal__sdhc.html#structcyhal__sdhc__config__t">cyhal_sdhc_config_t</a> *config, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cmd, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> clk, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data0, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data1, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data2, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data3, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data4, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data5, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data6, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> data7, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cardDetect, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> ioVoltSel, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cardIfPwrEn, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cardMechWriteProt, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> ledCtrl, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> cardEmmcReset)</td></tr>
 <tr class="memdesc:gae748a1d5e7c6f91eeb78801979c5abe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the SDHC peripheral.  <a href="#gae748a1d5e7c6f91eeb78801979c5abe6">More...</a><br /></td></tr>
 <tr class="separator:gae748a1d5e7c6f91eeb78801979c5abe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3fb2c77d8662f53a21996298cb4581b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga3fb2c77d8662f53a21996298cb4581b1">cyhal_sdhc_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj)</td></tr>
+<tr class="memitem:ga3fb2c77d8662f53a21996298cb4581b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga3fb2c77d8662f53a21996298cb4581b1">cyhal_sdhc_free</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj)</td></tr>
 <tr class="memdesc:ga3fb2c77d8662f53a21996298cb4581b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release the SDHC peripheral, not currently invoked.  <a href="#ga3fb2c77d8662f53a21996298cb4581b1">More...</a><br /></td></tr>
 <tr class="separator:ga3fb2c77d8662f53a21996298cb4581b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4714e8b2507eefd5e6df9105f2944a1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga4714e8b2507eefd5e6df9105f2944a1e">cyhal_sdhc_read</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t address, uint8_t *data, size_t *length)</td></tr>
+<tr class="memitem:ga4714e8b2507eefd5e6df9105f2944a1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga4714e8b2507eefd5e6df9105f2944a1e">cyhal_sdhc_read</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t address, uint8_t *data, size_t *length)</td></tr>
 <tr class="memdesc:ga4714e8b2507eefd5e6df9105f2944a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to read data synchronously over the SDHC peripheral.  <a href="#ga4714e8b2507eefd5e6df9105f2944a1e">More...</a><br /></td></tr>
 <tr class="separator:ga4714e8b2507eefd5e6df9105f2944a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5a7d14246fee3ef70ec2d9ce4abf066a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga5a7d14246fee3ef70ec2d9ce4abf066a">cyhal_sdhc_write</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t address, const uint8_t *data, size_t *length)</td></tr>
+<tr class="memitem:ga5a7d14246fee3ef70ec2d9ce4abf066a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga5a7d14246fee3ef70ec2d9ce4abf066a">cyhal_sdhc_write</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t address, const uint8_t *data, size_t *length)</td></tr>
 <tr class="memdesc:ga5a7d14246fee3ef70ec2d9ce4abf066a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write data synchronously over SDHC peripheral.  <a href="#ga5a7d14246fee3ef70ec2d9ce4abf066a">More...</a><br /></td></tr>
 <tr class="separator:ga5a7d14246fee3ef70ec2d9ce4abf066a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac3b257d6386f9699d70ca378bb02c7cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gac3b257d6386f9699d70ca378bb02c7cb">cyhal_sdhc_erase</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t start_addr, size_t length)</td></tr>
+<tr class="memitem:gac3b257d6386f9699d70ca378bb02c7cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gac3b257d6386f9699d70ca378bb02c7cb">cyhal_sdhc_erase</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t start_addr, size_t length)</td></tr>
 <tr class="memdesc:gac3b257d6386f9699d70ca378bb02c7cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases a block of data over the SDHC peripheral.  <a href="#gac3b257d6386f9699d70ca378bb02c7cb">More...</a><br /></td></tr>
 <tr class="separator:gac3b257d6386f9699d70ca378bb02c7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad020348569b21c43181c0c46e68ce05c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gad020348569b21c43181c0c46e68ce05c">cyhal_sdhc_read_async</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t address, uint8_t *data, size_t *length)</td></tr>
+<tr class="memitem:gad020348569b21c43181c0c46e68ce05c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gad020348569b21c43181c0c46e68ce05c">cyhal_sdhc_read_async</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t address, uint8_t *data, size_t *length)</td></tr>
 <tr class="memdesc:gad020348569b21c43181c0c46e68ce05c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start SDHC asynchronous read.  <a href="#gad020348569b21c43181c0c46e68ce05c">More...</a><br /></td></tr>
 <tr class="separator:gad020348569b21c43181c0c46e68ce05c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac46d4b112279c8a2eabe61769faab39d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gac46d4b112279c8a2eabe61769faab39d">cyhal_sdhc_write_async</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t address, const uint8_t *data, size_t *length)</td></tr>
+<tr class="memitem:gac46d4b112279c8a2eabe61769faab39d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gac46d4b112279c8a2eabe61769faab39d">cyhal_sdhc_write_async</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, uint32_t address, const uint8_t *data, size_t *length)</td></tr>
 <tr class="memdesc:gac46d4b112279c8a2eabe61769faab39d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start asynchronous SDHC write.  <a href="#gac46d4b112279c8a2eabe61769faab39d">More...</a><br /></td></tr>
 <tr class="separator:gac46d4b112279c8a2eabe61769faab39d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad28a8b2178173ce3ee981453ed3ce12c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gad28a8b2178173ce3ee981453ed3ce12c">cyhal_sdhc_is_busy</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj)</td></tr>
+<tr class="memitem:gad28a8b2178173ce3ee981453ed3ce12c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#gad28a8b2178173ce3ee981453ed3ce12c">cyhal_sdhc_is_busy</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj)</td></tr>
 <tr class="memdesc:gad28a8b2178173ce3ee981453ed3ce12c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the specified SDHC peripheral is in use.  <a href="#gad28a8b2178173ce3ee981453ed3ce12c">More...</a><br /></td></tr>
 <tr class="separator:gad28a8b2178173ce3ee981453ed3ce12c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1b3044289cec6662efea36bd4054bf7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga1b3044289cec6662efea36bd4054bf7b">cyhal_sdhc_abort_async</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj)</td></tr>
+<tr class="memitem:ga1b3044289cec6662efea36bd4054bf7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga1b3044289cec6662efea36bd4054bf7b">cyhal_sdhc_abort_async</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj)</td></tr>
 <tr class="memdesc:ga1b3044289cec6662efea36bd4054bf7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort an SDHC transfer.  <a href="#ga1b3044289cec6662efea36bd4054bf7b">More...</a><br /></td></tr>
 <tr class="separator:ga1b3044289cec6662efea36bd4054bf7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1fe53d842050280b8827e9a41545f461"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga1fe53d842050280b8827e9a41545f461">cyhal_sdhc_register_callback</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, <a class="el" href="group__group__hal__sdhc.html#gaded71f4751306e4983c1e8315c569fa1">cyhal_sdhc_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memitem:ga1fe53d842050280b8827e9a41545f461"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga1fe53d842050280b8827e9a41545f461">cyhal_sdhc_register_callback</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, <a class="el" href="group__group__hal__sdhc.html#gaded71f4751306e4983c1e8315c569fa1">cyhal_sdhc_event_callback_t</a> callback, void *callback_arg)</td></tr>
 <tr class="memdesc:ga1fe53d842050280b8827e9a41545f461"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an SDHC callback handler.  <a href="#ga1fe53d842050280b8827e9a41545f461">More...</a><br /></td></tr>
 <tr class="separator:ga1fe53d842050280b8827e9a41545f461"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3a0865321bd9284606655f9fb9402339"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga3a0865321bd9284606655f9fb9402339">cyhal_sdhc_enable_event</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, <a class="el" href="group__group__hal__sdhc.html#gab58a2ffca59383a72cf8bc49d74cf17b">cyhal_sdhc_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memitem:ga3a0865321bd9284606655f9fb9402339"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__sdhc.html#ga3a0865321bd9284606655f9fb9402339">cyhal_sdhc_enable_event</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *obj, <a class="el" href="group__group__hal__sdhc.html#gab58a2ffca59383a72cf8bc49d74cf17b">cyhal_sdhc_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
 <tr class="memdesc:ga3a0865321bd9284606655f9fb9402339"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure SDHC event enablement.  <a href="#ga3a0865321bd9284606655f9fb9402339">More...</a><br /></td></tr>
 <tr class="separator:ga3a0865321bd9284606655f9fb9402339"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -398,7 +398,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_sdhc_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -410,97 +410,97 @@ The desired bus width. </td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cmd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data0</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data3</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data4</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data5</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data6</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>data7</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cardDetect</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>ioVoltSel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cardIfPwrEn</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cardMechWriteProt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>ledCtrl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>cardEmmcReset</em>&#160;</td>
         </tr>
         <tr>
@@ -548,7 +548,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname">void cyhal_sdhc_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -575,7 +575,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_sdhc_read </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -629,7 +629,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_sdhc_write </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -683,7 +683,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_sdhc_erase </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -728,7 +728,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_sdhc_read_async </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -781,7 +781,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_sdhc_write_async </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -833,7 +833,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname">bool cyhal_sdhc_is_busy </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -860,7 +860,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_sdhc_abort_async </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -887,7 +887,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname">void cyhal_sdhc_register_callback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -932,7 +932,7 @@ The desired bus width. </td></tr>
         <tr>
           <td class="memname">void cyhal_sdhc_enable_event </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__sdhc__t">cyhal_sdhc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>

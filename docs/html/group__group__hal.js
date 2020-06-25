@@ -1,10 +1,11 @@
 var group__group__hal =
 [
+    [ "DMA (Direct Memory Access)", "group__group__hal__dma.html", "group__group__hal__dma" ],
     [ "ADC (Analog to Digital Converter)", "group__group__hal__adc.html", "group__group__hal__adc" ],
     [ "Clock", "group__group__hal__clock.html", "group__group__hal__clock" ],
+    [ "COMP (Analog Comparator)", "group__group__hal__comp.html", "group__group__hal__comp" ],
     [ "CRC (Cyclic Redundancy Check)", "group__group__hal__crc.html", "group__group__hal__crc" ],
     [ "DAC (Digital to Analog Converter)", "group__group__hal__dac.html", "group__group__hal__dac" ],
-    [ "DMA (Direct Memory Access)", "group__group__hal__dma.html", "group__group__hal__dma" ],
     [ "EZI2C (Inter-Integrated Circuit)", "group__group__hal__ezi2c.html", "group__group__hal__ezi2c" ],
     [ "Flash (Flash System Routine)", "group__group__hal__flash.html", "group__group__hal__flash" ],
     [ "System Power Management", "group__group__hal__syspm.html", "group__group__hal__syspm" ],
@@ -14,6 +15,7 @@ var group__group__hal =
     [ "I2S (Inter-IC Sound)", "group__group__hal__i2s.html", "group__group__hal__i2s" ],
     [ "INTERCONNECT (Internal digital routing)", "group__group__hal__interconnect.html", "group__group__hal__interconnect" ],
     [ "LPTimer (Low-Power Timer)", "group__group__hal__lptimer.html", "group__group__hal__lptimer" ],
+    [ "Opamp (Operational Amplifier)", "group__group__hal__opamp.html", "group__group__hal__opamp" ],
     [ "PDM/PCM (Pulse-Density Modulation to Pulse-Code Modulation Converter)", "group__group__hal__pdmpcm.html", "group__group__hal__pdmpcm" ],
     [ "PWM (Pulse Width Modulator)", "group__group__hal__pwm.html", "group__group__hal__pwm" ],
     [ "QSPI (Quad Serial Peripheral Interface)", "group__group__hal__qspi.html", "group__group__hal__qspi" ],

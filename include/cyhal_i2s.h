@@ -233,6 +233,13 @@ cy_rslt_t cyhal_i2s_start_tx(cyhal_i2s_t *obj);
   */
 cy_rslt_t cyhal_i2s_stop_tx(cyhal_i2s_t *obj);
 
+/** Clears the tx hardware buffer
+ *
+ * @param[in] obj The i2s peripheral
+ * @return The status of the clear request
+ */
+cy_rslt_t cyhal_i2s_clear_tx(cyhal_i2s_t *obj);
+
 /** Starts receiving data.
   *
   * @param[in] obj The I2S object
@@ -246,6 +253,13 @@ cy_rslt_t cyhal_i2s_start_rx(cyhal_i2s_t *obj);
   * @return The status of the stop request.
   */
 cy_rslt_t cyhal_i2s_stop_rx(cyhal_i2s_t *obj);
+
+/** Clears the rx hardware buffer
+ *
+ * @param[in] obj The i2s peripheral
+ * @return The status of the clear request
+ */
+cy_rslt_t cyhal_i2s_clear_rx(cyhal_i2s_t *obj);
 
 /** Read data synchronously
  *
@@ -282,6 +296,17 @@ cy_rslt_t cyhal_i2s_read(cyhal_i2s_t *obj, void *data, size_t* length);
  */
 cy_rslt_t cyhal_i2s_write(cyhal_i2s_t *obj, const void *data, size_t *length);
 
+/** Checks if the transmit functionality is enabled for the specified I2S peripheral (regardless of whether data
+  * is currently queued for transmission). 
+  * 
+  * The transmit functionality can be enabled by calling @ref cyhal_i2s_start_tx and disabled by calling 
+  * @ref cyhal_i2s_stop_tx
+  *
+  * @param[in] obj  The I2S peripheral to check
+  * @return Whether the I2S transmit function is enabled.
+  */
+bool cyhal_i2s_is_tx_enabled(cyhal_i2s_t *obj);
+
 /** Checks if the specified I2S peripheral is transmitting data, including if a pending async transfer is waiting
   * to write more data to the transmit buffer.
   *
@@ -289,6 +314,17 @@ cy_rslt_t cyhal_i2s_write(cyhal_i2s_t *obj, const void *data, size_t *length);
   * @return Whether the I2S is still transmitting
   */
 bool cyhal_i2s_is_tx_busy(cyhal_i2s_t *obj);
+
+/** Checks if the receive functionality is enabled for the specified I2S peripheral (regardless of whether any
+  * unread data has been received).
+  *
+  * The receive functionality can be enabled by calling @ref cyhal_i2s_start_rx and disabled by calling 
+  * @ref cyhal_i2s_stop_rx
+  * 
+  * @param[in] obj  The I2S peripheral to check
+  * @return Whether the I2S receive function is enabled.
+  */
+bool cyhal_i2s_is_rx_enabled(cyhal_i2s_t *obj);
 
 /** Checks if the specified I2S peripheral has received data that has not yet been read out of the hardware buffer.
   * This includes if an async read transfer is pending.

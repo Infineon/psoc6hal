@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['wdt_20_28watchdog_20timer_29',['WDT (Watchdog Timer)',['../group__group__hal__psoc6__wdt.html',1,'']]],
-  ['wdt_20_28watchdog_20timer_29',['WDT (Watchdog Timer)',['../group__group__hal__wdt.html',1,'']]],
-  ['width',['width',['../group__group__hal__crc.html#a43f6798e59b2c14c20cf662a9c8952e6',1,'crc_algorithm_t']]],
-  ['word_5flength',['word_length',['../group__group__hal__i2s.html#af516514096f1a20028012346b78648ce',1,'cyhal_i2s_config_t::word_length()'],['../group__group__hal__pdmpcm.html#a5847815ce526fa0d67e4a5a9d9de21dd',1,'cyhal_pdm_pcm_cfg_t::word_length()']]],
-  ['ws',['ws',['../group__group__hal__i2s.html#ac1888b4fa0b934f7c48598ced0fc5ba5',1,'cyhal_i2s_pins_t']]]
+  ['value',['value',['../group__group__hal__clock.html#a616d2f8495efbc9076a57ae15a76ec24',1,'cyhal_clock_tolerance_t::value()'],['../group__group__hal__timer.html#a53f34c0bd94d7d4b3661b9bc758d2536',1,'cyhal_timer_cfg_t::value()']]],
+  ['vneg',['vneg',['../group__group__hal__adc.html#a6f3458f47ce11c850cca0685dbfdb3d7',1,'cyhal_adc_config_t']]],
+  ['vref',['vref',['../group__group__hal__adc.html#a7ffa068ca4f21088761a9c4a57129055',1,'cyhal_adc_config_t']]]
 ];

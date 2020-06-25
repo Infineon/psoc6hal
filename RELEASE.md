@@ -1,10 +1,11 @@
-# Cypress PSoC 6 Hardware Abstraction Layer (HAL) Release Notes
-Cypress PSoC 6 Hardware Abstraction Layer (HAL) provides an implementation of the Cypress Hardware Abstraction Layer for the PSoC 6 family of chips. This API provides convenience methods for initializing and manipulating different hardware peripherals. Depending on the specific chip being used, not all features may be supported.
+# PSoC 6 Hardware Abstraction Layer (HAL) Release Notes
+The PSoC 6 Hardware Abstraction Layer (HAL) provides an implementation of the Hardware Abstraction Layer for the PSoC 6 family of chips. This API provides convenience methods for initializing and manipulating different hardware peripherals. Depending on the specific chip being used, not all features may be supported.
 
 ### What's Included?
 This release of the PSoC 6 HAL includes support for the following drivers:
 * ADC
 * Clock
+* Comparator
 * CRC
 * DAC
 * DMA
@@ -15,6 +16,7 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * I2C
 * I2S
 * LowPower Timer (LPTimer)
+* OpAmp
 * PDM/PCM
 * Power Management (SysPM)
 * PWM
@@ -31,9 +33,19 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * WDT
 
 ### What Changed?
+#### v1.3.0
+* Added new Analog Comparator driver
+* Added new OpAmp driver
+* Extended ADC driver
+* Extended DAC driver
+* Extended SPI/QSPI drivers to support multiple slave select signals
+* Fixed SDHC based SDIO cyhal_sdio_is_busy() function to return status immediately instead of waiting until the transfer completes
+* Fixed a few bugs in various drivers
+* Minor update for documentation & branding
 #### v1.2.1
-* Fixed an issue with deep-sleep wake-up in the SDIO and SDHC drivers that could cause intermittent communication failures.
-* Minor bug fixes and documentation improvements.
+* Added new option for SysPM driver to support tickless sleep in addition to deepsleep
+* Fixed an issue with deep-sleep wake-up in the SDIO and SDHC drivers that could cause intermittent communication failures
+* Minor bug fixes and documentation improvements
 #### v1.2.0
 * Added new Clock driver
 * Added new SysPM Power Management driver
@@ -42,6 +54,7 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * Reduced flash memory usage for a number of drivers
 * Improved documentation for a number of drivers
 * Fixed a few bugs in various drivers
+NOTE: The new SysPM driver needs to be initialized by calling cyhal_syspm_init(). This is done automatically by Board Support Packages version 1.2.0 and later.
 #### v1.1.1
 * Improved documentation for a number of drivers
 * Fixed duplicate symbol definition with PDL 1.4.1 release
@@ -61,7 +74,7 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * Initial release (ADC, CRC, DAC, Flash, GPIO, Hardware Manager, I2C, LP Timer, PWM, QSPI, RTC, SDHC, SDIO, SPI, System, Timer, TRNG, UART, USB Device, WDT)
 
 ### Supported Software and Tools
-This version of the Cypress PSoC 6 Hardware Abstraction Layer was validated for compatibility with the following Software and Tools:
+This version of the PSoC 6 Hardware Abstraction Layer was validated for compatibility with the following Software and Tools:
 
 | Software and Tools                        | Version |
 | :---                                      | :----:  |
@@ -73,7 +86,7 @@ This version of the Cypress PSoC 6 Hardware Abstraction Layer was validated for 
 ### More information
 Use the following links for more information, as needed:
 * [API Reference Guide](https://cypresssemiconductorco.github.io/psoc6hal/html/modules.html)
-* [Cypress Semiconductor](http://www.cypress.com)
+* [Cypress Semiconductor, an Infineon Technologies Company](http://www.cypress.com)
 * [Cypress Semiconductor GitHub](https://github.com/cypresssemiconductorco)
 * [ModusToolbox](https://www.cypress.com/products/modustoolbox-software-environment)
 

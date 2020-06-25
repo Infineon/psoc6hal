@@ -116,7 +116,7 @@ extern "C" {
  *
  * @param[out] obj  Pointer to a PWM object. The caller must allocate the memory
  *  for this object but the init function will initialize its contents.
- * @param[in]  pin  The PWM pin to initialize
+ * @param[in]  pin  The PWM pin to initialize. This pin is required, it cannot be \ref NC (No Connect).
  * @param[in]  clk  An optional, pre-allocated clock to use, if NULL a new clock will be allocated
  * @return The status of the init request.
  */
@@ -146,10 +146,10 @@ typedef void(*cyhal_pwm_event_callback_t)(void *callback_arg, cyhal_pwm_event_t 
  *
  * @param[out] obj              Pointer to a PWM object. The caller must allocate the memory
  *                               for this object but the init function will initialize its contents.
- * @param[in]  pin              The PWM pin to initialize.
+ * @param[in]  pin              The PWM pin to initialize. This pin is required, it cannot be \ref NC (No Connect).
  * @param[in]  compl_pin        An optional, additional inverted output pin. <br>
  * If supplied, this must be connected to the same PWM instance as <b>pin</b>, for
- * PSoC 6 see \ref section_psoc6_pwm_compl_pins.<br>
+ * PSoC 6 see \ref section_hal_impl_pwm_compl_pins.<br>
  * If this output is not needed, use \ref NC (No Connect).
  * @param[in]  pwm_alignment    PWM alignment: left, right, or center.
  * @param[in]  continuous       PWM run type: continuous (true) or one shot (false).

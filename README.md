@@ -1,8 +1,8 @@
-# Cypress Hardware Abstraction Layer
+# Hardware Abstraction Layer
 
 ## Overview
 
-The Cypress Hardware Abstraction Layer (HAL) provides a high-level interface to configure and use hardware blocks on Cypress MCUs. It is a generic interface that can be used across multiple product families. The focus on ease-of-use and portability means the HAL does not expose all of the low-level peripheral functionality. The HAL can be combined with platform-specific libraries (such as the PSoC 6 Peripheral Driver Library (PDL)) within a single application. You can leverage the HAL's simpler and more generic interface for most of an application, even if one portion requires finer-grained control.
+The Hardware Abstraction Layer (HAL) provides a high-level interface to configure and use hardware blocks on PSoC MCUs. It is a generic interface that can be used across multiple product families. The focus on ease-of-use and portability means the HAL does not expose all of the low-level peripheral functionality. The HAL can be combined with platform-specific libraries (such as the PSoC 6 Peripheral Driver Library (PDL)) within a single application. You can leverage the HAL's simpler and more generic interface for most of an application, even if one portion requires finer-grained control.
 
 To use code from the HAL, the specific driver header file can be included or the top level `cyhal.h` header can be include to allow access to any driver.
 
@@ -36,6 +36,8 @@ Additionally, all peripherals provide a function (`cyhal_<peripheral>_set_power_
 ## Compile Time Dependencies
 The HAL public interface is consistent across all platforms that the HAL supports. However, the HAL interface does depend on types that are defined by platform-specific HAL implementations (for example, the driver-specific "handle" types). Additionally, a HAL implementation may be compile-time dependent on device-specific data structures (for example, mapping pins to peripheral instances). This means that in order to compile an application that depends on the HAL, it must build against a platform-specific implementation of the HAL, specifying a particular device. The resulting application will be source (but not binary) compatible with a HAL implementation for any other platform.
 
+Some HAL driver's may have slightly different behavior when run in an RTOS environment. This is typically found in operations that need to wait for a significant period of time. In an RTOS aware environment, the function will attempt to wait using the RTOS. This allows other threads in the application to run while the current operation is waiting. In non-RTOS aware environments (eg: bare metal environments) the functions will instead rely on busy waits for operations to complete. To inform the HAL that an RTOS environment is being used the `RTOS_AWARE` component (COMPONENTS+=RTOS_AWARE) or the `CY_RTOS_AWARE` define (DEFINES+=CY_RTOS_AWARE) must be set. When set, the HAL will use  the [RTOS Abstraction](https://github.com/cypresssemiconductorco/abstraction-rtos) APIs to wait.
+
 ## Event Handling
 Many HAL drivers provide an API for registering a callback which is invoked when certain (driver-specific) events occur. These drivers also often provide an API for enabling or disabling specific types of events. Unless otherwise documented, the callback will only be invoked for events that occur while that event type is enabled. Specifically, events that occur while a given event type is disabled are not queued and will not trigger a callback when that event type is (re)enabled.
 
@@ -48,7 +50,7 @@ For more details on interacting with `cy_rslt_t` see [Result Type](docs/html/gro
 
 ## More information
 * [API Reference Guide](https://cypresssemiconductorco.github.io/psoc6hal/html/modules.html)
-* [Cypress Semiconductor](http://www.cypress.com)
+* [Cypress Semiconductor, an Infineon Technologies Company](http://www.cypress.com)
 * [Cypress Semiconductor GitHub](https://github.com/cypresssemiconductorco)
 * [ModusToolbox](https://www.cypress.com/products/modustoolbox-software-environment)
 

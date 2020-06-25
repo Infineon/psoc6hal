@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -88,7 +88,10 @@ $(document).ready(function(){initNavTree('group__group__hal__adc.html','');});
 <div class="header">
   <div class="summary">
 <a href="#groups">API Reference</a> &#124;
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ADC (Analog to Digital Converter)<div class="ingroups"><a class="el" href="group__group__hal.html">HAL Drivers</a></div></div>  </div>
@@ -96,52 +99,404 @@ $(document).ready(function(){initNavTree('group__group__hal__adc.html','');});
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
 <p>High level interface for interacting with the analog to digital converter (ADC). </p>
+<h1><a class="anchor" id="cyhal_adc_features"></a>
+Features</h1>
 <p>Each ADC instance supports one or more selectable channels, each of which can perform conversions on a different pin. See the device datasheet for details about which pins support ADC conversion.</p>
-<p>All channels are single-ended. The values returned by the read API are relative to the ADC's voltage range, which is device specific.</p>
+<p>Both single-ended and differential channels are supported. The values returned by the read API are relative to the ADC's voltage range, which is device specific. See the BSP documentation for details.</p>
 <h1><a class="anchor" id="cyhal_adc_quickstart"></a>
 Quickstart</h1>
 <p>Call <a class="el" href="group__group__hal__adc.html#ga7618b26a0677cb3f8cd477e3731da510">cyhal_adc_init</a> to initialize an ADC instance by providing the ADC object (<b>obj</b>), input pin (<b>pin</b>) and clock (<b>clk</b>).<br />
  The input pin argument is just to signify which ADC instance to initialize. It does not actually reserve the pin or create an ADC channel for it. The clock parameter can be left NULL to use an available clock resource with a default frequency.<br />
- Use <a class="el" href="group__group__hal__adc.html#ga873287b496e482c02f7d2c4ce94433e8">cyhal_adc_channel_init</a> to initialize one or more channels associated with that instance.<br />
- Use <a class="el" href="group__group__hal__adc.html#ga2baef8269f13b3c7da46cdabcef650a0">cyhal_adc_read_u16</a> for reading the results.<br />
+ Use <a class="el" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a> to initialize one or more channels associated with that instance.<br />
+ Use <a class="el" href="group__group__hal__adc.html#ga7207c3d089c48255e382cfe159a04ed0">cyhal_adc_read</a> for reading the results.<br />
  See <a class="el" href="group__group__hal__adc.html#subsection_adc_snippet_1">Snippet 1: Simple ADC initialization and</a>.</p>
 <dl class="section note"><dt>Note</dt><dd><a class="el" href="group__group__hal__adc.html#ga2baef8269f13b3c7da46cdabcef650a0">cyhal_adc_read_u16</a> always returns a 16 bit value in the range 0x0000-0xFFFF. If the underlying hardware does not support 16 bit resolution the value is scaled linearly to cover the full 16 bits.</dd></dl>
 <h1><a class="anchor" id="subsection_adc_snippets"></a>
 Code snippets</h1>
+<dl class="section note"><dt>Note</dt><dd>Error checking is omitted for clarity </dd></dl>
 <h2><a class="anchor" id="subsection_adc_snippet_1"></a>
 Snippet 1: Simple ADC initialization and</h2>
-<p>reading conversion result The following snippet initializes an ADC and one channel. One ADC conversion result is returned corresponding to the input at the specified pin. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> adc_obj;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> adc_chan_0_obj;</div><div class="line">    <span class="comment">/* 16 bit ADC conversion result */</span></div><div class="line">    uint16_t adc_out;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize ADC. The ADC block which can connect to pin 10[0] is selected */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__adc.html#ga7618b26a0677cb3f8cd477e3731da510">cyhal_adc_init</a>(&amp;adc_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Check the return of cyhal_adc_init to confirm whether initialization was successful */</span></div><div class="line">    <span class="keywordflow">if</span> (rslt == <a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>)</div><div class="line">    {</div><div class="line">        <span class="comment">/* Initialize ADC channel, allocate channel number 0 to pin 10[0] as this is the first channel initialized */</span></div><div class="line">        rslt = <a class="code" href="group__group__hal__adc.html#ga873287b496e482c02f7d2c4ce94433e8">cyhal_adc_channel_init</a>(&amp;adc_chan_0_obj, &amp;adc_obj, <a class="code" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>);</div><div class="line"></div><div class="line">        <span class="comment">/* Check the return of cyhal_adc_channel_init to confirm whether channel initialization was successful */</span></div><div class="line">        <span class="keywordflow">if</span> (rslt == <a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>)</div><div class="line">        {</div><div class="line">            <span class="comment">/* Read the 16 bit ADC conversion result for corresponding ADC channel */</span></div><div class="line">            adc_out = <a class="code" href="group__group__hal__adc.html#ga2baef8269f13b3c7da46cdabcef650a0">cyhal_adc_read_u16</a>(&amp;adc_chan_0_obj);</div><div class="line">        }</div><div class="line"></div><div class="line">        <span class="comment">/* Release ADC channel object after use */</span></div><div class="line">        <a class="code" href="group__group__hal__adc.html#ga55d144073f10cf6b6a1edcf6b9f59c78">cyhal_adc_channel_free</a>(&amp;adc_chan_0_obj);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/* Release ADC object after use */</span></div><div class="line">    <a class="code" href="group__group__hal__adc.html#gadae8361e3e3e3d0ff96767e1e8e1d913">cyhal_adc_free</a>(&amp;adc_obj);</div></div><!-- fragment --><table class="memberdecls">
+<p>reading conversion result The following snippet initializes an ADC and one channel. One ADC conversion result is returned corresponding to the input at the specified pin. </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> adc_obj;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> adc_chan_0_obj;</div><div class="line">    <span class="comment">/* ADC conversion result. */</span></div><div class="line">    int32_t adc_out;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize ADC. The ADC block which can connect to pin 10[0] is selected */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__adc.html#ga7618b26a0677cb3f8cd477e3731da510">cyhal_adc_init</a>(&amp;adc_obj, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize ADC channel, allocate channel number 0 to pin 10[0] as this is the first channel initialized */</span></div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__adc.html#structcyhal__adc__channel__config__t">cyhal_adc_channel_config_t</a> channel_config = { .<a class="code" href="group__group__hal__adc.html#ac2dae19e04515fbcb59cd43ce2e55a72">enable_averaging</a> = <span class="keyword">false</span>, .min_acquisition_ns = 220, .enabled = <span class="keyword">true</span> };</div><div class="line">    rslt = <a class="code" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a>(&amp;adc_chan_0_obj, &amp;adc_obj, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>, <a class="code" href="group__group__hal__adc.html#ga00175bb8e85fface6d74488febb0cf27">CYHAL_ADC_VNEG</a>, &amp;channel_config);</div><div class="line"></div><div class="line">    <span class="comment">/* Read the ADC conversion result for corresponding ADC channel. Repeat as necessary. */</span></div><div class="line">    adc_out = <a class="code" href="group__group__hal__adc.html#ga7207c3d089c48255e382cfe159a04ed0">cyhal_adc_read</a>(&amp;adc_chan_0_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Release ADC and channel objects when no longer needed */</span></div><div class="line">    <a class="code" href="group__group__hal__adc.html#ga55d144073f10cf6b6a1edcf6b9f59c78">cyhal_adc_channel_free</a>(&amp;adc_chan_0_obj);</div><div class="line">    <a class="code" href="group__group__hal__adc.html#gadae8361e3e3e3d0ff96767e1e8e1d913">cyhal_adc_free</a>(&amp;adc_obj);</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_adc_snippet_2"></a>
+Snippet 2: Multi-channel ADC initialization and reading conversion result</h2>
+<p>The following snippet initializes an ADC with one single-ended channel and one differential channel </p><div class="fragment"><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> adc_obj;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> adc_chan_0_obj;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> adc_chan_1_obj;</div><div class="line">    <span class="comment">/* 32-bit ADC conversion result */</span></div><div class="line">    int32_t adc_out_0;</div><div class="line">    int32_t adc_out_1;</div><div class="line"></div><div class="line">    <span class="comment">/* Use the same configuration for both channels */</span></div><div class="line">    <span class="keyword">const</span> <a class="code" href="group__group__hal__adc.html#structcyhal__adc__channel__config__t">cyhal_adc_channel_config_t</a> channel_config = { .<a class="code" href="group__group__hal__adc.html#ac2dae19e04515fbcb59cd43ce2e55a72">enable_averaging</a> = <span class="keyword">false</span>, .min_acquisition_ns = 220, .enabled = <span class="keyword">true</span> };</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize ADC. The ADC block which can connect to pin 10[0] is selected */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__adc.html#ga7618b26a0677cb3f8cd477e3731da510">cyhal_adc_init</a>(&amp;adc_obj, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize a channel to scan P10_0 with the default vminus */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a>(&amp;adc_chan_0_obj, &amp;adc_obj, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a3d6f6bf971075551e669f9044ddb30e3">P10_0</a>, <a class="code" href="group__group__hal__adc.html#ga00175bb8e85fface6d74488febb0cf27">CYHAL_ADC_VNEG</a>, &amp;channel_config);</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize a differential channel for the pair of P10_2 and P10_3 */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a>(&amp;adc_chan_1_obj, &amp;adc_obj, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51aec9f8c6c169e3ffce4866e4a1677d873">P10_2</a>, <a class="code" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#gga707195ce0627016bf371643bdd9caa51a687b4a01d80cb5284be1bc42362f79d6">P10_3</a>, &amp;channel_config);</div><div class="line"></div><div class="line">    <span class="comment">/* Read the ADC conversion results for both channels. Repeat as necessary. */</span></div><div class="line">    adc_out_0 = <a class="code" href="group__group__hal__adc.html#ga7207c3d089c48255e382cfe159a04ed0">cyhal_adc_read</a>(&amp;adc_chan_0_obj);</div><div class="line">    adc_out_1 = <a class="code" href="group__group__hal__adc.html#ga7207c3d089c48255e382cfe159a04ed0">cyhal_adc_read</a>(&amp;adc_chan_1_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Release ADC and channel objects when no longer needed */</span></div><div class="line">    <a class="code" href="group__group__hal__adc.html#ga55d144073f10cf6b6a1edcf6b9f59c78">cyhal_adc_channel_free</a>(&amp;adc_chan_0_obj);</div><div class="line">    <a class="code" href="group__group__hal__adc.html#ga55d144073f10cf6b6a1edcf6b9f59c78">cyhal_adc_channel_free</a>(&amp;adc_chan_1_obj);</div><div class="line">    <a class="code" href="group__group__hal__adc.html#gadae8361e3e3e3d0ff96767e1e8e1d913">cyhal_adc_free</a>(&amp;adc_obj);</div><div class="line"></div></div><!-- fragment --> <h2><a class="anchor" id="subsection_adc_snippet_3"></a>
+Snippet 3: Asynchronously read multiple channels</h2>
+<p>The following snippet illustrates how to asynchronously read multiple scans of multiple channels. </p><div class="fragment"><div class="line"></div><div class="line"><span class="preprocessor">#define NUM_CHANNELS (2)</span></div><div class="line"><span class="preprocessor">#define NUM_SCAN     (3)</span></div><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> adc_event_handler(<span class="keywordtype">void</span>* arg, <a class="code" href="group__group__hal__adc.html#ga3e21dc2fe98693d72260411459e1fc6c">cyhal_adc_event_t</a> event)</div><div class="line">{</div><div class="line">    <span class="comment">/* Note: arg is configured below to be a pointer to the destination array */</span></div><div class="line">    <span class="keywordflow">if</span>(0u != (event &amp; <a class="code" href="group__group__hal__adc.html#gga3e21dc2fe98693d72260411459e1fc6ca4a42dd67489a8b89bb8b1fefdac6c86c">CYHAL_ADC_ASYNC_READ_COMPLETE</a>))</div><div class="line">    {</div><div class="line">        int32_t* result_arr = (int32_t*)arg;</div><div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> scan = 0; scan &lt; NUM_SCAN; ++scan)</div><div class="line">        {</div><div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> channel = 0; channel &lt; NUM_CHANNELS; ++channel)</div><div class="line">            {</div><div class="line">                <span class="comment">/* Perform application-specific processing of the ADC result */</span></div><div class="line">                process_adc_result(channel, result_arr[(scan * NUM_CHANNELS) + channel]);</div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_adc_read_async(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> adc_obj;</div><div class="line">    <span class="comment">/* Initialize the ADC and its channels as shown in Snippet 2 */</span></div><div class="line"></div><div class="line">    int32_t result_arr[NUM_CHANNELS * NUM_SCAN];</div><div class="line">    <span class="comment">/* Register a callback and set the callback argument to be a pointer to the result array</span></div><div class="line"><span class="comment">     * so that we can easily reference it in the event handler. */</span></div><div class="line">     <a class="code" href="group__group__hal__adc.html#ga5ab88800c80f06d91d046a3b6d3144f2">cyhal_adc_register_callback</a>(&amp;adc_obj, &amp;adc_event_handler, result_arr);</div><div class="line"></div><div class="line">    <span class="comment">/* Subscribe to the async read complete event so that we we can process the results when they are available */</span></div><div class="line">    <a class="code" href="group__group__hal__adc.html#ga09f4a4783a982751b0f3effc48db1c6b">cyhal_adc_enable_event</a>(&amp;adc_obj, <a class="code" href="group__group__hal__adc.html#gga3e21dc2fe98693d72260411459e1fc6ca4a42dd67489a8b89bb8b1fefdac6c86c">CYHAL_ADC_ASYNC_READ_COMPLETE</a>, <a class="code" href="group__group__hal__impl__hw__types.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Initiate an asynchronous read operation. The event handler will be called when it is complete. */</span></div><div class="line">    <a class="code" href="group__group__hal__adc.html#ga7386fc156403ea08380c4410665b4ae2">cyhal_adc_read_async</a>(&amp;adc_obj, NUM_SCAN, result_arr);</div><div class="line">}</div></div><!-- fragment --> <h2><a class="anchor" id="subsection_adc_snippet_4"></a>
+Snippet 4: Continuous scanning</h2>
+<p>This snippet shows how to run the ADC in continuous mode and process results as each scan completes. </p><div class="fragment"><div class="line"></div><div class="line"><span class="keyword">static</span> <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> adc_channels[NUM_CHANNELS];</div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> adc_continuous_event_handler(<span class="keywordtype">void</span>* arg, <a class="code" href="group__group__hal__adc.html#ga3e21dc2fe98693d72260411459e1fc6c">cyhal_adc_event_t</a> event)</div><div class="line">{</div><div class="line">    CY_UNUSED_PARAMETER(arg);</div><div class="line">    CY_UNUSED_PARAMETER(event);</div><div class="line">    <span class="comment">/* Note: arg is configured below to be a pointer to the adc object */</span></div><div class="line">    <span class="keywordflow">if</span>(0u != (event &amp; <a class="code" href="group__group__hal__adc.html#gga3e21dc2fe98693d72260411459e1fc6ca72cdd442365c9b501eb0144ef31beb83">CYHAL_ADC_EOS</a>))</div><div class="line">    {</div><div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; NUM_CHANNELS; ++i)</div><div class="line">        {</div><div class="line">            <span class="comment">/* Perform application-specific processing of the ADC result */</span></div><div class="line">            process_adc_result(i, <a class="code" href="group__group__hal__adc.html#ga7207c3d089c48255e382cfe159a04ed0">cyhal_adc_read</a>(&amp;adc_channels[i]));</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_cyhal_adc_continuous_read(<span class="keywordtype">void</span>)</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> adc_obj;</div><div class="line">    <span class="comment">/* Initialize the each member of the adc_channels array as shown in Snippet 2 */</span></div><div class="line">    <a class="code" href="group__group__hal__adc.html#structcyhal__adc__config__t">cyhal_adc_config_t</a> config = { <span class="comment">/* Other configuration options are omitted here for clarity */</span> .<a class="code" href="group__group__hal__adc.html#a942daebdd7db9f8f38ea3f2d33503b68">continuous_scanning</a> = <span class="keyword">true</span> };</div><div class="line"></div><div class="line">    <span class="comment">/* Register a callback and set the callback argument to be a pointer to the adc object</span></div><div class="line"><span class="comment">     * so that we can easily reference it in the event handler. */</span></div><div class="line">     <a class="code" href="group__group__hal__adc.html#ga5ab88800c80f06d91d046a3b6d3144f2">cyhal_adc_register_callback</a>(&amp;adc_obj, &amp;adc_continuous_event_handler, &amp;adc_obj);</div><div class="line"></div><div class="line">    <span class="comment">/* Subscribe to the end of scan event so that we we can process the results as each scan completes*/</span></div><div class="line">    <a class="code" href="group__group__hal__adc.html#ga09f4a4783a982751b0f3effc48db1c6b">cyhal_adc_enable_event</a>(&amp;adc_obj, <a class="code" href="group__group__hal__adc.html#gga3e21dc2fe98693d72260411459e1fc6ca72cdd442365c9b501eb0144ef31beb83">CYHAL_ADC_EOS</a>, <a class="code" href="group__group__hal__impl__hw__types.html#gad822a466fc63847114add720ef84c83a">CYHAL_ISR_PRIORITY_DEFAULT</a>, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Call the ADC configure function to begin continuous scanning */</span></div><div class="line">    <a class="code" href="group__group__hal__adc.html#gae1abce4e4cfe015eb4cd4dd055ca3065">cyhal_adc_configure</a>(&amp;adc_obj, &amp;config);</div><div class="line">}</div></div><!-- fragment --><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 API Reference</h2></td></tr>
 <tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
 <tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:structcyhal__adc__config__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#structcyhal__adc__config__t">cyhal_adc_config_t</a></td></tr>
+<tr class="memdesc:structcyhal__adc__config__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Configuration.  <a href="group__group__hal__adc.html#structcyhal__adc__config__t">More...</a><br /></td></tr>
+<tr class="separator:structcyhal__adc__config__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:structcyhal__adc__channel__config__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#structcyhal__adc__channel__config__t">cyhal_adc_channel_config_t</a></td></tr>
+<tr class="memdesc:structcyhal__adc__channel__config__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Channel Configuration.  <a href="group__group__hal__adc.html#structcyhal__adc__channel__config__t">More...</a><br /></td></tr>
+<tr class="separator:structcyhal__adc__channel__config__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:gaf5637d9e3c7fdc08158643043888cdc6"><td class="memItemLeft" align="right" valign="top"><a id="gaf5637d9e3c7fdc08158643043888cdc6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gaf5637d9e3c7fdc08158643043888cdc6">CYHAL_ADC_BITS</a>&#160;&#160;&#160;16</td></tr>
+<tr class="memdesc:gaf5637d9e3c7fdc08158643043888cdc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bits populated with meaningful data by each ADC sample. <br /></td></tr>
+<tr class="separator:gaf5637d9e3c7fdc08158643043888cdc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga51d4fd58442f9c1e0804e3cf0b20c46e"><td class="memItemLeft" align="right" valign="top"><a id="ga51d4fd58442f9c1e0804e3cf0b20c46e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga51d4fd58442f9c1e0804e3cf0b20c46e">CYHAL_ADC_MAX_VALUE</a>&#160;&#160;&#160;0xFFFF</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga51d4fd58442f9c1e0804e3cf0b20c46e">CYHAL_ADC_MAX_VALUE</a>&#160;&#160;&#160;((1 &lt;&lt; <a class="el" href="group__group__hal__adc.html#gaf5637d9e3c7fdc08158643043888cdc6">CYHAL_ADC_BITS</a>) - 1)</td></tr>
 <tr class="memdesc:ga51d4fd58442f9c1e0804e3cf0b20c46e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value that the ADC can return. <br /></td></tr>
 <tr class="separator:ga51d4fd58442f9c1e0804e3cf0b20c46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga989ece649f9a1d7df78b73a0b75abf24"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga989ece649f9a1d7df78b73a0b75abf24">CYHAL_ADC_AVG_MODE_AVERAGE</a>&#160;&#160;&#160;(1u &lt;&lt; 0)</td></tr>
+<tr class="memdesc:ga989ece649f9a1d7df78b73a0b75abf24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform standard averaging.  <a href="#ga989ece649f9a1d7df78b73a0b75abf24">More...</a><br /></td></tr>
+<tr class="separator:ga989ece649f9a1d7df78b73a0b75abf24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaffbef3cc844fa6ff749e8230c6ef6d54"><td class="memItemLeft" align="right" valign="top"><a id="gaffbef3cc844fa6ff749e8230c6ef6d54"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gaffbef3cc844fa6ff749e8230c6ef6d54">CYHAL_ADC_AVG_MODE_ACCUMULATE</a>&#160;&#160;&#160;(1u &lt;&lt; 1)</td></tr>
+<tr class="memdesc:gaffbef3cc844fa6ff749e8230c6ef6d54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accumulate samples as in <a class="el" href="group__group__hal__adc.html#ga989ece649f9a1d7df78b73a0b75abf24">CYHAL_ADC_AVG_MODE_AVERAGE</a>, but do not divide by the number of samples. <br /></td></tr>
+<tr class="separator:gaffbef3cc844fa6ff749e8230c6ef6d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf5c909ab5cc7409a896abceda7da5773"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gaf5c909ab5cc7409a896abceda7da5773">CYHAL_ADC_AVG_MODE_MAX_SHIFT</a>&#160;&#160;&#160;(1u)</td></tr>
+<tr class="memdesc:gaf5c909ab5cc7409a896abceda7da5773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Average mode flag position indices shifted by greater than this are implementation specific.  <a href="#gaf5c909ab5cc7409a896abceda7da5773">More...</a><br /></td></tr>
+<tr class="separator:gaf5c909ab5cc7409a896abceda7da5773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga00175bb8e85fface6d74488febb0cf27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga00175bb8e85fface6d74488febb0cf27">CYHAL_ADC_VNEG</a>&#160;&#160;&#160;<a class="el" href="group__group__hal__gpio.html#ga25a61e0d5a27c77dca1c7709fba9c400">CYHAL_NC_PIN_VALUE</a></td></tr>
+<tr class="memdesc:ga00175bb8e85fface6d74488febb0cf27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the default connection for the inverting input to achieve a single-ended channel.  <a href="#ga00175bb8e85fface6d74488febb0cf27">More...</a><br /></td></tr>
+<tr class="separator:ga00175bb8e85fface6d74488febb0cf27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gae4fceb1fa1f96b3212106fda6b113836"><td class="memItemLeft" align="right" valign="top"><a id="gae4fceb1fa1f96b3212106fda6b113836"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gae4fceb1fa1f96b3212106fda6b113836">cyhal_adc_event_callback_t</a>) (void *callback_arg, <a class="el" href="group__group__hal__adc.html#ga3e21dc2fe98693d72260411459e1fc6c">cyhal_adc_event_t</a> event)</td></tr>
+<tr class="memdesc:gae4fceb1fa1f96b3212106fda6b113836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler for ADC event callbacks. <br /></td></tr>
+<tr class="separator:gae4fceb1fa1f96b3212106fda6b113836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gad77d58d52432f1f68f869b047b1a9bbe"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gad77d58d52432f1f68f869b047b1a9bbe">cyhal_adc_vref_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__adc.html#ggad77d58d52432f1f68f869b047b1a9bbeac3e8e93e60d21bfe83545ac9e4f8ca15">CYHAL_ADC_REF_INTERNAL</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__adc.html#ggad77d58d52432f1f68f869b047b1a9bbea78d9a5640a2866dad2f5e87d356a6c74">CYHAL_ADC_REF_EXTERNAL</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__adc.html#ggad77d58d52432f1f68f869b047b1a9bbea56163f5889cb958d81515c6e751e480e">CYHAL_ADC_REF_VDDA</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__adc.html#ggad77d58d52432f1f68f869b047b1a9bbea113f7ecc2ff424688320cfb62ce1c79e">CYHAL_ADC_REF_VDDA_DIV_2</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gad77d58d52432f1f68f869b047b1a9bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Possible selections for ADC reference.  <a href="group__group__hal__adc.html#gad77d58d52432f1f68f869b047b1a9bbe">More...</a><br /></td></tr>
+<tr class="separator:gad77d58d52432f1f68f869b047b1a9bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac9e066ac01bed2c374c3d0e164988d97"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gac9e066ac01bed2c374c3d0e164988d97">cyhal_adc_vneg_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__adc.html#ggac9e066ac01bed2c374c3d0e164988d97a10b9c188fccf67e20b0fce8d6fef6bc0">CYHAL_ADC_VNEG_VSSA</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__adc.html#ggac9e066ac01bed2c374c3d0e164988d97a2c7f27a19dbe55e6ddd9997b07439ce1">CYHAL_ADC_VNEG_VREF</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gac9e066ac01bed2c374c3d0e164988d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vminus selection for single-ended channels.  <a href="group__group__hal__adc.html#gac9e066ac01bed2c374c3d0e164988d97">More...</a><br /></td></tr>
+<tr class="separator:gac9e066ac01bed2c374c3d0e164988d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3e21dc2fe98693d72260411459e1fc6c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga3e21dc2fe98693d72260411459e1fc6c">cyhal_adc_event_t</a> { <br />
+&#160;&#160;<a class="el" href="group__group__hal__adc.html#gga3e21dc2fe98693d72260411459e1fc6ca72cdd442365c9b501eb0144ef31beb83">CYHAL_ADC_EOS</a> = 1u, 
+<br />
+&#160;&#160;<a class="el" href="group__group__hal__adc.html#gga3e21dc2fe98693d72260411459e1fc6ca4a42dd67489a8b89bb8b1fefdac6c86c">CYHAL_ADC_ASYNC_READ_COMPLETE</a> = 2u
+<br />
+ }</td></tr>
+<tr class="memdesc:ga3e21dc2fe98693d72260411459e1fc6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC events.  <a href="group__group__hal__adc.html#ga3e21dc2fe98693d72260411459e1fc6c">More...</a><br /></td></tr>
+<tr class="separator:ga3e21dc2fe98693d72260411459e1fc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga7618b26a0677cb3f8cd477e3731da510"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga7618b26a0677cb3f8cd477e3731da510">cyhal_adc_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> pin, const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk)</td></tr>
+<tr class="memitem:ga7618b26a0677cb3f8cd477e3731da510"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga7618b26a0677cb3f8cd477e3731da510">cyhal_adc_init</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> pin, const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *clk)</td></tr>
 <tr class="memdesc:ga7618b26a0677cb3f8cd477e3731da510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize ADC peripheral.  <a href="#ga7618b26a0677cb3f8cd477e3731da510">More...</a><br /></td></tr>
 <tr class="separator:ga7618b26a0677cb3f8cd477e3731da510"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadae8361e3e3e3d0ff96767e1e8e1d913"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gadae8361e3e3e3d0ff96767e1e8e1d913">cyhal_adc_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj)</td></tr>
-<tr class="memdesc:gadae8361e3e3e3d0ff96767e1e8e1d913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uninitialize the ADC peripheral and <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t" title="ADC object. ">cyhal_adc_t</a> object.  <a href="#gadae8361e3e3e3d0ff96767e1e8e1d913">More...</a><br /></td></tr>
+<tr class="memitem:gadae8361e3e3e3d0ff96767e1e8e1d913"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gadae8361e3e3e3d0ff96767e1e8e1d913">cyhal_adc_free</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj)</td></tr>
+<tr class="memdesc:gadae8361e3e3e3d0ff96767e1e8e1d913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uninitialize the ADC peripheral and <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t" title="ADC object. ">cyhal_adc_t</a> object.  <a href="#gadae8361e3e3e3d0ff96767e1e8e1d913">More...</a><br /></td></tr>
 <tr class="separator:gadae8361e3e3e3d0ff96767e1e8e1d913"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga873287b496e482c02f7d2c4ce94433e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga873287b496e482c02f7d2c4ce94433e8">cyhal_adc_channel_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj, <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *adc, <a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> pin)</td></tr>
-<tr class="memdesc:ga873287b496e482c02f7d2c4ce94433e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a single-ended ADC channel.  <a href="#ga873287b496e482c02f7d2c4ce94433e8">More...</a><br /></td></tr>
-<tr class="separator:ga873287b496e482c02f7d2c4ce94433e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga55d144073f10cf6b6a1edcf6b9f59c78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga55d144073f10cf6b6a1edcf6b9f59c78">cyhal_adc_channel_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj)</td></tr>
-<tr class="memdesc:ga55d144073f10cf6b6a1edcf6b9f59c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uninitialize the ADC channel and <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t" title="ADC channel object. ">cyhal_adc_channel_t</a> object.  <a href="#ga55d144073f10cf6b6a1edcf6b9f59c78">More...</a><br /></td></tr>
+<tr class="memitem:gae1abce4e4cfe015eb4cd4dd055ca3065"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gae1abce4e4cfe015eb4cd4dd055ca3065">cyhal_adc_configure</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, const <a class="el" href="group__group__hal__adc.html#structcyhal__adc__config__t">cyhal_adc_config_t</a> *config)</td></tr>
+<tr class="memdesc:gae1abce4e4cfe015eb4cd4dd055ca3065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the ADC configuration.  <a href="#gae1abce4e4cfe015eb4cd4dd055ca3065">More...</a><br /></td></tr>
+<tr class="separator:gae1abce4e4cfe015eb4cd4dd055ca3065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacfbd0adfbe5291b0cf131b6b07c4053b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gacfbd0adfbe5291b0cf131b6b07c4053b">cyhal_adc_set_power</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, <a class="el" href="group__group__hal__general__types.html#ga246fde0e79029f514ce3846b31e366d7">cyhal_power_level_t</a> power)</td></tr>
+<tr class="memdesc:gacfbd0adfbe5291b0cf131b6b07c4053b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the current operating power level of the ADC.  <a href="#gacfbd0adfbe5291b0cf131b6b07c4053b">More...</a><br /></td></tr>
+<tr class="separator:gacfbd0adfbe5291b0cf131b6b07c4053b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga15c047136b7a47d12dbafaa1e415ab59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga15c047136b7a47d12dbafaa1e415ab59">cyhal_adc_set_sample_rate</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, uint32_t desired_sample_rate_hz, uint32_t *achieved_sample_rate_hz)</td></tr>
+<tr class="memdesc:ga15c047136b7a47d12dbafaa1e415ab59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the number of samples per second.  <a href="#ga15c047136b7a47d12dbafaa1e415ab59">More...</a><br /></td></tr>
+<tr class="separator:ga15c047136b7a47d12dbafaa1e415ab59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaba21a0c4d83266951823ea5d9eba39b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj, <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *adc, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> vplus, <a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a> vminus, const <a class="el" href="group__group__hal__adc.html#structcyhal__adc__channel__config__t">cyhal_adc_channel_config_t</a> *cfg)</td></tr>
+<tr class="memdesc:gaba21a0c4d83266951823ea5d9eba39b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a differential ADC channel.  <a href="#gaba21a0c4d83266951823ea5d9eba39b9">More...</a><br /></td></tr>
+<tr class="separator:gaba21a0c4d83266951823ea5d9eba39b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga504f26400e475a67e978fb1a75b67f1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga504f26400e475a67e978fb1a75b67f1c">cyhal_adc_channel_configure</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj, const <a class="el" href="group__group__hal__adc.html#structcyhal__adc__channel__config__t">cyhal_adc_channel_config_t</a> *config)</td></tr>
+<tr class="memdesc:ga504f26400e475a67e978fb1a75b67f1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the ADC channel configuration.  <a href="#ga504f26400e475a67e978fb1a75b67f1c">More...</a><br /></td></tr>
+<tr class="separator:ga504f26400e475a67e978fb1a75b67f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga55d144073f10cf6b6a1edcf6b9f59c78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga55d144073f10cf6b6a1edcf6b9f59c78">cyhal_adc_channel_free</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj)</td></tr>
+<tr class="memdesc:ga55d144073f10cf6b6a1edcf6b9f59c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uninitialize the ADC channel and <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t" title="ADC channel object. ">cyhal_adc_channel_t</a> object.  <a href="#ga55d144073f10cf6b6a1edcf6b9f59c78">More...</a><br /></td></tr>
 <tr class="separator:ga55d144073f10cf6b6a1edcf6b9f59c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2baef8269f13b3c7da46cdabcef650a0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga2baef8269f13b3c7da46cdabcef650a0">cyhal_adc_read_u16</a> (const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj)</td></tr>
-<tr class="memdesc:ga2baef8269f13b3c7da46cdabcef650a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value from ADC pin, represented as an unsigned 16bit value where 0x0000 represents the minimum value in the ADC's range, and 0xFFFF represents the maximum value in the ADC's range.  <a href="#ga2baef8269f13b3c7da46cdabcef650a0">More...</a><br /></td></tr>
+<tr class="memitem:ga2baef8269f13b3c7da46cdabcef650a0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga2baef8269f13b3c7da46cdabcef650a0">cyhal_adc_read_u16</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj)</td></tr>
+<tr class="memdesc:ga2baef8269f13b3c7da46cdabcef650a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value from the ADC pin, represented as an unsigned 16bit value where 0x0000 represents the minimum value in the ADC's range, and 0xFFFF represents the maximum value in the ADC's range.  <a href="#ga2baef8269f13b3c7da46cdabcef650a0">More...</a><br /></td></tr>
 <tr class="separator:ga2baef8269f13b3c7da46cdabcef650a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7207c3d089c48255e382cfe159a04ed0"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga7207c3d089c48255e382cfe159a04ed0">cyhal_adc_read</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj)</td></tr>
+<tr class="memdesc:ga7207c3d089c48255e382cfe159a04ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value from ADC pin, represented as a 32-bit signed, right-aligned value.  <a href="#ga7207c3d089c48255e382cfe159a04ed0">More...</a><br /></td></tr>
+<tr class="separator:ga7207c3d089c48255e382cfe159a04ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga515d09fb9917bee89b3147852d0a3659"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga515d09fb9917bee89b3147852d0a3659">cyhal_adc_read_uv</a> (const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *obj)</td></tr>
+<tr class="memdesc:ga515d09fb9917bee89b3147852d0a3659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value from ADC pin, in microvolts.  <a href="#ga515d09fb9917bee89b3147852d0a3659">More...</a><br /></td></tr>
+<tr class="separator:ga515d09fb9917bee89b3147852d0a3659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7386fc156403ea08380c4410665b4ae2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga7386fc156403ea08380c4410665b4ae2">cyhal_adc_read_async</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, size_t num_scan, int32_t *result_list)</td></tr>
+<tr class="memdesc:ga7386fc156403ea08380c4410665b4ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan the specified ADC channels in the background and copy the results into the array pointed to by <code>result_list</code>.  <a href="#ga7386fc156403ea08380c4410665b4ae2">More...</a><br /></td></tr>
+<tr class="separator:ga7386fc156403ea08380c4410665b4ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4bdd118986c58fdfe4d832123fb8a31d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga4bdd118986c58fdfe4d832123fb8a31d">cyhal_adc_read_async_uv</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, size_t num_scan, int32_t *result_list)</td></tr>
+<tr class="memdesc:ga4bdd118986c58fdfe4d832123fb8a31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan the specified ADC channels in the background and copy the conversion results in microvolts into the array pointed to by <code>result_list</code>.  <a href="#ga4bdd118986c58fdfe4d832123fb8a31d">More...</a><br /></td></tr>
+<tr class="separator:ga4bdd118986c58fdfe4d832123fb8a31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac00f1d333ef4023e3d41dad9dbee5413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#gac00f1d333ef4023e3d41dad9dbee5413">cyhal_adc_set_async_mode</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, <a class="el" href="group__group__hal__general__types.html#gab2d2acfb82599df54152be0b170c6ec2">cyhal_async_mode_t</a> mode, uint8_t dma_priority)</td></tr>
+<tr class="memdesc:gac00f1d333ef4023e3d41dad9dbee5413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mechanism that is used to perform ADC asynchronous transfers.  <a href="#gac00f1d333ef4023e3d41dad9dbee5413">More...</a><br /></td></tr>
+<tr class="separator:gac00f1d333ef4023e3d41dad9dbee5413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5ab88800c80f06d91d046a3b6d3144f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga5ab88800c80f06d91d046a3b6d3144f2">cyhal_adc_register_callback</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, <a class="el" href="group__group__hal__adc.html#gae4fceb1fa1f96b3212106fda6b113836">cyhal_adc_event_callback_t</a> callback, void *callback_arg)</td></tr>
+<tr class="memdesc:ga5ab88800c80f06d91d046a3b6d3144f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an ADC callback handler.  <a href="#ga5ab88800c80f06d91d046a3b6d3144f2">More...</a><br /></td></tr>
+<tr class="separator:ga5ab88800c80f06d91d046a3b6d3144f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga09f4a4783a982751b0f3effc48db1c6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__adc.html#ga09f4a4783a982751b0f3effc48db1c6b">cyhal_adc_enable_event</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *obj, <a class="el" href="group__group__hal__adc.html#ga3e21dc2fe98693d72260411459e1fc6c">cyhal_adc_event_t</a> event, uint8_t intr_priority, bool enable)</td></tr>
+<tr class="memdesc:ga09f4a4783a982751b0f3effc48db1c6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure ADC events.  <a href="#ga09f4a4783a982751b0f3effc48db1c6b">More...</a><br /></td></tr>
+<tr class="separator:ga09f4a4783a982751b0f3effc48db1c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<hr/><h2 class="groupheader">Data Structure Documentation</h2>
+<a name="structcyhal__adc__config__t" id="structcyhal__adc__config__t"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structcyhal__adc__config__t">&#9670;&nbsp;</a></span>cyhal_adc_config_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct cyhal_adc_config_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Data Fields</th></tr>
+<tr><td class="fieldtype">
+<a id="a942daebdd7db9f8f38ea3f2d33503b68"></a>bool</td>
+<td class="fieldname">
+continuous_scanning</td>
+<td class="fielddoc">
+Whether the ADC samples continuously (true) or only on demand (false). <p>When configured to true, the ADC will immediately begin scanning all configured channels. When configured to false, the ADC will stop continuous scanning at the completion of the current scan </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a740aed93bab2f9cb2dddfffaaf6bfa73"></a>uint8_t</td>
+<td class="fieldname">
+resolution</td>
+<td class="fielddoc">
+ADC resolution. <p>See the implementation specific documentation for supported values </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ad0fa7163680d97b7ffc54dab388870b5"></a>uint16_t</td>
+<td class="fieldname">
+average_count</td>
+<td class="fielddoc">
+The number of samples that should be averaged together to obtain a result. <p>A value of 1 disables averaging. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="abfefd3f63c086f2ada288bfc6ac5824a"></a>uint32_t</td>
+<td class="fieldname">
+average_mode_flags</td>
+<td class="fielddoc">
+Flags to control the behavior of the averaging functionality when <a class="el" href="group__group__hal__adc.html#ad0fa7163680d97b7ffc54dab388870b5">average_count</a> is greater than 1. <p>This field contains zero or more flags that are OR'd together. All implementations define <a class="el" href="group__group__hal__adc.html#ga989ece649f9a1d7df78b73a0b75abf24">CYHAL_ADC_AVG_MODE_AVERAGE</a> and <a class="el" href="group__group__hal__adc.html#gaffbef3cc844fa6ff749e8230c6ef6d54">CYHAL_ADC_AVG_MODE_ACCUMULATE</a> (though some may not support both modes). Some implementations may define other flags to control additional aspects of the averaging functionality; see the implementation-specific documentation for details. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a97998569cedf9c1ee8f2e9cf0d199972"></a>uint32_t</td>
+<td class="fieldname">
+ext_vref_mv</td>
+<td class="fielddoc">
+The external voltage reference value, in millivolts. <p>If vref is set to <a class="el" href="group__group__hal__adc.html#ggad77d58d52432f1f68f869b047b1a9bbea78d9a5640a2866dad2f5e87d356a6c74">CYHAL_ADC_REF_EXTERNAL</a>, this must be nonzero. If vref is set to anything other than <a class="el" href="group__group__hal__adc.html#ggad77d58d52432f1f68f869b047b1a9bbea78d9a5640a2866dad2f5e87d356a6c74">CYHAL_ADC_REF_EXTERNAL</a>, this must be zero. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a6f3458f47ce11c850cca0685dbfdb3d7"></a><a class="el" href="group__group__hal__adc.html#gac9e066ac01bed2c374c3d0e164988d97">cyhal_adc_vneg_t</a></td>
+<td class="fieldname">
+vneg</td>
+<td class="fielddoc">
+Vminus selection for single-ended channels. </td></tr>
+<tr><td class="fieldtype">
+<a id="a7ffa068ca4f21088761a9c4a57129055"></a><a class="el" href="group__group__hal__adc.html#gad77d58d52432f1f68f869b047b1a9bbe">cyhal_adc_vref_t</a></td>
+<td class="fieldname">
+vref</td>
+<td class="fielddoc">
+ADC voltage reference. </td></tr>
+<tr><td class="fieldtype">
+<a id="a1e330ef5d05f2e0fb824f7060a398fb7"></a><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a></td>
+<td class="fieldname">
+ext_vref</td>
+<td class="fielddoc">
+The GPIO that should be used for the external reference. <p>If <a class="el" href="group__group__hal__adc.html#ggad77d58d52432f1f68f869b047b1a9bbea78d9a5640a2866dad2f5e87d356a6c74">CYHAL_ADC_REF_EXTERNAL</a> is selected and the current target uses a GPIO for ADC ext_vref (see the BSP documentation), this must not be <a class="el" href="group__group__hal__impl__pin__package__psoc6__04__80__tqfp.html#gga43c4aa9a5556b7386cb604f0ab3b242ca3dbd1016ea99d087d747530418b89a01">NC</a>. If the current target uses a dedicated pin (not a GPIO) for ADC ext_vref, or if any other reference is selected, this must be <a class="el" href="group__group__hal__impl__pin__package__psoc6__04__80__tqfp.html#gga43c4aa9a5556b7386cb604f0ab3b242ca3dbd1016ea99d087d747530418b89a01">NC</a>. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a38607f551c7248ff63862d1d8f848578"></a>bool</td>
+<td class="fieldname">
+is_bypassed</td>
+<td class="fielddoc">
+Whether an external bypass capacitor should be used. <p>Depending on the platform this may be required to reduce noise at sufficiently high sample rates. See the implementation specific documentation for details. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="afce79b08ba62854d108ca34fe649e692"></a><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a></td>
+<td class="fieldname">
+bypass_pin</td>
+<td class="fielddoc">
+The GPIO pin that should be used for the bypass capacitor. <p>If <code>is_bypassed</code> is true and the current target uses a GPIO for the bypass capacitor connection, this must not be <a class="el" href="group__group__hal__impl__pin__package__psoc6__04__80__tqfp.html#gga43c4aa9a5556b7386cb604f0ab3b242ca3dbd1016ea99d087d747530418b89a01">NC</a>. Otherwise, this must be <a class="el" href="group__group__hal__impl__pin__package__psoc6__04__80__tqfp.html#gga43c4aa9a5556b7386cb604f0ab3b242ca3dbd1016ea99d087d747530418b89a01">NC</a>. Depending on the device, this may be the same GPIO as <code>ext_vref</code>. See the BSP documentation for details. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structcyhal__adc__channel__config__t" id="structcyhal__adc__channel__config__t"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structcyhal__adc__channel__config__t">&#9670;&nbsp;</a></span>cyhal_adc_channel_config_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct cyhal_adc_channel_config_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Data Fields</th></tr>
+<tr><td class="fieldtype">
+<a id="a9d33c9d35e389a0f9efe1a0118ad5743"></a>bool</td>
+<td class="fieldname">
+enabled</td>
+<td class="fielddoc">
+Whether this channel should be sampled when the ADC performs a scan. </td></tr>
+<tr><td class="fieldtype">
+<a id="ac2dae19e04515fbcb59cd43ce2e55a72"></a>bool</td>
+<td class="fieldname">
+enable_averaging</td>
+<td class="fielddoc">
+Enable or disable averaging for this channel. <p>All other aspects of the averging functionality are configured in <a class="el" href="group__group__hal__adc.html#structcyhal__adc__config__t">cyhal_adc_config_t</a> </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="abbf12072b916127eb2731a2d55af6eba"></a>uint32_t</td>
+<td class="fieldname">
+min_acquisition_ns</td>
+<td class="fielddoc">
+Minimum time that this channel should be sampled, in nanoseconds. <p>The actual time may be greater than this depending on hardware limitations, the sample rate, and the configuration of other channels. </p><dl class="section note"><dt>Note</dt><dd>While this value is specified in ns, the underlying hardware generally does not support acquisition time with a granularity of 1 ns. See the implementation specific documentation for details. </dd></dl>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga989ece649f9a1d7df78b73a0b75abf24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga989ece649f9a1d7df78b73a0b75abf24">&#9670;&nbsp;</a></span>CYHAL_ADC_AVG_MODE_AVERAGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYHAL_ADC_AVG_MODE_AVERAGE&#160;&#160;&#160;(1u &lt;&lt; 0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Perform standard averaging. </p>
+<p>Divide the accumulated value by the number of samples. </p><dl class="section note"><dt>Note</dt><dd>This is not supported in combination with <a class="el" href="group__group__hal__adc.html#gaffbef3cc844fa6ff749e8230c6ef6d54">CYHAL_ADC_AVG_MODE_ACCUMULATE</a> </dd></dl>
+
+</div>
+</div>
+<a id="gaf5c909ab5cc7409a896abceda7da5773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf5c909ab5cc7409a896abceda7da5773">&#9670;&nbsp;</a></span>CYHAL_ADC_AVG_MODE_MAX_SHIFT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYHAL_ADC_AVG_MODE_MAX_SHIFT&#160;&#160;&#160;(1u)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Average mode flag position indices shifted by greater than this are implementation specific. </p>
+<p>The value of this macro is subject to change between HAL versions. </p>
+
+</div>
+</div>
+<a id="ga00175bb8e85fface6d74488febb0cf27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga00175bb8e85fface6d74488febb0cf27">&#9670;&nbsp;</a></span>CYHAL_ADC_VNEG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYHAL_ADC_VNEG&#160;&#160;&#160;<a class="el" href="group__group__hal__gpio.html#ga25a61e0d5a27c77dca1c7709fba9c400">CYHAL_NC_PIN_VALUE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selects the default connection for the inverting input to achieve a single-ended channel. </p>
+<p>This connection is controlled by the <code>vneg</code> member of <a class="el" href="group__group__hal__adc.html#structcyhal__adc__config__t">cyhal_adc_config_t</a>. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="gad77d58d52432f1f68f869b047b1a9bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad77d58d52432f1f68f869b047b1a9bbe">&#9670;&nbsp;</a></span>cyhal_adc_vref_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__group__hal__adc.html#gad77d58d52432f1f68f869b047b1a9bbe">cyhal_adc_vref_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Possible selections for ADC reference. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggad77d58d52432f1f68f869b047b1a9bbeac3e8e93e60d21bfe83545ac9e4f8ca15"></a>CYHAL_ADC_REF_INTERNAL&#160;</td><td class="fielddoc"><p>Internal reference. See the BSP documentation for the value of this reference. (Default) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggad77d58d52432f1f68f869b047b1a9bbea78d9a5640a2866dad2f5e87d356a6c74"></a>CYHAL_ADC_REF_EXTERNAL&#160;</td><td class="fielddoc"><p>Reference from external pin. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggad77d58d52432f1f68f869b047b1a9bbea56163f5889cb958d81515c6e751e480e"></a>CYHAL_ADC_REF_VDDA&#160;</td><td class="fielddoc"><p>Reference from VDDA (analog supply) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggad77d58d52432f1f68f869b047b1a9bbea113f7ecc2ff424688320cfb62ce1c79e"></a>CYHAL_ADC_REF_VDDA_DIV_2&#160;</td><td class="fielddoc"><p>Reference from VDDA (analog supply) divided by 2. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="gac9e066ac01bed2c374c3d0e164988d97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac9e066ac01bed2c374c3d0e164988d97">&#9670;&nbsp;</a></span>cyhal_adc_vneg_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__group__hal__adc.html#gac9e066ac01bed2c374c3d0e164988d97">cyhal_adc_vneg_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vminus selection for single-ended channels. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac9e066ac01bed2c374c3d0e164988d97a10b9c188fccf67e20b0fce8d6fef6bc0"></a>CYHAL_ADC_VNEG_VSSA&#160;</td><td class="fielddoc"><p>Connect vminus to ground. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggac9e066ac01bed2c374c3d0e164988d97a2c7f27a19dbe55e6ddd9997b07439ce1"></a>CYHAL_ADC_VNEG_VREF&#160;</td><td class="fielddoc"><p>Connect vminus to the selected vref (see <a class="el" href="group__group__hal__adc.html#gad77d58d52432f1f68f869b047b1a9bbe">cyhal_adc_vref_t</a>) </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="ga3e21dc2fe98693d72260411459e1fc6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3e21dc2fe98693d72260411459e1fc6c">&#9670;&nbsp;</a></span>cyhal_adc_event_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__group__hal__adc.html#ga3e21dc2fe98693d72260411459e1fc6c">cyhal_adc_event_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ADC events. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga3e21dc2fe98693d72260411459e1fc6ca72cdd442365c9b501eb0144ef31beb83"></a>CYHAL_ADC_EOS&#160;</td><td class="fielddoc"><p>End of scan: a scan of all channels has completed. Only applicable when continuously scanning. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga3e21dc2fe98693d72260411459e1fc6ca4a42dd67489a8b89bb8b1fefdac6c86c"></a>CYHAL_ADC_ASYNC_READ_COMPLETE&#160;</td><td class="fielddoc"><p>An asynchronous read operation has completed. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga7618b26a0677cb3f8cd477e3731da510"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga7618b26a0677cb3f8cd477e3731da510">&#9670;&nbsp;</a></span>cyhal_adc_init()</h2>
@@ -152,19 +507,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__clock__t">cyhal_clock_t</a> *&#160;</td>
           <td class="paramname"><em>clk</em>&#160;</td>
         </tr>
         <tr>
@@ -176,10 +531,22 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize ADC peripheral. </p>
+<p>The ADC will be initialized with the following default configuration:</p><ul>
+<li>Sample rate: See implementation-specific documentation</li>
+<li>Average count: 1 (averaging disabled).</li>
+<li>Continuous scanning: false</li>
+<li>Single ended vneg: <a class="el" href="group__group__hal__adc.html#ggac9e066ac01bed2c374c3d0e164988d97a2c7f27a19dbe55e6ddd9997b07439ce1">CYHAL_ADC_VNEG_VREF</a></li>
+<li>Vref: <a class="el" href="group__group__hal__adc.html#ggad77d58d52432f1f68f869b047b1a9bbeac3e8e93e60d21bfe83545ac9e4f8ca15">CYHAL_ADC_REF_INTERNAL</a></li>
+<li>External vref: <a class="el" href="group__group__hal__impl__pin__package__psoc6__04__80__tqfp.html#gga43c4aa9a5556b7386cb604f0ab3b242ca3dbd1016ea99d087d747530418b89a01">NC</a></li>
+<li>Bypassed: false</li>
+<li>Bypass pin: <a class="el" href="group__group__hal__impl__pin__package__psoc6__04__80__tqfp.html#gga43c4aa9a5556b7386cb604f0ab3b242ca3dbd1016ea99d087d747530418b89a01">NC</a></li>
+<li>Power level: <a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7a6f0f4df45e9cac012a2c8e5ba736241b">CYHAL_POWER_LEVEL_DEFAULT</a></li>
+</ul>
+<p>To change the configuration, see <a class="el" href="group__group__hal__adc.html#gae1abce4e4cfe015eb4cd4dd055ca3065">cyhal_adc_configure</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>Pointer to an ADC object. The caller must allocate the memory for this object but the init function will initialize its contents. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>A pin corresponding to the ADC block to initialize Note: This pin is not reserved, it is just used to identify which ADC block to allocate. If multiple channels will be allocated for a single ADC instance, only one pin should be passed here; it does not matter which one. After calling this function once, call cyhal_adc_channel_init once for each pin whose value should be measured. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>A pin corresponding to the ADC block to initialize Note: This pin is not reserved, it is just used to identify which ADC block to allocate. If multiple channels will be allocated for a single ADC instance, only one pin should be passed here; it does not matter which one. After calling this function once, call <a class="el" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a> once for each pin whose value should be measured. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">clk</td><td>The clock to use can be shared, if not provided a new clock will be allocated </td></tr>
   </table>
   </dd>
@@ -198,14 +565,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_adc_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uninitialize the ADC peripheral and <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t" title="ADC object. ">cyhal_adc_t</a> object. </p>
+<p>Uninitialize the ADC peripheral and <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t" title="ADC object. ">cyhal_adc_t</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
@@ -215,29 +582,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga873287b496e482c02f7d2c4ce94433e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga873287b496e482c02f7d2c4ce94433e8">&#9670;&nbsp;</a></span>cyhal_adc_channel_init()</h2>
+<a id="gae1abce4e4cfe015eb4cd4dd055ca3065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae1abce4e4cfe015eb4cd4dd055ca3065">&#9670;&nbsp;</a></span>cyhal_adc_configure()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_channel_init </td>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_configure </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
-          <td class="paramname"><em>adc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
-          <td class="paramname"><em>pin</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__adc.html#structcyhal__adc__config__t">cyhal_adc_config_t</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -247,17 +608,205 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialize a single-ended ADC channel. </p>
-<p>Configures the pin used by ADC. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Update the ADC configuration. </p>
+<dl class="section note"><dt>Note</dt><dd>If a scan is in progress, this may cause it to be interrupted.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The adc channel object to initialize </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">adc</td><td>The adc for which the channel should be initialized </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>The adc pin name </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>The configuration to apply </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The status of the init request. The status of the init request. <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> is returned on success.<br />
+<dl class="section return"><dt>Returns</dt><dd>The status of the configuration request On failure, a problem specific error code will be returned. This error could be from the HAL or lower level driver.<br />
+ For all other return codes, please refer to device driver documentation available in the BSP landing page </dd></dl>
+
+</div>
+</div>
+<a id="gacfbd0adfbe5291b0cf131b6b07c4053b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacfbd0adfbe5291b0cf131b6b07c4053b">&#9670;&nbsp;</a></span>cyhal_adc_set_power()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_set_power </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__general__types.html#ga246fde0e79029f514ce3846b31e366d7">cyhal_power_level_t</a>&#160;</td>
+          <td class="paramname"><em>power</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the current operating power level of the ADC. </p>
+<p>If the power level is set to <a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7a0f601c5d5843c59e58ee1988dd0e6861">CYHAL_POWER_LEVEL_OFF</a>, the ADC will be powered-off but it will retain its configuration, so it is not necessary to reconfigure it when changing the power level from <a class="el" href="group__group__hal__general__types.html#gga246fde0e79029f514ce3846b31e366d7a0f601c5d5843c59e58ee1988dd0e6861">CYHAL_POWER_LEVEL_OFF</a> to any other value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>ADC object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">power</td><td>The power level to set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the set power request On failure, a problem specific error code will be returned. This error could be from the HAL or lower level driver.<br />
+ For all other return codes, please refer to device driver documentation available in the BSP landing page </dd></dl>
+
+</div>
+</div>
+<a id="ga15c047136b7a47d12dbafaa1e415ab59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga15c047136b7a47d12dbafaa1e415ab59">&#9670;&nbsp;</a></span>cyhal_adc_set_sample_rate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_set_sample_rate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>desired_sample_rate_hz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>achieved_sample_rate_hz</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure the number of samples per second. </p>
+<p>This is the number of times each enabled channel is sampled per second. The total number of samples performed by the ADC hardware per second is equal to <code>sample_rate_hz / num_channels_enabled</code>. Depending on the system clock configuration or limitations of the underlying hardware, it may not be possible to achieve precisely the desired sample rate. The <code>achived_sample_rate_hz</code> parameter will be updated to indicate the sample rate that was achived. </p><dl class="section note"><dt>Note</dt><dd>The <code>achieved_sample_rate_hz</code> value is only valid while the configuration of the ADC and its channels remains umodified. If <a class="el" href="group__group__hal__adc.html#gae1abce4e4cfe015eb4cd4dd055ca3065">cyhal_adc_configure</a>, <a class="el" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a>, <a class="el" href="group__group__hal__adc.html#ga504f26400e475a67e978fb1a75b67f1c">cyhal_adc_channel_configure</a>, or <a class="el" href="group__group__hal__adc.html#ga55d144073f10cf6b6a1edcf6b9f59c78">cyhal_adc_channel_free</a> is called, it is necessary to call this function again in order to update the sample rate. Therefore, it is recommended to call this function after the ADC and all channels have been configured.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC object to configure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">desired_sample_rate_hz</td><td>The desired sample rate, in hertz </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">achieved_sample_rate_hz</td><td>The achieved sample rate, in hertz</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the sample rate request. Note that inability to exactly match the requested sample rate is not considered an error. It is the application's responsibility to determine whether the achived rate is within the tolerance that it requires. <a class="el" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> is returned on success.<br />
  On failure, a problem specific error code will be returned. This error could be from the HAL or lower level driver.<br />
+ For all other return codes, please refer to device driver documentation available in the BSP landing page </dd></dl>
+
+</div>
+</div>
+<a id="gaba21a0c4d83266951823ea5d9eba39b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaba21a0c4d83266951823ea5d9eba39b9">&#9670;&nbsp;</a></span>cyhal_adc_channel_init_diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_channel_init_diff </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramname"><em>adc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramname"><em>vplus</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__pin__package__psoc6__01__104__m__csp__ble.html#ga707195ce0627016bf371643bdd9caa51">cyhal_gpio_t</a>&#160;</td>
+          <td class="paramname"><em>vminus</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__adc.html#structcyhal__adc__channel__config__t">cyhal_adc_channel_config_t</a> *&#160;</td>
+          <td class="paramname"><em>cfg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize a differential ADC channel. </p>
+<dl class="section note"><dt>Note</dt><dd>: Some platforms may restrict which pins can be used as part of a differential pair. See the implementation-specific documentation for details.</dd></dl>
+<p>Configures the pin used by ADC. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>The ADC channel object to initialize </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">adc</td><td>The ADC for which the channel should be initialized </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vplus</td><td>Non-inverting input </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vminus</td><td>Inverting input. For a single ended channel, use <a class="el" href="group__group__hal__adc.html#ga00175bb8e85fface6d74488febb0cf27">CYHAL_ADC_VNEG</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cfg</td><td>The ADC channel configuration </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the init request. On failure, a problem specific error code will be returned. This error could be from the HAL or lower level driver.<br />
+ For all other return codes, please refer to device driver documentation available in the BSP landing page </dd></dl>
+
+</div>
+</div>
+<a id="ga504f26400e475a67e978fb1a75b67f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga504f26400e475a67e978fb1a75b67f1c">&#9670;&nbsp;</a></span>cyhal_adc_channel_configure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_channel_configure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__adc.html#structcyhal__adc__channel__config__t">cyhal_adc_channel_config_t</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the ADC channel configuration. </p>
+<dl class="section note"><dt>Note</dt><dd>If a scan is in progress, this may cause it to be interrupted. It is not valid to change the enabled state of a channel while an asynchronous read operation is in progress.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC channel object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>The configuration to apply </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the configuration request On failure, a problem specific error code will be returned. This error could be from the HAL or lower level driver.<br />
  For all other return codes, please refer to device driver documentation available in the BSP landing page </dd></dl>
 
 </div>
@@ -271,14 +820,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_adc_channel_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uninitialize the ADC channel and <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t" title="ADC channel object. ">cyhal_adc_channel_t</a> object. </p>
+<p>Uninitialize the ADC channel and <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t" title="ADC channel object. ">cyhal_adc_channel_t</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The ADC channel object </td></tr>
@@ -297,15 +846,15 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">uint16_t cyhal_adc_read_u16 </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Read the value from ADC pin, represented as an unsigned 16bit value where 0x0000 represents the minimum value in the ADC's range, and 0xFFFF represents the maximum value in the ADC's range. </p>
-<p>Depending on the ADC speed this function may block for some time.</p>
+<p>Read the value from the ADC pin, represented as an unsigned 16bit value where 0x0000 represents the minimum value in the ADC's range, and 0xFFFF represents the maximum value in the ADC's range. </p>
+<p>If continous scanning is disabled, this will block while a conversion is performed on the selected channel, then return the result. Depending on the ADC speed this function may block for some time. If continuous scanning is enabled, this will return the value from the most recent conversion of the specified channel (if called shortly after enabling continuous scanning it may block until at least one conversion has been performed on this channel).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
@@ -313,6 +862,309 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An unsigned 16bit value representing the current input voltage </dd></dl>
+
+</div>
+</div>
+<a id="ga7207c3d089c48255e382cfe159a04ed0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7207c3d089c48255e382cfe159a04ed0">&#9670;&nbsp;</a></span>cyhal_adc_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t cyhal_adc_read </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read the value from ADC pin, represented as a 32-bit signed, right-aligned value. </p>
+<p>This is a 'resolution'-bit value, sign-extended to 32 bits. If the vplus signal is below the vminus signal, the result will be negative. If the vplus signal is above the vminus signal, the result will be positive. If continous scanning is disabled, this will block while a conversion is performed on the selected channel, then return the result. Depending on the ADC speed this function may block for some time. If continuous scanning is enabled, this will return the value from the most recent conversion of the specified channel (if called shortly after enabling continuous scanning it may block until at least one conversion has been performed on this channel).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A signed 32 bit value representing the current input voltage </dd></dl>
+
+</div>
+</div>
+<a id="ga515d09fb9917bee89b3147852d0a3659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga515d09fb9917bee89b3147852d0a3659">&#9670;&nbsp;</a></span>cyhal_adc_read_uv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t cyhal_adc_read_uv </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__channel__t">cyhal_adc_channel_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read the value from ADC pin, in microvolts. </p>
+<p>If continous scanning is disabled, this will block while a conversion is performed on the selected channel, then return the result. Depending on the ADC speed this function may block for some time. If continuous scanning is enabled, this will return the value from the most recent conversion of the specified channel (if called shortly after enabling continuous scanning it may block until at least one conversion has been performed on this channel).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An unsigned 32 bit value representing the current input in microvolts </dd></dl>
+
+</div>
+</div>
+<a id="ga7386fc156403ea08380c4410665b4ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7386fc156403ea08380c4410665b4ae2">&#9670;&nbsp;</a></span>cyhal_adc_read_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_read_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>num_scan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t *&#160;</td>
+          <td class="paramname"><em>result_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scan the specified ADC channels in the background and copy the results into the array pointed to by <code>result_list</code>. </p>
+<p>Results are represented as 32-bit signed, right-aligned values. That is, they are 'resolution'-bit values, sign-extended to 32 bits. If the vplus signal is below the vminus signal, the result will be negative. If the vplus signal is above the vminus signal, the result will be positive.</p>
+<p>If continuous scanning is disabled, this will trigger num_scan new scans and copy the results into <code>result_list</code> once the scan is completed.</p>
+<p>If continuous scanning is enabled, this will copy the results of num_scan scans into the result_list as they complete, beginning with the most recently completed scan (if one exists).</p>
+<p>Scan results are placed sequentially into result_list. That is, result_list will contain all of the results from the first scan, followed by all of the results from the second scan, etc. If channels exist that are initialized but not enabled, they will consume locations in result_list, but these values are undefined.</p>
+<p>When the requested number of scans have been completed, the <a class="el" href="group__group__hal__adc.html#gga3e21dc2fe98693d72260411459e1fc6ca4a42dd67489a8b89bb8b1fefdac6c86c">CYHAL_ADC_ASYNC_READ_COMPLETE</a> event will be raised.</p>
+<p><a class="el" href="group__group__hal__adc.html#gac00f1d333ef4023e3d41dad9dbee5413">cyhal_adc_set_async_mode</a> can be used to control whether this uses DMA or a SW (CPU-driven) transfer.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>ADC to read from </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">num_scan</td><td>The number of scans of each channel that should be read </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">result_list</td><td>The array where results should be. This must be of length num_scan * initialized_channels, where initialized_channels is the number of channels that have been initialized for this ADC (and not later freed) via <a class="el" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the read async request On failure, a problem specific error code will be returned. This error could be from the HAL or lower level driver.<br />
+ For all other return codes, please refer to device driver documentation available in the BSP landing page </dd></dl>
+
+</div>
+</div>
+<a id="ga4bdd118986c58fdfe4d832123fb8a31d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4bdd118986c58fdfe4d832123fb8a31d">&#9670;&nbsp;</a></span>cyhal_adc_read_async_uv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_read_async_uv </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>num_scan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t *&#160;</td>
+          <td class="paramname"><em>result_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scan the specified ADC channels in the background and copy the conversion results in microvolts into the array pointed to by <code>result_list</code>. </p>
+<p>If continuous scanning is disabled, this will trigger num_scan new scans and copy the results into <code>result_list</code> once the scan is completed.</p>
+<p>If continuous scanning is enabled, this will copy the results of num_scan scans into the result_list as they complete, beginning with the most recently completed scan (if one exists).</p>
+<p>Scan results are placed sequentially into result_list. That is, result_list will contain all of the results from the first scan, followed by all of the results from the second scan, etc. If channels exist that are initialized but not enabled, they will consume locations in result_list, but these values are undefined.</p>
+<p>When the requested number of scans have been completed, the <a class="el" href="group__group__hal__adc.html#gga3e21dc2fe98693d72260411459e1fc6ca4a42dd67489a8b89bb8b1fefdac6c86c">CYHAL_ADC_ASYNC_READ_COMPLETE</a> event will be raised.</p>
+<p><a class="el" href="group__group__hal__adc.html#gac00f1d333ef4023e3d41dad9dbee5413">cyhal_adc_set_async_mode</a> can be used to control whether this uses DMA or a SW (CPU-driven) transfer.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>ADC to read from </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">num_scan</td><td>The number of scans of each channel that should be read </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">result_list</td><td>The array where results should be. This must be of length num_scan * initialized_channels, where initialized_channels is the number of channels that have been initialized for this ADC (and not later freed) via <a class="el" href="group__group__hal__adc.html#gaba21a0c4d83266951823ea5d9eba39b9">cyhal_adc_channel_init_diff</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the read async request On failure, a problem specific error code will be returned. This error could be from the HAL or lower level driver.<br />
+ For all other return codes, please refer to device driver documentation available in the BSP landing page </dd></dl>
+
+</div>
+</div>
+<a id="gac00f1d333ef4023e3d41dad9dbee5413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac00f1d333ef4023e3d41dad9dbee5413">&#9670;&nbsp;</a></span>cyhal_adc_set_async_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_adc_set_async_mode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__general__types.html#gab2d2acfb82599df54152be0b170c6ec2">cyhal_async_mode_t</a>&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>dma_priority</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the mechanism that is used to perform ADC asynchronous transfers. </p>
+<p>The default is SW. </p><dl class="section warning"><dt>Warning</dt><dd>The effect of calling this function while an async transfer is pending is undefined.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>The transfer mode </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dma_priority</td><td>The priority, if DMA is used. Valid values are the same as for <a class="el" href="group__group__hal__dma.html#ga77d62adf012b570ff1a157b43d134318">cyhal_dma_init</a>. If DMA is not selected, the only valid value is CYHAL_DMA_PRIORITY_DEFAULT, and no guarantees are made about prioritization. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of the set mode request On failure, a problem specific error code will be returned. This error could be from the HAL or lower level driver.<br />
+ For all other return codes, please refer to device driver documentation available in the BSP landing page </dd></dl>
+
+</div>
+</div>
+<a id="ga5ab88800c80f06d91d046a3b6d3144f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5ab88800c80f06d91d046a3b6d3144f2">&#9670;&nbsp;</a></span>cyhal_adc_register_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cyhal_adc_register_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__adc.html#gae4fceb1fa1f96b3212106fda6b113836">cyhal_adc_event_callback_t</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>callback_arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register an ADC callback handler. </p>
+<p>This function will be called when one of the events enabled by <a class="el" href="group__group__hal__adc.html#ga09f4a4783a982751b0f3effc48db1c6b">cyhal_adc_enable_event</a> occurs.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td>The callback handler which will be invoked when the interrupt fires </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">callback_arg</td><td>Generic argument that will be provided to the callback when called </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga09f4a4783a982751b0f3effc48db1c6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga09f4a4783a982751b0f3effc48db1c6b">&#9670;&nbsp;</a></span>cyhal_adc_enable_event()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cyhal_adc_enable_event </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__adc__t">cyhal_adc_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__group__hal__adc.html#ga3e21dc2fe98693d72260411459e1fc6c">cyhal_adc_event_t</a>&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>intr_priority</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure ADC events. </p>
+<p>When an enabled event occurs, the function specified by <a class="el" href="group__group__hal__adc.html#ga5ab88800c80f06d91d046a3b6d3144f2">cyhal_adc_register_callback</a> will be called.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The ADC object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>The ADC event type </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">intr_priority</td><td>The priority for NVIC interrupt events </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>True to turn on specified events, False to turn off </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -122,6 +122,12 @@ extern "C" {
 /** The requested resource type is invalid */
 #define CYHAL_SPI_RSLT_ERR_INVALID_PIN                  \
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_SPI, 7))
+/** Cannot configure SSEL signal */
+#define CYHAL_SPI_RSLT_ERR_CANNOT_CONFIG_SSEL           \
+    (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_SPI, 8))
+/** Cannot switch SSEL - device is busy or incorrect pin provided */
+#define CYHAL_SPI_RSLT_ERR_CANNOT_SWITCH_SSEL           \
+    (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_SPI, 9))
 
 /**
  * \} \}
@@ -139,6 +145,14 @@ typedef enum {
     /** An error occurred while transferring data */
     CYHAL_SPI_IRQ_ERROR               = 1 << 3,
 } cyhal_spi_event_t;
+
+/** SPI Slave Select polarity */
+typedef enum {
+    /** SSEL signal is active low */
+    CYHAL_SPI_SSEL_ACTIVE_LOW         = 0,
+    /** SSEL signal is active high */
+    CYHAL_SPI_SSEL_ACTIVE_HIGH        = 1,
+} cyhal_spi_ssel_polarity_t;
 
 /** Handler for SPI interrupts */
 typedef void (*cyhal_spi_event_callback_t)(void *callback_arg, cyhal_spi_event_t event);
@@ -195,7 +209,9 @@ typedef struct
  * @param[in]  sclk The pin to use for SCLK
  * @note This pin cannot be NC
  * @param[in]  ssel The pin to use for SSEL
- * @note This pin can be NC
+ * @note Provided pin will be configured for \ref CYHAL_SPI_SSEL_ACTIVE_LOW polarity and set as active. This can be changed
+ * (as well as additional ssel pins can be added) by \ref cyhal_spi_slave_select_config and \ref cyhal_spi_select_active_ssel functions.
+ * This pin can be NC.
  * @param[in]  clk The clock to use can be shared, if not provided a new clock will be allocated
  * @param[in]  bits      The number of bits per frame
  * @note bits should be 8 or 16
@@ -203,8 +219,8 @@ typedef struct
  * @param[in]  is_slave  false for master mode or true for slave mode operation
  * @return The status of the init request
  */
-cy_rslt_t cyhal_spi_init(cyhal_spi_t *obj, cyhal_gpio_t mosi, cyhal_gpio_t miso, cyhal_gpio_t sclk, cyhal_gpio_t ssel, const cyhal_clock_t *clk,
-                        uint8_t bits, cyhal_spi_mode_t mode, bool is_slave);
+cy_rslt_t cyhal_spi_init(cyhal_spi_t *obj, cyhal_gpio_t mosi, cyhal_gpio_t miso, cyhal_gpio_t sclk, cyhal_gpio_t ssel,
+                        const cyhal_clock_t *clk, uint8_t bits, cyhal_spi_mode_t mode, bool is_slave);
 
 /** Release a SPI object
  *
@@ -222,6 +238,28 @@ void cyhal_spi_free(cyhal_spi_t *obj);
  * @return The status of the set_frequency request
  */
 cy_rslt_t cyhal_spi_set_frequency(cyhal_spi_t *obj, uint32_t hz);
+
+/** Configures provided ssel pin to work as SPI slave select with specified polarity.
+ *
+ * Multiple pins can be configured as SPI slave select pins. Please refer to device datasheet for details. Switching between
+ * configured slave select pins is done by \ref cyhal_spi_select_active_ssel function.
+ * Unless modified with this function, the SSEL pin provided as part of \ref cyhal_spi_init is the default.
+ * @param[in] obj       The SPI object to add slave select for
+ * @param[in] ssel      Slave select pin to be added
+ * @param[in] polarity  Polarity of slave select
+ * @return The status of ssel pin configuration
+ */
+cy_rslt_t cyhal_spi_slave_select_config(cyhal_spi_t *obj, cyhal_gpio_t ssel, cyhal_spi_ssel_polarity_t polarity);
+
+/** Selects an active slave select line from one of available.
+ *
+ * This function is applicable for the master and slave.
+ * SSEL pin should be configured by \ref cyhal_spi_slave_select_config or \ref cyhal_spi_init functions prior to selecting it as active.
+ * @param[in] obj       The SPI object for switching
+ * @param[in] ssel      Slave select pin to be set as active
+ * @return CY_RSLT_SUCCESS if slave select was switched successfully, otherwise - CYHAL_SPI_RSLT_ERR_CANNOT_SWITCH_SSEL
+ */
+cy_rslt_t cyhal_spi_select_active_ssel(cyhal_spi_t *obj, cyhal_gpio_t ssel);
 
 /** Synchronously get a received value out of the SPI receive buffer
  *

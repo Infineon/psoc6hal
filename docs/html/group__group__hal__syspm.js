@@ -39,6 +39,10 @@ var group__group__hal__syspm =
       [ "CYHAL_SYSPM_HIBERNATE_PINB_LOW", "group__group__hal__syspm.html#gga716955af458772e538910575cbf6e1dda1bf3cfcfb69b48e6b0ef5a525cc6eb3d", null ],
       [ "CYHAL_SYSPM_HIBERNATE_PINB_HIGH", "group__group__hal__syspm.html#gga716955af458772e538910575cbf6e1dda69f639b3f33245d1a789fd443b94b47d", null ]
     ] ],
+    [ "cyhal_syspm_voltage_supply_t", "group__group__hal__syspm.html#ga843f8267deb62a570fff3ce7ebf1a6c4", [
+      [ "CYHAL_VOLTAGE_SUPPLY_VDDA", "group__group__hal__syspm.html#gga843f8267deb62a570fff3ce7ebf1a6c4af5c399ada3960bb3f5e6784be9bdccc9", null ],
+      [ "CYHAL_VOLTAGE_SUPPLY_MAX", "group__group__hal__syspm.html#gga843f8267deb62a570fff3ce7ebf1a6c4a072774e669a76b4999d596b27bf897b0", null ]
+    ] ],
     [ "cyhal_syspm_hibernate", "group__group__hal__syspm.html#ga507445e44ab6aae0f4cbaabaec6c5a3f", null ],
     [ "cyhal_syspm_set_system_state", "group__group__hal__syspm.html#gaae0157682bad1b2155738e73347afa87", null ],
     [ "cyhal_syspm_get_system_state", "group__group__hal__syspm.html#gaf5aec2878d9a38835444befb25e274fe", null ],
@@ -49,5 +53,7 @@ var group__group__hal__syspm =
     [ "cyhal_syspm_lock_deepsleep", "group__group__hal__syspm.html#ga3568214a6038240239f99768fe6707d6", null ],
     [ "cyhal_syspm_unlock_deepsleep", "group__group__hal__syspm.html#ga028b85f03d4607ccac8494b46ec8413c", null ],
     [ "cyhal_syspm_tickless_deepsleep", "group__group__hal__syspm.html#ga2217e0c4c24cc5fe14d5765681de191d", null ],
-    [ "cyhal_syspm_tickless_sleep", "group__group__hal__syspm.html#ga777835c494bbea3923a4cf9795249fd6", null ]
+    [ "cyhal_syspm_tickless_sleep", "group__group__hal__syspm.html#ga777835c494bbea3923a4cf9795249fd6", null ],
+    [ "cyhal_syspm_set_supply_voltage", "group__group__hal__syspm.html#ga01d10df7bebeb345902a0d8e1c193ad1", null ],
+    [ "cyhal_syspm_get_supply_voltage", "group__group__hal__syspm.html#ga6bbb8993f1add4b31d7b168fb670f842", null ]
 ];

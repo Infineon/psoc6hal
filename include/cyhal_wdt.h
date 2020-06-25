@@ -86,7 +86,7 @@ extern "C" {
 *
  * @param[out] obj  Pointer to a WDT object. The caller must allocate the memory
  *  for this object but the init function will initialize its contents.
-* @param[in] timeout_ms The time in milliseconds before the WDT times out (1ms - max) (see cyhal_wdt_get_max_timeout_ms())
+* @param[inout] timeout_ms The time in milliseconds before the WDT times out (1ms - max) (see cyhal_wdt_get_max_timeout_ms())
 * @return The status of the init request
 *
 * Returns \ref CY_RSLT_SUCCESS if the operation was successfull.
@@ -134,7 +134,7 @@ void cyhal_wdt_stop(cyhal_wdt_t *obj);
 *
 * Gets the time in milliseconds before the WDT times out.
 *
-* @param[inout] obj The WDT object
+* @param[in] obj The WDT object
 * @return The time in milliseconds before the WDT times out
 */
 uint32_t cyhal_wdt_get_timeout_ms(cyhal_wdt_t *obj);
@@ -144,6 +144,12 @@ uint32_t cyhal_wdt_get_timeout_ms(cyhal_wdt_t *obj);
 * @return The maximum timeout for the WDT
 */
 uint32_t cyhal_wdt_get_max_timeout_ms(void);
+
+/** Check if WDT is enabled
+ *
+ * @param[in] obj The WDT object
+ * @return The status of WDT is_enabled request */
+bool cyhal_wdt_is_enabled(cyhal_wdt_t *obj);
 
 #if defined(__cplusplus)
 }

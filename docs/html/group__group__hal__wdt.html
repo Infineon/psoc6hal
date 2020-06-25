@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="cypress_logo.png"/></a></td>
+  <td id="projectlogo"><a href="http://www.cypress.com/"><img alt="Logo" src="logo.png"/></a></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Hardware Abstraction Layer (HAL)</div>
   </td>
@@ -108,7 +108,7 @@ Quick Start</h1>
 Code Snippet</h1>
 <h2><a class="anchor" id="subsection_wdt_snippet1"></a>
 Snippet 1: Initialize the WDT and reset the</h2>
-<p>WDT periodically The following snippet initializes the WDT and illustrates how to reset the WDT within the timeout interval. </p><div class="fragment"><div class="line"><span class="preprocessor">    #define GPIO_LED    P13_7</span></div><div class="line"><span class="preprocessor">    #define LED_ON      0u</span></div><div class="line"><span class="preprocessor">    #define LED_OFF     1u</span></div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> wdt_obj;</div><div class="line">    uint32_t timeout_ms = 2000; <span class="comment">/* Minimum value of timeout_ms is 1ms */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Initializing WDT */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init</a>(&amp;wdt_obj, timeout_ms);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the pin connected to an LED on the board */</span></div><div class="line">    <a class="code" href="group__group__hal__gpio.html#gab93322030909d3af6a9fc1a3b2eccbaa">cyhal_gpio_init</a>(GPIO_LED, <a class="code" href="group__group__hal__gpio.html#gga54f023b4b455556095b64f4f5d7e3446a846ce42fac8d332495aaa45b93d671ec">CYHAL_GPIO_DIR_OUTPUT</a>, <a class="code" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a697e0520cb1b71b748bb76eaafb3ad1b">CYHAL_GPIO_DRIVE_STRONG</a>, LED_OFF);</div><div class="line"></div><div class="line">    <span class="comment">/* Device has restarted due to Watchdog timeout - blink LED twice*/</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__hal__system.html#gga53ba6a7416574a1b03890d23b7a90264a28d2eb1bf90f731f930c487d8dcd8079">CYHAL_SYSTEM_RESET_WDT</a> == <a class="code" href="group__group__hal__system.html#ga9a7b601e0b06a896860f411103a4abc6">cyhal_system_get_reset_reason</a>())</div><div class="line">    {</div><div class="line">        <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(GPIO_LED, LED_ON);</div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line">        <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(GPIO_LED, LED_OFF);</div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line">        <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(GPIO_LED, LED_ON);</div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line">        <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(GPIO_LED, LED_OFF);</div><div class="line">    }</div><div class="line">    <span class="comment">/* Device power-on reset or XRES event - blink LED once */</span></div><div class="line">    <span class="keywordflow">else</span></div><div class="line">    {</div><div class="line">        <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(GPIO_LED, LED_ON);</div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line">        <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(GPIO_LED, LED_OFF);</div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize WDT */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init</a>(&amp;wdt_obj, timeout_ms);</div><div class="line"></div><div class="line">    <span class="keywordflow">for</span> ( ; ; )</div><div class="line">    {</div><div class="line">        <span class="comment">/* This delay emulates an application task executed between subsequent</span></div><div class="line"><span class="comment">        WDT kicks. Increasing this delay to beyond the programmed WDT timeout will</span></div><div class="line"><span class="comment">        cause a device reset. */</span></div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(1000);</div><div class="line"></div><div class="line">        <span class="comment">/* Reset the WDT and avoid a device reset */</span></div><div class="line">        <a class="code" href="group__group__hal__wdt.html#gaeb43bee6a246da3eedfb5d06fbd226de">cyhal_wdt_kick</a>(&amp;wdt_obj);</div><div class="line">    }</div></div><!-- fragment --><table class="memberdecls">
+<p>WDT periodically The following snippet initializes the WDT and illustrates how to reset the WDT within the timeout interval. </p><div class="fragment"><div class="line"><span class="preprocessor">    #define LED_ON      0u</span></div><div class="line"><span class="preprocessor">    #define LED_OFF     1u</span></div><div class="line"></div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line">    <a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> wdt_obj;</div><div class="line">    uint32_t timeout_ms = 2000; <span class="comment">/* Minimum value of timeout_ms is 1ms */</span></div><div class="line"></div><div class="line">    <span class="comment">/* Initializing WDT */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init</a>(&amp;wdt_obj, timeout_ms);</div><div class="line">    CY_ASSERT(<a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a> == rslt);</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the pin connected to an LED on the board */</span></div><div class="line">    <a class="code" href="group__group__hal__gpio.html#gab93322030909d3af6a9fc1a3b2eccbaa">cyhal_gpio_init</a>(CYBSP_USER_LED, <a class="code" href="group__group__hal__gpio.html#gga54f023b4b455556095b64f4f5d7e3446a846ce42fac8d332495aaa45b93d671ec">CYHAL_GPIO_DIR_OUTPUT</a>, <a class="code" href="group__group__hal__gpio.html#gga2eb76143375648febb0ef73f00a681b2a697e0520cb1b71b748bb76eaafb3ad1b">CYHAL_GPIO_DRIVE_STRONG</a>, CYBSP_LED_STATE_OFF);</div><div class="line"></div><div class="line">    <span class="comment">/* Device power-on reset or XRES event - blink LED once */</span></div><div class="line">    <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(CYBSP_USER_LED, CYBSP_LED_STATE_ON);</div><div class="line">    <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line">    <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(CYBSP_USER_LED, CYBSP_LED_STATE_OFF);</div><div class="line">    <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line"></div><div class="line">    <span class="comment">/* Device has restarted due to Watchdog timeout - blink a second time */</span></div><div class="line">    <span class="keywordflow">if</span> (<a class="code" href="group__group__hal__system.html#gga53ba6a7416574a1b03890d23b7a90264a28d2eb1bf90f731f930c487d8dcd8079">CYHAL_SYSTEM_RESET_WDT</a> == <a class="code" href="group__group__hal__system.html#ga9a7b601e0b06a896860f411103a4abc6">cyhal_system_get_reset_reason</a>())</div><div class="line">    {</div><div class="line">        <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(CYBSP_USER_LED, CYBSP_LED_STATE_ON);</div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line">        <a class="code" href="group__group__hal__gpio.html#gaf66e7c3ed7b3b0711635d7687ae92291">cyhal_gpio_write</a>(CYBSP_USER_LED, CYBSP_LED_STATE_OFF);</div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(100);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize WDT */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init</a>(&amp;wdt_obj, timeout_ms);</div><div class="line"></div><div class="line">    <span class="keywordflow">for</span> ( ; ; )</div><div class="line">    {</div><div class="line">        <span class="comment">/* This delay emulates an application task executed between subsequent</span></div><div class="line"><span class="comment">        WDT kicks. Increasing this delay to beyond the programmed WDT timeout will</span></div><div class="line"><span class="comment">        cause a device reset. */</span></div><div class="line">        <a class="code" href="group__group__hal__system.html#ga5f450769c1207d98134a9ced39adfdda">cyhal_system_delay_ms</a>(1000);</div><div class="line"></div><div class="line">        <span class="comment">/* Reset the WDT and avoid a device reset */</span></div><div class="line">        <a class="code" href="group__group__hal__wdt.html#gaeb43bee6a246da3eedfb5d06fbd226de">cyhal_wdt_kick</a>(&amp;wdt_obj);</div><div class="line">    }</div></div><!-- fragment --><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 API Reference</h2></td></tr>
 <tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
@@ -117,27 +117,30 @@ API Reference</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga4f2a8a684b8a76b92b9417637bb55697"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj, uint32_t timeout_ms)</td></tr>
+<tr class="memitem:ga4f2a8a684b8a76b92b9417637bb55697"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697">cyhal_wdt_init</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj, uint32_t timeout_ms)</td></tr>
 <tr class="memdesc:ga4f2a8a684b8a76b92b9417637bb55697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize and start the WDT.  <a href="#ga4f2a8a684b8a76b92b9417637bb55697">More...</a><br /></td></tr>
 <tr class="separator:ga4f2a8a684b8a76b92b9417637bb55697"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga976a8b0fe8fe66f89311cfca18768b13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#ga976a8b0fe8fe66f89311cfca18768b13">cyhal_wdt_free</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
+<tr class="memitem:ga976a8b0fe8fe66f89311cfca18768b13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#ga976a8b0fe8fe66f89311cfca18768b13">cyhal_wdt_free</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
 <tr class="memdesc:ga976a8b0fe8fe66f89311cfca18768b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the WDT.  <a href="#ga976a8b0fe8fe66f89311cfca18768b13">More...</a><br /></td></tr>
 <tr class="separator:ga976a8b0fe8fe66f89311cfca18768b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaeb43bee6a246da3eedfb5d06fbd226de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gaeb43bee6a246da3eedfb5d06fbd226de">cyhal_wdt_kick</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
+<tr class="memitem:gaeb43bee6a246da3eedfb5d06fbd226de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gaeb43bee6a246da3eedfb5d06fbd226de">cyhal_wdt_kick</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
 <tr class="memdesc:gaeb43bee6a246da3eedfb5d06fbd226de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the WDT.  <a href="#gaeb43bee6a246da3eedfb5d06fbd226de">More...</a><br /></td></tr>
 <tr class="separator:gaeb43bee6a246da3eedfb5d06fbd226de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaae8da9770e8e061c341bf9f604b91260"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gaae8da9770e8e061c341bf9f604b91260">cyhal_wdt_start</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
+<tr class="memitem:gaae8da9770e8e061c341bf9f604b91260"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gaae8da9770e8e061c341bf9f604b91260">cyhal_wdt_start</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
 <tr class="memdesc:gaae8da9770e8e061c341bf9f604b91260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start (enable) the WDT.  <a href="#gaae8da9770e8e061c341bf9f604b91260">More...</a><br /></td></tr>
 <tr class="separator:gaae8da9770e8e061c341bf9f604b91260"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac4a8ed58907508cc2ebf9a29c2d86f39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gac4a8ed58907508cc2ebf9a29c2d86f39">cyhal_wdt_stop</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
+<tr class="memitem:gac4a8ed58907508cc2ebf9a29c2d86f39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gac4a8ed58907508cc2ebf9a29c2d86f39">cyhal_wdt_stop</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
 <tr class="memdesc:gac4a8ed58907508cc2ebf9a29c2d86f39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop (disable) the WDT.  <a href="#gac4a8ed58907508cc2ebf9a29c2d86f39">More...</a><br /></td></tr>
 <tr class="separator:gac4a8ed58907508cc2ebf9a29c2d86f39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga84de4fa0ac7dbacb681e82a5df94f6d5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#ga84de4fa0ac7dbacb681e82a5df94f6d5">cyhal_wdt_get_timeout_ms</a> (<a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
+<tr class="memitem:ga84de4fa0ac7dbacb681e82a5df94f6d5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#ga84de4fa0ac7dbacb681e82a5df94f6d5">cyhal_wdt_get_timeout_ms</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
 <tr class="memdesc:ga84de4fa0ac7dbacb681e82a5df94f6d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the WDT timeout.  <a href="#ga84de4fa0ac7dbacb681e82a5df94f6d5">More...</a><br /></td></tr>
 <tr class="separator:ga84de4fa0ac7dbacb681e82a5df94f6d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf121c3f36d38b275c1887b8fddf96a3f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gaf121c3f36d38b275c1887b8fddf96a3f">cyhal_wdt_get_max_timeout_ms</a> (void)</td></tr>
 <tr class="memdesc:gaf121c3f36d38b275c1887b8fddf96a3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the maximum WDT timeout in milliseconds.  <a href="#gaf121c3f36d38b275c1887b8fddf96a3f">More...</a><br /></td></tr>
 <tr class="separator:gaf121c3f36d38b275c1887b8fddf96a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae57e067322093d0170563c9609890f7c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__wdt.html#gae57e067322093d0170563c9609890f7c">cyhal_wdt_is_enabled</a> (<a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *obj)</td></tr>
+<tr class="memdesc:gae57e067322093d0170563c9609890f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if WDT is enabled.  <a href="#gae57e067322093d0170563c9609890f7c">More...</a><br /></td></tr>
+<tr class="separator:gae57e067322093d0170563c9609890f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga4f2a8a684b8a76b92b9417637bb55697"></a>
@@ -149,7 +152,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> cyhal_wdt_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
         </tr>
         <tr>
@@ -171,7 +174,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">obj</td><td>Pointer to a WDT object. The caller must allocate the memory for this object but the init function will initialize its contents. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">timeout_ms</td><td>The time in milliseconds before the WDT times out (1ms - max) (see <a class="el" href="group__group__hal__wdt.html#gaf121c3f36d38b275c1887b8fddf96a3f" title="Gets the maximum WDT timeout in milliseconds. ">cyhal_wdt_get_max_timeout_ms()</a>) </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">timeout_ms</td><td>The time in milliseconds before the WDT times out (1ms - max) (see <a class="el" href="group__group__hal__wdt.html#gaf121c3f36d38b275c1887b8fddf96a3f" title="Gets the maximum WDT timeout in milliseconds. ">cyhal_wdt_get_max_timeout_ms()</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -189,7 +192,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_wdt_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -216,7 +219,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_wdt_kick </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -244,7 +247,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_wdt_start </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -271,7 +274,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cyhal_wdt_stop </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -298,7 +301,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">uint32_t cyhal_wdt_get_timeout_ms </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__group__hal__psoc6__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -309,7 +312,7 @@ Functions</h2></td></tr>
 <p>Gets the time in milliseconds before the WDT times out.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">obj</td><td>The WDT object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The WDT object </td></tr>
   </table>
   </dd>
 </dl>
@@ -335,6 +338,33 @@ Functions</h2></td></tr>
 
 <p>Gets the maximum WDT timeout in milliseconds. </p>
 <dl class="section return"><dt>Returns</dt><dd>The maximum timeout for the WDT </dd></dl>
+
+</div>
+</div>
+<a id="gae57e067322093d0170563c9609890f7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae57e067322093d0170563c9609890f7c">&#9670;&nbsp;</a></span>cyhal_wdt_is_enabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cyhal_wdt_is_enabled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__group__hal__impl__hw__types.html#structcyhal__wdt__t">cyhal_wdt_t</a> *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if WDT is enabled. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The WDT object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The status of WDT is_enabled request </dd></dl>
 
 </div>
 </div>
