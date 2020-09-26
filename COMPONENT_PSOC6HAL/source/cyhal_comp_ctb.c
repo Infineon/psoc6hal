@@ -50,11 +50,7 @@ static cyhal_comp_t* _cyhal_comp_ctb_config_structs[CY_IP_MXS40PASS_CTB_INSTANCE
 static const IRQn_Type _cyhal_ctb_irq_n[] =
 {
 #if (CY_IP_MXS40PASS_CTB_INSTANCES == 1)
-#if (CY_IP_MXS40PASS_VERSION == 1)
-        pass_interrupt_ctbs_IRQn,
-#else
-        pass_interrupt_ctb_IRQn,
-#endif
+    pass_interrupt_ctbs_IRQn,
 #endif
 #if (CY_IP_MXS40PASS_CTB_INSTANCES > 1)
     #error Unhandled CTB instance count

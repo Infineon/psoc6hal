@@ -5,7 +5,7 @@
 * PSoC6_02 device GPIO HAL header for 100-WLCSP package
 *
 * \note
-* Generator version: 1.6.7473.26498
+* Generator version: 1.6.0.229
 *
 ********************************************************************************
 * \copyright

@@ -1,6 +1,6 @@
 var group__group__hal__lptimer =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "LPTimer HAL Results", "group__group__hal__results__lptimer.html", "group__group__hal__results__lptimer" ],
     [ "cyhal_lptimer_info_t", "group__group__hal__lptimer.html#structcyhal__lptimer__info__t", [
       [ "frequency_hz", "group__group__hal__lptimer.html#a4e13c1d5a49242cc9c88c1ae28eaa6d1", null ],
       [ "min_set_delay", "group__group__hal__lptimer.html#ad0043d671bf3be7655d7701d6fbedcb8", null ],

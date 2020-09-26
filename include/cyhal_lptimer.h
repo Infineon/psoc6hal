@@ -34,6 +34,7 @@
 * LPTimer can operate in all possible low power modes. It can be used either to measure timing between events, or to perform
 * some action after a specified interval of time.
 * \section subsection_lptimer_features Features
+* * Wake the device up from deepsleep
 * * Configurable to create a free-running timer or generate periodic interrupts.
 * * Configurable to update the match value of an already configured LPTimer set up to generate an interrupt on match.
 * * Used for measuring time between events in free-running mode.
@@ -67,9 +68,10 @@
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_lptimer LPTimer HAL Results
+ *  LPTimer specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name LPTimer Results
  */
 
 /** Failed to configure power management callback */
@@ -77,7 +79,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_WDT, 0))
 
 /**
- * \} \}
+ * \}
  */
 
 /** LPTimer Information */
@@ -136,6 +138,7 @@ cy_rslt_t cyhal_lptimer_reload(cyhal_lptimer_t *obj);
  * to generate an interrupt on match. Note that this function does not
  * reinitialize the counter or the associated peripheral initialization
  * sequence.
+ * \note This does not reset the counter.
  *
  * @param[in] obj   The LPTimer object
  * @param[in] value The tick value to match
@@ -151,6 +154,7 @@ cy_rslt_t cyhal_lptimer_set_match(cyhal_lptimer_t *obj, uint32_t value);
  * Note that this function does not reinitialize the counter or the
  * associated peripheral initialization
  * sequence.
+ * \note This does not reset the counter.
  *
  * @param[in] obj   The LPTimer object
  * @param[in] delay The ticks to wait. The minimum permitted delay value can be

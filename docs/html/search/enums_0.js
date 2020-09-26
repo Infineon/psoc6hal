@@ -58,6 +58,7 @@ var searchData=
   ['cyhal_5fsdhc_5fevent_5ft',['cyhal_sdhc_event_t',['../group__group__hal__sdhc.html#gab58a2ffca59383a72cf8bc49d74cf17b',1,'cyhal_sdhc.h']]],
   ['cyhal_5fsdio_5fcommand_5ft',['cyhal_sdio_command_t',['../group__group__hal__sdio.html#ga25cddf5200bffe914579005c59d0c0e3',1,'cyhal_sdio.h']]],
   ['cyhal_5fsdio_5fevent_5ft',['cyhal_sdio_event_t',['../group__group__hal__sdio.html#gaabd12f41a517ee8a5097479ec0101d3a',1,'cyhal_sdio.h']]],
+  ['cyhal_5fsignal_5fdigital_5fout_5ft',['cyhal_signal_digital_out_t',['../group__group__hal__results.html#ga6df5063be354515111d4f0b83d6128fc',1,'cyhal_general_types.h']]],
   ['cyhal_5fspi_5fevent_5ft',['cyhal_spi_event_t',['../group__group__hal__spi.html#gae8f0cf0233d0225a80815f8282d87b85',1,'cyhal_spi.h']]],
   ['cyhal_5fspi_5fmode_5ft',['cyhal_spi_mode_t',['../group__group__hal__spi.html#gaf56d895e50b0cf0e858a1ff221c58d51',1,'cyhal_spi.h']]],
   ['cyhal_5fspi_5fssel_5fpolarity_5ft',['cyhal_spi_ssel_polarity_t',['../group__group__hal__spi.html#gabfadf37558e1092ac2fe3a5bd2b912d5',1,'cyhal_spi.h']]],

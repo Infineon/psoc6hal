@@ -1,6 +1,6 @@
 var group__group__hal__sdio =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "SDIO HAL Results", "group__group__hal__results__sdio.html", "group__group__hal__results__sdio" ],
     [ "cyhal_sdio_cfg_t", "group__group__hal__sdio.html#structcyhal__sdio__cfg__t", [
       [ "frequencyhal_hz", "group__group__hal__sdio.html#a5a5ce0393c501c3675d683f5076bdd0a", null ],
       [ "block_size", "group__group__hal__sdio.html#a918b317033419d8b40d052a4f88aa91c", null ]

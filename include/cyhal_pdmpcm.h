@@ -90,9 +90,10 @@ PSoC 6 MCU: PDM to I2S</b></a>
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_pdmpcm PDM/PCM HAL Results
+ *  PDM/PCM specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name PDM/PCM Results
  */
 
 /** The pin PDM/PCM hardware cannot be initialized with the passed in pin */
@@ -107,7 +108,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_PDMPCM, 2))
 
 /**
- * \} \}
+ * \}
  */
 
 /** PDM/PCM interrupt triggers */

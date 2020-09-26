@@ -5,7 +5,7 @@
 * PSoC6_01 device GPIO HAL header for 124-BGA package
 *
 * \note
-* Generator version: 1.6.7458.30860
+* Generator version: 1.6.0.229
 *
 ********************************************************************************
 * \copyright

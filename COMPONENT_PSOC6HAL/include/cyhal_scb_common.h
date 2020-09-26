@@ -108,6 +108,26 @@ void _cyhal_scb_update_instance_data(uint8_t block_num, void *obj, cyhal_scb_ins
 /** Whether power management transition is pending and communication should be suspended. */
 bool _cyhal_scb_pm_transition_pending(void);
 
+/** Finds the en_clk_dst_t clock connection index for provided SCB block number
+ *
+ * @param[in] block_num Index of SCB block
+ * @return en_clk_dst_t clock connection index
+ */
+static inline en_clk_dst_t _cyhal_scb_get_clock_index(uint32_t block_num)
+{
+    en_clk_dst_t clk;
+    // PSOC6A256K does not have SCB 3
+    #if defined(CY_DEVICE_PSOC6A256K)
+    if (block_num < 3)
+        clk = (en_clk_dst_t)((uint32_t)PCLK_SCB0_CLOCK + block_num);
+    else
+        clk = (en_clk_dst_t)((uint32_t)PCLK_SCB0_CLOCK + block_num -1);
+    #else
+        clk = (en_clk_dst_t)((uint32_t)PCLK_SCB0_CLOCK + block_num);
+    #endif
+    return clk;
+}
+
 #if defined(__cplusplus)
 }
 #endif

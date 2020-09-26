@@ -1,6 +1,7 @@
 var group__group__hal__clock =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "Clock HAL Results", "group__group__hal__results__clock.html", "group__group__hal__results__clock" ],
+    [ "Group_hal_tolerance", "group__group__hal__tolerance.html", "group__group__hal__tolerance" ],
     [ "cyhal_clock_tolerance_t", "group__group__hal__clock.html#structcyhal__clock__tolerance__t", [
       [ "type", "group__group__hal__clock.html#a40d24ccae9f6f78e2c94d5fdbef1f355", null ],
       [ "value", "group__group__hal__clock.html#a616d2f8495efbc9076a57ae15a76ec24", null ]

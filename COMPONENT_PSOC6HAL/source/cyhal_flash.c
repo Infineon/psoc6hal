@@ -41,7 +41,13 @@ typedef cy_en_flashdrv_status_t (*_cyhal_flash_operation)(uint32_t rowAddr, cons
 
 static bool _cyhal_flash_pm_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_callback_mode_t mode, void* callback_arg);
 
-static const cyhal_flash_block_info_t _CYHAL_FLASH_BLOCKS[2] =
+#if (CY_EM_EEPROM_SIZE > 0)
+#define _CYHAL_INTERNAL_MEMORY_BLOCKS 2
+#else
+#define _CYHAL_INTERNAL_MEMORY_BLOCKS 1
+#endif
+
+static const cyhal_flash_block_info_t _CYHAL_FLASH_BLOCKS[_CYHAL_INTERNAL_MEMORY_BLOCKS] =
 {
     // Main Flash
     {
@@ -52,6 +58,7 @@ static const cyhal_flash_block_info_t _CYHAL_FLASH_BLOCKS[2] =
         .erase_value = 0x00U,
     },
     // Working Flash
+#if (CY_EM_EEPROM_SIZE > 0)
     {
         .start_address = CY_EM_EEPROM_BASE,
         .size = CY_EM_EEPROM_SIZE,
@@ -59,6 +66,7 @@ static const cyhal_flash_block_info_t _CYHAL_FLASH_BLOCKS[2] =
         .page_size = CY_FLASH_SIZEOF_ROW,
         .erase_value = 0x00U,
     },
+#endif
 };
 
 static uint8_t _cyhal_flash_write_buf[CY_FLASH_SIZEOF_ROW];
@@ -175,7 +183,7 @@ void cyhal_flash_get_info(const cyhal_flash_t *obj, cyhal_flash_info_t *info)
     CY_UNUSED_PARAMETER(obj);
     CY_ASSERT(NULL != obj);
 
-    info->block_count = 2;
+    info->block_count = _CYHAL_INTERNAL_MEMORY_BLOCKS;
     info->blocks = &_CYHAL_FLASH_BLOCKS[0];
 }
 

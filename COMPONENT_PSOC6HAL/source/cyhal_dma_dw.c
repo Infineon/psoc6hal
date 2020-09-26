@@ -215,8 +215,6 @@ static inline cyhal_dma_event_t _cyhal_dma_dw_convert_interrupt_cause(cy_en_dma_
 {
     switch(cause)
     {
-        case CY_DMA_INTR_CAUSE_NO_INTR:
-            return CYHAL_DMA_NO_INTR;
         case CY_DMA_INTR_CAUSE_COMPLETION:
             return CYHAL_DMA_TRANSFER_COMPLETE;
         case CY_DMA_INTR_CAUSE_SRC_BUS_ERROR:
@@ -378,8 +376,8 @@ cy_rslt_t _cyhal_dma_dw_configure(cyhal_dma_t *obj, const cyhal_dma_cfg_t *cfg)
     /* src_misal and dst_misal interrupts are triggered immediately on enable
      * so return those errors here */
     uint32_t status = Cy_DMA_Channel_GetInterruptStatus(base, obj->resource.channel_num);
-    if((status & CY_DMA_INTR_CAUSE_SRC_MISAL) ||
-       (status & CY_DMA_INTR_CAUSE_DST_MISAL))
+    if((status == CY_DMA_INTR_CAUSE_SRC_MISAL) ||
+       (status == CY_DMA_INTR_CAUSE_DST_MISAL))
     {
         Cy_DMA_Channel_ClearInterrupt(base, obj->resource.channel_num);
         return CYHAL_DMA_RSLT_ERR_INVALID_ALIGNMENT;

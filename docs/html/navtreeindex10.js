@@ -1,5 +1,11 @@
 var NAVTREEINDEX10 =
 {
+"group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga1dee1079787b327aaadd8553f0d8f32a":[1,2,6,7,81],
+"group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga1e34a5031107cfb58ccf32d07474d841":[1,2,6,7,103],
+"group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga1e90214182084da73ab43d401d35eadf":[1,2,6,7,24],
+"group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga2095568584c3fb5eb0ad068f88a08760":[1,2,6,7,35],
+"group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga20b810ee598a528bb9b042d6a9c23b92":[1,2,6,7,133],
+"group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga20bf75b3ca03d6349831c2534123e0fa":[1,2,6,7,30],
 "group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga20ff8d7878bb6868b15de20d594b3964":[1,2,6,7,36],
 "group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga2128493c7b6f12d251f885e244a38f9e":[1,2,6,7,132],
 "group__group__hal__impl__pin__package__psoc6__01__68__qfn__ble.html#ga21e7cb5c4b8b30c1edeb3354cec5a201":[1,2,6,7,57],
@@ -243,11 +249,5 @@ var NAVTREEINDEX10 =
 "group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga614cbdcadc7ceb0a154df9770456ba06":[1,2,6,8,60],
 "group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga61898ffb81ac872174375500a7ffb7d3":[1,2,6,8,18],
 "group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga63377551ffe0293e4f4828e9dcd23fbd":[1,2,6,8,118],
-"group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga67a486e3c3942498f6e545301ecdca32":[1,2,6,8,62],
-"group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga6a946dbc62a3caf3017830f771bee583":[1,2,6,8,16],
-"group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga6ae1bf5b127b601bb8e928b13d7cd576":[1,2,6,8,139],
-"group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga6af64a8a5a49301c522030ca552c3855":[1,2,6,8,19],
-"group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga6b5a0a7d4efcdd544ce7c02beb1539e8":[1,2,6,8,23],
-"group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga7266876b104bc8e839114fff692f96a7":[1,2,6,8,61],
-"group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga7362c3ff1fc18495265bc70235fee148":[1,2,6,8,133]
+"group__group__hal__impl__pin__package__psoc6__01__80__wlcsp.html#ga67a486e3c3942498f6e545301ecdca32":[1,2,6,8,62]
 };

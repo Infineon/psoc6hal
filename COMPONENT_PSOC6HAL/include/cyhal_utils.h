@@ -49,6 +49,19 @@ extern "C" {
 * \{
 */
 
+/** Attempts to reserve a resource block that connects to the specified pin from the provided resource pin mapping table.
+  * If the first matching block cannot be reserved, this will continue searching until either a match is successfully
+  * reserved or the end of the table is reached.
+ * This is a convenience utility for _cyhal_utils_get_resource() if the mappings is an array of known size.
+  *
+  * @param[in] pin      The pin to which the reserved hardware block must connect
+  * @param[in] mappings The mapping of pin to hardware block
+  * @return The entry for the specified pin corresponding to the reserved block, if it exists and was successfully reserved.
+            Otherwise, NULL.
+  */
+#define _CYHAL_UTILS_TRY_ALLOC(pin, mappings) \
+    _cyhal_utils_try_alloc(pin, mappings, sizeof(mappings)/sizeof(cyhal_resource_pin_mapping_t))
+
 /** Looks up the resource block that connects to the specified pins from the provided resource pin mapping table.
  * This is a convenience utility for _cyhal_utils_get_resource() if the mappings is an array of known size.
  *
@@ -56,7 +69,7 @@ extern "C" {
  * @param[in] mappings   The mappings of pin to hardware block
  * @return The entry for the specified pin if it exists, or null if it doesn't.
  */
-#define _CYHAL_UTILS_GET_RESOURCE(pin, mappings) _cyhal_utils_get_resource(pin, mappings, sizeof(mappings)/sizeof(cyhal_resource_pin_mapping_t))
+#define _CYHAL_UTILS_GET_RESOURCE(pin, mappings) _cyhal_utils_get_resource(pin, mappings, sizeof(mappings)/sizeof(cyhal_resource_pin_mapping_t), NULL)
 
 /** Converts the provided gpio pin to a resource instance object
  *
@@ -74,9 +87,10 @@ static inline cyhal_resource_inst_t _cyhal_utils_get_gpio_resource(cyhal_gpio_t 
  * @param[in] pin        The pin to lookup the hardware block for
  * @param[in] mappings   The mappings of pin to hardware block
  * @param[in] count      The number of items in the mappings table
+ * @param[in] block_res  If not NULL, find pin mapping, that belongs to specified block
  * @return The entry for the specified pin if it exists, or null if it doesn't.
  */
-const cyhal_resource_pin_mapping_t *_cyhal_utils_get_resource(cyhal_gpio_t pin, const cyhal_resource_pin_mapping_t* mappings, size_t count);
+const cyhal_resource_pin_mapping_t *_cyhal_utils_get_resource(cyhal_gpio_t pin, const cyhal_resource_pin_mapping_t* mappings, size_t count, const cyhal_resource_inst_t* block_res);
 
 /** Attempts to reserve a resource block that connects to the specified pin from the provided resource pin mapping table.
   * If the first matching block cannot be reserved, this will continue searching until either a match is successfully
@@ -267,9 +281,21 @@ cy_rslt_t _cyhal_utils_allocate_clock(cyhal_clock_t *clock, const cyhal_resource
  */
 cy_rslt_t _cyhal_utils_set_clock_frequency(cyhal_clock_t* clock, uint32_t hz, const cyhal_clock_tolerance_t *tolerance);
 
+/**
+ * Attempts to set the clock to the specified frequency. This is similar to cyhal_clock_set_frequency, but it will also make
+ * an attempt to set the frequency for HFCLK outputs. This is an enhancement beyond _cyhal_utils_set_clock_frequency as this
+ * will also attemt to adjust the source clock as well as change the divider.
+ *
+ * @param[in] clock     The HFCLK clock instance to set the frequency for.
+ * @param[in] hz        The maximum frequency, in hertz, to set the clock to. The clock will not exceed this value.
+ * @param[in] tolerance The allowed tolerance below the desired hz that is acceptable, use NULL if no
+ *                      tolerance check is required.
+ */
+cy_rslt_t _cyhal_utils_set_clock_frequency2(cyhal_clock_t *clock, uint32_t hz, const cyhal_clock_tolerance_t *tolerance);
+
 /* Compatibility macros until other environments are updated to not use this anymore. */
 #define CY_UTILS_GET_RESOURCE(pin, mappings)            _CYHAL_UTILS_GET_RESOURCE(pin, mappings)
-#define cyhal_utils_get_resource(pin, mappings, count)  _cyhal_utils_get_resource(pin, mappings, count)
+#define cyhal_utils_get_resource(pin, mappings, count)  _cyhal_utils_get_resource(pin, mappings, count, NULL)
 #define cyhal_utils_get_gpio_resource(pin)              _cyhal_utils_get_gpio_resource(pin)
 #define CYHAL_SCB_BASE_ADDRESSES                        _CYHAL_SCB_BASE_ADDRESSES
 #define CYHAL_TCPWM_DATA                                _CYHAL_TCPWM_DATA

@@ -70,9 +70,10 @@
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_dac DAC HAL Results
+ *  DAC specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name DAC Results
  */
 
 /** Bad argument */
@@ -89,7 +90,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_DAC, 1))
 
 /**
- * \} \}
+ * \}
  */
 
 /** Reference choices for the DAC */

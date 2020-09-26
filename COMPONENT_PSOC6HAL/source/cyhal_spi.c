@@ -397,11 +397,12 @@ cy_rslt_t cyhal_spi_init(cyhal_spi_t *obj, cyhal_gpio_t mosi, cyhal_gpio_t miso,
     }
 
     const cyhal_resource_inst_t *spi_inst = (NC != mosi)
-        ? mosi_map->inst
-        : miso_map->inst;
+        ? (mosi_map != NULL ? mosi_map->inst : NULL)
+        : (miso_map != NULL ? miso_map->inst : NULL);
 
     /* Validate pins mapping */
-    if (((NC != mosi) && ((NULL == mosi_map) || !_cyhal_utils_resources_equal(spi_inst, mosi_map->inst))) ||
+    if (NULL == spi_inst ||
+        ((NC != mosi) && ((NULL == mosi_map) || !_cyhal_utils_resources_equal(spi_inst, mosi_map->inst))) ||
         ((NC != miso) && ((NULL == miso_map) || !_cyhal_utils_resources_equal(spi_inst, miso_map->inst))) ||
         ((NC != sclk) && ((NULL == sclk_map) || !_cyhal_utils_resources_equal(spi_inst, sclk_map->inst))) ||
         ((is_slave) && ((NC != ssel) && ((NULL == ssel_map) || !_cyhal_utils_resources_equal(spi_inst, ssel_map->inst)))))
@@ -478,7 +479,7 @@ cy_rslt_t cyhal_spi_init(cyhal_spi_t *obj, cyhal_gpio_t mosi, cyhal_gpio_t miso,
     if (result == CY_RSLT_SUCCESS)
     {
         result = (cy_rslt_t)Cy_SysClk_PeriphAssignDivider(
-                (en_clk_dst_t)((uint32_t)PCLK_SCB0_CLOCK + obj->resource.block_num),
+                _cyhal_scb_get_clock_index(obj->resource.block_num),
                 (cy_en_divider_types_t)obj->clock.block, obj->clock.channel);
 
         if (result == CY_RSLT_SUCCESS)

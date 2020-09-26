@@ -35,43 +35,43 @@
 * and the corresponding hardware resource. This is intended to help understand how the HAL
 * is implemented for PSoC 6 and what features the underlying hardware supports.
 *
-* | HAL Resource     | PDL Driver(s)       | PSoC 6 Hardware                  |
-* | ---------------- | ------------------- | -------------------------------- |
-* | ADC              | cy_adc              | SAR ADC                          |
-* | Clock            | cy_sysclk           | All clocks (system & peripheral) |
-* | Comparator       | cy_ctb or cy_lpcomp | CTBm or LPComp                   |
-* | CRC              | cy_crypto_core_crc  | Crypto                           |
-* | DAC              | cy_ctdac            | DAC                              |
-* | DMA              | cy_dma, cy_dmac     | DMA Controller                   |
-* | EZ-I2C           | cy_scb_ezi2c        | SCB                              |
-* | Flash            | cy_flash            | Flash                            |
-* | GPIO             | cy_gpio             | GPIO                             |
-* | Hardware Manager | NA                  | NA                               |
-* | I2C              | cy_scb_i2c          | SCB                              |
-* | I2S              | cy_i2s              | I2S                              |
-* | LPTimer          | cy_mcwdt            | MCWDT                            |
-* | Opamp            | cy_ctb              | CTBm                             |
-* | PDM/PCM          | cy_pdm_pcm          | PDM-PCM                          |
-* | PWM              | cy_pwm              | TCPWM                            |
-* | QSPI             | cy_smif             | QSPI (SMIF)                      |
-* | RTC              | cy_rtc              | RTC                              |
-* | SDHC             | cy_sd_host          | SD Host                          |
-* | SDIO             | cy_sd_host, or NA   | SD Host, or UDB                  |
-* | SPI              | cy_scb_spi          | SCB                              |
-* | SysPM            | cy_syspm            | System Power Resources           |
-* | System           | cy_syslib           | System Resources                 |
-* | Timer            | cy_tcpwm_counter    | TCPWM                            |
-* | TRNG             | cy_crypto_core_trng | Crypto                           |
-* | UART             | cy_scb_uart         | SCB                              |
-* | USB Device       | cy_usbfs_dev_drv    | USB-FS                           |
-* | WDT              | cy_wdt              | WDT                              |
+* | HAL Resource       | PDL Driver(s)       | PSoC 6 Hardware                  |
+* | ------------------ | ------------------- | -------------------------------- |
+* | ADC                | cy_adc              | SAR ADC                          |
+* | Clock              | cy_sysclk           | All clocks (system & peripheral) |
+* | Comparator         | cy_ctb or cy_lpcomp | CTBm or LPComp                   |
+* | CRC                | cy_crypto_core_crc  | Crypto                           |
+* | DAC                | cy_ctdac            | DAC                              |
+* | DMA                | cy_dma, cy_dmac     | DMA Controller                   |
+* | EZ-I2C             | cy_scb_ezi2c        | SCB                              |
+* | Flash              | cy_flash            | Flash                            |
+* | GPIO               | cy_gpio             | GPIO                             |
+* | Hardware Manager   | NA                  | NA                               |
+* | I2C                | cy_scb_i2c          | SCB                              |
+* | I2S                | cy_i2s              | I2S                              |
+* | LPTimer            | cy_mcwdt            | MCWDT                            |
+* | Opamp              | cy_ctb              | CTBm                             |
+* | PDM/PCM            | cy_pdm_pcm          | PDM-PCM                          |
+* | PWM                | cy_pwm              | TCPWM                            |
+* | QSPI               | cy_smif             | QSPI (SMIF)                      |
+* | RTC                | cy_rtc              | RTC                              |
+* | SDHC               | cy_sd_host          | SD Host                          |
+* | SDIO               | cy_sd_host, or NA   | SD Host, or UDB                  |
+* | SPI                | cy_scb_spi          | SCB                              |
+* | SysPM              | cy_syspm            | System Power Resources           |
+* | System             | cy_syslib           | System Resources                 |
+* | Timer              | cy_tcpwm_counter    | TCPWM                            |
+* | TRNG               | cy_crypto_core_trng | Crypto                           |
+* | UART               | cy_scb_uart         | SCB                              |
+* | USB Device         | cy_usbfs_dev_drv    | USB-FS                           |
+* | WDT                | cy_wdt              | WDT                              |
 *
 * \section group_hal_impl_errors Device Specific Errors
 * Error codes generated by the low level level PDL driver all use module IDs starting
 * with \ref CY_RSLT_MODULE_DRIVERS_PDL_BASE. The exact errors are documented for each
 * driver in the
-* <a href="https://cypresssemiconductorco.github.io/psoc6pdl/pdl_api_reference_manual/html/index.html">
-* psoc6pdl documentation</a>.
+* <a href="https://cypresssemiconductorco.github.io/mtb-pdl-cat1/pdl_api_reference_manual/html/index.html">
+* mtb-pdl-cat1 documentation</a>.
 */
 
 /**
@@ -144,21 +144,18 @@ typedef struct {
  * They are considered an implementation detail which is subject to change
  * between platforms and/or HAL releases.
  */
-typedef struct cyhal_tcpwm_common {
+typedef struct {
 #ifdef CY_IP_MXTCPWM
     TCPWM_Type*                  base;
     cyhal_resource_inst_t        resource;
-    cyhal_gpio_t                 pin;
     cyhal_clock_t                clock;
     bool                         dedicated_clock;
     uint32_t                     clock_hz;
     cyhal_event_callback_data_t  callback_data;
-    cyhal_gpio_t                 pin_compl;     /* PWM Only */
-    uint32_t                     default_value; /* Timer only */
 #else
     void *empty;
 #endif
-} cyhal_tcpwm_common_t;
+} cyhal_tcpwm_t;
 
 /* This is presented out of order because many other structs depend on it */
 /**
@@ -229,7 +226,8 @@ typedef struct {
     cyhal_async_mode_t              async_mode;
     cyhal_dma_t                     dma;
     /* Always updated to contain the location where the next result should be stored */
-    int32_t                         *async_buff;
+    int32_t                         *async_buff_orig;
+    int32_t                         *async_buff_next;
     bool                            async_transfer_in_uv; /* Default is counts */
     /* Only decremented after all elements from a scan have been copied into async_buff */
     size_t                          async_scans_remaining;
@@ -428,10 +426,10 @@ typedef struct {
     cyhal_dma_t                     rx_dma;
     // Note: When the async DMA mode is in use, these variables will always reflect the state
     // that the transfer will be in after the in-progress DMA transfer, if any, is complete
-    const void                      *async_tx_buff;
-    size_t                          async_tx_length;
-    void                            *async_rx_buff;
-    size_t                          async_rx_length;
+    volatile const void             *async_tx_buff;
+    volatile size_t                 async_tx_length;
+    volatile void                   *async_rx_buff;
+    volatile size_t                 async_rx_length;
     volatile bool                   pm_transition_ready;
     cyhal_syspm_callback_data_t     pm_callback;
 #else
@@ -492,10 +490,18 @@ typedef struct {
   * They are considered an implementation detail which is subject to change
   * between platforms and/or HAL releases.
   */
-typedef cyhal_tcpwm_common_t cyhal_pwm_t;
+typedef struct {
+#ifdef CY_IP_MXTCPWM
+    cyhal_tcpwm_t  tcpwm;
+    cyhal_gpio_t   pin;
+    cyhal_gpio_t   pin_compl;
+#else
+    void *empty;
+#endif
+} cyhal_pwm_t;
 
 /**
-  * @brief SMIF object
+  * @brief QSPI object
   *
   * Application code should not rely on the specific contents of this struct.
   * They are considered an implementation detail which is subject to change
@@ -512,7 +518,6 @@ typedef struct {
     cy_en_smif_slave_select_t        slave_select;
     cyhal_clock_t                    clock;
     bool                             is_clock_owned;
-    uint32_t                         frequency;
     uint8_t                          mode;
     cy_stc_smif_context_t            context;
     cy_en_smif_data_select_t         data_select;
@@ -567,6 +572,7 @@ typedef struct {
 #ifdef CY_IP_MXSDHC
     SDHC_Type*                       base;
     cyhal_resource_inst_t            resource;
+    cyhal_clock_t                    clock;
     bool                             emmc;
     cy_en_sd_host_dma_type_t         dmaType;
     bool                             enableLedControl;
@@ -603,7 +609,6 @@ typedef struct {
     cy_en_sd_host_dma_type_t                  dmaType;
     cy_stc_sd_host_context_t                  context;
 #elif defined(CYHAL_UDB_SDIO)
-    cyhal_clock_t                             clock;
     cyhal_dma_t                               dma0Ch0;
     cyhal_dma_t                               dma0Ch1;
     cyhal_dma_t                               dma1Ch1;
@@ -612,6 +617,7 @@ typedef struct {
 #endif /* defined(CY_IP_MXSDHC) */
 
 #if defined(CYHAL_UDB_SDIO) || defined(CY_IP_MXSDHC)
+    cyhal_clock_t                             clock;
     cyhal_resource_inst_t                     resource;
     cyhal_gpio_t                              pin_clk;
     cyhal_gpio_t                              pin_cmd;
@@ -681,7 +687,14 @@ typedef struct {
   * They are considered an implementation detail which is subject to change
   * between platforms and/or HAL releases.
   */
-typedef cyhal_tcpwm_common_t cyhal_timer_t;
+typedef struct {
+#ifdef CY_IP_MXTCPWM
+    cyhal_tcpwm_t  tcpwm;
+    uint32_t       default_value;
+#else
+    void *empty;
+#endif
+} cyhal_timer_t;
 
 /**
   * @brief UART object

@@ -103,6 +103,7 @@ $(document).ready(function(){initNavTree('group__group__hal__lptimer.html','');}
 <h1><a class="anchor" id="subsection_lptimer_features"></a>
 Features</h1>
 <ul>
+<li>Wake the device up from deepsleep</li>
 <li>Configurable to create a free-running timer or generate periodic interrupts.</li>
 <li>Configurable to update the match value of an already configured LPTimer set up to generate an interrupt on match.</li>
 <li>Used for measuring time between events in free-running mode.</li>
@@ -120,8 +121,8 @@ Snippet 2: LPTimer interrupts</h2>
 <p>The following snippet initializes a LPTimer and uses <a class="el" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match()</a> to trigger an interrupt on match. Subsequent interrupts can be triggered at required times using <a class="el" href="group__group__hal__lptimer.html#gae91cdc8b63ef191f5a2013df3aaa5d78">cyhal_lptimer_set_delay()</a> called from the ISR. </p><div class="fragment"><div class="line"><span class="preprocessor">#define LPTIMER_MATCH_VALUE    (8192u)</span></div><div class="line"><span class="preprocessor">#define LPTIMER_INTR_PRIORITY     (3u)</span></div><div class="line"></div><div class="line"><a class="code" href="group__group__hal__impl__hw__types.html#structcyhal__lptimer__t">cyhal_lptimer_t</a> lptimer_obj;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> snippet_lptimer_init()</div><div class="line">{</div><div class="line">    <a class="code" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> rslt;</div><div class="line"></div><div class="line">    <span class="comment">/* Initialize the LPTIMER */</span></div><div class="line">    rslt = <a class="code" href="group__group__hal__lptimer.html#gad5438541af765572369ee96588bd4ee5">cyhal_lptimer_init</a>(&amp;lptimer_obj);</div><div class="line">    CY_ASSERT(rslt == <a class="code" href="group__group__result.html#gaf58fac450d9fff4472f03ad68f6e546e">CY_RSLT_SUCCESS</a>);</div><div class="line"></div><div class="line">    <span class="comment">/* Set a match value of 8192 counts (~0.25 seconds for a clock source of 32768 Hz) */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#ga39d049f6f4bdd0bcd4e0be2ab48d3394">cyhal_lptimer_set_match</a>(&amp;lptimer_obj, LPTIMER_MATCH_VALUE);</div><div class="line"></div><div class="line">    <span class="comment">/* Register the callback handler which will be invoked when the interrupt triggers */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#gac670fa5380ffd41e548dac6975500b3d">cyhal_lptimer_register_callback</a>(&amp;lptimer_obj, lptimer_interrupt_handler, NULL);</div><div class="line"></div><div class="line">    <span class="comment">/* Configure and Enable the LPTIMER events */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#gaa07d09cfeb275d1343a335f6b4caec9c">cyhal_lptimer_enable_event</a>(&amp;lptimer_obj, CYHAL_LPTIMER_COMPARE_MATCH, LPTIMER_INTR_PRIORITY, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="comment">/* Reload/Reset the Low-Power timer to start counting from this instant */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#ga5ed361c85190707574565009eb325473">cyhal_lptimer_reload</a>(&amp;lptimer_obj);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> lptimer_interrupt_handler(<span class="keywordtype">void</span> *handler_arg, <a class="code" href="group__group__hal__lptimer.html#ga8a2db5e37e9e36afd382844cf909278f">cyhal_lptimer_event_t</a> event)</div><div class="line">{</div><div class="line">    CY_UNUSED_PARAMETER(handler_arg);</div><div class="line">    CY_UNUSED_PARAMETER(event);</div><div class="line">    <span class="comment">/* Reload/Reset the Low-Power timer to start counting from this instant */</span></div><div class="line">    <a class="code" href="group__group__hal__lptimer.html#gae91cdc8b63ef191f5a2013df3aaa5d78">cyhal_lptimer_set_delay</a>(&amp;lptimer_obj, LPTIMER_MATCH_VALUE);</div><div class="line">}</div><div class="line"></div></div><!-- fragment --><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 API Reference</h2></td></tr>
-<tr class="memitem:group__group__hal__results"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results.html">Result Codes</a></td></tr>
-<tr class="memdesc:group__group__hal__results"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL specific return codes definitions for all drivers. <br /></td></tr>
+<tr class="memitem:group__group__hal__results__lptimer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__hal__results__lptimer.html">LPTimer HAL Results</a></td></tr>
+<tr class="memdesc:group__group__hal__results__lptimer"><td class="mdescLeft">&#160;</td><td class="mdescRight">LPTimer specific return codes. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -347,7 +348,7 @@ Maximum value of the counter. </td></tr>
 </div><div class="memdoc">
 
 <p>Update the match/compare value. </p>
-<p>Update the match value of an already configured LPTimer set up to generate an interrupt on match. Note that this function does not reinitialize the counter or the associated peripheral initialization sequence.</p>
+<p>Update the match value of an already configured LPTimer set up to generate an interrupt on match. Note that this function does not reinitialize the counter or the associated peripheral initialization sequence. </p><dl class="section note"><dt>Note</dt><dd>This does not reset the counter.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The LPTimer object </td></tr>
@@ -386,7 +387,7 @@ Maximum value of the counter. </td></tr>
 </div><div class="memdoc">
 
 <p>Update the match/compare value. </p>
-<p>Update the match value of an already configured LPTimer set up to generate an interrupt on match delay from the current counter value. Note that this function does not reinitialize the counter or the associated peripheral initialization sequence.</p>
+<p>Update the match value of an already configured LPTimer set up to generate an interrupt on match delay from the current counter value. Note that this function does not reinitialize the counter or the associated peripheral initialization sequence. </p><dl class="section note"><dt>Note</dt><dd>This does not reset the counter.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>The LPTimer object </td></tr>

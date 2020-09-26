@@ -1,6 +1,6 @@
 var group__group__hal__dma =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "DMA HAL Results", "group__group__hal__results__dma.html", "group__group__hal__results__dma" ],
     [ "cyhal_dma_cfg_t", "group__group__hal__dma.html#structcyhal__dma__cfg__t", [
       [ "src_addr", "group__group__hal__dma.html#addcfd22935f15ed7fd86990afb2d8fe5", null ],
       [ "src_increment", "group__group__hal__dma.html#a82383d2bf599937a55503e744b70a0bf", null ],

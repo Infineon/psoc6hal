@@ -105,9 +105,10 @@ PSoC 6 MCU: PDM to I2S</b></a>
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_i2s I2S HAL Results
+ *  I2S specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name I2S Results
  */
 
 /** An invalid pin location was specified */
@@ -124,7 +125,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_I2S, 3))
 
 /**
- * \} \}
+ * \}
  */
 
 /** I2S events */

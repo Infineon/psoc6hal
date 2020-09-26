@@ -1,6 +1,6 @@
 var group__group__hal__uart =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "UART HAL Results", "group__group__hal__results__uart.html", "group__group__hal__results__uart" ],
     [ "cyhal_uart_cfg_t", "group__group__hal__uart.html#structcyhal__uart__cfg__t", [
       [ "data_bits", "group__group__hal__uart.html#a3360061aafad236eb9a9d347f9154643", null ],
       [ "stop_bits", "group__group__hal__uart.html#a6864a54db95005a564fd8617f9029e20", null ],

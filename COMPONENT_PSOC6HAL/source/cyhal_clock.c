@@ -44,6 +44,11 @@ extern "C"
 const cyhal_resource_inst_t CYHAL_CLOCK_IMO = { CYHAL_RSC_CLOCK, (uint8_t)CYHAL_CLOCK_BLOCK_IMO, 0 };
 const cyhal_resource_inst_t CYHAL_CLOCK_EXT = { CYHAL_RSC_CLOCK, (uint8_t)CYHAL_CLOCK_BLOCK_EXT, 0 };
 const cyhal_resource_inst_t CYHAL_CLOCK_ILO = { CYHAL_RSC_CLOCK, (uint8_t)CYHAL_CLOCK_BLOCK_ILO, 0 };
+
+const cyhal_clock_tolerance_t CYHAL_CLOCK_TOLERANCE_0_P = {CYHAL_TOLERANCE_PERCENT, 0};
+const cyhal_clock_tolerance_t CYHAL_CLOCK_TOLERANCE_1_P = {CYHAL_TOLERANCE_PERCENT, 1};
+const cyhal_clock_tolerance_t CYHAL_CLOCK_TOLERANCE_5_P = {CYHAL_TOLERANCE_PERCENT, 5};
+
 #if SRSS_ECO_PRESENT
 const cyhal_resource_inst_t CYHAL_CLOCK_ECO = { CYHAL_RSC_CLOCK, (uint8_t)CYHAL_CLOCK_BLOCK_ECO, 0 };
 #endif
@@ -445,9 +450,8 @@ static inline cy_rslt_t _cyhal_clock_set_pathmux_source(uint8_t mux, cyhal_clock
             return CYHAL_CLOCK_RSLT_ERR_SOURCE;
     }
 
-    uint32_t old_freq = Cy_SysClk_ClkPathMuxGetFrequency(mux);
     uint32_t old_hf_freq = Cy_SysClk_ClkHfGetFrequency(0);
-    uint32_t new_hf_freq = (uint32_t)(((uint64_t)Cy_SysClk_ClkHfGetFrequency(0) * new_freq) / old_freq);
+    uint32_t new_hf_freq = new_freq >> ((uint8_t)Cy_SysClk_ClkHfGetDivider(0));
     bool is_sysclk_path = (mux == (uint32_t)Cy_SysClk_ClkHfGetSource(0));
 
     if (is_sysclk_path)

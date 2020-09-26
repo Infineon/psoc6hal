@@ -27,6 +27,7 @@
 #include "cyhal_hwmgr.h"
 #include "cyhal_system.h"
 #include "cmsis_compiler.h"
+#include "cyhal_scb_common.h"
 
 #if defined(__cplusplus)
 extern "C"
@@ -184,10 +185,8 @@ extern "C"
     #define CY_BLOCK_COUNT_RTC      (0)
 #endif
 
-#if defined(CY_IP_MXSCB_INSTANCES)
-    #define CY_BLOCK_COUNT_SCB      (CY_IP_MXSCB_INSTANCES)
-#elif defined(CY_IP_M0S8SCB_INSTANCES)
-    #define CY_BLOCK_COUNT_SCB      (CY_IP_M0S8SCB_INSTANCES)
+#if defined(CY_IP_MXSCB_INSTANCES) || defined(CY_IP_M0S8SCB_INSTANCES)
+    #define CY_BLOCK_COUNT_SCB      (_SCB_ARRAY_SIZE)
 #else
     #define CY_BLOCK_COUNT_SCB      (0)
 #endif
@@ -521,7 +520,7 @@ static const uint8_t cyhal_block_offsets_tcpwm[] =
         #if (CY_IP_MXTCPWM_INSTANCES > 10)
             #warning Unhandled TCPWM instance count
         #endif
-    #elif CY_IP_MXTCPWM_VERSION == 2
+    #else // CY_IP_MXTCPWM_VERSION >= 2
         #if (CY_IP_MXTCPWM_INSTANCES == 1)
             #if (TCPWM_GRP_NR > 1)
                 TCPWM_GRP_NR0_GRP_GRP_CNT_NR,
@@ -803,8 +802,8 @@ void cyhal_hwmgr_free(const cyhal_resource_inst_t* obj)
 {
     uint32_t state = cyhal_system_critical_section_enter();
     cy_rslt_t rslt = cyhal_clear_bit(cyhal_used, obj->type, obj->block_num, obj->channel_num);
+    CY_UNUSED_PARAMETER(rslt); /* CY_ASSERT only processes in DEBUG, ignores for others */
     CY_ASSERT(CY_RSLT_SUCCESS == rslt);
-    (void)rslt; //Avoid warning about unused variable in Release builds
     cyhal_system_critical_section_exit(state);
 }
 

@@ -357,7 +357,6 @@ void cyhal_dac_free(cyhal_dac_t *obj)
 
         obj->base_dac = NULL;
         obj->base_opamp = NULL;
-        memset(&obj, 0, sizeof(cyhal_dac_t));
     }
 }
 

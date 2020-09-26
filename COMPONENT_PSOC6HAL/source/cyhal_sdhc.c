@@ -124,6 +124,7 @@ extern "C"
 
 /* Mask which indicates interface change */
 #define _CYHAL_SDIO_INTERFACE_CHANGE_MASK    ((uint32_t) ((uint32_t) CYHAL_SDIO_GOING_DOWN) | ((uint32_t) CYHAL_SDIO_COMING_UP))
+const uint32_t MAX_FREQUENCY = 50000000;
 
 /* List of available SDHC instances */
 static SDHC_Type * const _CYHAL_SDHC_BASE_ADDRESSES[CY_IP_MXSDHC_INSTANCES] =
@@ -134,18 +135,6 @@ static SDHC_Type * const _CYHAL_SDHC_BASE_ADDRESSES[CY_IP_MXSDHC_INSTANCES] =
 
 #ifdef SDHC1
     SDHC1,
-#endif /* ifdef SDHC1 */
-};
-
-/* List of available SDHC HF clocks */
-static const uint8_t _CYHAL_SDHC_HF_CLOCKS[CY_IP_MXSDHC_INSTANCES] =
-{
-#ifdef SDHC0
-    4,
-#endif /* ifdef SDHC0 */
-
-#ifdef SDHC1
-    2,
 #endif /* ifdef SDHC1 */
 };
 
@@ -208,7 +197,7 @@ static const uint32_t _cyhal_sdhc_event_map[] =
 static cy_rslt_t _cyhal_sdhc_setup_pin(cyhal_gpio_t pin, const cyhal_resource_pin_mapping_t *pinmap, size_t count, cyhal_gpio_t *objRef)
 {
     cy_rslt_t result;
-    const cyhal_resource_pin_mapping_t *map = _cyhal_utils_get_resource(pin, pinmap, count);
+    const cyhal_resource_pin_mapping_t *map = _cyhal_utils_get_resource(pin, pinmap, count, NULL);
 
     if (map == NULL)
     {
@@ -263,7 +252,7 @@ static bool _cyhal_sdio_syspm_callback(cyhal_syspm_callback_state_t state, cyhal
                     cyhal_sdio_event_callback_t callback = (cyhal_sdio_event_callback_t) obj->callback_data.callback;
                     if ((callback != NULL) && (0U != (obj->events & (uint32_t) CYHAL_SDIO_GOING_DOWN)))
                     {
-                        (void)(callback)(obj->callback_data.callback_arg, CYHAL_SDIO_GOING_DOWN);
+                        (callback)(obj->callback_data.callback_arg, CYHAL_SDIO_GOING_DOWN);
                     }
                     /* Set transition flag to prevent any further transaction */
                     obj->pm_transition_pending = true;
@@ -287,7 +276,7 @@ static bool _cyhal_sdio_syspm_callback(cyhal_syspm_callback_state_t state, cyhal
                     cyhal_sdio_event_callback_t callback = (cyhal_sdio_event_callback_t) obj->callback_data.callback;
                     if ((callback != NULL) && (0U != (obj->events & (uint32_t) CYHAL_SDIO_COMING_UP)))
                     {
-                        (void)(callback)(obj->callback_data.callback_arg, CYHAL_SDIO_COMING_UP);
+                        (callback)(obj->callback_data.callback_arg, CYHAL_SDIO_COMING_UP);
                     }
 
                     obj->pm_transition_pending = false;
@@ -379,47 +368,43 @@ static cy_en_sd_host_bus_width_t _cyhal_sdhc_convert_buswidth(uint8_t stopbits)
 *
 * Changes the Host controller SD clock.
 *
+* clock         - The HFCLK clock instance driving the SD host.
 * base          - The SD host registers structure pointer.
-* instance_num  - The SD host instance number.
 * frequency     - The frequency in Hz.
 *
 *******************************************************************************/
-static cy_rslt_t _cyhal_sdhc_sdcardchangeclock(SDHC_Type *base, uint32_t instance_num, uint32_t frequency)
+static cy_rslt_t _cyhal_sdhc_sdcardchangeclock(cyhal_clock_t *clock, SDHC_Type *base, uint32_t frequency)
 {
-    cyhal_clock_t clock;
-    const cyhal_resource_inst_t rsc = { CYHAL_RSC_CLOCK, CYHAL_CLOCK_BLOCK_HF, _CYHAL_SDHC_HF_CLOCKS[instance_num] };
-    cy_rslt_t ret = cyhal_clock_get(&clock, &rsc);
-    uint32_t clockInput = cyhal_clock_get_frequency(&clock);
+    CY_ASSERT(NULL != clock);
+    CY_ASSERT(NULL != base);
 
-    if ((NULL != base) && (0U != clockInput))
+    /* Update SD Host clock divider */
+    uint32_t clockInput = cyhal_clock_get_frequency(clock);
+    uint16_t clkDiv = (uint16_t) ((clockInput / frequency) >> 1UL);
+
+    Cy_SD_Host_DisableSdClk(base);
+    cy_rslt_t ret = Cy_SD_Host_SetSdClkDiv(base, clkDiv);
+    Cy_SD_Host_EnableSdClk(base);
+
+    /* Update bus speed mode based on new frequency */
+    if (CY_RET_SUCCESS == ret)
     {
-        /* Update SD Host clock divider */
-        uint16_t clkDiv = (uint16_t) ((clockInput / frequency) >> 1UL);
+        cy_en_sd_host_bus_speed_mode_t busSpeed;
 
-        Cy_SD_Host_DisableSdClk(base);
-        ret = Cy_SD_Host_SetSdClkDiv(base, clkDiv);
-        Cy_SD_Host_EnableSdClk(base);
-
-        /* Update bus speed mode based on new frequency */
-        if (ret == CY_SD_HOST_SUCCESS)
+        if (frequency == CY_SD_HOST_CLK_50M)
         {
-            cy_en_sd_host_bus_speed_mode_t busSpeed;
-
-            if (frequency == CY_SD_HOST_CLK_50M)
-            {
-                busSpeed = CY_SD_HOST_BUS_SPEED_SDR50;
-            }
-            else if (frequency == CY_SD_HOST_CLK_25M)
-            {
-                busSpeed = CY_SD_HOST_BUS_SPEED_SDR25;
-            }
-            else
-            {
-                busSpeed = CY_SD_HOST_BUS_SPEED_SDR12_5;
-            }
-
-            ret = Cy_SD_Host_SetBusSpeedMode(base, busSpeed, NULL);
+            busSpeed = CY_SD_HOST_BUS_SPEED_SDR50;
         }
+        else if (frequency == CY_SD_HOST_CLK_25M)
+        {
+            busSpeed = CY_SD_HOST_BUS_SPEED_SDR25;
+        }
+        else
+        {
+            busSpeed = CY_SD_HOST_BUS_SPEED_SDR12_5;
+        }
+
+        ret = Cy_SD_Host_SetBusSpeedMode(base, busSpeed, NULL);
     }
 
     return ret;
@@ -511,7 +496,7 @@ static void _cyhal_sdhc_irq_handler(void)
         cyhal_sdhc_event_callback_t callback = (cyhal_sdhc_event_callback_t) obj->callback_data.callback;
 
         /* Call registered callbacks here */
-        (void) (callback) (obj->callback_data.callback_arg, user_events);
+        (callback) (obj->callback_data.callback_arg, user_events);
     }
 
     /* Clear only handled events */
@@ -542,7 +527,7 @@ static void _cyhal_sdio_irq_handler(void)
     {
         cyhal_sdio_event_callback_t callback = (cyhal_sdio_event_callback_t) obj->callback_data.callback;
         /* Call registered callbacks here */
-        (void)(callback)(obj->callback_data.callback_arg, (cyhal_sdio_irq_event_t) userInterruptStatus);
+        (callback)(obj->callback_data.callback_arg, (cyhal_sdio_irq_event_t) userInterruptStatus);
     }
 
     /* Clear only handled events */
@@ -589,6 +574,7 @@ cy_rslt_t cyhal_sdhc_init(cyhal_sdhc_t *obj,
     cy_rslt_t result = CY_RSLT_SUCCESS;
 
     obj->base = NULL;
+    obj->resource.type = CYHAL_RSC_INVALID;
 
     obj->pin_clk = CYHAL_NC_PIN_VALUE;
     obj->pin_cmd = CYHAL_NC_PIN_VALUE;
@@ -723,6 +709,21 @@ cy_rslt_t cyhal_sdhc_init(cyhal_sdhc_t *obj,
 
     if (CY_RSLT_SUCCESS == result)
     {
+        result = _cyhal_utils_allocate_clock(&(obj->clock), map->inst, CYHAL_CLOCK_BLOCK_PERIPHERAL_8BIT, true);
+
+        if (CY_RSLT_SUCCESS == result)
+        {
+            result = _cyhal_utils_set_clock_frequency2(&(obj->clock), MAX_FREQUENCY, &CYHAL_CLOCK_TOLERANCE_5_P);
+        }
+
+        if (CY_RSLT_SUCCESS == result && !cyhal_clock_is_enabled(&(obj->clock)))
+        {
+            result = cyhal_clock_set_enabled(&(obj->clock), true, true);
+        }
+    }
+
+    if (CY_RSLT_SUCCESS == result)
+    {
         obj->resource = *map->inst;
         result = cyhal_hwmgr_reserve(&obj->resource);
 
@@ -784,7 +785,7 @@ cy_rslt_t cyhal_sdhc_init(cyhal_sdhc_t *obj,
             if (result == CY_RSLT_SUCCESS)
             {
                 /* Update SD Card frequency to be 25 Mhz */
-                result = _cyhal_sdhc_sdcardchangeclock(obj->base, obj->resource.block_num, CY_SD_HOST_CLK_25M);
+                result = _cyhal_sdhc_sdcardchangeclock(&(obj->clock), obj->base, CY_SD_HOST_CLK_25M);
             }
         }
 
@@ -816,7 +817,7 @@ void cyhal_sdhc_free(cyhal_sdhc_t *obj)
 {
     CY_ASSERT(NULL != obj);
 
-    if ((NULL != obj->base) && (obj->resource.type != CYHAL_RSC_INVALID))
+    if (NULL != obj->base)
     {
         IRQn_Type irqn = _CYHAL_SDHC_IRQ_N[obj->resource.block_num];
         NVIC_DisableIRQ(irqn);
@@ -825,9 +826,14 @@ void cyhal_sdhc_free(cyhal_sdhc_t *obj)
 
         cyhal_hwmgr_free(&(obj->resource));
         obj->base = NULL;
-        obj->resource.type = CYHAL_RSC_INVALID;
 
         _cyhal_syspm_unregister_peripheral_callback(&obj->pm_callback_data);
+    }
+
+    if (obj->resource.type != CYHAL_RSC_INVALID)
+    {
+        cyhal_clock_free(&(obj->clock));
+        obj->resource.type = CYHAL_RSC_INVALID;
     }
 
     /* Free pins */
@@ -1218,67 +1224,81 @@ cy_rslt_t cyhal_sdio_init(cyhal_sdio_t *obj, cyhal_gpio_t cmd, cyhal_gpio_t clk,
         const cyhal_resource_pin_mapping_t *cmd_map = _CYHAL_UTILS_GET_RESOURCE(cmd, cyhal_pin_map_sdhc_card_cmd);
         cyhal_resource_inst_t sdhc = *cmd_map->inst;
 
-        result = cyhal_hwmgr_reserve(&sdhc);
+        result = _cyhal_utils_allocate_clock(&(obj->clock), &sdhc, CYHAL_CLOCK_BLOCK_PERIPHERAL_16BIT, true);
+        if (CY_RSLT_SUCCESS == result)
+        {
+            result = _cyhal_utils_set_clock_frequency2(&(obj->clock), MAX_FREQUENCY, &CYHAL_CLOCK_TOLERANCE_5_P);
+        }
+
+        if (CY_RSLT_SUCCESS == result && !cyhal_clock_is_enabled(&(obj->clock)))
+        {
+            result = cyhal_clock_set_enabled(&(obj->clock), true, true);
+        }
+
         if (result == CY_RSLT_SUCCESS)
         {
             obj->resource = sdhc;
+            result = cyhal_hwmgr_reserve(&sdhc);
+        }
+
+        if (result == CY_RSLT_SUCCESS)
+        {
+            obj->base = _CYHAL_SDHC_BASE_ADDRESSES[obj->resource.block_num];
+
+            /* Enable the SDHC block */
+            Cy_SD_Host_Enable(obj->base);
+
+            hostConfig.dmaType = CY_SD_HOST_DMA_SDMA;
+            hostConfig.emmc = false;
+            hostConfig.enableLedControl = false;
+            context.cardType = CY_SD_HOST_SDIO;
+
+            /* Configure SD Host to operate */
+            result = Cy_SD_Host_Init(obj->base, &hostConfig, &context);
+
+            /* Register SDIO Deep Sleep Callback */
+            if (CY_RSLT_SUCCESS == result)
+            {
+                obj->pm_transition_pending = false;
+                obj->pm_callback_data.callback = &_cyhal_sdio_syspm_callback,
+                obj->pm_callback_data.states = (cyhal_syspm_callback_state_t)(CYHAL_SYSPM_CB_CPU_DEEPSLEEP | CYHAL_SYSPM_CB_SYSTEM_HIBERNATE);
+                obj->pm_callback_data.next = NULL;
+                obj->pm_callback_data.args = obj;
+                /* The CYHAL_SYSPM_BEFORE_TRANSITION mode cannot be ignored because the PM handler
+                    * calls the PDL deep-sleep callback that disables the block in this mode before transitioning.
+                    */
+                obj->pm_callback_data.ignore_modes = (cyhal_syspm_callback_mode_t)0;
+
+                _cyhal_syspm_register_peripheral_callback(&obj->pm_callback_data);
+            }
 
             if (result == CY_RSLT_SUCCESS)
             {
-                obj->base = _CYHAL_SDHC_BASE_ADDRESSES[obj->resource.block_num];
+                /* Don't enable any error interrupts for now */
+                Cy_SD_Host_SetErrorInterruptMask(obj->base, 0UL);
 
-                /* Enable the SDHC block */
-                Cy_SD_Host_Enable(obj->base);
+                /* Clear all interrupts */
+                Cy_SD_Host_ClearErrorInterruptStatus(obj->base, _CYHAL_SDIO_SET_ALL_INTERRUPTS_MASK);
+                Cy_SD_Host_ClearNormalInterruptStatus(obj->base, _CYHAL_SDIO_SET_ALL_INTERRUPTS_MASK);
 
-                hostConfig.dmaType = CY_SD_HOST_DMA_SDMA;
-                hostConfig.emmc = false;
-                hostConfig.enableLedControl = false;
-                context.cardType = CY_SD_HOST_SDIO;
+                obj->irq_cause = 0UL;
+                obj->events    = 0UL;
 
-                /* Configure SD Host to operate */
-                (void) Cy_SD_Host_Init(obj->base, &hostConfig, &context);
+                obj->callback_data.callback = NULL;
+                obj->callback_data.callback_arg = NULL;
+                _cyhal_sdhc_config_structs[obj->resource.block_num] = obj;
 
-                /* Register SDIO Deep Sleep Callback */
-                if (CY_RSLT_SUCCESS == result)
-                {
-                    obj->pm_transition_pending = false;
-                    obj->pm_callback_data.callback = &_cyhal_sdio_syspm_callback,
-                    obj->pm_callback_data.states = (cyhal_syspm_callback_state_t)(CYHAL_SYSPM_CB_CPU_DEEPSLEEP | CYHAL_SYSPM_CB_SYSTEM_HIBERNATE);
-                    obj->pm_callback_data.next = NULL;
-                    obj->pm_callback_data.args = obj;
-                    /* The CYHAL_SYSPM_BEFORE_TRANSITION mode cannot be ignored because the PM handler
-                     * calls the PDL deep-sleep callback that disables the block in this mode before transitioning.
-                     */
-                    obj->pm_callback_data.ignore_modes = (cyhal_syspm_callback_mode_t)0;
+                IRQn_Type irqn = _CYHAL_SDHC_IRQ_N[obj->resource.block_num];
+                cy_stc_sysint_t irqCfg = { irqn, CYHAL_ISR_PRIORITY_DEFAULT };
+                Cy_SysInt_Init(&irqCfg, _cyhal_sdio_irq_handler);
+                NVIC_EnableIRQ(irqn);
 
-                    _cyhal_syspm_register_peripheral_callback(&obj->pm_callback_data);
-                }
+                result = Cy_SD_Host_SetHostBusWidth(obj->base, CY_SD_HOST_BUS_WIDTH_4_BIT);
 
+                /* Change the host SD clock to 400 kHz */
                 if (result == CY_RSLT_SUCCESS)
                 {
-                    /* Don't enable any error interrupts for now */
-                    Cy_SD_Host_SetErrorInterruptMask(obj->base, 0UL);
-
-                    /* Clear all interrupts */
-                    Cy_SD_Host_ClearErrorInterruptStatus(obj->base, _CYHAL_SDIO_SET_ALL_INTERRUPTS_MASK);
-                    Cy_SD_Host_ClearNormalInterruptStatus(obj->base, _CYHAL_SDIO_SET_ALL_INTERRUPTS_MASK);
-
-                    obj->irq_cause = 0UL;
-                    obj->events    = 0UL;
-
-                    obj->callback_data.callback = NULL;
-                    obj->callback_data.callback_arg = NULL;
-                    _cyhal_sdhc_config_structs[obj->resource.block_num] = obj;
-
-                    IRQn_Type irqn = _CYHAL_SDHC_IRQ_N[obj->resource.block_num];
-                    cy_stc_sysint_t irqCfg = { irqn, CYHAL_ISR_PRIORITY_DEFAULT };
-                    Cy_SysInt_Init(&irqCfg, _cyhal_sdio_irq_handler);
-                    NVIC_EnableIRQ(irqn);
-
-                    (void)Cy_SD_Host_SetHostBusWidth(obj->base, CY_SD_HOST_BUS_WIDTH_4_BIT);
-
-                    /* Change the host SD clock to 400 kHz */
-                    (void) _cyhal_sdhc_sdcardchangeclock(obj->base, obj->resource.block_num, _CYHAL_SDIO_HOST_CLK_400K);
+                    result = _cyhal_sdhc_sdcardchangeclock(&(obj->clock), obj->base, _CYHAL_SDIO_HOST_CLK_400K);
 
                     obj->frequencyhal_hz = _CYHAL_SDIO_HOST_CLK_400K;
                     obj->block_size = _CYHAL_SDIO_64B_BLOCK;
@@ -1299,7 +1319,7 @@ void cyhal_sdio_free(cyhal_sdio_t *obj)
 {
     CY_ASSERT(NULL != obj);
 
-    if ((NULL != obj->base) && (obj->resource.type != CYHAL_RSC_INVALID))
+    if (NULL != obj->base)
     {
         IRQn_Type irqn = _CYHAL_SDHC_IRQ_N[obj->resource.block_num];
         NVIC_DisableIRQ(irqn);
@@ -1308,10 +1328,15 @@ void cyhal_sdio_free(cyhal_sdio_t *obj)
 
         cyhal_hwmgr_free(&(obj->resource));
         obj->base = NULL;
-        obj->resource.type = CYHAL_RSC_INVALID;
 
         _cyhal_sdhc_config_structs[obj->resource.block_num] = NULL;
         _cyhal_syspm_unregister_peripheral_callback(&obj->pm_callback_data);
+    }
+
+    if (obj->resource.type != CYHAL_RSC_INVALID)
+    {
+        obj->resource.type = CYHAL_RSC_INVALID;
+        cyhal_clock_free(&(obj->clock));
     }
 
     /* Free pins */
@@ -1334,7 +1359,7 @@ cy_rslt_t cyhal_sdio_configure(cyhal_sdio_t *obj, const cyhal_sdio_cfg_t *config
 
     if (config->frequencyhal_hz != 0U)
     {
-        result = _cyhal_sdhc_sdcardchangeclock(obj->base, obj->resource.block_num, config->frequencyhal_hz);
+        result = _cyhal_sdhc_sdcardchangeclock(&(obj->clock), obj->base, config->frequencyhal_hz);
         obj->frequencyhal_hz = config->frequencyhal_hz;
     }
 
@@ -1358,7 +1383,7 @@ cy_rslt_t cyhal_sdio_configure(cyhal_sdio_t *obj, const cyhal_sdio_cfg_t *config
 cy_rslt_t cyhal_sdio_send_cmd(const cyhal_sdio_t *obj, cyhal_transfer_t direction, \
                               cyhal_sdio_command_t command, uint32_t argument, uint32_t* response)
 {
-    (void)direction;
+    CY_UNUSED_PARAMETER(direction);
     if (NULL == obj)
     {
         return CYHAL_SDIO_RSLT_ERR_BAD_PARAM;
@@ -1420,7 +1445,7 @@ cy_rslt_t cyhal_sdio_send_cmd(const cyhal_sdio_t *obj, cyhal_transfer_t directio
         }
     }
 
-    (void)Cy_SD_Host_GetResponse(obj->base, response, false);
+    result = Cy_SD_Host_GetResponse(obj->base, response, false);
 
     if (CY_SD_HOST_SUCCESS != result)
     {
@@ -1537,9 +1562,13 @@ cy_rslt_t cyhal_sdio_bulk_transfer(cyhal_sdio_t *obj, cyhal_transfer_t direction
         Cy_SD_Host_SetNormalInterruptMask(obj->base, (regIntrSts &
                                                      (uint16_t)~(CY_SD_HOST_XFER_COMPLETE | CY_SD_HOST_CMD_COMPLETE)));
 
-        (void)Cy_SD_Host_InitDataTransfer(obj->base, &dat);
+        result = Cy_SD_Host_InitDataTransfer(obj->base, &dat);
 
-        result = Cy_SD_Host_SendCommand(obj->base, &cmd);
+        if ( CY_SD_HOST_SUCCESS == result )
+        {
+            result = Cy_SD_Host_SendCommand(obj->base, &cmd);
+        }
+
         if ( CY_SD_HOST_SUCCESS == result )
         {
             result = _cyhal_sdhc_pollcmdcomplete(obj->base);
@@ -1552,9 +1581,9 @@ cy_rslt_t cyhal_sdio_bulk_transfer(cyhal_sdio_t *obj, cyhal_transfer_t direction
         retry--;
     }
 
-    if (response != NULL )
+    if (response != NULL && CY_SD_HOST_SUCCESS == result)
     {
-        (void)Cy_SD_Host_GetResponse(obj->base, response, false);
+        result = Cy_SD_Host_GetResponse(obj->base, response, false);
     }
 
     /* Restore interrupts after transition */
@@ -1672,9 +1701,12 @@ cy_rslt_t cyhal_sdio_transfer_async(cyhal_sdio_t *obj, cyhal_transfer_t directio
         Cy_SD_Host_SetNormalInterruptMask(obj->base, (intMaskReg &
                                                      (uint16_t)~(CY_SD_HOST_XFER_COMPLETE | CY_SD_HOST_CMD_COMPLETE)));
 
-        (void)Cy_SD_Host_InitDataTransfer(obj->base, &dat);
+        result = Cy_SD_Host_InitDataTransfer(obj->base, &dat);
 
-        result = Cy_SD_Host_SendCommand(obj->base, &cmd);
+        if (CY_SD_HOST_SUCCESS == result)
+        {
+            result = Cy_SD_Host_SendCommand(obj->base, &cmd);
+        }
         retry--;
     }
 

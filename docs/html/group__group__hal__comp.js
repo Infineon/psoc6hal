@@ -1,6 +1,6 @@
 var group__group__hal__comp =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "Comparator HAL Results", "group__group__hal__results__comp.html", "group__group__hal__results__comp" ],
     [ "cyhal_comp_config_t", "group__group__hal__comp.html#structcyhal__comp__config__t", [
       [ "power", "group__group__hal__comp.html#aa0a64636f172477d20e66a6b735f5145", null ],
       [ "hysteresis", "group__group__hal__comp.html#acb59e8dcfb68fd6598abd7a7a88473b8", null ]

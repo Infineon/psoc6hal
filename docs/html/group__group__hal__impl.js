@@ -8,6 +8,7 @@ var group__group__hal__impl =
     [ "PSoC 6 Specific Hardware Types", "group__group__hal__impl__hw__types.html", "group__group__hal__impl__hw__types" ],
     [ "Pins", "group__group__hal__impl__pin__package.html", "group__group__hal__impl__pin__package" ],
     [ "System Power Management", "group__group__hal__impl__syspm.html", null ],
+    [ "Timer (Timer/Counter)", "group__group__hal__impl__timer.html", null ],
     [ "Triggers", "group__group__hal__impl__triggers.html", "group__group__hal__impl__triggers" ],
     [ "ADC (Analog Digital Converter)", "group__group__hal__impl__adc.html", null ],
     [ "COMP (Analog Comparator)", "group__group__hal__impl__comp.html", null ],

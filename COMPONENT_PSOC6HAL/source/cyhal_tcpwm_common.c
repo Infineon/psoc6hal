@@ -47,7 +47,7 @@ const _cyhal_tcpwm_data_t _CYHAL_TCPWM_DATA[] = {
         #if (CY_IP_MXTCPWM_INSTANCES > 2)
             #warning Unhandled TCPWM instance count
         #endif
-    #elif (CY_IP_MXTCPWM_VERSION == 2)
+    #else // (CY_IP_MXTCPWM_VERSION >= 2)
         #if (CY_IP_MXTCPWM_INSTANCES == 1)
             #if (TCPWM_GRP_NR > 0)
                 {TCPWM0, PCLK_TCPWM0_CLOCKS0, TCPWM_GRP_NR0_CNT_GRP_CNT_WIDTH, TCPWM_GRP_NR0_GRP_GRP_CNT_NR, 0, tcpwm_0_interrupts_0_IRQn },
@@ -87,7 +87,7 @@ const _cyhal_tcpwm_data_t _CYHAL_TCPWM_DATA[] = {
     #else
         #warning Unhandled TCPWM instance count
     #endif
-#elif (CY_IP_MXTCPWM_VERSION == 2)
+#else // (CY_IP_MXTCPWM_VERSION >= 2)
     #if (TCPWM_GRP_NR == 0)
         #define _CYHAL_TCPWM_CHANNELS 0
     #elif (TCPWM_GRP_NR == 1)
@@ -111,7 +111,7 @@ const _cyhal_tcpwm_data_t _CYHAL_TCPWM_DATA[] = {
 #define _CYHAL_TCPWM_GET_ARRAY_INDEX(block, channel)  (_CYHAL_TCPWM_DATA[block].channel_offset + channel)
 
 /** Callback array for TCPWM interrupts */
-static cyhal_tcpwm_common_t *_cyhal_tcpwm_data_structs[_CYHAL_TCPWM_CHANNELS];
+static cyhal_tcpwm_t *_cyhal_tcpwm_data_structs[_CYHAL_TCPWM_CHANNELS];
 
 bool _cyhal_tcpwm_pm_has_enabled()
 {
@@ -147,20 +147,28 @@ bool _cyhal_tcpwm_pm_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_ca
         {
             for (uint8_t i = 0; i < _CYHAL_TCPWM_INSTANCES; i++)
             {
+                #if defined(CY_IP_M0S8TCPWM) || (CY_IP_MXTCPWM_VERSION == 1)
                 uint32_t enable_flag = 0;
+                #endif
                 TCPWM_Type* base = _CYHAL_TCPWM_DATA[i].base;
                 for (uint8_t j = 0; j < _CYHAL_TCPWM_DATA[i].num_channels; j++)
                 {
                     if (_cyhal_tcpwm_data_structs[_CYHAL_TCPWM_GET_ARRAY_INDEX(i, j)])
                     {
+                        #if defined(CY_IP_M0S8TCPWM) || (CY_IP_MXTCPWM_VERSION == 1)
                         enable_flag |= 1u << j;
+                        #else
+                        Cy_TCPWM_Enable_Single(base, j);
+                        #endif
                     }
                 }
+                #if defined(CY_IP_M0S8TCPWM) || (CY_IP_MXTCPWM_VERSION == 1)
                 if (0 != enable_flag)
                 {
                     // This only enables the counter. This does not start the timer/counter or the pwm.
                     Cy_TCPWM_Enable_Multiple(base, enable_flag);
                 }
+                #endif
             }
             _cyhal_tcpwm_pm_transition_pending_value = false;
             break;
@@ -171,7 +179,7 @@ bool _cyhal_tcpwm_pm_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_ca
             {
                 for (uint8_t j = 0; j < _CYHAL_TCPWM_DATA[i].num_channels; j++)
                 {
-                    cyhal_tcpwm_common_t* obj = _cyhal_tcpwm_data_structs[_CYHAL_TCPWM_GET_ARRAY_INDEX(i, j)];
+                    cyhal_tcpwm_t* obj = _cyhal_tcpwm_data_structs[_CYHAL_TCPWM_GET_ARRAY_INDEX(i, j)];
                     if (obj && (CY_TCPWM_PWM_STATUS_COUNTER_RUNNING & Cy_TCPWM_PWM_GetStatus(obj->base, _CYHAL_TCPWM_CNT_NUMBER(obj->resource))))
                     {
                         return false;
@@ -198,7 +206,7 @@ static cyhal_syspm_callback_data_t _cyhal_tcpwm_syspm_callback_data =
     .ignore_modes = CYHAL_SYSPM_BEFORE_TRANSITION,
 };
 
-void _cyhal_tcpwm_init_data(cyhal_tcpwm_common_t *tcpwm)
+void _cyhal_tcpwm_init_data(cyhal_tcpwm_t *tcpwm)
 {
     if (!_cyhal_tcpwm_pm_has_enabled())
     {
@@ -225,7 +233,7 @@ void _cyhal_tcpwm_irq_handler(void)
     {
         TCPWM_Type *blockAddr = _CYHAL_TCPWM_DATA[block].base;
         uint32_t intrCause = Cy_TCPWM_GetInterruptStatusMasked(blockAddr, channel);
-        cyhal_tcpwm_common_t *tcpwm = _cyhal_tcpwm_data_structs[_CYHAL_TCPWM_GET_ARRAY_INDEX(block, channel)];
+        cyhal_tcpwm_t *tcpwm = _cyhal_tcpwm_data_structs[_CYHAL_TCPWM_GET_ARRAY_INDEX(block, channel)];
         if (tcpwm->callback_data.callback != NULL)
         {
             _cyhal_tcpwm_event_callback_t callback = (_cyhal_tcpwm_event_callback_t) tcpwm->callback_data.callback;
@@ -245,14 +253,12 @@ void _cyhal_tcpwm_irq_handler(void)
 *       TCPWM Shared HAL Functions
 *******************************************************************************/
 
-void _cyhal_tcpwm_free(cyhal_tcpwm_common_t *obj)
+void _cyhal_tcpwm_free(cyhal_tcpwm_t *obj)
 {
     CY_ASSERT(NULL != obj);
 
     IRQn_Type irqn = (IRQn_Type)(_CYHAL_TCPWM_DATA[obj->resource.block_num].isr_offset + obj->resource.channel_num);
     NVIC_DisableIRQ(irqn);
-
-    _cyhal_utils_release_if_used(&(obj->pin));
 
     if (NULL != obj->base)
     {
@@ -262,7 +268,11 @@ void _cyhal_tcpwm_free(cyhal_tcpwm_common_t *obj)
             _cyhal_syspm_unregister_peripheral_callback(&_cyhal_tcpwm_syspm_callback_data);
         }
 
+        #if defined(CY_IP_MXTCPWM) && (CY_IP_MXTCPWM_VERSION >= 2)
+        Cy_TCPWM_Disable_Single(obj->base, _CYHAL_TCPWM_CNT_NUMBER(obj->resource));
+        #else
         Cy_TCPWM_PWM_Disable(obj->base, _CYHAL_TCPWM_CNT_NUMBER(obj->resource));
+        #endif
 
         cyhal_hwmgr_free(&(obj->resource));
         obj->base = NULL;

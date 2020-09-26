@@ -5,7 +5,7 @@
 * PSoC6_04 device GPIO HAL header for 64-TQFP package
 *
 * \note
-* Generator version: 1.6.7473.26462
+* Generator version: 1.6.0.229
 *
 ********************************************************************************
 * \copyright

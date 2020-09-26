@@ -1,6 +1,6 @@
 var group__group__hal__sdhc =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "SDHC HAL Results", "group__group__hal__results__sdhc.html", "group__group__hal__results__sdhc" ],
     [ "cyhal_sdhc_config_t", "group__group__hal__sdhc.html#structcyhal__sdhc__config__t", [
       [ "enableLedControl", "group__group__hal__sdhc.html#a9a0d3720e7b0898f436fd51dc3f65ab2", null ],
       [ "lowVoltageSignaling", "group__group__hal__sdhc.html#a34288a41b330982ab1a584953922d8f3", null ],

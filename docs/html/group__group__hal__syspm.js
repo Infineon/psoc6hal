@@ -1,6 +1,6 @@
 var group__group__hal__syspm =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "SYSPM HAL Results", "group__group__hal__results__syspm.html", "group__group__hal__results__syspm" ],
     [ "cyhal_syspm_callback_data_t", "group__group__hal__syspm.html#structcyhal__syspm__callback__data__t", [
       [ "callback", "group__group__hal__syspm.html#aacd72d2e829b54c27e98e6495ca4dfd8", null ],
       [ "states", "group__group__hal__syspm.html#a30d05805c7003766b01d970c6c5519ea", null ],

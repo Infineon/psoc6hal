@@ -1,6 +1,6 @@
 var group__group__hal__qspi =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "QSPI HAL Results", "group__group__hal__results__qspi.html", "group__group__hal__results__qspi" ],
     [ "cyhal_qspi_command_t", "group__group__hal__qspi.html#structcyhal__qspi__command__t", [
       [ "instruction", "group__group__hal__qspi.html#a6b3a205d095fac02f65395f3080e2257", null ],
       [ "address", "group__group__hal__qspi.html#a5575b9fde5fb2ef4278f4162d3ba9b17", null ],

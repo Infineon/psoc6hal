@@ -57,8 +57,7 @@
 *
 * \section subsection_adc_snippets Code snippets
 * \note Error checking is omitted for clarity
-* \subsection subsection_adc_snippet_1 Snippet 1: Simple ADC initialization and
-* reading conversion result
+* \subsection subsection_adc_snippet_1 Snippet 1: Simple ADC initialization and reading conversion result
 * The following snippet initializes an ADC and one channel.
 * One ADC conversion result is returned corresponding to the input at the specified
 * pin.
@@ -89,9 +88,10 @@
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_adc ADC HAL Results
+ *  ADC specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name ADC Results
  */
 
 /** Bad argument */
@@ -108,7 +108,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_ADC, 3))
 
 /**
- * \} \}
+ * \}
  */
 
 /** Number of bits populated with meaningful data by each ADC sample */

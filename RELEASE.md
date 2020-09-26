@@ -33,6 +33,12 @@ This release of the PSoC 6 HAL includes support for the following drivers:
 * WDT
 
 ### What Changed?
+#### v1.4.0
+* Renamed library from psoc6hal to mtb-hal-cat1
+* Added support for new PSoC 6 S4 devices
+* Extended clock support for QSPI and SDHC drivers
+* Fixed a few bugs in various drivers
+* Minor documentation updates
 #### v1.3.0
 * Added new Analog Comparator driver
 * Added new OpAmp driver
@@ -78,14 +84,16 @@ This version of the PSoC 6 Hardware Abstraction Layer was validated for compatib
 
 | Software and Tools                        | Version |
 | :---                                      | :----:  |
-| ModusToolbox Software Environment         | 2.0     |
-| GCC Compiler                              | 7.4     |
-| IAR Compiler                              | 8.32    |
+| ModusToolbox Software Environment         | 2.1     |
+| GCC Compiler                              | 9.2     |
+| IAR Compiler                              | 8.4     |
 | ARM Compiler                              | 6.11    |
+
+Minimum required ModusToolbox Software Environment: v2.0
 
 ### More information
 Use the following links for more information, as needed:
-* [API Reference Guide](https://cypresssemiconductorco.github.io/psoc6hal/html/modules.html)
+* [API Reference Guide](https://cypresssemiconductorco.github.io/mtb-hal-cat1/html/modules.html)
 * [Cypress Semiconductor, an Infineon Technologies Company](http://www.cypress.com)
 * [Cypress Semiconductor GitHub](https://github.com/cypresssemiconductorco)
 * [ModusToolbox](https://www.cypress.com/products/modustoolbox-software-environment)

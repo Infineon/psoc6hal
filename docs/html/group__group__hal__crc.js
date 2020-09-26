@@ -1,6 +1,6 @@
 var group__group__hal__crc =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "CRC HAL Results", "group__group__hal__results__crc.html", "group__group__hal__results__crc" ],
     [ "crc_algorithm_t", "group__group__hal__crc.html#structcrc__algorithm__t", [
       [ "width", "group__group__hal__crc.html#a43f6798e59b2c14c20cf662a9c8952e6", null ],
       [ "polynomial", "group__group__hal__crc.html#a75ef8f2fc1413a0d9fc0e6e54446e381", null ],

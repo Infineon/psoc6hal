@@ -66,9 +66,10 @@
 #include "cy_result.h"
 #include "cyhal_hw_types.h"
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_opamp Opamp HAL Results
+ *  Opamp specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name OPAMP Results
  */
 
 /** The requested pins are invalid */
@@ -78,7 +79,7 @@
 #define CYHAL_OPAMP_RSLT_BAD_ARGUMENT                     \
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_OPAMP, 2))
 /**
- * \} \}
+ * \}
  */
 
 #if defined(__cplusplus)

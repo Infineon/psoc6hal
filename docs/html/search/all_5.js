@@ -14,6 +14,7 @@ var searchData=
   ['ext_5fvref',['ext_vref',['../group__group__hal__adc.html#a1e330ef5d05f2e0fb824f7060a398fb7',1,'cyhal_adc_config_t']]],
   ['ext_5fvref_5fmv',['ext_vref_mv',['../group__group__hal__adc.html#a97998569cedf9c1ee8f2e9cf0d199972',1,'cyhal_adc_config_t']]],
   ['ezi2c_20_28inter_2dintegrated_20circuit_29',['EZI2C (Inter-Integrated Circuit)',['../group__group__hal__ezi2c.html',1,'']]],
+  ['ezi2c_20hal_20results',['EZI2C HAL Results',['../group__group__hal__results__ezi2c.html',1,'']]],
   ['endpoint',['Endpoint',['../group__group__hal__usb__dev__endpoint.html',1,'']]],
   ['ep0',['EP0',['../group__group__hal__usb__dev__ep0.html',1,'']]]
 ];

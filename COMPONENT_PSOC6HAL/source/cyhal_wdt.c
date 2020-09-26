@@ -136,9 +136,13 @@ static const _cyhal_wdt_ignore_bits_data_t _cyhal_wdt_ignore_data[] = {
 
 static bool _cyhal_wdt_initialized = false;
 static bool _cyhal_wdt_pdl_initialized = false;
-static uint16_t _cyhal_wdt_initial_timeout_ms = 0;
-static uint8_t _cyhal_wdt_initial_ignore_bits = 0;
 
+static uint16_t _cyhal_wdt_initial_timeout_ms = 0;
+
+static uint16_t _cyhal_wdt_rounded_timeout_ms = 0;
+static uint8_t _cyhal_wdt_ignore_bits = 0;
+
+// Rounds up *timeout_ms if it's outside of the valid timeout ranges (see above)
 static __INLINE uint32_t _cyhal_wdt_timeout_to_ignore_bits(uint32_t *timeout_ms) {
     for (uint32_t i = 0; i <= _CYHAL_WDT_MAX_IGNORE_BITS; i++)
     {
@@ -184,12 +188,13 @@ cy_rslt_t cyhal_wdt_init(cyhal_wdt_t *obj, uint32_t timeout_ms)
     cyhal_wdt_stop(obj);
 
     _cyhal_wdt_initial_timeout_ms = timeout_ms;
-    uint8_t ignore_bits = _cyhal_wdt_timeout_to_ignore_bits(&timeout_ms);
-    _cyhal_wdt_initial_ignore_bits = ignore_bits;
 
-    Cy_WDT_SetIgnoreBits(ignore_bits);
+    _cyhal_wdt_ignore_bits = _cyhal_wdt_timeout_to_ignore_bits(&timeout_ms);
+    _cyhal_wdt_rounded_timeout_ms = timeout_ms;
 
-    Cy_WDT_SetMatch(_cyhal_wdt_timeout_to_match(timeout_ms, ignore_bits));
+    Cy_WDT_SetIgnoreBits(_cyhal_wdt_ignore_bits);
+
+    Cy_WDT_SetMatch(_cyhal_wdt_timeout_to_match(_cyhal_wdt_rounded_timeout_ms, _cyhal_wdt_ignore_bits));
 
     cyhal_wdt_start(obj);
 
@@ -212,7 +217,7 @@ void cyhal_wdt_kick(cyhal_wdt_t *obj)
     Cy_WDT_ClearWatchdog();
 
     _cyhal_wdt_unlock();
-    Cy_WDT_SetMatch(_cyhal_wdt_timeout_to_match(_cyhal_wdt_initial_timeout_ms, _cyhal_wdt_initial_ignore_bits));
+    Cy_WDT_SetMatch(_cyhal_wdt_timeout_to_match(_cyhal_wdt_rounded_timeout_ms, _cyhal_wdt_ignore_bits));
     _cyhal_wdt_lock();
 }
 

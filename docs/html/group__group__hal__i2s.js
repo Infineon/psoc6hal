@@ -1,6 +1,6 @@
 var group__group__hal__i2s =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "I2S HAL Results", "group__group__hal__results__i2s.html", "group__group__hal__results__i2s" ],
     [ "cyhal_i2s_pins_t", "group__group__hal__i2s.html#structcyhal__i2s__pins__t", [
       [ "sck", "group__group__hal__i2s.html#a06f418e1a73780daacabb034e78ad0d9", null ],
       [ "ws", "group__group__hal__i2s.html#ac1888b4fa0b934f7c48598ced0fc5ba5", null ],

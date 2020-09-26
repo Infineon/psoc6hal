@@ -1,6 +1,6 @@
 var group__group__hal__spi =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "SPI HAL Results", "group__group__hal__results__spi.html", "group__group__hal__results__spi" ],
     [ "cyhal_spi_cfg_t", "group__group__hal__spi.html#structcyhal__spi__cfg__t", [
       [ "mode", "group__group__hal__spi.html#a031d638b78c9d9e2d62f98352b3fe3cf", null ],
       [ "data_bits", "group__group__hal__spi.html#a1991eaa6f8caf9cb6ad1346615158636", null ],

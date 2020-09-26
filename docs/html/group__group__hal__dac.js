@@ -1,6 +1,6 @@
 var group__group__hal__dac =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "DAC HAL Results", "group__group__hal__results__dac.html", "group__group__hal__results__dac" ],
     [ "cyhal_dac_ref_t", "group__group__hal__dac.html#gab8bd602f1b7d91eacd4126873148e5a3", [
       [ "CYHAL_DAC_REF_VDDA", "group__group__hal__dac.html#ggab8bd602f1b7d91eacd4126873148e5a3aa38d2cb249af9c70780d9b6aaa225e24", null ],
       [ "CYHAL_DAC_REF_VREF", "group__group__hal__dac.html#ggab8bd602f1b7d91eacd4126873148e5a3af87f660f3058a173c6fbdeb24528e46f", null ]

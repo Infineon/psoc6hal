@@ -290,7 +290,8 @@ static uint32_t _cyhal_adc_convert_average_mode(uint32_t average_mode_flags)
     }
     else if(0u != (average_mode_flags & CYHAL_ADC_AVG_MODE_INTERLEAVED))
     {
-        result |= CY_SAR_AVG_MODE_INTERLEAVED;
+        /* INTERLEAVED on its own does not divide the result back down */
+        result |= (CY_SAR_AVG_MODE_INTERLEAVED | SAR_SAMPLE_CTRL_AVG_SHIFT_Msk);
     }
     else
     {
@@ -415,14 +416,14 @@ static void _cyhal_adc_irq_handler(void)
             for(int i = 0; i < num_channels; ++i)
             {
                 int32_t counts = Cy_SAR_GetResult32(obj->base, i);
-                *obj->async_buff = obj->async_transfer_in_uv ? Cy_SAR_CountsTo_uVolts(obj->base, i, counts) : counts;
-                ++obj->async_buff;
+                *obj->async_buff_next = obj->async_transfer_in_uv ? Cy_SAR_CountsTo_uVolts(obj->base, i, counts) : counts;
+                ++obj->async_buff_next;
             }
             --(obj->async_scans_remaining);
 
             if(0 == obj->async_scans_remaining)
             {
-                obj->async_buff = NULL;
+                obj->async_buff_next = obj->async_buff_orig = NULL;
                 hal_event |= CYHAL_ADC_ASYNC_READ_COMPLETE;
             }
             else if(false == obj->continuous_scanning)
@@ -439,7 +440,7 @@ static void _cyhal_adc_irq_handler(void)
             {
                 .src_addr = (uint32_t)obj->base->CHAN_RESULT,
                 .src_increment = 1u,
-                .dst_addr = (uint32_t)obj->async_buff,
+                .dst_addr = (uint32_t)obj->async_buff_next,
                 .dst_increment = 1u,
                 .transfer_width = 16u,
                 .length = num_channels,
@@ -504,12 +505,20 @@ static void _cyhal_adc_dma_handler(void* arg, cyhal_dma_event_t event)
 
     uint8_t num_channels = _cyhal_adc_max_configured_channel(obj) + 1;
     CY_ASSERT(false == obj->async_transfer_in_uv);
-    obj->async_buff += num_channels;
+    obj->async_buff_next += num_channels;
     --(obj->async_scans_remaining);
 
     if(0 == obj->async_scans_remaining)
     {
-        obj->async_buff = NULL;
+        // DMA doesn't sign extend when we copy from 16 to 32 bits, so do the sign extension
+        // ourselves once all channel scans are complete.
+        while(obj->async_buff_orig != obj->async_buff_next)
+        {
+            int16_t sar_result = (int16_t)*(obj->async_buff_orig);
+            *(obj->async_buff_orig) = sar_result;
+            ++(obj->async_buff_orig);
+        }
+        obj->async_buff_next = obj->async_buff_orig = NULL;
         if(0 != (CYHAL_ADC_ASYNC_READ_COMPLETE & ((cyhal_adc_event_t)obj->user_enabled_events)))
         {
             cyhal_adc_event_callback_t callback = (cyhal_adc_event_callback_t)obj->callback_data.callback;
@@ -918,7 +927,7 @@ cy_rslt_t cyhal_adc_set_sample_rate(cyhal_adc_t* obj, uint32_t desired_sample_ra
 uint32_t _cyhal_adc_channel_convert_config(const cyhal_adc_channel_config_t* config, cyhal_gpio_t vplus, cyhal_gpio_t vminus)
 {
     uint32_t result = (uint32_t)CY_SAR_CHAN_SAMPLE_TIME_0  /* Placeholder, will be updated by populate_acquisition_timers */
-                        | config->enable_averaging ? (uint32_t)CY_SAR_CHAN_AVG_ENABLE : (uint32_t)CY_SAR_CHAN_AVG_DISABLE
+                        | (config->enable_averaging ? (uint32_t)CY_SAR_CHAN_AVG_ENABLE : (uint32_t)CY_SAR_CHAN_AVG_DISABLE)
                         | (uint32_t)CY_SAR_POS_PORT_ADDR_SARMUX
                         | _cyhal_adc_get_pin_addr(vplus, true);
 
@@ -1142,6 +1151,9 @@ uint16_t cyhal_adc_read_u16(const cyhal_adc_channel_t *obj)
 int32_t cyhal_adc_read(const cyhal_adc_channel_t *obj)
 {
     uint32_t old_en_mask = 0u;
+
+    bool isInterleaved = (CY_SAR_AVG_MODE_INTERLEAVED == (SAR_SAMPLE_CTRL(obj->adc->base) & SAR_SAMPLE_CTRL_AVG_MODE_Msk));
+    bool isChannelAveraging = (obj->adc->base->CHAN_CONFIG[obj->channel_idx] & SAR_CHAN_CONFIG_AVG_EN_Msk);
     if(!obj->adc->continuous_scanning)
     {
         /* Enable the selected channel only, then perform an on-demand conversion.
@@ -1149,7 +1161,16 @@ int32_t cyhal_adc_read(const cyhal_adc_channel_t *obj)
         old_en_mask = SAR_CHAN_EN(obj->adc->base);
         Cy_SAR_SetChanMask(obj->adc->base, 1U << obj->channel_idx);
         obj->adc->conversion_complete = false;
-        Cy_SAR_StartConvert(obj->adc->base, CY_SAR_START_CONVERT_SINGLE_SHOT);
+
+        // If interleaved averaging and average is enabled for this channel, set for
+        // continuous scanning and then stop the scan once we get a result. This is 
+        // because the ADC hardware has a special case where it will not raise
+        // the EOC interrupt until AVG_COUNT scans have occurred when all enabled
+        // channels are using interleaved channels. This means that for the first AVG_COUNT - 1
+        // scans there will be no interrupt, therefore conversion_complete will never 
+        // be set true, and therefore the loop below would be stuck waiting forever, 
+        // never able to trigger a subsequent scan.
+        Cy_SAR_StartConvert(obj->adc->base, (isInterleaved && isChannelAveraging) ? CY_SAR_START_CONVERT_CONTINUOUS : CY_SAR_START_CONVERT_SINGLE_SHOT);
     }
 
     /* Cy_SAR_IsEndConversion relies on and clears the EOS interrupt status bit.
@@ -1162,6 +1183,10 @@ int32_t cyhal_adc_read(const cyhal_adc_channel_t *obj)
 
     if(!obj->adc->continuous_scanning)
     {
+        if(isInterleaved && isChannelAveraging)
+        {
+            Cy_SAR_StopConvert(obj->adc->base);
+        }
         Cy_SAR_SetChanMask(obj->adc->base, old_en_mask);
     }
 
@@ -1178,10 +1203,10 @@ int32_t cyhal_adc_read_uv(const cyhal_adc_channel_t *obj)
 
 void _cyhal_adc_start_async_read(cyhal_adc_t* obj, size_t num_scan, int32_t* result_list)
 {
-    CY_ASSERT(NULL == obj->async_buff); /* Transfer already in progress */
+    CY_ASSERT(NULL == obj->async_buff_next); /* Transfer already in progress */
     uint32_t savedIntrStatus = cyhal_system_critical_section_enter();
     obj->async_scans_remaining = num_scan;
-    obj->async_buff = result_list;
+    obj->async_buff_next = obj->async_buff_orig = result_list;
 
     if(false == obj->continuous_scanning)
     {
@@ -1209,7 +1234,7 @@ cy_rslt_t cyhal_adc_read_async_uv(cyhal_adc_t* obj, size_t num_scan, int32_t* re
 cy_rslt_t cyhal_adc_set_async_mode(cyhal_adc_t *obj, cyhal_async_mode_t mode, uint8_t dma_priority)
 {
     CY_ASSERT(NULL != obj);
-    CY_ASSERT(NULL == obj->async_buff); /* Can't swap mode while a transfer is running */
+    CY_ASSERT(NULL == obj->async_buff_next); /* Can't swap mode while a transfer is running */
 
     cy_rslt_t result = CY_RSLT_SUCCESS;
 

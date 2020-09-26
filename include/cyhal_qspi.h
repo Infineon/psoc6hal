@@ -78,9 +78,10 @@
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_qspi QSPI HAL Results
+ *  QSPI specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name QSPI Results
  */
 
 /** Bus width Error. */
@@ -109,7 +110,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_QSPI, 7))
 
 /**
- * \} \}
+ * \}
  */
 
 /** QSPI Bus width. Some parts of commands provide variable bus width. */

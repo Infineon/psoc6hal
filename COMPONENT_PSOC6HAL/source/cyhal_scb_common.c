@@ -271,7 +271,7 @@ uint32_t _cyhal_i2c_set_peri_divider(CySCB_Type *base, uint32_t block_num, cyhal
         }
 
         if (peri_freq > 0 &&
-            Cy_SysClk_PeriphAssignDivider((en_clk_dst_t)((uint8_t)PCLK_SCB0_CLOCK + block_num), (cy_en_divider_types_t)clock->block, clock->channel) == CY_SYSCLK_SUCCESS)
+            Cy_SysClk_PeriphAssignDivider(_cyhal_scb_get_clock_index(block_num), (cy_en_divider_types_t)clock->block, clock->channel) == CY_SYSCLK_SUCCESS)
         {
             cy_rslt_t status = cyhal_clock_set_enabled(clock, false, false);
             if (status == CY_RSLT_SUCCESS)

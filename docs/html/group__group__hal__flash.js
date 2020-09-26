@@ -1,6 +1,6 @@
 var group__group__hal__flash =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "Flash HAL Results", "group__group__hal__results__flash.html", "group__group__hal__results__flash" ],
     [ "cyhal_flash_block_info_t", "group__group__hal__flash.html#structcyhal__flash__block__info__t", [
       [ "start_address", "group__group__hal__flash.html#a7066dc8bfd2f85ba0a0a8fa61afe9a9d", null ],
       [ "size", "group__group__hal__flash.html#a28cdf0683abfa135ae3711631cb137a7", null ],

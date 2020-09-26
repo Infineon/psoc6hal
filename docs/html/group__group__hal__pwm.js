@@ -1,12 +1,12 @@
 var group__group__hal__pwm =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "PWM HAL Results", "group__group__hal__results__pwm.html", "group__group__hal__results__pwm" ],
     [ "cyhal_pwm_init", "group__group__hal__pwm.html#ga54a93c541bdbb3fce066a2af00d8b67f", null ],
     [ "cyhal_pwm_event_callback_t", "group__group__hal__pwm.html#gaaa08c1a2445ea5243c96ca657b37ec67", null ],
     [ "cyhal_pwm_event_t", "group__group__hal__pwm.html#gabfbeebd93efd6491261d3eb6aefef554", [
       [ "CYHAL_PWM_IRQ_NONE", "group__group__hal__pwm.html#ggabfbeebd93efd6491261d3eb6aefef554a2984287e6c0b15bc61328815d59f4b3a", null ],
       [ "CYHAL_PWM_IRQ_TERMINAL_COUNT", "group__group__hal__pwm.html#ggabfbeebd93efd6491261d3eb6aefef554a6544b76f92d881a053531d723ed70104", null ],
-      [ "CYHAL_PWM_IRQ_CAPTURE_COMPARE", "group__group__hal__pwm.html#ggabfbeebd93efd6491261d3eb6aefef554a6f51bd855226f93a9803c2b1560d8d0e", null ],
+      [ "CYHAL_PWM_IRQ_COMPARE", "group__group__hal__pwm.html#ggabfbeebd93efd6491261d3eb6aefef554aff354daea767d054ef38516556bbf20b", null ],
       [ "CYHAL_PWM_IRQ_ALL", "group__group__hal__pwm.html#ggabfbeebd93efd6491261d3eb6aefef554a8c8570c6b62d204339202b002a326ad6", null ]
     ] ],
     [ "cyhal_pwm_alignment_t", "group__group__hal__pwm.html#ga251111384b543a19975df63353203b51", [

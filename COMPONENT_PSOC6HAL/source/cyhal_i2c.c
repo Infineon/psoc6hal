@@ -227,7 +227,11 @@ cy_rslt_t cyhal_i2c_init(cyhal_i2c_t *obj, cyhal_gpio_t sda, cyhal_gpio_t scl, c
     {
         _cyhal_scb_update_instance_data(obj->resource.block_num, (void*)obj, &_cyhal_i2c_pm_callback_instance);
         /* Enable I2C to operate */
+#if defined(COMPONENT_PSOC6HAL)
         Cy_SCB_I2C_Enable(obj->base);
+#else /* COMPONENT_PSOC4HAL */
+        Cy_SCB_I2C_Enable(obj->base, &(obj->context));
+#endif
 
         obj->callback_data.callback = NULL;
         obj->callback_data.callback_arg = NULL;
@@ -296,7 +300,11 @@ cy_rslt_t cyhal_i2c_configure(cyhal_i2c_t *obj, const cyhal_i2c_cfg_t *cfg)
     }
 
     cy_rslt_t result = (cy_rslt_t)Cy_SCB_I2C_Init(obj->base, &config_structure, &(obj->context));
+#if defined(COMPONENT_PSOC6HAL)
     (void) Cy_SCB_I2C_Enable(obj->base);
+#else /* COMPONENT_PSOC4HAL */
+    (void) Cy_SCB_I2C_Enable(obj->base, &(obj->context));
+#endif
 
     return result;
 }

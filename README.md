@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Hardware Abstraction Layer (HAL) provides a high-level interface to configure and use hardware blocks on PSoC MCUs. It is a generic interface that can be used across multiple product families. The focus on ease-of-use and portability means the HAL does not expose all of the low-level peripheral functionality. The HAL can be combined with platform-specific libraries (such as the PSoC 6 Peripheral Driver Library (PDL)) within a single application. You can leverage the HAL's simpler and more generic interface for most of an application, even if one portion requires finer-grained control.
+The Hardware Abstraction Layer (HAL) provides a high-level interface to configure and use hardware blocks on PSoC MCUs. It is a generic interface that can be used across multiple product families. The focus on ease-of-use and portability means the HAL does not expose all of the low-level peripheral functionality. The HAL can be combined with platform-specific libraries (such as the PSoC 4/6 Peripheral Driver Library (PDL)) within a single application. You can leverage the HAL's simpler and more generic interface for most of an application, even if one portion requires finer-grained control.
 
 To use code from the HAL, the specific driver header file can be included or the top level `cyhal.h` header can be include to allow access to any driver.
 
@@ -22,7 +22,7 @@ Note: Some APIs that manipulate block timing may not be able to support as wide 
 For peripherals, the HAL generally does not identify block instances directly (for example, by index). Instead, block instances are identified indirectly by specifying the desired pin for each function. The `_init` function selects the block instance that connects to the specified pins. If multiple block instances can connect to the specified pins, the HAL may select any available instance.
 
 ## Hardware Manager
-To ensure that distinct driver instances do not attempt to manipulate the same hardware blocks, the HAL includes facilities for allocating and tracking resource use. The "Hardware Manager" component handles this. It is usually not necessary to interact directly with the Hardware Manager from application firmware. The peripheral drivers automatically reserve the resources they require (and check for conflicts) as part of the `_init` API. However, the Hardware Manager is part of the public HAL API, and the application may directly invoke it to handle advanced use cases. For example, if a block instance will be managed by a lower-level API (for example, PSoC 6 PDL), the application should call the `cyhal_hwmgr_reserve` function to ensure that no other HAL driver attempts to use the same block.
+To ensure that distinct driver instances do not attempt to manipulate the same hardware blocks, the HAL includes facilities for allocating and tracking resource use. The "Hardware Manager" component handles this. It is usually not necessary to interact directly with the Hardware Manager from application firmware. The peripheral drivers automatically reserve the resources they require (and check for conflicts) as part of the `_init` API. However, the Hardware Manager is part of the public HAL API, and the application may directly invoke it to handle advanced use cases. For example, if a block instance will be managed by a lower-level API (for example, PSoC 4/6 PDL), the application should call the `cyhal_hwmgr_reserve` function to ensure that no other HAL driver attempts to use the same block.
 
 ## Power Management
 The System driver provides general purpose power management APIs (`cyhal_system_register_callback` and `cyhal_system_unregister_callback`) that can be used to control when the application can go to sleep at a global level. Additionally, each peripheral driver has its own default power management strategy. The strategy is:
@@ -49,7 +49,7 @@ The HAL driver headers provide macros corresponding to codes for common error si
 For more details on interacting with `cy_rslt_t` see [Result Type](docs/html/group__group__result.html).
 
 ## More information
-* [API Reference Guide](https://cypresssemiconductorco.github.io/psoc6hal/html/modules.html)
+* [API Reference Guide](https://cypresssemiconductorco.github.io/mtb-hal-cat1/html/modules.html)
 * [Cypress Semiconductor, an Infineon Technologies Company](http://www.cypress.com)
 * [Cypress Semiconductor GitHub](https://github.com/cypresssemiconductorco)
 * [ModusToolbox](https://www.cypress.com/products/modustoolbox-software-environment)

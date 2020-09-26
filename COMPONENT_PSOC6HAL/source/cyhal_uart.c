@@ -91,7 +91,7 @@ static void _cyhal_uart_irq_handler(void)
 
 static void _cyhal_uart_cb_wrapper(uint32_t event)
 {
-    static const uint32_t status_map[] =
+    static const uint32_t status_map[] =            //Note: HAL defines in PDL order for mapping
     {
         (uint32_t)CYHAL_UART_IRQ_NONE,                 // Default no IRQ
         (uint32_t)CYHAL_UART_IRQ_TX_TRANSMIT_IN_FIFO,  // CY_SCB_UART_TRANSMIT_IN_FIFO_EVENT
@@ -117,11 +117,7 @@ static bool _cyhal_uart_pm_callback_instance(void *obj_ptr, cyhal_syspm_callback
 {
     CY_UNUSED_PARAMETER(state);
     cyhal_uart_t *obj = (cyhal_uart_t*)obj_ptr;
-    bool allow = true;
-    cy_stc_syspm_callback_params_t uart_callback_params = {
-        .base = (void *) (obj->base),
-        .context = (void *) &(obj->context)
-    };
+    bool allow = false;
 
     // The output pins need to be set to high before going to deepsleep.
     // Otherwise the UART on the other side would see incoming data as '0'.
@@ -130,34 +126,55 @@ static bool _cyhal_uart_pm_callback_instance(void *obj_ptr, cyhal_syspm_callback
     uint8_t txpin = (uint8_t)CYHAL_GET_PIN(obj->pin_tx);
     uint8_t rtspin = (uint8_t)CYHAL_GET_PIN(obj->pin_rts);
 
-    cy_en_syspm_status_t ret_status = Cy_SCB_UART_DeepSleepCallback(&uart_callback_params, pdl_mode);
-
     switch (pdl_mode)
     {
         case CY_SYSPM_CHECK_READY:
-            if (CY_SYSPM_SUCCESS == ret_status)
+            /* Check whether the High-level API is not busy executing the transmit
+            * or receive operation.
+            */
+            if ((0UL == (CY_SCB_UART_TRANSMIT_ACTIVE & Cy_SCB_UART_GetTransmitStatus(obj->base, &(obj->context)))) &&
+                (0UL == (CY_SCB_UART_RECEIVE_ACTIVE  & Cy_SCB_UART_GetReceiveStatus (obj->base, &(obj->context)))))
             {
-                if (NULL != txport)
+                /* If all data elements are transmitted from the TX FIFO and
+                * shifter and the RX FIFO is empty: the UART is ready to enter
+                * Deep Sleep mode.
+                */
+                if (Cy_SCB_UART_IsTxComplete(obj->base))
                 {
-                    obj->saved_tx_hsiom = Cy_GPIO_GetHSIOM(txport, txpin);
-                    Cy_GPIO_Set(txport, txpin);
-                    Cy_GPIO_SetHSIOM(txport, txpin, HSIOM_SEL_GPIO);
+                    if (0UL == Cy_SCB_UART_GetNumInRxFifo(obj->base))
+                    {
+                        /* Disable the UART. The transmitter stops driving the
+                        * lines and the receiver stops receiving data until
+                        * the UART is enabled.
+                        * This happens when the device failed to enter Deep
+                        * Sleep or it is awaken from Deep Sleep mode.
+                        */
+
+                        if (NULL != txport)
+                        {
+                            obj->saved_tx_hsiom = Cy_GPIO_GetHSIOM(txport, txpin);
+                            Cy_GPIO_Set(txport, txpin);
+                            Cy_GPIO_SetHSIOM(txport, txpin, HSIOM_SEL_GPIO);
+                        }
+                        if (NULL != rtsport)
+                        {
+                            obj->saved_rts_hsiom = Cy_GPIO_GetHSIOM(rtsport, rtspin);
+                            Cy_GPIO_Set(rtsport, rtspin);
+                            Cy_GPIO_SetHSIOM(rtsport, rtspin, HSIOM_SEL_GPIO);
+                        }
+
+                        Cy_SCB_UART_Disable(obj->base, &(obj->context));
+                        allow = true;
+
+                    }
                 }
-                if (NULL != rtsport)
-                {
-                    obj->saved_rts_hsiom = Cy_GPIO_GetHSIOM(rtsport, rtspin);
-                    Cy_GPIO_Set(rtsport, rtspin);
-                    Cy_GPIO_SetHSIOM(rtsport, rtspin, HSIOM_SEL_GPIO);
-                }
-            }
-            else
-            {
-                allow = false;
             }
             break;
 
         case CY_SYSPM_CHECK_FAIL:
         case CY_SYSPM_AFTER_TRANSITION:
+            allow = true;
+            Cy_SCB_UART_Enable(obj->base);
             if (NULL != txport)
             {
                 Cy_GPIO_SetHSIOM(txport, txpin, obj->saved_tx_hsiom);
@@ -169,6 +186,7 @@ static bool _cyhal_uart_pm_callback_instance(void *obj_ptr, cyhal_syspm_callback
             break;
 
         case CY_SYSPM_BEFORE_TRANSITION:
+            allow = true;
             break;
 
         default:
@@ -310,7 +328,7 @@ cy_rslt_t cyhal_uart_init(cyhal_uart_t *obj, cyhal_gpio_t tx, cyhal_gpio_t rx, c
     if (result == CY_RSLT_SUCCESS)
     {
         result = (cy_rslt_t)Cy_SysClk_PeriphAssignDivider(
-            (en_clk_dst_t)((uint8_t)PCLK_SCB0_CLOCK + obj->resource.block_num), (cy_en_divider_types_t)obj->clock.block, obj->clock.channel);
+            _cyhal_scb_get_clock_index(obj->resource.block_num), (cy_en_divider_types_t)obj->clock.block, obj->clock.channel);
     }
 
     if (result == CY_RSLT_SUCCESS)
@@ -425,10 +443,18 @@ cy_rslt_t cyhal_uart_set_baud(cyhal_uart_t *obj, uint32_t baudrate, uint32_t *ac
     status = cyhal_clock_set_enabled(&(obj->clock), true, false);
 
     /* Configure the UART interface */
-    SCB_CTRL(obj->base) = _BOOL2FLD(SCB_CTRL_ADDR_ACCEPT, obj->config.acceptAddrInFifo)       |
-                 _BOOL2FLD(SCB_CTRL_BYTE_MODE, (obj->config.dataWidth <= CY_SCB_BYTE_WIDTH))  |
-                 _VAL2FLD(SCB_CTRL_OVS, oversample_value - 1)                                 |
-                 _VAL2FLD(SCB_CTRL_MODE, CY_SCB_CTRL_MODE_UART);
+    #if (CY_IP_MXSCB_VERSION >= 2) /* Versions 2 and later */
+    SCB_CTRL(obj->base) = _BOOL2FLD(SCB_CTRL_ADDR_ACCEPT, obj->config.acceptAddrInFifo)     |
+                _BOOL2FLD(SCB_CTRL_MEM_WIDTH, (obj->config.dataWidth <= CY_SCB_BYTE_WIDTH)
+                    ? CY_SCB_CTRL_MEM_WIDTH_BYTE : CY_SCB_CTRL_MEM_WIDTH_HALFWORD)          |
+                _VAL2FLD(SCB_CTRL_OVS, oversample_value - 1)                                |
+                _VAL2FLD(SCB_CTRL_MODE, CY_SCB_CTRL_MODE_UART);
+    #else /* Older versions of the block */
+    SCB_CTRL(obj->base) = _BOOL2FLD(SCB_CTRL_ADDR_ACCEPT, obj->config.acceptAddrInFifo)     |
+                _BOOL2FLD(SCB_CTRL_BYTE_MODE, (obj->config.dataWidth <= CY_SCB_BYTE_WIDTH)) |
+                _VAL2FLD(SCB_CTRL_OVS, oversample_value - 1)                                |
+                _VAL2FLD(SCB_CTRL_MODE, CY_SCB_CTRL_MODE_UART);
+    #endif
 
     Cy_SCB_UART_Enable(obj->base);
     return status;

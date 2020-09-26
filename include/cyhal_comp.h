@@ -83,9 +83,10 @@
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_comp Comparator HAL Results
+ *  Comparator specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name COMP Results
  */
 
 /** The requested pins are invalid */
@@ -96,7 +97,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_COMP, 2))
 
 /**
- * \} \}
+ * \}
  */
 
 /** Comparator event types */

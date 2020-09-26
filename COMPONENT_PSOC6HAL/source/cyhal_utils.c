@@ -35,7 +35,8 @@ extern "C"
 {
 #endif
 
-const cyhal_resource_pin_mapping_t *_cyhal_utils_get_resource(cyhal_gpio_t pin, const cyhal_resource_pin_mapping_t* mappings, size_t count)
+const cyhal_resource_pin_mapping_t *_cyhal_utils_get_resource(cyhal_gpio_t pin, const cyhal_resource_pin_mapping_t* mappings, size_t count,
+    const cyhal_resource_inst_t* block_res)
 {
     if (NC != pin)
     {
@@ -43,7 +44,10 @@ const cyhal_resource_pin_mapping_t *_cyhal_utils_get_resource(cyhal_gpio_t pin, 
         {
             if (pin == mappings[i].pin)
             {
-                return &mappings[i];
+                if ((NULL == block_res) || (_cyhal_utils_resources_equal(mappings[i].inst, block_res)))
+                {
+                    return &mappings[i];
+                }
             }
         }
     }
@@ -335,7 +339,7 @@ cy_rslt_t _cyhal_utils_find_hf_clk_div(uint32_t hz_src, uint32_t desired_hz, con
         }
         else if (only_below_desired)
         {
-            /* We are going from smallest divider, to highest. If we've not achieved better tollerance in
+            /* We are going from smallest divider, to highest. If we've not achieved better tolerance in
             *   this iteration, we will no achieve it in futher for sure. */
             break;
         }
@@ -360,6 +364,85 @@ cy_rslt_t _cyhal_utils_set_clock_frequency(cyhal_clock_t* clock, uint32_t hz, co
         // Defer to the clock driver
         return cyhal_clock_set_frequency(clock, hz, tolerance);
     }
+}
+
+cy_rslt_t _cyhal_utils_set_clock_frequency2(cyhal_clock_t *clock, uint32_t hz, const cyhal_clock_tolerance_t *tolerance)
+{
+    CY_ASSERT(NULL != clock);
+    CY_ASSERT(hz != 0);
+
+    uint32_t count;
+    const cyhal_resource_inst_t ** sources;
+    cy_rslt_t retval = cyhal_clock_get_sources(clock, &sources, &count);
+    if (CY_RSLT_SUCCESS != retval)
+        return retval;
+
+    uint32_t best_tolerance_hz = 0xFFFFFFFF;
+    cyhal_clock_t best_clock;
+    uint32_t best_clock_freq = 0;
+    uint32_t best_divider = 1;
+    /* Go through all possible HFCLK clock sources and check what source fits best */
+    for (uint32_t i = 0; i < count; ++i)
+    {
+        cyhal_clock_t temp_clock;
+        if (CY_RSLT_SUCCESS == cyhal_clock_get(&temp_clock, sources[i]))
+        {
+            uint32_t cur_hf_source_freq = cyhal_clock_get_frequency(&temp_clock);
+            /* source frequency is much lower than desired, no reason to continue */
+            if ((0 == cur_hf_source_freq) ||
+                ((NULL != tolerance) && (_cyhal_utils_calculate_tolerance(tolerance->type, hz, cur_hf_source_freq) > (int32_t)tolerance->value)))
+            {
+                continue;
+            }
+            /* Covering situation when PATHMUX has enabled FLL / PLL on its way. In that case FLL / PLL frequency
+                is observed on PATHMUX which is covered in other iterations of the sources loop */
+            if (CYHAL_CLOCK_BLOCK_PATHMUX == temp_clock.block)
+            {
+                if (((sources[i]->channel_num == 0) && Cy_SysClk_FllIsEnabled()) ||
+                    ((sources[i]->channel_num > 0) && (sources[i]->channel_num <= SRSS_NUM_PLL) &&
+                        Cy_SysClk_PllIsEnabled(sources[i]->channel_num)))
+                {
+                    continue;
+                }
+            }
+
+            uint8_t cur_clock_divider;
+            if (CY_RSLT_SUCCESS == _cyhal_utils_find_hf_clk_div(cur_hf_source_freq, hz, NULL, true, &cur_clock_divider))
+            {
+                uint32_t cur_divided_freq = cur_hf_source_freq / cur_clock_divider;
+                uint32_t cur_clock_tolerance = abs(_cyhal_utils_calculate_tolerance(CYHAL_TOLERANCE_HZ, hz, cur_divided_freq));
+                if (cur_clock_tolerance < best_tolerance_hz)
+                {
+                    best_clock = temp_clock;
+                    best_tolerance_hz = cur_clock_tolerance;
+                    best_clock_freq = cur_divided_freq;
+                    best_divider = cur_clock_divider;
+                    if (cur_divided_freq == hz)
+                        break;
+                }
+            }
+        }
+    }
+
+    /* Verify within tolerance if one was provided. */
+    if (NULL != tolerance)
+    {
+        uint32_t achieved_tolerance = abs(_cyhal_utils_calculate_tolerance(tolerance->type, hz, best_clock_freq));
+        if ((0 == best_clock_freq) || (achieved_tolerance > tolerance->value))
+            retval = CYHAL_CLOCK_RSLT_ERR_FREQ;
+    }
+
+    if (CY_RSLT_SUCCESS == retval)
+    {
+        retval = cyhal_clock_set_source(clock, &best_clock);
+    }
+
+    if (CY_RSLT_SUCCESS == retval)
+    {
+        retval = cyhal_clock_set_divider(clock, best_divider);
+    }
+
+    return retval;
 }
 #endif
 

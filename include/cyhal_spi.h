@@ -57,12 +57,12 @@
 * \section section_spi_snippets Code snippets
 *
 * \subsection subsection_spi_snippet_1 Snippet 1: SPI Master - Single byte transfer operation (Read and Write)
-* The following code snippet initialises an SPI Master interface using the \ref cyhal_spi_init(). The data rate of transfer is set using \ref cyhal_spi_set_frequency().
+* The following code snippet initializes an SPI Master interface using the \ref cyhal_spi_init(). The data rate of transfer is set using \ref cyhal_spi_set_frequency().
 * The code snippet shows how to transfer a single byte of data using \ref cyhal_spi_send() and \ref cyhal_spi_recv().
 * \snippet spi.c snippet_cyhal_spi_master_byte_operation
 *
 * \subsection subsection_spi_snippet_2 Snippet 2: SPI Slave - Single byte transfer operation (Read and Write)
-* The following code snippet initialises an SPI Slave interface using the \ref cyhal_spi_init(). The data rate of transfer is set using \ref cyhal_spi_set_frequency.
+* The following code snippet initializes an SPI Slave interface using the \ref cyhal_spi_init(). The data rate of transfer is set using \ref cyhal_spi_set_frequency.
 * The code snippet shows how to transfer a single byte of data using \ref cyhal_spi_send() and \ref cyhal_spi_recv.
 * \snippet spi.c snippet_cyhal_spi_slave_byte_operation
 *
@@ -96,9 +96,10 @@
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_spi SPI HAL Results
+ *  SPI specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name SPI Results
  */
 
 /** Bad argument */
@@ -130,7 +131,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_SPI, 9))
 
 /**
- * \} \}
+ * \}
  */
 
 /** Compatibility define for cyhal_spi_set_frequency. */
@@ -210,8 +211,8 @@ typedef struct
  * @note This pin cannot be NC
  * @param[in]  ssel The pin to use for SSEL
  * @note Provided pin will be configured for \ref CYHAL_SPI_SSEL_ACTIVE_LOW polarity and set as active. This can be changed
- * (as well as additional ssel pins can be added) by \ref cyhal_spi_slave_select_config and \ref cyhal_spi_select_active_ssel functions.
- * This pin can be NC.
+ * (as well as additional ssel pins can be added) by \ref cyhal_spi_slave_select_config and \ref cyhal_spi_select_active_ssel
+ * functions. This pin can be NC.
  * @param[in]  clk The clock to use can be shared, if not provided a new clock will be allocated
  * @param[in]  bits      The number of bits per frame
  * @note bits should be 8 or 16
@@ -241,8 +242,8 @@ cy_rslt_t cyhal_spi_set_frequency(cyhal_spi_t *obj, uint32_t hz);
 
 /** Configures provided ssel pin to work as SPI slave select with specified polarity.
  *
- * Multiple pins can be configured as SPI slave select pins. Please refer to device datasheet for details. Switching between
- * configured slave select pins is done by \ref cyhal_spi_select_active_ssel function.
+ * Multiple pins can be configured as SPI slave select pins. Please refer to device datasheet for details. Switching
+ * between configured slave select pins is done by \ref cyhal_spi_select_active_ssel function.
  * Unless modified with this function, the SSEL pin provided as part of \ref cyhal_spi_init is the default.
  * @param[in] obj       The SPI object to add slave select for
  * @param[in] ssel      Slave select pin to be added
@@ -254,7 +255,8 @@ cy_rslt_t cyhal_spi_slave_select_config(cyhal_spi_t *obj, cyhal_gpio_t ssel, cyh
 /** Selects an active slave select line from one of available.
  *
  * This function is applicable for the master and slave.
- * SSEL pin should be configured by \ref cyhal_spi_slave_select_config or \ref cyhal_spi_init functions prior to selecting it as active.
+ * SSEL pin should be configured by \ref cyhal_spi_slave_select_config or \ref cyhal_spi_init functions prior
+ * to selecting it as active. The active slave select line will automatically be toggled as part of any transfer.
  * @param[in] obj       The SPI object for switching
  * @param[in] ssel      Slave select pin to be set as active
  * @return CY_RSLT_SUCCESS if slave select was switched successfully, otherwise - CYHAL_SPI_RSLT_ERR_CANNOT_SWITCH_SSEL
@@ -291,17 +293,18 @@ cy_rslt_t cyhal_spi_send(cyhal_spi_t *obj, uint32_t value);
 
 /** Synchronously Write a block out and receive a value
  *
- *  The total number of bytes sent and received will be the maximum of
- *  tx_length and rx_length. The bytes written will be padded with the
- *  value given by write_fill.
+ *  The total number of bytes sent and received will be the maximum of tx_length
+ *  and rx_length. The bytes written will be padded (at the end) with the value
+ *  given by write_fill.
  *
- * This function will block for the duration of the transfer.
+ * This function will block for the duration of the transfer. \ref cyhal_spi_transfer_async
+ * can be used for non-blocking transfers.
  *
  * @param[in] obj           The SPI peripheral to use for sending
  * @param[in] tx            Pointer to the byte-array of data to write to the device
  * @param[in,out] tx_length Number of bytes to write, updated with the number actually written
  * @param[out] rx           Pointer to the byte-array of data to read from the device
- * @param[in,out] rx_length Number of bytes to read, udpated with the number actually read
+ * @param[in,out] rx_length Number of bytes to read, updated with the number actually read
  * @param[in] write_fill    Default data transmitted while performing a read
  * @return The status of the transfer request
  * @note Both MOSI and MISO pins required to be non-NC for this API to operate
@@ -314,6 +317,7 @@ cy_rslt_t cyhal_spi_transfer(cyhal_spi_t *obj, const uint8_t *tx, size_t tx_leng
  * `tx_length` bytes of data from the buffer pointed to by `tx`, both in the background.
  * When the transfer is complete, the @ref CYHAL_SPI_IRQ_DONE event will be raised.
  * See @ref cyhal_spi_register_callback and @ref cyhal_spi_enable_event.
+ * \note For blocking transfers cyhal_spi_transfer can be used.
  *
  * @param[in] obj           The SPI object that holds the transfer information
  * @param[in] tx            The transmit buffer

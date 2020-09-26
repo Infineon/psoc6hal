@@ -1,5 +1,11 @@
 var NAVTREEINDEX16 =
 {
+"group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gad92a5fd297f6dedf51184d38a52e7e40":[1,2,6,14,90],
+"group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gad92ce1f09a0d0bdace2749ddcc0d76cd":[1,2,6,14,69],
+"group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gad9c6f5e43065048a2dae4e03127bf4fe":[1,2,6,14,81],
+"group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gadac7f9252f750525c6fb6584a260bce7":[1,2,6,14,72],
+"group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gadba1e1bf0cb3c391f00cf5c1c0f1e011":[1,2,6,14,26],
+"group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gadbcb21726bedc8b2e4f1bb2e0235035d":[1,2,6,14,1],
 "group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gae0af2ee8c5a2a2e6661962b368d1f2ba":[1,2,6,14,2],
 "group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gae0ba4b8191d0ce260e08fca914553439":[1,2,6,14,88],
 "group__group__hal__impl__pin__package__psoc6__03__49__wlcsp.html#gae5d141fa4eb401f82206ea95a7834d7c":[1,2,6,14,23],
@@ -243,11 +249,5 @@ var NAVTREEINDEX16 =
 "group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga7a9867472e2b3ff245eaed06a736836e":[1,2,6,16,52],
 "group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga7c3de111f3e70546a4f6c536357ad932":[1,2,6,16,40],
 "group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga7d40983581a0d307b3a4d24982084800":[1,2,6,16,82],
-"group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga83fb4570c24c16b8b6ec802d5e522808":[1,2,6,16,91],
-"group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga84850b23190db3bac87503809083e7c0":[1,2,6,16,12],
-"group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga88fd206a3b77925268da2c8e078abfc5":[1,2,6,16,49],
-"group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga8d41ec91abdcddb2a9baef178a478585":[1,2,6,16,13],
-"group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga90d588859bafd8ecf06a9758e767b73a":[1,2,6,16,90],
-"group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga9206aa45ce42a70e93b8da8ff79fc72c":[1,2,6,16,22],
-"group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga9a76d03fdd8563bca0941ad90e5400cc":[1,2,6,16,26]
+"group__group__hal__impl__pin__package__psoc6__04__64__tqfp__epad.html#ga83fb4570c24c16b8b6ec802d5e522808":[1,2,6,16,91]
 };

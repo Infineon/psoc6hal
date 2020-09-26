@@ -1,6 +1,6 @@
 var group__group__hal__pdmpcm =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "PDM/PCM HAL Results", "group__group__hal__results__pdmpcm.html", "group__group__hal__results__pdmpcm" ],
     [ "cyhal_pdm_pcm_cfg_t", "group__group__hal__pdmpcm.html#structcyhal__pdm__pcm__cfg__t", [
       [ "sample_rate", "group__group__hal__pdmpcm.html#a19eeeb8ba0eaed3b82bf4f052e36b731", null ],
       [ "decimation_rate", "group__group__hal__pdmpcm.html#a1d94274f6ae0d514c0140866ea7b5c7e", null ],

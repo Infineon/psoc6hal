@@ -1,6 +1,6 @@
 var group__group__hal__ezi2c =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "EZI2C HAL Results", "group__group__hal__results__ezi2c.html", "group__group__hal__results__ezi2c" ],
     [ "cyhal_ezi2c_slave_cfg_t", "group__group__hal__ezi2c.html#structcyhal__ezi2c__slave__cfg__t", [
       [ "slave_address", "group__group__hal__ezi2c.html#ab00e8f466048660368420dea9ff18346", null ],
       [ "buf", "group__group__hal__ezi2c.html#a68a95c0eac422be405ebee6815cead4e", null ],

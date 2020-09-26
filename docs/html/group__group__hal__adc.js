@@ -1,6 +1,6 @@
 var group__group__hal__adc =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "ADC HAL Results", "group__group__hal__results__adc.html", "group__group__hal__results__adc" ],
     [ "cyhal_adc_config_t", "group__group__hal__adc.html#structcyhal__adc__config__t", [
       [ "continuous_scanning", "group__group__hal__adc.html#a942daebdd7db9f8f38ea3f2d33503b68", null ],
       [ "resolution", "group__group__hal__adc.html#a740aed93bab2f9cb2dddfffaaf6bfa73", null ],

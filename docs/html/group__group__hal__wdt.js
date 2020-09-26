@@ -1,6 +1,6 @@
 var group__group__hal__wdt =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "WDT HAL Results", "group__group__hal__results__wdt.html", "group__group__hal__results__wdt" ],
     [ "cyhal_wdt_init", "group__group__hal__wdt.html#ga4f2a8a684b8a76b92b9417637bb55697", null ],
     [ "cyhal_wdt_free", "group__group__hal__wdt.html#ga976a8b0fe8fe66f89311cfca18768b13", null ],
     [ "cyhal_wdt_kick", "group__group__hal__wdt.html#gaeb43bee6a246da3eedfb5d06fbd226de", null ],

@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h2>Overview</h2>
-<p>The Hardware Abstraction Layer (HAL) provides a high-level interface to configure and use hardware blocks on PSoC MCUs. It is a generic interface that can be used across multiple product families. The focus on ease-of-use and portability means the HAL does not expose all of the low-level peripheral functionality. The HAL can be combined with platform-specific libraries (such as the PSoC 6 Peripheral Driver Library (PDL)) within a single application. You can leverage the HAL's simpler and more generic interface for most of an application, even if one portion requires finer-grained control.</p>
+<p>The Hardware Abstraction Layer (HAL) provides a high-level interface to configure and use hardware blocks on PSoC MCUs. It is a generic interface that can be used across multiple product families. The focus on ease-of-use and portability means the HAL does not expose all of the low-level peripheral functionality. The HAL can be combined with platform-specific libraries (such as the PSoC 4/6 Peripheral Driver Library (PDL)) within a single application. You can leverage the HAL's simpler and more generic interface for most of an application, even if one portion requires finer-grained control.</p>
 <p>To use code from the HAL, the specific driver header file can be included or the top level <code>cyhal.h</code> header can be include to allow access to any driver.</p>
 <h2>API Structure</h2>
 <p>The API functions for each HAL driver can be divided into the following categories:</p><ul>
@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <h2>Resource Identification</h2>
 <p>For peripherals, the HAL generally does not identify block instances directly (for example, by index). Instead, block instances are identified indirectly by specifying the desired pin for each function. The <code>_init</code> function selects the block instance that connects to the specified pins. If multiple block instances can connect to the specified pins, the HAL may select any available instance.</p>
 <h2>Hardware Manager</h2>
-<p>To ensure that distinct driver instances do not attempt to manipulate the same hardware blocks, the HAL includes facilities for allocating and tracking resource use. The "Hardware Manager" component handles this. It is usually not necessary to interact directly with the Hardware Manager from application firmware. The peripheral drivers automatically reserve the resources they require (and check for conflicts) as part of the <code>_init</code> API. However, the Hardware Manager is part of the public HAL API, and the application may directly invoke it to handle advanced use cases. For example, if a block instance will be managed by a lower-level API (for example, PSoC 6 PDL), the application should call the <code>cyhal_hwmgr_reserve</code> function to ensure that no other HAL driver attempts to use the same block.</p>
+<p>To ensure that distinct driver instances do not attempt to manipulate the same hardware blocks, the HAL includes facilities for allocating and tracking resource use. The "Hardware Manager" component handles this. It is usually not necessary to interact directly with the Hardware Manager from application firmware. The peripheral drivers automatically reserve the resources they require (and check for conflicts) as part of the <code>_init</code> API. However, the Hardware Manager is part of the public HAL API, and the application may directly invoke it to handle advanced use cases. For example, if a block instance will be managed by a lower-level API (for example, PSoC 4/6 PDL), the application should call the <code>cyhal_hwmgr_reserve</code> function to ensure that no other HAL driver attempts to use the same block.</p>
 <h2>Power Management</h2>
 <p>The System driver provides general purpose power management APIs (<code>cyhal_system_register_callback</code> and <code>cyhal_system_unregister_callback</code>) that can be used to control when the application can go to sleep at a global level. Additionally, each peripheral driver has its own default power management strategy. The strategy is:</p><ul>
 <li>Peripherals that can operate as is in the requested lower power mode do so</li>
@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>For more details on interacting with <a class="el" href="group__group__result.html#gaca79700fcc701534ce61778a9bcf57d1">cy_rslt_t</a> see <a href="group__group__result.html">Result Type</a>.</p>
 <h2>More information</h2>
 <ul>
-<li><a href="https://cypresssemiconductorco.github.io/psoc6hal/html/modules.html">API Reference Guide</a></li>
+<li><a href="https://cypresssemiconductorco.github.io/mtb-hal-cat1/html/modules.html">API Reference Guide</a></li>
 <li><a href="http://www.cypress.com">Cypress Semiconductor, an Infineon Technologies Company</a></li>
 <li><a href="https://github.com/cypresssemiconductorco">Cypress Semiconductor GitHub</a></li>
 <li><a href="https://www.cypress.com/products/modustoolbox-software-environment">ModusToolbox</a> <hr/>

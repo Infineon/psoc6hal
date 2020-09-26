@@ -35,11 +35,11 @@
 * \ingroup group_hal_impl
 * \{
 *
-* Internally the PSoC6 RTC only stores the year as a two digit BCD value
+* Internally the PSoC 6 RTC only stores the year as a two digit BCD value
 * (0-99); no century information is stored. On RTC initialization the HAL must,
 * as a result, assume a default century. If cyhal_rtc_write has been called
 * with a different century than the default, its value must be stored and that
-* value must persist through deep sleep, hibernate, software resets, etc. PSoC6
+* value must persist through deep sleep, hibernate, software resets, etc. PSoC 6
 * hardware provides a number of BREG registers which exist in the BACKUP domain
 * and will persist over these power modes and resets. The HAL uses the highest
 * indexed BACKUP->BREG register to store the century for the RTC.

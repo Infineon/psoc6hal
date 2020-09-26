@@ -1,6 +1,6 @@
 var group__group__hal__timer =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "Timer HAL Results", "group__group__hal__results__timer.html", "group__group__hal__results__timer" ],
     [ "cyhal_timer_cfg_t", "group__group__hal__timer.html#structcyhal__timer__cfg__t", [
       [ "is_continuous", "group__group__hal__timer.html#ae8be9b8ef3b99902c9f2bd29e498d558", null ],
       [ "direction", "group__group__hal__timer.html#abcacbb77905a45d92f9ecda65de6fe32", null ],

@@ -33,7 +33,7 @@
  *
  * The PWM driver can be used to generate periodic digital waveforms with configurable frequency and duty cycle.
  * The driver allows assigning the PWM output and an optional inverted output to supplied pins.
- * The driver supports interrupt generation on PWM terminal count and capture/compare events.
+ * The driver supports interrupt generation on PWM terminal count and compare events.
  *
  * \section section_pwm_features Features
  * * Configurable pin assignment for the PWM output
@@ -42,7 +42,7 @@
  * * Configurable alignment: left, right or center
  * * Continuous or One-shot operation
  * * Option to instantiate and use a new clock or use pre-allocated clock for clock input
- * * Configurable interrupt and callback assignment on PWM events: terminal count, capture/compare match or combination of both
+ * * Configurable interrupt and callback assignment on PWM events: terminal count, compare match or combination of both
  *
  * \section section_pwm_quickstart Quick Start
  *
@@ -74,16 +74,17 @@
  *
  *
  * \subsection subsection_pwm_snippet_4 Snippet 4: Interrupts on PWM events
- * PWM events like hitting the terminal count or a capture/compare event can be used to trigger a callback function. <br>
+ * PWM events like hitting the terminal count or a compare event can be used to trigger a callback function. <br>
  * \ref cyhal_pwm_enable_event() can be used to enable one or more events to trigger the callback function.
  *
  * \snippet pwm.c snippet_cyhal_pwm_events
-*/
+ */
 
 #pragma once
 
 #include <stdint.h>
 #include <stdbool.h>
+
 #include "cy_result.h"
 #include "cyhal_hw_types.h"
 
@@ -91,9 +92,10 @@
 extern "C" {
 #endif
 
-/** \addtogroup group_hal_results
+/** \addtogroup group_hal_results_pwm PWM HAL Results
+ *  PWM specific return codes
+ *  \ingroup group_hal_results
  *  \{ *//**
- *  \{ @name PWM Results
  */
 
 /** Bad argument */
@@ -107,7 +109,7 @@ extern "C" {
     (CYHAL_RSLT_CREATE(CY_RSLT_TYPE_ERROR, CYHAL_RSLT_MODULE_PWM, 2))
 
 /**
- * \} \}
+ * \}
  */
 
 /** Initialize the PWM out peripheral and configure the pin
@@ -126,14 +128,18 @@ extern "C" {
 typedef enum {
     CYHAL_PWM_IRQ_NONE            =  0,             /**< No interrupts */
     CYHAL_PWM_IRQ_TERMINAL_COUNT  =  1 << 0,        /**< Interrupt on terminal count match event */
-    CYHAL_PWM_IRQ_CAPTURE_COMPARE =  1 << 1,        /**< Interrupt on capture/compare match event */
+    CYHAL_PWM_IRQ_COMPARE         =  1 << 1,        /**< Interrupt on compare match event */
     CYHAL_PWM_IRQ_ALL             = (1 << 2) - 1,   /**< Interrupt on any events */
+
+/** \cond INTERNAL */
+    CYHAL_PWM_IRQ_CAPTURE_COMPARE /* __attribute__ ((deprecated)) */ = CYHAL_PWM_IRQ_COMPARE,
+/** \endcond */
 } cyhal_pwm_event_t;
 
 /** PWM alignment */
 typedef enum {
-    CYHAL_PWM_LEFT_ALIGN       = 0, /**< PWM is left aligned (signal starts high and goes low after capture/compare match) */
-    CYHAL_PWM_RIGHT_ALIGN      = 1, /**< PWM is right aligned (signal starts low and goes high after capture/compare match) */
+    CYHAL_PWM_LEFT_ALIGN       = 0, /**< PWM is left aligned (signal starts high and goes low after compare match) */
+    CYHAL_PWM_RIGHT_ALIGN      = 1, /**< PWM is right aligned (signal starts low and goes high after compare match) */
     CYHAL_PWM_CENTER_ALIGN     = 2, /**< PWM is centered aligned (signal starts and ends low with a center aligned pulse) */
 } cyhal_pwm_alignment_t;
 

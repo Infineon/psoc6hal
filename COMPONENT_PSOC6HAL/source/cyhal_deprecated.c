@@ -200,7 +200,7 @@ cy_rslt_t cyhal_system_clock_set_frequency(uint8_t hf_clock, uint32_t frequency_
         rslt = cyhal_clock_allocate(&inst, CYHAL_CLOCK_BLOCK_PATHMUX);
         if (rslt == CY_RSLT_SUCCESS)
         {
-            if (inst.channel < SRSS_NUM_PLL)
+            if (inst.channel < 1)
             {
                 rslt = _cyhal_deprecated_try_set_fll(hf_clock, frequency_hz);
             }

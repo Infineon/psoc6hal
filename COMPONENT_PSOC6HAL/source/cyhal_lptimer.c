@@ -136,19 +136,18 @@ static uint32_t _cyhal_lptimer_set_delay_common(cyhal_lptimer_t *obj, uint32_t d
      *          Synching match value occurs on falling edge. Wait until c0 = match0 to ensure cascade occurs.
      * Case 3: everything works as expected.
      */
-    uint16_t c0_current_ticks;
-    while ((c0_current_ticks = (uint16_t)(Cy_MCWDT_GetCount(obj->base, CY_MCWDT_COUNTER0))) == c0_old_match) {}
+    uint16_t c0_current_ticks = (uint16_t)Cy_MCWDT_GetCount(obj->base, CY_MCWDT_COUNTER0);
+    // Wait until the cascade has definitively happened. It takes a clock cycle for the cascade to happen, and potentially another a full 
+    // LFCLK clock cycle for the cascade to propagate up to the HFCLK-domain registers that the CPU reads.
+    while (((uint16_t)(c0_old_match - 1)) == c0_current_ticks ||
+                       c0_old_match       == c0_current_ticks ||
+           ((uint16_t)(c0_old_match + 1)) == c0_current_ticks)
+    {
+        c0_current_ticks = (uint16_t)Cy_MCWDT_GetCount(obj->base, CY_MCWDT_COUNTER0);
+    }
 
     uint16_t c1_current_ticks = (uint16_t)Cy_MCWDT_GetCount(obj->base, CY_MCWDT_COUNTER1);
-    if (c0_current_ticks == c0_old_match + 1)
-    {
-        c1_current_ticks++;
-    }
-    if (Cy_MCWDT_GetCount(obj->base, CY_MCWDT_COUNTER0) != c0_current_ticks)
-    {
-        // Just in the very unlikely case that an increment occurred while previous instruction was running.
-        c1_current_ticks = (uint16_t)Cy_MCWDT_GetCount(obj->base, CY_MCWDT_COUNTER1);
-    }
+
     Cy_MCWDT_SetMatch(obj->base, CY_MCWDT_COUNTER0, c0_current_ticks + c0_increment, _CYHAL_LPTIMER_SETMATCH_NOWAIT_TIME_US);
     Cy_MCWDT_SetMatch(obj->base, CY_MCWDT_COUNTER1, c1_current_ticks + c1_increment, _CYHAL_LPTIMER_SETMATCH_NOWAIT_TIME_US);
 

@@ -580,7 +580,8 @@ cy_rslt_t cyhal_qspi_init(
         /* Check that all data pins are valid and belong to same instance */
         for (uint8_t i = 1; i < max_width; i++)
         {
-            io_maps[i] = _cyhal_utils_get_resource(obj->pin_ios[i], data_pin_maps[i - 1 + pin_offset], data_pin_map_sizes[i - 1 + pin_offset]);
+            io_maps[i] = _cyhal_utils_get_resource(obj->pin_ios[i], data_pin_maps[i - 1 + pin_offset],
+                data_pin_map_sizes[i - 1 + pin_offset], NULL);
             if (NULL == io_maps[i] || !_cyhal_utils_resources_equal(sclk_map->inst, io_maps[i]->inst))
             {
                 result = CYHAL_QSPI_RSLT_ERR_PIN;
@@ -716,81 +717,20 @@ void cyhal_qspi_free(cyhal_qspi_t *obj)
     }
 }
 
-#define QSPI_FREQ_ACCEPTABLE_TOLERANCE_PERCENT  10
 cy_rslt_t cyhal_qspi_set_frequency(cyhal_qspi_t *obj, uint32_t hz)
 {
     CY_ASSERT(NULL != obj);
     CY_ASSERT(hz != 0);
     CY_ASSERT(obj->is_clock_owned);
-    uint32_t count;
-    const cyhal_resource_inst_t ** sources;
-    cy_rslt_t retval = cyhal_clock_get_sources(&(obj->clock), &sources, &count);
-    if (CY_RSLT_SUCCESS != retval)
-        return retval;
 
-    uint32_t best_tolerance_hz = 0xFFFFFFFF;
-    cyhal_clock_t best_clock;
-    uint32_t best_clock_freq = 0;    
-    uint32_t best_divider = 1;
-    /* Go through all possible QSPI clock sources and check what source fits best */
-    for (uint32_t i=0; i<count; ++i)
-    {
-        cyhal_clock_t temp_clock;
-        if (CY_RSLT_SUCCESS == cyhal_clock_get(&temp_clock, sources[i]))
-        {
-            uint32_t cur_hf_source_freq = cyhal_clock_get_frequency(&temp_clock);
-            if ((0 == cur_hf_source_freq) ||
-                        /* source frequency is much lower than desired, no reason to continue */
-                        (_cyhal_utils_calculate_tolerance(CYHAL_TOLERANCE_PERCENT, hz, cur_hf_source_freq) >
-                            QSPI_FREQ_ACCEPTABLE_TOLERANCE_PERCENT))
-                continue;
-            /* Covering situation when PATHMUX has enabled FLL / PLL on its way. In that case FLL / PLL frequency
-                is observed on PATHMUX which is covered in other iterations of the sources loop */
-            if (CYHAL_CLOCK_BLOCK_PATHMUX == temp_clock.block)
-            {
-                if (((sources[i]->channel_num == 0) && Cy_SysClk_FllIsEnabled()) ||
-                    ((sources[i]->channel_num > 0) && (sources[i]->channel_num <= SRSS_NUM_PLL) &&
-                        Cy_SysClk_PllIsEnabled(sources[i]->channel_num)))
-                {
-                    continue;
-                }
-            }
-
-            uint8_t cur_clock_divider;
-            if (CY_RSLT_SUCCESS == _cyhal_utils_find_hf_clk_div(cur_hf_source_freq, hz, NULL, true, &cur_clock_divider))
-            {
-                uint32_t cur_divided_freq = cur_hf_source_freq / cur_clock_divider;
-                uint32_t cur_clock_tolerance = abs(_cyhal_utils_calculate_tolerance(CYHAL_TOLERANCE_HZ, hz, cur_divided_freq));
-                if (cur_clock_tolerance < best_tolerance_hz)
-                {
-                    best_clock = temp_clock;
-                    best_tolerance_hz = cur_clock_tolerance;
-                    best_clock_freq = cur_divided_freq;
-                    best_divider = cur_clock_divider;
-                    if (cur_divided_freq == hz)
-                        break;
-                }
-            }
-        }
-    }
-    int achieved_tolerance = abs(_cyhal_utils_calculate_tolerance(CYHAL_TOLERANCE_PERCENT, hz, best_clock_freq));
-    if ((0 == best_clock_freq) || (achieved_tolerance > QSPI_FREQ_ACCEPTABLE_TOLERANCE_PERCENT))
-        return CYHAL_QSPI_RSLT_ERR_FREQUENCY;
-
-    retval = cyhal_clock_set_source(&(obj->clock), &best_clock);
-    if (CY_RSLT_SUCCESS == retval)
-    {
-        obj->frequency = best_clock_freq;
-        return cyhal_clock_set_divider(&(obj->clock), best_divider);
-    }
-    else
-        return retval;
+    const cyhal_clock_tolerance_t tolerance = { CYHAL_TOLERANCE_PERCENT, 10 };
+    return _cyhal_utils_set_clock_frequency2(&(obj->clock), hz, &tolerance);
 }
 
 uint32_t cyhal_qspi_get_frequency(cyhal_qspi_t *obj)
 {
     CY_ASSERT(NULL != obj);
-    return obj->frequency;
+    return cyhal_clock_get_frequency(&(obj->clock));
 }
 
 cy_rslt_t cyhal_qspi_slave_select_config(cyhal_qspi_t *obj, cyhal_gpio_t ssel)

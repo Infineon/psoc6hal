@@ -137,6 +137,7 @@ static inline cyhal_dma_t* _cyhal_dma_dmac_get_obj(uint8_t block, uint8_t channe
 /** This should never be called from a non-dma IRQn */
 static inline uint8_t _cyhal_dma_dmac_get_block_from_irqn(IRQn_Type irqn)
 {
+    CY_UNUSED_PARAMETER(irqn);
     /* Since there is only one dmac block this function always returns 0. diff
      * is calculated here only to verify that this was called from a valid
      * IRQn. */

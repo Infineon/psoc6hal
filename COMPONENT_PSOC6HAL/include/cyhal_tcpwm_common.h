@@ -46,7 +46,7 @@ extern "C" {
     #if (CY_IP_MXTCPWM_VERSION == 1)
         #define _CYHAL_TCPWM_INSTANCES     CY_IP_MXTCPWM_INSTANCES
         #define _CYHAL_TCPWM_CNT_NUMBER(resource) ((resource).channel_num)
-    #elif(CY_IP_MXTCPWM_VERSION == 2)
+    #else // (CY_IP_MXTCPWM_VERSION >= 2)
         #define _CYHAL_TCPWM_INSTANCES     TCPWM_GRP_NR
         #define _CYHAL_TCPWM_CNT_NUMBER(resource) (((resource).block_num << 8) | (resource).channel_num)
     #endif
@@ -76,13 +76,13 @@ extern const _cyhal_tcpwm_data_t _CYHAL_TCPWM_DATA[_CYHAL_TCPWM_INSTANCES];
  *
  * @param[in] obj The timer/counter or the PWM resource
  */
-void _cyhal_tcpwm_free(cyhal_tcpwm_common_t *obj);
+void _cyhal_tcpwm_free(cyhal_tcpwm_t *obj);
 
 /** Initialize a timer/counter or PWM object's callback data.
  *
  * @param[in,out] tcpwm    The shared data struct between timer/counter and PWM
  */
-void _cyhal_tcpwm_init_data(cyhal_tcpwm_common_t *tcpwm);
+void _cyhal_tcpwm_init_data(cyhal_tcpwm_t *tcpwm);
 
 /** The TCPWM interrupt handler registration
  *

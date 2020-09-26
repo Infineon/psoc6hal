@@ -68,8 +68,6 @@ cy_rslt_t cyhal_syspm_init(void);
 void _cyhal_syspm_register_peripheral_callback(cyhal_syspm_callback_data_t *callback_data);
 void _cyhal_syspm_unregister_peripheral_callback(cyhal_syspm_callback_data_t *callback_data);
 
-#define cyhal_syspm_sleep()              Cy_SysPm_CpuEnterSleep(CY_SYSPM_WAIT_FOR_INTERRUPT)
-
 cy_rslt_t cyhal_syspm_tickless_sleep_deepsleep(cyhal_lptimer_t *obj, uint32_t desired_ms, uint32_t *actual_ms, bool deep_sleep);
 
 #define cyhal_syspm_tickless_deepsleep(obj, desired_ms, actual_ms) cyhal_syspm_tickless_sleep_deepsleep(obj, desired_ms, actual_ms, true)
@@ -77,10 +75,12 @@ cy_rslt_t cyhal_syspm_tickless_sleep_deepsleep(cyhal_lptimer_t *obj, uint32_t de
 #define cyhal_syspm_tickless_sleep(obj, desired_ms, actual_ms) cyhal_syspm_tickless_sleep_deepsleep(obj, desired_ms, actual_ms, false)
 
 #if defined(COMPONENT_PSOC6HAL)
+#define cyhal_syspm_sleep()              Cy_SysPm_CpuEnterSleep(CY_SYSPM_WAIT_FOR_INTERRUPT)
 #define cyhal_syspm_deepsleep()          Cy_SysPm_CpuEnterDeepSleep(CY_SYSPM_WAIT_FOR_INTERRUPT)
 #define cyhal_syspm_get_system_state()   (Cy_SysPm_IsSystemUlp() ? CYHAL_SYSPM_SYSTEM_LOW : CYHAL_SYSPM_SYSTEM_NORMAL)
 #else
-#define cyhal_syspm_deepsleep()          Cy_SysPm_SystemEnterDeepSleep(CY_SYSPM_WAIT_FOR_INTERRUPT)
+#define cyhal_syspm_sleep()              Cy_SysPm_CpuEnterSleep()
+#define cyhal_syspm_deepsleep()          Cy_SysPm_CpuEnterDeepSleep()
 #endif /* COMPONENT_PSOC6HAL */
 
 /** \endcond */

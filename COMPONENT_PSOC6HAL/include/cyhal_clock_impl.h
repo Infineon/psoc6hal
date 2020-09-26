@@ -41,7 +41,7 @@ extern "C"
  * the device specific Data Sheet for the exact set of clocks that are available on a
  * specific device.
  *
- * \image html psoc6_clock_tree.png
+ * \image html mxs40_clock_tree.png
  *
  * \section section_clock_snippets_impl Code snippets
  * \note Error handling code has been intentionally left out of snippets to highlight API usage.

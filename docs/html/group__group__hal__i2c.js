@@ -1,11 +1,13 @@
 var group__group__hal__i2c =
 [
-    [ "Result Codes", "group__group__hal__results.html", "group__group__hal__results" ],
+    [ "I2C HAL Results", "group__group__hal__results__i2c.html", "group__group__hal__results__i2c" ],
     [ "cyhal_i2c_cfg_t", "group__group__hal__i2c.html#structcyhal__i2c__cfg__t", [
       [ "is_slave", "group__group__hal__i2c.html#a734b40ed68843e48a0b2586e3fb58fcb", null ],
       [ "address", "group__group__hal__i2c.html#a7789fe25fd94e1ba74c7312f85fdb4cd", null ],
       [ "frequencyhal_hz", "group__group__hal__i2c.html#a4bc56f48688bf67f70d721fd7d94c16a", null ]
     ] ],
+    [ "CYHAL_I2C_MODE_SLAVE", "group__group__hal__i2c.html#gad2ea1e12f91892dfd0d6695b11f1d4a5", null ],
+    [ "CYHAL_I2C_MODE_MASTER", "group__group__hal__i2c.html#gae8ce31deae8ac6078af98b52249e0089", null ],
     [ "cyhal_i2c_event_callback_t", "group__group__hal__i2c.html#ga67df812388aae9fcc3b3b1986dab7a09", null ],
     [ "cyhal_i2c_event_t", "group__group__hal__i2c.html#gaaba7daccaa3861c32a4b0284e8194a79", [
       [ "CYHAL_I2C_EVENT_NONE", "group__group__hal__i2c.html#ggaaba7daccaa3861c32a4b0284e8194a79a80d8eb3997f062277769a958ff0b74bd", null ],

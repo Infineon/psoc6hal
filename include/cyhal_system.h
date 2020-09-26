@@ -39,7 +39,7 @@
 *
 * \section subsection_system_quickstart Quick Start
 * * \ref cyhal_system_critical_section_enter and \ref
-* cyhal_system_critical_section_exit are used to control the interrupts
+* cyhal_system_critical_section_exit are used to enable/disable global interrupts
 * * \ref cyhal_system_delay_ms and \ref cyhal_system_delay_us are delay functions
 * used to halt the CPU exectution for a specified period of time
 * * \ref cyhal_system_get_reset_reason gets the cause of latest system reset and
